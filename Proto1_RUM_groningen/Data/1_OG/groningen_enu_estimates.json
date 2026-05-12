@@ -1,0 +1,10 @@
+{
+    "project_name": "groningen_3d_displ",
+    "groningen_3d_filename": "groningen_enu_estimates.csv",
+    "metadata_filename": "groningen_enu_estimates.json",
+    "asc_track": "t015",
+    "dsc_track": "t037",
+    "insar_start_date": "2015-12-02",
+    "insar_end_date": "2023-06-21",
+    "RUM size": "500x500m"
+}

@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>MSc Thesis Project: InSAR 4D Viewer Prototypes</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+      line-height: 1.5;
+      max-width: 900px;
+    }
+    a {
+      display: block;
+      margin: 12px 0;
+      font-size: 20px;
+    }
+    code {
+      background: #eee;
+      padding: 2px 5px;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+  <h1>MSc Thesis Project: InSAR 4D Viewer Prototypes</h1>
+
+  <p>
+    Interactive CesiumJS prototypes for RUM-based InSAR deformation visualization.
+    These pages run directly in the browser.
+  </p>
+
+  <h2>Open Prototype1 viewers</h2>
+  <a href="Proto1_RUM_jakarta/viewer_4d.html">Open Jakarta 4D RUM Viewer</a>
+  <a href="Proto1_RUM_groningen/viewer_4d.html">Open Groningen (before tuning) 4D RUM Viewer</a>
+  <a href="Proto1_RUM_groningen/viewer_4d_tuned.html">Open Groningen tuned 4D RUM Viewer</a>
+
+  <h2>Template package</h2>
+  <p>
+    The <code>template/</code> folder contains the reusable package structure and pipeline notes.
+    It is not meant to be opened as a viewer directly.
+  </p>
+
+  <h2>Local use</h2>
+  <p>
+    Online use requires no installation. For local use, download the repository and run a simple local server:
+  </p>
+
+  <pre><code>python -m http.server 8000</code></pre>
+
+  <p>
+    Then open <code>http://localhost:8000/</code>.
+  </p>
+</body>
+</html>

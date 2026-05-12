@@ -1,0 +1,928 @@
+{
+  "asset": {
+    "version": "1.0",
+    "tilesetVersion": "1.0.0",
+    "generator": "RUM 4D Template \u2014 08_build_tile_index.py",
+    "generator_real_caps": "RUM 4D Template \u2014 12_build_real_caps_b3dm.py"
+  },
+  "geometricError": 5000.0,
+  "root": {
+    "boundingVolume": {
+      "region": [
+        0.11281487786584472,
+        0.9275624903035077,
+        0.1238027717191666,
+        0.9332069487201744,
+        -1000.0,
+        10000.0
+      ]
+    },
+    "geometricError": 5000.0,
+    "refine": "ADD",
+    "children": [
+      {
+        "boundingVolume": {
+          "region": [
+            0.11281487786584472,
+            0.927597338324048,
+            0.11425411001331372,
+            0.9285429799598421,
+            -1000.0,
+            10000.0
+          ]
+        },
+        "geometricError": 100.0,
+        "refine": "REPLACE",
+        "content": {
+          "uri": "0_0.b3dm"
+        },
+        "metadata": {
+          "auto_geometric_error_m": 8152.6,
+          "rum_count": 63
+        }
+      },
+      {
+        "boundingVolume": {
+          "region": [
+            0.11282852744134939,
+            0.9284645806573656,
+            0.11415914283649574,
+            0.9294813535929597,
+            -1000.0,
+            10000.0
+          ]
+        },
+        "geometricError": 100.0,
+        "refine": "REPLACE",
+        "content": {
+          "uri": "0_1.b3dm"
+        },
+        "metadata": {
+          "auto_geometric_error_m": 8232.5,
+          "rum_count": 108
+        }
+      },
+      {
+        "boundingVolume": {
+          "region": [
+            0.112851973189957,
+            0.9294041652016045,
+            0.11418638731533136,
+            0.9304233334076756,
+            -1000.0,
+            10000.0
+          ]
+        },
+        "geometricError": 100.0,
+        "refine": "REPLACE",
+        "content": {
+          "uri": "0_2.b3dm"
+        },
+        "metadata": {
+          "auto_geometric_error_m": 8253.4,
+          "rum_count": 99
+        }
+      },
+      {
+        "boundingVolume": {
+          "region": [
+            0.11288136322618467,
+            0.9303449364602588,
+            0.11421160195980451,
+            0.9313640882619917,
+            -1000.0,
+            10000.0
+          ]
+        },
+        "geometricError": 100.0,
+        "refine": "REPLACE",
+        "content": {
+          "uri": "0_3.b3dm"
+        },
+        "metadata": {
+          "auto_geometric_error_m": 8243.5,
+          "rum_count": 88
+        }
+      },
+      {
+        "boundingVolume": {
+          "region": [
+            0.11289904160152847,
+            0.9312856926456803,
+            0.11423688010885294,
+            0.9323036125197817,
+            -1000.0,
+            10000.0
+          ]
+        },
+        "geometricError": 100.0,
+        "refine": "REPLACE",
+        "content": {
+          "uri": "0_4.b3dm"
+        },
+        "metadata": {
+          "auto_geometric_error_m": 8255.2,
+          "rum_count": 76
+        }
+      },
+      {
+        "boundingVolume": {
+          "region": [
+            0.11292660767991113,
+            0.9322264320963355,
+            0.11424320959682445,
+            0.9325424112235828,
+            -1000.0,
+            10000.0
+          ]
+        },
+        "geometricError": 100.0,
+        "refine": "REPLACE",
+        "content": {
+          "uri": "0_5.b3dm"
+        },
+        "metadata": {
+          "auto_geometric_error_m": 5407.3,
+          "rum_count": 21
+        }
+      },
+      {
+        "boundingVolume": {
+          "region": [
+            0.11412362697133563,
+            0.9275793506024173,
+            0.1155723374346746,
+            0.928534406180206,
+            -1000.0,
+            10000.0
+          ]
+        },
+        "geometricError": 100.0,
+        "refine": "REPLACE",
+        "content": {
+          "uri": "1_0.b3dm"
+        },
+        "metadata": {
+          "auto_geometric_error_m": 8221.3,
+          "rum_count": 111
+        }
+      },
+      {
+        "boundingVolume": {
+          "region": [
+            0.1141361475854076,
+            0.9285201216101397,
+            0.11559922704509905,
+            0.9294751816532009,
+            -1000.0,
+            10000.0
+          ]
+        },
+        "geometricError": 100.0,
+        "refine": "REPLACE",
+        "content": {
+          "uri": "1_1.b3dm"
+        },
+        "metadata": {
+          "auto_geometric_error_m": 8258.2,
+          "rum_count": 130
+        }
+      },
+      {
+        "boundingVolume": {
+          "region": [
+            0.1141633294741134,
+            0.9294622218146346,
+            0.11562618420532043,
+            0.9304159435530904,
+            -1000.0,
+            10000.0
+          ]
+        },
+        "geometricError": 100.0,
+        "refine": "REPLACE",
+        "content": {
+          "uri": "1_2.b3dm"
+        },
+        "metadata": {
+          "auto_geometric_error_m": 8251.3,
+          "rum_count": 95
+        }
+      },
+      {
+        "boundingVolume": {
+          "region": [
+            0.11418848611602156,
+            0.9304016260963371,
+            0.11562843369244015,
+            0.9313566902180604,
+            -1000.0,
+            10000.0
+          ]
+        },
+        "geometricError": 100.0,
+        "refine": "REPLACE",
+        "content": {
+          "uri": "1_3.b3dm"
+        },
+        "metadata": {
+          "auto_geometric_error_m": 8199.0,
+          "rum_count": 86
+        }
+      },
+      {
+        "boundingVolume": {
+          "region": [
+            0.11421160195980451,
+            0.931346364448549,
+            0.115546837573367,
+            0.9322974199865014,
+            -1000.0,
+            10000.0
+          ]
+        },
+        "geometricError": 100.0,
+        "refine": "REPLACE",
+        "content": {
+          "uri": "1_4.b3dm"
+        },
+        "metadata": {
+          "auto_geometric_error_m": 7917.8,
+          "rum_count": 76
+        }
+      },
+      {
+        "boundingVolume": {
+          "region": [
+            0.11423688010885294,
+            0.9322857529940033,
+            0.11556482353574384,
+            0.9328344957275491,
+            -1000.0,
+            10000.0
+          ]
+        },
+        "geometricError": 100.0,
+        "refine": "REPLACE",
+        "content": {
+          "uri": "1_5.b3dm"
+        },
+        "metadata": {
+          "auto_geometric_error_m": 6153.3,
+          "rum_count": 24
+        }
+      },
+      {
+        "boundingVolume": {
+          "region": [
+            0.1155455151205021,
+            0.9275655205801452,
+            0.11700131235980114,
+            0.9285201216101397,
+            -1000.0,
+            10000.0
+          ]
+        },
+        "geometricError": 100.0,
+        "refine": "REPLACE",
+        "content": {
+          "uri": "2_0.b3dm"
+        },
+        "metadata": {
+          "auto_geometric_error_m": 8237.3,
+          "rum_count": 85
+        }
+      },
+      {
+        "boundingVolume": {
+          "region": [
+            0.1155723374346746,
+            0.9285076965670743,
+            0.1169064452092655,
+            0.9294608806621726,
+            -1000.0,
+            10000.0
+          ]
+        },
+        "geometricError": 100.0,
+        "refine": "REPLACE",
+        "content": {
+          "uri": "2_1.b3dm"
+        },
+        "metadata": {
+          "auto_geometric_error_m": 7925.4,
+          "rum_count": 99
+        }
+      },
+      {
+        "boundingVolume": {
+          "region": [
+            0.11560820524708246,
+            0.9294470174759388,
+            0.11692311898018357,
+            0.9304016260963371,
+            -1000.0,
+            10000.0
+          ]
+        },
+        "geometricError": 100.0,
+        "refine": "REPLACE",
+        "content": {
+          "uri": "2_2.b3dm"
+        },
+        "metadata": {
+          "auto_geometric_error_m": 7885.7,
+          "rum_count": 71
+        }
+      },
+      {
+        "boundingVolume": {
+          "region": [
+            0.11549753150946493,
+            0.9303877462631785,
+            0.11696371427113487,
+            0.9313437005609112,
+            -1000.0,
+            10000.0
+          ]
+        },
+        "geometricError": 100.0,
+        "refine": "REPLACE",
+        "content": {
+          "uri": "2_3.b3dm"
+        },
+        "metadata": {
+          "auto_geometric_error_m": 8270.4,
+          "rum_count": 98
+        }
+      },
+      {
+        "boundingVolume": {
+          "region": [
+            0.11552663942368487,
+            0.9313284597270385,
+            0.11699245696847199,
+            0.9322803528916064,
+            -1000.0,
+            10000.0
+          ]
+        },
+        "geometricError": 100.0,
+        "refine": "REPLACE",
+        "content": {
+          "uri": "2_4.b3dm"
+        },
+        "metadata": {
+          "auto_geometric_error_m": 8250.4,
+          "rum_count": 98
+        }
+      },
+      {
+        "boundingVolume": {
+          "region": [
+            0.11555133123261915,
+            0.9322691562055628,
+            0.11699725445676888,
+            0.9331357104444058,
+            -1000.0,
+            10000.0
+          ]
+        },
+        "geometricError": 100.0,
+        "refine": "REPLACE",
+        "content": {
+          "uri": "2_5.b3dm"
+        },
+        "metadata": {
+          "auto_geometric_error_m": 7804.8,
+          "rum_count": 50
+        }
+      },
+      {
+        "boundingVolume": {
+          "region": [
+            0.11687079774138771,
+            0.9276277577595489,
+            0.1183140008829246,
+            0.9285062750274793,
+            -1000.0,
+            10000.0
+          ]
+        },
+        "geometricError": 100.0,
+        "refine": "REPLACE",
+        "content": {
+          "uri": "3_0.b3dm"
+        },
+        "metadata": {
+          "auto_geometric_error_m": 7851.7,
+          "rum_count": 93
+        }
+      },
+      {
+        "boundingVolume": {
+          "region": [
+            0.11687791830276147,
+            0.9284900971984753,
+            0.11833168278694665,
+            0.9294470174759388,
+            -1000.0,
+            10000.0
+          ]
+        },
+        "geometricError": 100.0,
+        "refine": "REPLACE",
+        "content": {
+          "uri": "3_1.b3dm"
+        },
+        "metadata": {
+          "auto_geometric_error_m": 8243.1,
+          "rum_count": 72
+        }
+      },
+      {
+        "boundingVolume": {
+          "region": [
+            0.1169064452092655,
+            0.9294308195403502,
+            0.11837473241750027,
+            0.9303877462631785,
+            -1000.0,
+            10000.0
+          ]
+        },
+        "geometricError": 100.0,
+        "refine": "REPLACE",
+        "content": {
+          "uri": "3_2.b3dm"
+        },
+        "metadata": {
+          "auto_geometric_error_m": 8280.4,
+          "rum_count": 93
+        }
+      },
+      {
+        "boundingVolume": {
+          "region": [
+            0.11693504377528817,
+            0.930373043677526,
+            0.11827417004858477,
+            0.9313270247340821,
+            -1000.0,
+            10000.0
+          ]
+        },
+        "geometricError": 100.0,
+        "refine": "REPLACE",
+        "content": {
+          "uri": "3_3.b3dm"
+        },
+        "metadata": {
+          "auto_geometric_error_m": 7941.6,
+          "rum_count": 101
+        }
+      },
+      {
+        "boundingVolume": {
+          "region": [
+            0.11696371427113487,
+            0.9313137388504936,
+            0.11829949152311864,
+            0.9322691562055628,
+            -1000.0,
+            10000.0
+          ]
+        },
+        "geometricError": 100.0,
+        "refine": "REPLACE",
+        "content": {
+          "uri": "3_4.b3dm"
+        },
+        "metadata": {
+          "auto_geometric_error_m": 7940.5,
+          "rum_count": 88
+        }
+      },
+      {
+        "boundingVolume": {
+          "region": [
+            0.11687555952134131,
+            0.932254416991894,
+            0.11833248897151874,
+            0.9332069487201744,
+            -1000.0,
+            10000.0
+          ]
+        },
+        "geometricError": 100.0,
+        "refine": "REPLACE",
+        "content": {
+          "uri": "3_5.b3dm"
+        },
+        "metadata": {
+          "auto_geometric_error_m": 8230.5,
+          "rum_count": 70
+        }
+      },
+      {
+        "boundingVolume": {
+          "region": [
+            0.11828878580388966,
+            0.9276169591207476,
+            0.11974734495018248,
+            0.9284900971984753,
+            -1000.0,
+            10000.0
+          ]
+        },
+        "geometricError": 100.0,
+        "refine": "REPLACE",
+        "content": {
+          "uri": "4_0.b3dm"
+        },
+        "metadata": {
+          "auto_geometric_error_m": 7868.5,
+          "rum_count": 99
+        }
+      },
+      {
+        "boundingVolume": {
+          "region": [
+            0.1183140008829246,
+            0.9284745296276711,
+            0.11965143891957486,
+            0.929429297734852,
+            -1000.0,
+            10000.0
+          ]
+        },
+        "geometricError": 100.0,
+        "refine": "REPLACE",
+        "content": {
+          "uri": "4_1.b3dm"
+        },
+        "metadata": {
+          "auto_geometric_error_m": 7941.3,
+          "rum_count": 66
+        }
+      },
+      {
+        "boundingVolume": {
+          "region": [
+            0.11834432856079839,
+            0.9294168277143786,
+            0.11968348369891167,
+            0.9303684724761079,
+            -1000.0,
+            10000.0
+          ]
+        },
+        "geometricError": 100.0,
+        "refine": "REPLACE",
+        "content": {
+          "uri": "4_2.b3dm"
+        },
+        "metadata": {
+          "auto_geometric_error_m": 7930.3,
+          "rum_count": 71
+        }
+      },
+      {
+        "boundingVolume": {
+          "region": [
+            0.11824637765204295,
+            0.9303559206438313,
+            0.11970757015315832,
+            0.9313137388504936,
+            -1000.0,
+            10000.0
+          ]
+        },
+        "geometricError": 100.0,
+        "refine": "REPLACE",
+        "content": {
+          "uri": "4_3.b3dm"
+        },
+        "metadata": {
+          "auto_geometric_error_m": 8266.4,
+          "rum_count": 101
+        }
+      },
+      {
+        "boundingVolume": {
+          "region": [
+            0.11827417004858477,
+            0.9312965938486387,
+            0.1197478153281273,
+            0.932254416991894,
+            -1000.0,
+            10000.0
+          ]
+        },
+        "geometricError": 100.0,
+        "refine": "REPLACE",
+        "content": {
+          "uri": "4_4.b3dm"
+        },
+        "metadata": {
+          "auto_geometric_error_m": 8298.4,
+          "rum_count": 99
+        }
+      },
+      {
+        "boundingVolume": {
+          "region": [
+            0.11830456219445866,
+            0.9322388518977968,
+            0.11964337618408002,
+            0.9331166889070257,
+            -1000.0,
+            10000.0
+          ]
+        },
+        "geometricError": 100.0,
+        "refine": "REPLACE",
+        "content": {
+          "uri": "4_5.b3dm"
+        },
+        "metadata": {
+          "auto_geometric_error_m": 7575.2,
+          "rum_count": 87
+        }
+      },
+      {
+        "boundingVolume": {
+          "region": [
+            0.11961681433295972,
+            0.9276024862289389,
+            0.12105823865695324,
+            0.9285415358920862,
+            -1000.0,
+            10000.0
+          ]
+        },
+        "geometricError": 100.0,
+        "refine": "REPLACE",
+        "content": {
+          "uri": "5_0.b3dm"
+        },
+        "metadata": {
+          "auto_geometric_error_m": 8127.2,
+          "rum_count": 86
+        }
+      },
+      {
+        "boundingVolume": {
+          "region": [
+            0.11963278322748071,
+            0.9284664385638272,
+            0.1210920104071861,
+            0.9294838756255005,
+            -1000.0,
+            10000.0
+          ]
+        },
+        "geometricError": 100.0,
+        "refine": "REPLACE",
+        "content": {
+          "uri": "5_1.b3dm"
+        },
+        "metadata": {
+          "auto_geometric_error_m": 8546.3,
+          "rum_count": 79
+        }
+      },
+      {
+        "boundingVolume": {
+          "region": [
+            0.11965143891957486,
+            0.9294054854208493,
+            0.12112021831857503,
+            0.9304245502609916,
+            -1000.0,
+            10000.0
+          ]
+        },
+        "geometricError": 100.0,
+        "refine": "REPLACE",
+        "content": {
+          "uri": "5_2.b3dm"
+        },
+        "metadata": {
+          "auto_geometric_error_m": 8577.9,
+          "rum_count": 96
+        }
+      },
+      {
+        "boundingVolume": {
+          "region": [
+            0.11968348369891167,
+            0.9303461612806347,
+            0.12101468047543185,
+            0.9312965938486387,
+            -1000.0,
+            10000.0
+          ]
+        },
+        "geometricError": 100.0,
+        "refine": "REPLACE",
+        "content": {
+          "uri": "5_3.b3dm"
+        },
+        "metadata": {
+          "auto_geometric_error_m": 7904.9,
+          "rum_count": 96
+        }
+      },
+      {
+        "boundingVolume": {
+          "region": [
+            0.11971560906698832,
+            0.9312884709843691,
+            0.1207918160223145,
+            0.9322372499680875,
+            -1000.0,
+            10000.0
+          ]
+        },
+        "geometricError": 100.0,
+        "refine": "REPLACE",
+        "content": {
+          "uri": "5_4.b3dm"
+        },
+        "metadata": {
+          "auto_geometric_error_m": 7310.5,
+          "rum_count": 40
+        }
+      },
+      {
+        "boundingVolume": {
+          "region": [
+            0.11961661335886171,
+            0.9322340213350698,
+            0.1201632641039742,
+            0.9329443333401376,
+            -1000.0,
+            10000.0
+          ]
+        },
+        "geometricError": 100.0,
+        "refine": "REPLACE",
+        "content": {
+          "uri": "5_5.b3dm"
+        },
+        "metadata": {
+          "auto_geometric_error_m": 4986.5,
+          "rum_count": 30
+        }
+      },
+      {
+        "boundingVolume": {
+          "region": [
+            0.12103016010179998,
+            0.9275786560755717,
+            0.1224942661163875,
+            0.9285348492725459,
+            -1000.0,
+            10000.0
+          ]
+        },
+        "geometricError": 100.0,
+        "refine": "REPLACE",
+        "content": {
+          "uri": "6_0.b3dm"
+        },
+        "metadata": {
+          "auto_geometric_error_m": 8266.2,
+          "rum_count": 100
+        }
+      },
+      {
+        "boundingVolume": {
+          "region": [
+            0.12105823865695324,
+            0.9285210827135458,
+            0.12239617573126765,
+            0.9294669726828172,
+            -1000.0,
+            10000.0
+          ]
+        },
+        "geometricError": 100.0,
+        "refine": "REPLACE",
+        "content": {
+          "uri": "6_1.b3dm"
+        },
+        "metadata": {
+          "auto_geometric_error_m": 7899.2,
+          "rum_count": 41
+        }
+      },
+      {
+        "boundingVolume": {
+          "region": [
+            0.12098936611864784,
+            0.9294704189524968,
+            0.12243462710653714,
+            0.9304178787739534,
+            -1000.0,
+            10000.0
+          ]
+        },
+        "geometricError": 100.0,
+        "refine": "REPLACE",
+        "content": {
+          "uri": "6_2.b3dm"
+        },
+        "metadata": {
+          "auto_geometric_error_m": 8176.6,
+          "rum_count": 75
+        }
+      },
+      {
+        "boundingVolume": {
+          "region": [
+            0.12099498740997916,
+            0.930398853532985,
+            0.12244055199094522,
+            0.9308882059241561,
+            -1000.0,
+            10000.0
+          ]
+        },
+        "geometricError": 100.0,
+        "refine": "REPLACE",
+        "content": {
+          "uri": "6_3.b3dm"
+        },
+        "metadata": {
+          "auto_geometric_error_m": 6331.9,
+          "rum_count": 39
+        }
+      },
+      {
+        "boundingVolume": {
+          "region": [
+            0.12245878312835902,
+            0.9275624903035077,
+            0.1237996745897995,
+            0.928515785058158,
+            -1000.0,
+            10000.0
+          ]
+        },
+        "geometricError": 100.0,
+        "refine": "REPLACE",
+        "content": {
+          "uri": "7_0.b3dm"
+        },
+        "metadata": {
+          "auto_geometric_error_m": 7942.6,
+          "rum_count": 100
+        }
+      },
+      {
+        "boundingVolume": {
+          "region": [
+            0.12237256523558718,
+            0.9284975936634368,
+            0.1238027717191666,
+            0.9294582133395597,
+            -1000.0,
+            10000.0
+          ]
+        },
+        "geometricError": 100.0,
+        "refine": "REPLACE",
+        "content": {
+          "uri": "7_1.b3dm"
+        },
+        "metadata": {
+          "auto_geometric_error_m": 8200.6,
+          "rum_count": 43
+        }
+      },
+      {
+        "boundingVolume": {
+          "region": [
+            0.12240799579061835,
+            0.9294528592216682,
+            0.12374331928904812,
+            0.930398853532985,
+            -1000.0,
+            10000.0
+          ]
+        },
+        "geometricError": 100.0,
+        "refine": "REPLACE",
+        "content": {
+          "uri": "7_2.b3dm"
+        },
+        "metadata": {
+          "auto_geometric_error_m": 7893.3,
+          "rum_count": 57
+        }
+      }
+    ]
+  }
+}

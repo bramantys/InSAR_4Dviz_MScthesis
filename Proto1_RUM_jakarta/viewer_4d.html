@@ -1,0 +1,3322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>4D JKT_Prototype1</title>
+    <link rel="stylesheet" href="Widgets/widgets.css" />
+    <style>
+        html, body, #cesiumContainer {
+            width: 100%; height: 100%;
+            margin: 0; padding: 0; overflow: hidden;
+        }
+
+        #hParticleCanvas {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1000;
+            pointer-events: none;
+            display: none;
+        }
+
+        /* ---- epoch panel ---- */
+        #epochPanel {
+            position: absolute;
+            left: 16px; bottom: 20px;
+            z-index: 9999;
+            width: min(500px, calc(100vw - 40px));
+            background: rgba(0,0,0,0.78);
+            color: white;
+            padding: 12px 14px;
+            border-radius: 10px;
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            border: 1px solid rgba(255,255,255,0.15);
+        }
+        #epochLabel {
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 8px;
+        }
+        #epochSlider { width: 100%; }
+        #epochControls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 7px;
+            margin-top: 6px;
+        }
+        .epochBtn {
+            background: rgba(40,40,40,0.9);
+            color: white;
+            border: 1px solid #666;
+            border-radius: 6px;
+            width: 36px;
+            height: 28px;
+            font-size: 15px;
+            line-height: 1;
+            cursor: pointer;
+        }
+        .epochBtn:hover { background: rgba(70,70,70,0.95); }
+        #epochPlayBtn { width: 42px; }
+        #epochInfo { color: #bbb; font-size: 11px; margin-left: 6px; }
+
+        /* ---- colorbar ---- */
+        #colorbar {
+            position: absolute;
+            right: 16px; bottom: 20px;
+            z-index: 9999;
+            background: rgba(0,0,0,0.78);
+            color: white;
+            padding: 12px 14px;
+            border-radius: 10px;
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            width: 248px;
+            border: 1px solid rgba(255,255,255,0.15);
+        }
+        #colorbarTitle,
+        #uncertaintyTitle,
+        #distanceTitle,
+        #hParticleLegendTitle {
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        #distanceLegend {
+            margin-bottom: 12px;
+        }
+        #distanceScaleWrap {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        #distanceScaleBarOuter {
+            width: 150px;
+            height: 18px;
+            position: relative;
+            flex: 0 0 150px;
+        }
+        #distanceScaleBar {
+            position: absolute;
+            left: 0;
+            bottom: 3px;
+            height: 8px;
+            min-width: 24px;
+            max-width: 150px;
+            border-left: 2px solid rgba(255,255,255,0.85);
+            border-right: 2px solid rgba(255,255,255,0.85);
+            border-bottom: 2px solid rgba(255,255,255,0.85);
+            box-sizing: border-box;
+        }
+        #distanceScaleLabel {
+            color: #ddd;
+            font-size: 11px;
+            white-space: nowrap;
+        }
+
+        #hParticleLegend {
+            border-top: 1px solid rgba(255,255,255,0.16);
+            padding-top: 10px;
+            margin-bottom: 12px;
+        }
+        #hParticleLegendRow {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        #hParticleSwatch {
+            width: 64px;
+            height: 24px;
+            flex: 0 0 64px;
+        }
+        #hParticleLegendText {
+            color: #ddd;
+            font-size: 11px;
+            line-height: 1.25;
+        }
+
+        #velocityLegend {
+            border-top: 1px solid rgba(255,255,255,0.16);
+            padding-top: 10px;
+        }
+        #colorbarScale {
+            height: 16px; width: 100%;
+            background: linear-gradient(to right,
+                #7f0000 0%, #d73027 12%, #f46d43 25%,
+                #fdae61 40%, #fee391 58%, #ffffff 75%,
+                #d9f0ff 88%, #2b8cbe 100%);
+            border: 1px solid rgba(255,255,255,0.3);
+            margin-bottom: 4px;
+            box-sizing: border-box;
+        }
+        #colorbarLabels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 10px;
+            color: #ccc;
+            margin-bottom: 8px;
+        }
+        #noDataRow {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #ddd;
+            font-size: 11px;
+            margin: 5px 0 12px;
+        }
+        #noDataSwatch {
+            width: 24px;
+            height: 12px;
+            background: rgba(158,158,158,0.65);
+            border: 1px solid rgba(255,255,255,0.35);
+            box-sizing: border-box;
+        }
+        #uncertaintyLegend {
+            border-top: 1px solid rgba(255,255,255,0.16);
+            padding-top: 10px;
+        }
+        #uncertaintyBoxes {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+        }
+        .uncertItem {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            color: #ddd;
+            font-size: 10px;
+            text-align: center;
+        }
+        .uncertBox {
+            width: 42px;
+            height: 42px;
+            border: 1px solid rgba(255,255,255,0.35);
+            background-color: rgba(245,245,245,0.28);
+            box-sizing: border-box;
+        }
+        .uncertClean {
+            background: rgba(245,245,245,0.28);
+        }
+        .uncertThin {
+            background:
+                repeating-linear-gradient(135deg,
+                    transparent 0px,
+                    transparent 9px,
+                    rgba(35,35,35,0.70) 9px,
+                    rgba(35,35,35,0.70) 12px,
+                    transparent 12px,
+                    transparent 22px),
+                rgba(245,245,245,0.28);
+        }
+        .uncertThick {
+            background:
+                repeating-linear-gradient(135deg,
+                    transparent 0px,
+                    transparent 7px,
+                    rgba(20,20,20,0.82) 7px,
+                    rgba(20,20,20,0.82) 15px,
+                    transparent 15px,
+                    transparent 24px),
+                rgba(245,245,245,0.28);
+        }
+
+        /* ---- status ---- */
+        #statusBadge {
+            position: absolute;
+            top: 14px; left: 14px;
+            z-index: 9999;
+            background: rgba(0,0,0,0.72);
+            color: #7ef;
+            font-family: monospace;
+            font-size: 11px;
+            padding: 6px 10px;
+            border-radius: 6px;
+            border: 1px solid rgba(255,255,255,0.15);
+        }
+
+        #fpsCounter {
+            position: absolute;
+            top: 14px; left: 50%;
+            transform: translateX(-50%);
+            z-index: 9999;
+            background: rgba(0,0,0,0.72);
+            color: #7ef;
+            font-family: monospace;
+            font-size: 12px;
+            padding: 5px 12px;
+            border-radius: 6px;
+            border: 1px solid rgba(255,255,255,0.15);
+        }
+
+        #resetBtn {
+            position: absolute;
+            top: 14px; right: 14px;
+            z-index: 9999;
+            background: rgba(0,0,0,0.72);
+            color: white;
+            border: 1px solid #444;
+            border-radius: 8px;
+            padding: 7px 14px;
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            cursor: pointer;
+        }
+        #resetBtn:hover { background: rgba(40,40,40,0.9); }
+
+        #viewModeToggleBtn {
+            position: absolute;
+            left: 16px; bottom: 142px;
+            z-index: 9999;
+            min-width: 168px;
+            background: rgba(0,0,0,0.78);
+            color: white;
+            border: 1px solid #555;
+            border-radius: 12px;
+            padding: 14px 22px;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.28);
+        }
+        #viewModeToggleBtn:hover { background: rgba(40,40,40,0.94); }
+
+        #rumInfoPopup {
+            position: absolute;
+            z-index: 10001;
+            width: 286px;
+            max-width: calc(100vw - 24px);
+            display: none;
+            background: rgba(0,0,0,0.84);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.22);
+            border-radius: 10px;
+            box-shadow: 0 8px 26px rgba(0,0,0,0.35);
+            padding: 10px 12px;
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            pointer-events: auto;
+        }
+        #rumInfoPopup .popupTop {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+            border-bottom: 1px solid rgba(255,255,255,0.15);
+            padding-bottom: 6px;
+        }
+        #rumInfoTitle {
+            font-weight: bold;
+            color: #7ef;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        #rumInfoClose {
+            background: transparent;
+            color: white;
+            border: 0;
+            font-size: 18px;
+            line-height: 1;
+            cursor: pointer;
+            padding: 0 2px;
+        }
+        #rumInfoBody {
+            color: #ddd;
+            line-height: 1.35;
+        }
+        .rumInfoRow {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            border-bottom: 1px solid rgba(255,255,255,0.07);
+            padding: 3px 0;
+        }
+        .rumInfoKey {
+            color: #aaa;
+            flex: 0 0 122px;
+        }
+        .rumInfoVal {
+            color: #fff;
+            text-align: right;
+            overflow-wrap: anywhere;
+        }
+        .rumInfoNote {
+            color: #aaa;
+            font-size: 11px;
+            margin-top: 7px;
+        }
+
+        #rumInfoCrosshair {
+            position: absolute;
+            z-index: 10000;
+            width: 22px;
+            height: 22px;
+            display: none;
+            pointer-events: none;
+            transform: translate(-11px, -11px);
+        }
+        #rumInfoCrosshair::before,
+        #rumInfoCrosshair::after {
+            content: "";
+            position: absolute;
+            background: rgba(255,255,255,0.92);
+            box-shadow: 0 0 3px rgba(0,0,0,0.9);
+        }
+        #rumInfoCrosshair::before {
+            left: 10px; top: 0;
+            width: 2px; height: 22px;
+        }
+        #rumInfoCrosshair::after {
+            left: 0; top: 10px;
+            width: 22px; height: 2px;
+        }
+        #rumInfoStem {
+            position: absolute;
+            z-index: 10000;
+            display: none;
+            width: 2px;
+            background: rgba(255,255,255,0.88);
+            box-shadow: 0 0 3px rgba(0,0,0,0.9);
+            pointer-events: none;
+        }
+
+        #epochPanel.timeLocked {
+            opacity: 0.55;
+        }
+        #epochPanel.timeLocked input,
+        #epochPanel.timeLocked button {
+            cursor: not-allowed;
+        }
+
+        #blankToggleBtn {
+            position: absolute;
+            top: 98px; right: 14px;
+            z-index: 9999;
+            background: rgba(0,0,0,0.72);
+            color: white;
+            border: 1px solid #444;
+            border-radius: 8px;
+            padding: 7px 14px;
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            cursor: pointer;
+        }
+        #blankToggleBtn:hover { background: rgba(40,40,40,0.9); }
+
+        #rumWallToggleBtn {
+            position: absolute;
+            top: 140px; right: 14px;
+            z-index: 9999;
+            background: rgba(0,0,0,0.72);
+            color: white;
+            border: 1px solid #444;
+            border-radius: 8px;
+            padding: 7px 14px;
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            cursor: pointer;
+        }
+        #rumWallToggleBtn:hover { background: rgba(40,40,40,0.9); }
+
+        #blankWallToggleBtn {
+            position: absolute;
+            top: 182px; right: 14px;
+            z-index: 9999;
+            background: rgba(0,0,0,0.72);
+            color: white;
+            border: 1px solid #444;
+            border-radius: 8px;
+            padding: 7px 14px;
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            cursor: pointer;
+        }
+        #blankWallToggleBtn:hover { background: rgba(40,40,40,0.9); }
+
+        #hatchToggleBtn {
+            position: absolute;
+            top: 224px; right: 14px;
+            z-index: 9999;
+            background: rgba(0,0,0,0.72);
+            color: white;
+            border: 1px solid #444;
+            border-radius: 8px;
+            padding: 7px 14px;
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            cursor: pointer;
+        }
+        #hatchToggleBtn:hover { background: rgba(40,40,40,0.9); }
+
+        #bowlToggleBtn {
+            position: absolute;
+            top: 266px; right: 14px;
+            z-index: 9999;
+            background: rgba(0,0,0,0.72);
+            color: white;
+            border: 1px solid #444;
+            border-radius: 8px;
+            padding: 7px 14px;
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            cursor: pointer;
+        }
+        #bowlToggleBtn:hover { background: rgba(40,40,40,0.9); }
+
+        #hParticleToggleBtn {
+            position: absolute;
+            top: 308px; right: 14px;
+            z-index: 9999;
+            background: rgba(0,0,0,0.72);
+            color: white;
+            border: 1px solid #444;
+            border-radius: 8px;
+            padding: 7px 14px;
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            cursor: pointer;
+        }
+        #hParticleToggleBtn:hover { background: rgba(40,40,40,0.9); }
+
+        #hUncertaintyToggleBtn {
+            position: absolute;
+            top: 350px; right: 14px;
+            z-index: 9999;
+            background: rgba(0,0,0,0.72);
+            color: white;
+            border: 1px solid #444;
+            border-radius: 8px;
+            padding: 7px 14px;
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            cursor: pointer;
+        }
+        #hUncertaintyToggleBtn:hover { background: rgba(40,40,40,0.9); }
+
+        #displayPanel {
+            position: absolute;
+            top: 392px; right: 14px;
+            z-index: 9999;
+            width: 230px;
+            background: rgba(0,0,0,0.72);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 10px;
+            padding: 10px 12px;
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+        }
+        #displayPanel .panelTitle {
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        #displayPanel label {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 8px;
+            color: #ddd;
+        }
+        #displayPanel input[type="range"],
+        #displayPanel select {
+            width: 100%;
+            margin: 4px 0 2px;
+        }
+        #displayPanel select {
+            background: rgba(20,20,20,0.92);
+            color: white;
+            border: 1px solid #555;
+            border-radius: 6px;
+            padding: 4px 6px;
+            font-size: 12px;
+        }
+        #displayPanel .hint {
+            margin-top: 6px;
+            color: #aaa;
+            font-size: 10px;
+            line-height: 1.25;
+        }
+        #displayPanel .panelDivider {
+            margin: 10px 0 6px;
+            border-top: 1px solid rgba(255,255,255,0.16);
+        }
+    </style>
+</head>
+<body>
+
+<div id="cesiumContainer"></div>
+<canvas id="hParticleCanvas"></canvas>
+
+<div id="statusBadge">loading…</div>
+<button id="resetBtn">Reset view</button>
+<button id="viewModeToggleBtn">View: 2D</button>
+<button id="blankToggleBtn">Blankie caps: ON</button>
+<button id="rumWallToggleBtn">RUM walls: ON</button>
+<button id="blankWallToggleBtn">Blankie walls: ON</button>
+<button id="hatchToggleBtn">Uncertainty hatch: ON</button>
+<button id="bowlToggleBtn">Subsidence bowl: OFF</button>
+<button id="hParticleToggleBtn">Horizontal particles: ON</button>
+<button id="hUncertaintyToggleBtn">H uncertainty: ON</button>
+<div id="fpsCounter">FPS: —</div>
+
+<div id="rumInfoPopup">
+    <div class="popupTop">
+        <div id="rumInfoTitle">RUM info</div>
+        <button id="rumInfoClose" title="Close">×</button>
+    </div>
+    <div id="rumInfoBody"></div>
+</div>
+<div id="rumInfoStem"></div>
+<div id="rumInfoCrosshair"></div>
+
+<div id="displayPanel">
+    <div class="panelTitle">Display controls</div>
+
+    <label>
+        <span>Vertical exaggeration</span>
+        <span id="verticalExagValue">5.0</span>
+    </label>
+    <input id="verticalExagSlider" type="range" min="0" max="10" step="0.1" value="5" />
+
+    <label>
+        <span>Global opacity</span>
+        <span id="globalOpacityValue">1.00</span>
+    </label>
+    <input id="globalOpacitySlider" type="range" min="0" max="1" step="0.05" value="0.70" />
+
+    <div class="hint">Opacity multiplies each layer's base alpha.</div>
+
+    <div class="panelDivider"></div>
+    <div class="panelTitle">Horizontal particles</div>
+
+    <label>
+        <span>Interpolation</span>
+        <span id="hParticleSamplerValue">conservative v2</span>
+    </label>
+    <select id="hParticleSamplerSelect">
+        <option value="nearest">nearest</option>
+        <option value="conservative_v1">conservative bilinear v1</option>
+        <option value="conservative_v2" selected>conservative bilinear v2</option>
+        <option value="bilinear">loose bilinear</option>
+    </select>
+
+    <label>
+        <span>Particle count</span>
+        <span id="hParticleCountValue">2500</span>
+    </label>
+    <input id="hParticleCountSlider" type="range" min="500" max="8000" step="500" value="5000" />
+
+    <label>
+        <span>Particle speed</span>
+        <span id="hParticleSpeedValue">1.5</span>
+    </label>
+    <input id="hParticleSpeedSlider" type="range" min="0.1" max="6" step="0.1" value="1.5" />
+
+    <label>
+        <span>Trail persistence</span>
+        <span id="hParticleTrailValue">0.92</span>
+    </label>
+    <input id="hParticleTrailSlider" type="range" min="0.80" max="0.98" step="0.01" value="0.92" />
+
+    <label>
+        <span>Uncertainty shimmer</span>
+        <span id="hUncertaintyStrengthValue">0.50</span>
+    </label>
+    <input id="hUncertaintyStrengthSlider" type="range" min="0" max="1" step="0.05" value="0.5" />
+
+    <div class="hint">H7: particle path shows mean horizontal velocity; trail shimmer shows horizontal directional uncertainty.</div>
+</div>
+
+<div id="epochPanel">
+    <div id="epochLabel">Epoch: loading…</div>
+    <input id="epochSlider" type="range" min="0" max="287" step="1" value="0" />
+    <div id="epochControls">
+        <button id="epochFirstBtn" class="epochBtn" title="First epoch">⏮</button>
+        <button id="epochPrevBtn" class="epochBtn" title="Previous epoch">&lt;</button>
+        <button id="epochPlayBtn" class="epochBtn" title="Play / pause">▶</button>
+        <button id="epochNextBtn" class="epochBtn" title="Next epoch">&gt;</button>
+        <button id="epochLastBtn" class="epochBtn" title="Last epoch">⏭</button>
+        <span id="epochInfo">—</span>
+    </div>
+</div>
+
+<div id="colorbar">
+    <div id="distanceLegend">
+        <div id="distanceTitle">Distance scale</div>
+        <div id="distanceScaleWrap">
+            <div id="distanceScaleBarOuter">
+                <div id="distanceScaleBar"></div>
+            </div>
+            <div id="distanceScaleLabel">—</div>
+        </div>
+    </div>
+
+    <div id="hParticleLegend">
+        <div id="hParticleLegendTitle">Horizontal Velocity</div>
+        <div id="hParticleLegendRow">
+            <svg id="hParticleSwatch" viewBox="0 0 64 24" aria-hidden="true">
+                <path d="M4 17 C 16 8, 29 10, 42 5" fill="none" stroke="rgba(100,100,100,0.82)" stroke-width="2.2" stroke-linecap="round"/>
+                <path d="M10 21 C 23 14, 35 15, 55 9" fill="none" stroke="rgba(100,100,100,0.50)" stroke-width="1.6" stroke-linecap="round"/>
+                <path d="M6 8 C 20 3, 33 6, 60 3" fill="none" stroke="rgba(100,100,100,0.34)" stroke-width="1.2" stroke-linecap="round"/>
+            </svg>
+            <div id="hParticleLegendText">motion = direction and relative magnitude<br/>shimmer = higher horizontal uncertainty</div>
+        </div>
+    </div>
+
+    <div id="velocityLegend">
+        <div id="colorbarTitle">Vertical Velocity [mm/yr]</div>
+        <div id="colorbarScale"></div>
+        <div id="colorbarLabels">
+            <span>−40</span><span>−20</span><span>−5</span><span>0</span><span>+8</span>
+        </div>
+        <div id="noDataRow">
+            <span id="noDataSwatch"></span>
+            <span>No vertical data</span>
+        </div>
+    </div>
+
+    <div id="uncertaintyLegend">
+        <div id="uncertaintyTitle">Vertical Uncertainty</div>
+        <div id="uncertaintyBoxes">
+            <div class="uncertItem">
+                <div class="uncertBox uncertClean"></div>
+                <span>SNR ≥ 3</span>
+                <span>reliable</span>
+            </div>
+            <div class="uncertItem">
+                <div class="uncertBox uncertThin"></div>
+                <span>1–3</span>
+                <span>moderate</span>
+            </div>
+            <div class="uncertItem">
+                <div class="uncertBox uncertThick"></div>
+                <span>&lt; 1</span>
+                <span>low</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script> window.CESIUM_BASE_URL = "./"; </script>
+<script src="Cesium.js"></script>
+<script> Cesium.Ion.defaultAccessToken = ''; </script>
+
+
+<script>
+// ============================================================
+// CONFIG
+// ============================================================
+const TILESET_URL         = "Data/tiles/tileset.json";
+const BLANK_TILESET_URL   = "Data/tiles_blank/tileset.json";
+const REAL_WALL_TILESET_URL  = "Data/tiles_walls_real/tileset.json";
+const BLANK_WALL_TILESET_URL = "Data/tiles_walls_blank/tileset.json";
+const EPOCH_URL           = "Data/tiles/epoch_axis.json";
+const HEIGHT_TEXTURE_URL  = "Data/tiles/height_texture.png";
+const HEIGHT_META_URL     = "Data/tiles/height_meta.json";
+const BOWL_GEOJSON_URL    = "Data/jakarta_bowl_outlines_wgs84.geojson";
+const HORIZONTAL_FIELD_URL = "Data/horizontal_field.json";
+const PLAYBACK_MULTIPLIER = 60 * 60 * 24 * 14 * 8;      // 8 epochs/sec
+
+// Interface camera presets.
+const CAMERA_CENTER_LON = 106.85;
+const CAMERA_CENTER_LAT = -6.215;
+const CAMERA_2D_HEIGHT_M = 65000.0;   // zoomed in from old 90 km reset
+const CAMERA_RESET_HEIGHT_M = 90000.0;
+const CAMERA_2D_GLOBAL_OPACITY = 0.70;
+const CAMERA_3D_GLOBAL_OPACITY = 1.00; // requested: switch global opacity to 1 in 3D
+const CAMERA_3D_RANGE_M = 42000.0;     // lower cinematic camera
+const CAMERA_3D_PITCH_DEG = -58.0;
+const CAMERA_3D_START_HEADING_DEG = 35.0;
+const CAMERA_3D_ROTATION_DEG_PER_SEC = 6.0;
+const CAMERA_3D_CINEMATIC_DURATION_MS = 12000.0;
+
+// Neutral geometry heights baked by phase9b_b3dm.py.
+// These are NOT display settings.
+const GEOMETRY_BASE_HEIGHT_M = 0.0;
+const GEOMETRY_TOP_HEIGHT_M  = 1.0;
+
+// Viewer-side display settings.
+// Tune these without rerunning the Python pipeline.
+const WALL_BASE_HEIGHT_M = 999.0;
+const DISPLAY_DATUM_HEIGHT_M = 1000.0;
+const VERTICAL_EXAGGERATION_M_PER_MM = 5.0;
+
+// Subsidence bowl overlay, ported from old index.html.
+// Static primitive, built once, then toggled via .show.
+const BOWLS_ENABLED_INITIAL = false;
+const BOWL_HEIGHT = 50.0;
+const BOWL_CURTAIN_DEPTH = 100.0;
+const BOWL_FILL_OPACITY = 0.02;
+const BOWL_CURTAIN_OPACITY = 0.8;
+const BOWL_LABEL_SIZE = 18;
+const BOWL_LINE_COLOR = Cesium.Color.fromCssColorString("#40E0D0").withAlpha(0.95);
+const BOWL_LABEL_COLOR = Cesium.Color.fromCssColorString("#40E0D0");
+
+// Horizontal particle prototype.
+// BASE_MPS is visual advection speed for a p95 horizontal vector at speed multiplier = 1.
+// It is deliberately visual, not a physical mm/yr-to-m/s conversion.
+const H_PARTICLES_ENABLED_INITIAL = true;
+const H_PARTICLE_BASE_MPS = 1800.0;
+const H_PARTICLE_SURFACE_OFFSET_M = 10.0;
+const H_PARTICLE_STALL_SPEED_MM_YR = 0.05;
+
+// H7 horizontal uncertainty shimmer.
+// True particle trajectory is unchanged; only the rendered trail is offset.
+// sigma_theta is derived from the full east/north covariance matrix.
+const H_UNCERTAINTY_ENABLED_INITIAL = true;
+const H_UNCERTAINTY_SPEED_FLOOR_MM_YR = 0.50;
+const H_UNCERTAINTY_THETA_LOW_DEG = 8.0;
+const H_UNCERTAINTY_THETA_HIGH_DEG = 32.5;
+const H_UNCERTAINTY_MAX_WOBBLE_PX = 5.0;
+const H_UNCERTAINTY_FREQ_MIN_HZ = 0.7;
+const H_UNCERTAINTY_FREQ_MAX_HZ = 1.6;
+let hUncertaintyEnabled = H_UNCERTAINTY_ENABLED_INITIAL;
+let hUncertaintyStrength = 0.5;
+
+// Screen-space canvas particles are paused during camera movement.
+// This prevents old trails from sticking to the screen while Cesium reprojects the scene.
+const H_PARTICLE_CAMERA_STABLE_DELAY_MS = 1;
+let hParticleCount = 4500;
+let hParticleSpeedMultiplier = 1.5;
+let hParticleTrailPersistence = 0.92;
+let hParticleSamplerMode = "conservative_v2";
+let currentVerticalExaggeration = VERTICAL_EXAGGERATION_M_PER_MM;
+let globalOpacity = 1.0;
+
+// Dynamic uncertainty hatch, applied only to real RUM caps.
+let uncertaintyHatchEnabled = true;
+let SIGMA_MIN = 0.0;
+let SIGMA_MAX = 1.0;
+let SNR_NO_HATCH = 3.0;
+let SNR_THICK_HATCH = 1.0;
+
+// Blankie layer display settings.
+const BLANKIES_ENABLED_INITIAL = true;
+const BLANK_COLOR = Cesium.Color.fromCssColorString("#9e9e9e").withAlpha(0.55);
+
+// Height-difference wall layer display settings.
+const RUM_WALLS_ENABLED_INITIAL = true;
+const BLANK_WALLS_ENABLED_INITIAL = true;
+const RUM_WALL_COLOR = Cesium.Color.fromCssColorString("#303030").withAlpha(0.75); // fallback only
+const BLANK_WALL_COLOR = Cesium.Color.fromCssColorString("#505050").withAlpha(0.55);
+
+// Loaded from height_meta.json. Fallbacks match phase9a.
+let V_MIN = -1500.0;
+let V_MAX =  1500.0;
+let NUM_EPOCHS = 288;
+let NUM_RUMS   = 4779;
+let REAL_RUM_COUNT = 4779;
+let BLANK_CELL_COUNT = 0;
+
+// ---- Colormap (ported exactly from index.html) ----
+const RUM_STABLE_THRESHOLD = 2.0;
+const RUM_SUBSIDENCE_RANGE = 40.0;
+const RUM_UPLIFT_RANGE     = 8.0;
+
+const COLOR_STABLE       = Cesium.Color.fromCssColorString("#f7f7f7");
+const COLOR_UPLIFT_LIGHT = Cesium.Color.fromCssColorString("#d9f0ff");
+const COLOR_UPLIFT_DARK  = Cesium.Color.fromCssColorString("#2b8cbe");
+const COLOR_NODATA       = Cesium.Color.fromCssColorString("#9e9e9e").withAlpha(0.65);
+
+const NEGATIVE_STOPS = [
+    { t: 0.00, color: Cesium.Color.fromCssColorString("#ffffff") },
+    { t: 0.18, color: Cesium.Color.fromCssColorString("#fff7bc") },
+    { t: 0.35, color: Cesium.Color.fromCssColorString("#fee391") },
+    { t: 0.55, color: Cesium.Color.fromCssColorString("#fdae61") },
+    { t: 0.75, color: Cesium.Color.fromCssColorString("#f46d43") },
+    { t: 0.90, color: Cesium.Color.fromCssColorString("#d73027") },
+    { t: 1.00, color: Cesium.Color.fromCssColorString("#7f0000") },
+];
+
+// ============================================================
+// VIEWER
+// ============================================================
+const viewer = new Cesium.Viewer("cesiumContainer", {
+    terrainProvider:      new Cesium.EllipsoidTerrainProvider(),
+    baseLayerPicker:      false,
+    geocoder:             false,
+    homeButton:           false,
+    sceneModePicker:      false,
+    navigationHelpButton: false,
+    timeline:             false,
+    animation:            false,
+    infoBox:              false,
+    selectionIndicator:   false,
+});
+
+viewer.imageryLayers.removeAll();
+viewer.imageryLayers.addImageryProvider(
+    new Cesium.OpenStreetMapImageryProvider({
+        url: "https://tile.openstreetmap.org/"
+    })
+);
+viewer.scene.morphTo3D(0);
+
+// ------------------------------------------------------------
+// Fixed lighting
+// ------------------------------------------------------------
+// Keep lighting independent from Cesium clock time. Otherwise wall shading
+// can flicker during playback because scene time jumps through 2014–2025.
+viewer.scene.globe.enableLighting = false;
+if (viewer.scene.shadowMap) {
+    viewer.scene.shadowMap.enabled = false;
+}
+viewer.shadows = false;
+viewer.scene.light = new Cesium.DirectionalLight({
+    direction: Cesium.Cartesian3.normalize(
+        new Cesium.Cartesian3(0.35, 0.45, 0.82),
+        new Cesium.Cartesian3()
+    ),
+});
+
+// ============================================================
+// UI REFS
+// ============================================================
+const statusBadge  = document.getElementById("statusBadge");
+const viewModeToggleBtn = document.getElementById("viewModeToggleBtn");
+const rumInfoPopup = document.getElementById("rumInfoPopup");
+const rumInfoTitle = document.getElementById("rumInfoTitle");
+const rumInfoBody = document.getElementById("rumInfoBody");
+const rumInfoClose = document.getElementById("rumInfoClose");
+const rumInfoCrosshair = document.getElementById("rumInfoCrosshair");
+const rumInfoStem = document.getElementById("rumInfoStem");
+const epochPanel = document.getElementById("epochPanel");
+const epochLabel   = document.getElementById("epochLabel");
+const epochSlider  = document.getElementById("epochSlider");
+const epochFirstBtn = document.getElementById("epochFirstBtn");
+const epochPrevBtn  = document.getElementById("epochPrevBtn");
+const epochPlayBtn  = document.getElementById("epochPlayBtn");
+const epochNextBtn  = document.getElementById("epochNextBtn");
+const epochLastBtn  = document.getElementById("epochLastBtn");
+const epochInfo     = document.getElementById("epochInfo");
+const fpsCounter   = document.getElementById("fpsCounter");
+const blankToggleBtn = document.getElementById("blankToggleBtn");
+const rumWallToggleBtn = document.getElementById("rumWallToggleBtn");
+const blankWallToggleBtn = document.getElementById("blankWallToggleBtn");
+const hatchToggleBtn = document.getElementById("hatchToggleBtn");
+const bowlToggleBtn = document.getElementById("bowlToggleBtn");
+const hParticleToggleBtn = document.getElementById("hParticleToggleBtn");
+const hUncertaintyToggleBtn = document.getElementById("hUncertaintyToggleBtn");
+const hParticleCanvas = document.getElementById("hParticleCanvas");
+const hParticleSamplerSelect = document.getElementById("hParticleSamplerSelect");
+const hParticleSamplerValue = document.getElementById("hParticleSamplerValue");
+const hParticleCountSlider = document.getElementById("hParticleCountSlider");
+const hParticleCountValue = document.getElementById("hParticleCountValue");
+const hParticleSpeedSlider = document.getElementById("hParticleSpeedSlider");
+const hParticleSpeedValue = document.getElementById("hParticleSpeedValue");
+const hParticleTrailSlider = document.getElementById("hParticleTrailSlider");
+const hParticleTrailValue = document.getElementById("hParticleTrailValue");
+const hUncertaintyStrengthSlider = document.getElementById("hUncertaintyStrengthSlider");
+const hUncertaintyStrengthValue = document.getElementById("hUncertaintyStrengthValue");
+const verticalExagSlider = document.getElementById("verticalExagSlider");
+const verticalExagValue = document.getElementById("verticalExagValue");
+const globalOpacitySlider = document.getElementById("globalOpacitySlider");
+const globalOpacityValue = document.getElementById("globalOpacityValue");
+const distanceScaleBar = document.getElementById("distanceScaleBar");
+const distanceScaleLabel = document.getElementById("distanceScaleLabel");
+
+function setStatus(msg) { statusBadge.textContent = msg; }
+
+// ============================================================
+// VIEW MODE + RUM INFO POPUP
+// ============================================================
+
+let currentViewMode = "2D";
+let cinematic3DActive = false;
+let cinematic3DStartMs = 0.0;
+let cinematic3DInitialHeading = Cesium.Math.toRadians(CAMERA_3D_START_HEADING_DEG);
+
+function updateViewModeButton() {
+    if (!viewModeToggleBtn) return;
+    viewModeToggleBtn.textContent = currentViewMode === "2D" ? "View: 2D" : "View: 3D";
+}
+
+function applyCameraControlsForMode(mode) {
+    const ctrl = viewer.scene.screenSpaceCameraController;
+    ctrl.enableZoom = true;
+
+    if (mode === "2D") {
+        // 2D orientation mode: keep zoom + map-like pan, block tilt/look.
+        ctrl.enableTranslate = true;
+        ctrl.enableRotate = true;
+        ctrl.enableTilt = false;
+        ctrl.enableLook = false;
+    } else {
+        // 3D science/show mode: restore full camera movement.
+        ctrl.enableTranslate = true;
+        ctrl.enableRotate = true;
+        ctrl.enableTilt = true;
+        ctrl.enableLook = true;
+    }
+}
+
+function setGlobalOpacityForMode(value) {
+    if (typeof window.__setGlobalOpacity === "function") {
+        window.__setGlobalOpacity(value);
+    } else {
+        globalOpacity = Number(value);
+        if (globalOpacitySlider) globalOpacitySlider.value = String(value);
+        if (globalOpacityValue) globalOpacityValue.textContent = Number(value).toFixed(2);
+    }
+}
+
+function setTimeControlsEnabled(enabled) {
+    const controls = [epochSlider, epochFirstBtn, epochPrevBtn, epochPlayBtn, epochNextBtn, epochLastBtn];
+    for (const el of controls) {
+        if (el) el.disabled = !enabled;
+    }
+    if (epochPanel) {
+        epochPanel.classList.toggle("timeLocked", !enabled);
+        epochPanel.title = enabled ? "" : "Time slider only available in 3D mode";
+    }
+    if (!enabled && viewer && viewer.clock) {
+        viewer.clock.shouldAnimate = false;
+        if (epochPlayBtn) epochPlayBtn.textContent = "▶";
+    }
+}
+
+function block2DTimeControlsMessage(evt) {
+    if (currentViewMode === "2D") {
+        setStatus("time slider only available in 3D mode");
+        if (evt) {
+            evt.preventDefault();
+            evt.stopPropagation();
+        }
+        return true;
+    }
+    return false;
+}
+
+function stopCinematic3D(resumeParticles = true) {
+    cinematic3DActive = false;
+    try {
+        viewer.camera.lookAtTransform(Cesium.Matrix4.IDENTITY);
+    } catch (e) {}
+
+    if (resumeParticles && typeof resumeHParticlesAfterCameraStable === "function") {
+        hCesiumCameraMoving = false;
+        hPointerDown = false;
+        resumeHParticlesAfterCameraStable();
+    }
+}
+
+function goTo2DView(animated = true) {
+    stopCinematic3D(false);
+    currentViewMode = "2D";
+    updateViewModeButton();
+    applyCameraControlsForMode("2D");
+    setTimeControlsEnabled(false);
+    setGlobalOpacityForMode(CAMERA_2D_GLOBAL_OPACITY);
+    hideRumInfoPopup();
+
+    const flight = {
+        destination: Cesium.Cartesian3.fromDegrees(CAMERA_CENTER_LON, CAMERA_CENTER_LAT, CAMERA_2D_HEIGHT_M),
+        orientation: {
+            heading: Cesium.Math.toRadians(0),
+            pitch:   Cesium.Math.toRadians(-90),
+            roll:    0
+        }
+    };
+
+    if (animated) {
+        flight.duration = 1.0;
+        viewer.camera.flyTo(flight);
+    } else {
+        viewer.camera.setView(flight);
+    }
+
+    viewer.scene.requestRender();
+}
+
+function start3DCinematicOrbit() {
+    currentViewMode = "3D";
+    updateViewModeButton();
+    hideRumInfoPopup();
+
+    cinematic3DActive = true;
+    cinematic3DStartMs = performance.now();
+    cinematic3DInitialHeading = Cesium.Math.toRadians(CAMERA_3D_START_HEADING_DEG);
+
+    if (typeof pauseHParticlesForCameraInteraction === "function") {
+        pauseHParticlesForCameraInteraction();
+    }
+}
+
+function goTo3DView() {
+    stopCinematic3D(false);
+    currentViewMode = "3D";
+    updateViewModeButton();
+    applyCameraControlsForMode("3D");
+    setTimeControlsEnabled(true);
+    setGlobalOpacityForMode(CAMERA_3D_GLOBAL_OPACITY);
+    hideRumInfoPopup();
+
+    viewer.camera.flyTo({
+        destination: Cesium.Cartesian3.fromDegrees(CAMERA_CENTER_LON - 0.07, CAMERA_CENTER_LAT - 0.08, 36000.0),
+        orientation: {
+            heading: Cesium.Math.toRadians(CAMERA_3D_START_HEADING_DEG),
+            pitch:   Cesium.Math.toRadians(CAMERA_3D_PITCH_DEG),
+            roll:    0
+        },
+        duration: 1.0,
+        complete: function() {
+            start3DCinematicOrbit();
+        }
+    });
+}
+
+function update3DCinematicOrbit() {
+    if (!cinematic3DActive) return;
+
+    const now = performance.now();
+    const elapsedMs = now - cinematic3DStartMs;
+
+    if (elapsedMs > CAMERA_3D_CINEMATIC_DURATION_MS) {
+        stopCinematic3D(true);
+        return;
+    }
+
+    const center = Cesium.Cartesian3.fromDegrees(
+        CAMERA_CENTER_LON,
+        CAMERA_CENTER_LAT,
+        DISPLAY_DATUM_HEIGHT_M
+    );
+
+    const heading = cinematic3DInitialHeading +
+        Cesium.Math.toRadians(CAMERA_3D_ROTATION_DEG_PER_SEC * elapsedMs / 1000.0);
+
+    viewer.camera.lookAt(
+        center,
+        new Cesium.HeadingPitchRange(
+            heading,
+            Cesium.Math.toRadians(CAMERA_3D_PITCH_DEG),
+            CAMERA_3D_RANGE_M
+        )
+    );
+
+    // Avoid screen-space particle hair during cinematic camera motion.
+    if (typeof pauseHParticlesForCameraInteraction === "function") {
+        pauseHParticlesForCameraInteraction();
+    }
+}
+
+function safeNumber(value) {
+    const n = Number(value);
+    return Number.isFinite(n) ? n : null;
+}
+
+function fmtNum(value, decimals = 2, suffix = "") {
+    const n = safeNumber(value);
+    if (n === null) return "—";
+    return `${n.toFixed(decimals)}${suffix}`;
+}
+
+function pickedFeatureProperty(feature, names) {
+    if (!feature || typeof feature.getProperty !== "function") return undefined;
+
+    for (const name of names) {
+        try {
+            const value = feature.getProperty(name);
+            if (value !== undefined && value !== null && value !== "") return value;
+        } catch (e) {}
+    }
+
+    return undefined;
+}
+
+function pickedFeaturePropertyIds(feature) {
+    try {
+        if (feature && typeof feature.getPropertyIds === "function") {
+            return feature.getPropertyIds();
+        }
+    } catch (e) {}
+    return [];
+}
+
+function positionRumInfoPopup(screenPosition) {
+    const margin = 12;
+    const width = 286;
+    const targetX = Number(screenPosition.x || 0);
+    const targetY = Number(screenPosition.y || 0);
+    const desiredStem = 46;
+
+    // Temporarily show for measurement, then position as a flag above the picked RUM.
+    rumInfoPopup.style.display = "block";
+    const boxH = rumInfoPopup.offsetHeight || 220;
+
+    let x = targetX - width * 0.5;
+    let y = targetY - desiredStem - boxH;
+
+    x = Math.max(margin, Math.min(window.innerWidth - width - margin, x));
+    y = Math.max(margin, y);
+
+    const popupBottom = y + boxH;
+    const stemTop = popupBottom;
+    const stemH = Math.max(8, targetY - popupBottom);
+
+    rumInfoPopup.style.left = `${x}px`;
+    rumInfoPopup.style.top = `${y}px`;
+
+    if (rumInfoCrosshair) {
+        rumInfoCrosshair.style.left = `${targetX}px`;
+        rumInfoCrosshair.style.top = `${targetY}px`;
+        rumInfoCrosshair.style.display = "block";
+    }
+
+    if (rumInfoStem) {
+        rumInfoStem.style.left = `${targetX - 1}px`;
+        rumInfoStem.style.top = `${stemTop}px`;
+        rumInfoStem.style.height = `${stemH}px`;
+        rumInfoStem.style.display = "block";
+    }
+}
+
+function hideRumInfoPopup() {
+    if (!rumInfoPopup) return;
+    rumInfoPopup.style.display = "none";
+    if (rumInfoCrosshair) rumInfoCrosshair.style.display = "none";
+    if (rumInfoStem) rumInfoStem.style.display = "none";
+}
+
+function rumInfoRow(label, value) {
+    return `
+        <div class="rumInfoRow">
+            <div class="rumInfoKey">${label}</div>
+            <div class="rumInfoVal">${value}</div>
+        </div>
+    `;
+}
+
+function showRumInfoPopup(feature, screenPosition) {
+    if (!feature || !rumInfoPopup) return;
+
+    const ids = pickedFeaturePropertyIds(feature);
+    const rumIdRaw = pickedFeatureProperty(feature, [
+        "rum_id", "RUM_ID", "rumId", "id", "name"
+    ]);
+
+    const rumId = rumIdRaw !== undefined && rumIdRaw !== null ? String(rumIdRaw) : "";
+
+    if (!rumId || !rumId.startsWith("RUM_")) {
+        rumInfoTitle.textContent = "Selected feature";
+        rumInfoBody.innerHTML = `
+            <div class="rumInfoNote">
+                This is not a real RUM cap feature, or this tile does not expose a RUM ID.
+            </div>
+            <div class="rumInfoNote">Available properties: ${ids.length ? ids.join(", ") : "—"}</div>
+        `;
+        positionRumInfoPopup(screenPosition);
+        rumInfoPopup.style.display = "block";
+        return;
+    }
+
+    const up = safeNumber(pickedFeatureProperty(feature, ["up", "up_mm_yr", "vertical_velocity"]));
+    const hCell = hCellByRumId.get(rumId);
+
+    let dispMm = null;
+    if (hHeightMeta && hHeightMeta.rum_index && hCurrentDispByRow) {
+        const row = hHeightMeta.rum_index[rumId];
+        if (row !== undefined && row !== null && row >= 0 && row < hCurrentDispByRow.length) {
+            dispMm = hCurrentDispByRow[row];
+        }
+    }
+
+    const east = hCell ? safeNumber(hCell.east_mm_yr) : null;
+    const north = hCell ? safeNumber(hCell.north_mm_yr) : null;
+    const speed = hCell ? safeNumber(hCell.speed_mm_yr) : null;
+
+    const varE = hCell ? safeNumber(hCell.var_east) : null;
+    const varN = hCell ? safeNumber(hCell.var_north) : null;
+    const covEN = hCell ? safeNumber(hCell.covar_en) : null;
+
+    const sigmaE = varE !== null ? Math.sqrt(Math.max(0.0, varE)) : null;
+    const sigmaN = varN !== null ? Math.sqrt(Math.max(0.0, varN)) : null;
+
+    rumInfoTitle.textContent = rumId;
+    rumInfoBody.innerHTML =
+        rumInfoRow("Vertical velocity", fmtNum(up, 2, " mm/yr")) +
+        rumInfoRow("Current displacement", fmtNum(dispMm, 2, " mm")) +
+        rumInfoRow("Horizontal east", fmtNum(east, 3, " mm/yr")) +
+        rumInfoRow("Horizontal north", fmtNum(north, 3, " mm/yr")) +
+        rumInfoRow("Horizontal speed", fmtNum(speed, 3, " mm/yr")) +
+        rumInfoRow("σ east", fmtNum(sigmaE, 3, " mm/yr")) +
+        rumInfoRow("σ north", fmtNum(sigmaN, 3, " mm/yr")) +
+        rumInfoRow("cov EN", fmtNum(covEN, 3, "")) +
+        `<div class="rumInfoNote">Numbers come from the picked RUM cap and horizontal_field.json.</div>`;
+
+    positionRumInfoPopup(screenPosition);
+    rumInfoPopup.style.display = "block";
+}
+
+// ============================================================
+// SCREEN-SPACE DISTANCE SCALE
+// ============================================================
+
+function niceDistanceMeters(maxMeters) {
+    if (!Number.isFinite(maxMeters) || maxMeters <= 0) return 0;
+
+    const exponent = Math.floor(Math.log10(maxMeters));
+    const base = Math.pow(10, exponent);
+    const candidates = [1, 2, 5, 10];
+
+    let best = base;
+    for (const c of candidates) {
+        const value = c * base;
+        if (value <= maxMeters) best = value;
+    }
+    return best;
+}
+
+function formatDistanceLabel(meters) {
+    if (!Number.isFinite(meters) || meters <= 0) return "—";
+
+    if (meters >= 1000) {
+        const km = meters / 1000.0;
+        const mi = meters / 1609.344;
+        const kmTxt = km >= 10 ? km.toFixed(0) : km.toFixed(1).replace(/\.0$/, "");
+        const miTxt = mi >= 10 ? mi.toFixed(0) : mi.toFixed(1).replace(/\.0$/, "");
+        return `${kmTxt} km / ${miTxt} mi`;
+    }
+
+    const ft = meters * 3.28084;
+    const mTxt = meters >= 100 ? meters.toFixed(0) : meters.toFixed(0);
+    const ftTxt = ft >= 1000 ? ft.toFixed(0) : ft.toFixed(0);
+    return `${mTxt} m / ${ftTxt} ft`;
+}
+
+function ellipsoidDistanceMeters(cartA, cartB) {
+    const ellipsoid = viewer.scene.globe.ellipsoid;
+    const ca = ellipsoid.cartesianToCartographic(cartA);
+    const cb = ellipsoid.cartesianToCartographic(cartB);
+
+    if (!ca || !cb) return NaN;
+
+    const geodesic = new Cesium.EllipsoidGeodesic(ca, cb, ellipsoid);
+    return geodesic.surfaceDistance;
+}
+
+let _lastDistanceScaleUpdate = 0;
+
+function updateDistanceScale(force = false) {
+    const now = performance.now();
+    if (!force && now - _lastDistanceScaleUpdate < 250) return;
+    _lastDistanceScaleUpdate = now;
+
+    if (!distanceScaleBar || !distanceScaleLabel) return;
+
+    const canvas = viewer.scene.canvas;
+    const width = canvas.clientWidth || window.innerWidth;
+    const height = canvas.clientHeight || window.innerHeight;
+
+    // Sample near the lower-middle screen, away from the legend and epoch panel.
+    const y = Math.round(height * 0.78);
+    const xCenter = Math.round(width * 0.52);
+    const samplePx = 120;
+
+    const p1 = viewer.camera.pickEllipsoid(
+        new Cesium.Cartesian2(xCenter - samplePx / 2, y),
+        viewer.scene.globe.ellipsoid
+    );
+    const p2 = viewer.camera.pickEllipsoid(
+        new Cesium.Cartesian2(xCenter + samplePx / 2, y),
+        viewer.scene.globe.ellipsoid
+    );
+
+    if (!p1 || !p2) {
+        distanceScaleBar.style.width = "0px";
+        distanceScaleLabel.textContent = "—";
+        return;
+    }
+
+    const sampleMeters = ellipsoidDistanceMeters(p1, p2);
+    const metersPerPixel = sampleMeters / samplePx;
+
+    if (!Number.isFinite(metersPerPixel) || metersPerPixel <= 0) {
+        distanceScaleBar.style.width = "0px";
+        distanceScaleLabel.textContent = "—";
+        return;
+    }
+
+    const maxBarPx = 150;
+    const niceMeters = niceDistanceMeters(metersPerPixel * maxBarPx);
+    const barPx = Math.max(24, Math.min(maxBarPx, niceMeters / metersPerPixel));
+
+    distanceScaleBar.style.width = `${barPx.toFixed(0)}px`;
+    distanceScaleLabel.textContent = formatDistanceLabel(niceMeters);
+}
+
+// ============================================================
+// COLORMAP
+// ============================================================
+function interpolateStops(t, stops, result) {
+    t = Math.max(0, Math.min(1, t));
+    for (let i = 0; i < stops.length - 1; i++) {
+        if (t <= stops[i + 1].t) {
+            const range = stops[i + 1].t - stops[i].t;
+            const f = range < 1e-9 ? 0 : (t - stops[i].t) / range;
+            return Cesium.Color.lerp(stops[i].color, stops[i + 1].color, f, result || new Cesium.Color());
+        }
+    }
+    return stops[stops.length - 1].color.clone(result);
+}
+
+function velocityToColor(upMmYr, result) {
+    if (!isFinite(upMmYr)) return COLOR_NODATA.clone(result);
+    if (upMmYr > RUM_STABLE_THRESHOLD) {
+        const t = Math.min((upMmYr - RUM_STABLE_THRESHOLD) / RUM_UPLIFT_RANGE, 1.0);
+        return Cesium.Color.lerp(COLOR_UPLIFT_LIGHT, COLOR_UPLIFT_DARK, t, result || new Cesium.Color());
+    }
+    if (upMmYr >= -RUM_STABLE_THRESHOLD) {
+        return COLOR_STABLE.clone(result);
+    }
+    const t = Math.min((-upMmYr) / RUM_SUBSIDENCE_RANGE, 1.0);
+    return interpolateStops(t, NEGATIVE_STOPS, result);
+}
+
+function colorWithGlobalOpacity(baseColor, result) {
+    const out = baseColor.clone(result || new Cesium.Color());
+    out.alpha = Math.max(0.0, Math.min(1.0, out.alpha * globalOpacity));
+    return out;
+}
+
+
+
+// ============================================================
+// SUBSIDENCE BOWL OVERLAY
+// ============================================================
+
+let bowlOutlinePrimitive = null;
+let bowlCurtainPrimitive = null;
+let bowlLabels = [];
+let bowlsVisible = BOWLS_ENABLED_INITIAL;
+
+async function loadJson(url, label) {
+    console.time(label);
+    const response = await fetch(url);
+    if (!response.ok) {
+        throw new Error(`${label} failed: ${response.status}`);
+    }
+    const data = await response.json();
+    console.timeEnd(label);
+    return data;
+}
+
+function getFeatureProperty(feature, key, fallback = "") {
+    if (!feature || !feature.properties) return fallback;
+    if (feature.properties[key] === undefined || feature.properties[key] === null) return fallback;
+    return feature.properties[key];
+}
+
+function setBowlVisibility(visible) {
+    bowlsVisible = visible;
+
+    if (bowlOutlinePrimitive) {
+        bowlOutlinePrimitive.show = visible;
+    }
+    if (bowlCurtainPrimitive) {
+        bowlCurtainPrimitive.show = visible;
+    }
+    for (let i = 0; i < bowlLabels.length; i++) {
+        bowlLabels[i].show = visible;
+    }
+
+    bowlToggleBtn.textContent = visible ? "Subsidence bowl: ON" : "Subsidence bowl: OFF";
+    viewer.scene.requestRender();
+}
+
+async function loadBowlOutlines() {
+    try {
+        const bowlGeoJson = await loadJson(BOWL_GEOJSON_URL, "load bowl outlines");
+        buildBowlOutlinePrimitives(bowlGeoJson);
+        setBowlVisibility(BOWLS_ENABLED_INITIAL);
+        console.log("[bowl] Subsidence bowl outlines loaded");
+    } catch (error) {
+        console.warn("[bowl] Bowl outline load skipped/failed:", error);
+        setBowlVisibility(false);
+    }
+}
+
+function buildBowlOutlinePrimitives(geoJson) {
+    if (!geoJson || !geoJson.features) return;
+
+    const polygonInstances = [];
+    const curtainInstances = [];
+
+    const topHeight = DISPLAY_DATUM_HEIGHT_M + BOWL_HEIGHT;
+    const bottomHeight = topHeight - BOWL_CURTAIN_DEPTH;
+
+    for (let i = 0; i < geoJson.features.length; i++) {
+        const feature = geoJson.features[i];
+
+        if (
+            !feature.geometry ||
+            feature.geometry.type !== "Polygon" ||
+            !feature.geometry.coordinates ||
+            feature.geometry.coordinates.length === 0
+        ) {
+            continue;
+        }
+
+        const coords = feature.geometry.coordinates[0];
+        const positions = [];
+
+        for (let j = 0; j < coords.length; j++) {
+            const lon = coords[j][0];
+            const lat = coords[j][1];
+            positions.push(Cesium.Cartesian3.fromDegrees(lon, lat, topHeight));
+        }
+
+        if (positions.length < 3) continue;
+
+        const polygonGeometry = new Cesium.PolygonGeometry({
+            polygonHierarchy: new Cesium.PolygonHierarchy(positions),
+            height: topHeight,
+            vertexFormat: Cesium.PerInstanceColorAppearance.VERTEX_FORMAT
+        });
+
+        polygonInstances.push(
+            new Cesium.GeometryInstance({
+                geometry: polygonGeometry,
+                attributes: {
+                    color: Cesium.ColorGeometryInstanceAttribute.fromColor(
+                        BOWL_LINE_COLOR.withAlpha(BOWL_FILL_OPACITY)
+                    )
+                }
+            })
+        );
+
+        if (BOWL_CURTAIN_DEPTH > 0) {
+            const curtainPositions = [];
+
+            for (let j = 0; j < coords.length; j++) {
+                const lon = coords[j][0];
+                const lat = coords[j][1];
+                curtainPositions.push(Cesium.Cartesian3.fromDegrees(lon, lat, 0));
+            }
+
+            const wallGeometry = new Cesium.WallGeometry({
+                positions: curtainPositions,
+                minimumHeights: new Array(curtainPositions.length).fill(bottomHeight),
+                maximumHeights: new Array(curtainPositions.length).fill(topHeight),
+                vertexFormat: Cesium.PerInstanceColorAppearance.VERTEX_FORMAT
+            });
+
+            curtainInstances.push(
+                new Cesium.GeometryInstance({
+                    geometry: wallGeometry,
+                    attributes: {
+                        color: Cesium.ColorGeometryInstanceAttribute.fromColor(
+                            BOWL_LINE_COLOR.withAlpha(BOWL_CURTAIN_OPACITY * 0.5)
+                        )
+                    }
+                })
+            );
+        }
+
+        const labelText = String(getFeatureProperty(feature, "label", ""));
+
+        if (labelText) {
+            const bs = Cesium.BoundingSphere.fromPoints(positions);
+            const centerCartographic = Cesium.Cartographic.fromCartesian(bs.center);
+
+            const labelEntity = viewer.entities.add({
+                position: Cesium.Cartesian3.fromRadians(
+                    centerCartographic.longitude,
+                    centerCartographic.latitude,
+                    topHeight
+                ),
+                label: {
+                    text: labelText,
+                    font: `bold ${BOWL_LABEL_SIZE}px Arial`,
+                    fillColor: BOWL_LABEL_COLOR,
+                    outlineColor: Cesium.Color.BLACK,
+                    outlineWidth: 2,
+                    style: Cesium.LabelStyle.FILL_AND_OUTLINE,
+                    verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
+                    pixelOffset: new Cesium.Cartesian2(0, -8),
+                    disableDepthTestDistance: Number.POSITIVE_INFINITY
+                },
+                show: bowlsVisible
+            });
+
+            bowlLabels.push(labelEntity);
+        }
+    }
+
+    if (polygonInstances.length > 0) {
+        bowlOutlinePrimitive = new Cesium.Primitive({
+            geometryInstances: polygonInstances,
+            appearance: new Cesium.PerInstanceColorAppearance({
+                flat: true,
+                translucent: true,
+                closed: false
+            }),
+            asynchronous: false,
+            show: bowlsVisible
+        });
+
+        viewer.scene.primitives.add(bowlOutlinePrimitive);
+        console.log("[bowl] Bowl polygon instances:", polygonInstances.length);
+    }
+
+    if (curtainInstances.length > 0) {
+        bowlCurtainPrimitive = new Cesium.Primitive({
+            geometryInstances: curtainInstances,
+            appearance: new Cesium.PerInstanceColorAppearance({
+                flat: true,
+                translucent: true,
+                closed: false
+            }),
+            asynchronous: false,
+            show: bowlsVisible
+        });
+
+        viewer.scene.primitives.add(bowlCurtainPrimitive);
+        console.log("[bowl] Bowl curtain instances:", curtainInstances.length);
+    }
+}
+
+
+// ============================================================
+// HORIZONTAL PARTICLE PROTOTYPE
+// ============================================================
+
+let hCtx = hParticleCanvas.getContext("2d");
+let hField = null;
+let hCells = [];
+let hValidSpawnCells = [];
+let hLookup = new Map();
+let hCellByRumId = new Map();
+let hAffine = null;
+let hParticles = [];
+let hParticlesVisible = H_PARTICLES_ENABLED_INITIAL;
+let hAnimationId = null;
+let hLastTimestamp = 0;
+let hSpeedP95 = 2.0;
+let hCameraMoving = false;
+let hCameraStableTimer = null;
+let hPointerDown = false;
+let hCesiumCameraMoving = false;
+
+// CPU-side vertical surface cache for particle projection height.
+// The GPU shaders still drive the real cap/wall geometry.
+// This cache only lets the canvas particles sit above the current RUM surface.
+let hHeightMeta = null;
+let hHeightImageCanvas = null;
+let hHeightImageCtx = null;
+let hCurrentDispByRow = null;
+let hCurrentDispEpoch = -1;
+let hHeightTextureReady = false;
+
+function resizeHParticleCanvas() {
+    const dpr = window.devicePixelRatio || 1;
+    const w = window.innerWidth;
+    const h = window.innerHeight;
+
+    const targetW = Math.max(1, Math.floor(w * dpr));
+    const targetH = Math.max(1, Math.floor(h * dpr));
+
+    if (hParticleCanvas.width !== targetW || hParticleCanvas.height !== targetH) {
+        hParticleCanvas.width = targetW;
+        hParticleCanvas.height = targetH;
+        hParticleCanvas.style.width = `${w}px`;
+        hParticleCanvas.style.height = `${h}px`;
+        hCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        clearHParticlesCanvas();
+        resetHParticleScreenHistory();
+    }
+}
+
+function clearHParticlesCanvas() {
+    hCtx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+}
+
+function resetHParticleScreenHistory() {
+    for (const p of hParticles) {
+        p.prevX = null;
+        p.prevY = null;
+        p.prevTrueX = null;
+        p.prevTrueY = null;
+    }
+}
+
+function solve3x3(A, b) {
+    // Small Gaussian elimination solver for affine fit.
+    const m = [
+        [A[0][0], A[0][1], A[0][2], b[0]],
+        [A[1][0], A[1][1], A[1][2], b[1]],
+        [A[2][0], A[2][1], A[2][2], b[2]],
+    ];
+
+    for (let col = 0; col < 3; col++) {
+        let pivot = col;
+        for (let r = col + 1; r < 3; r++) {
+            if (Math.abs(m[r][col]) > Math.abs(m[pivot][col])) pivot = r;
+        }
+        if (Math.abs(m[pivot][col]) < 1e-20) {
+            throw new Error("Singular affine fit matrix");
+        }
+        if (pivot !== col) {
+            const tmp = m[col];
+            m[col] = m[pivot];
+            m[pivot] = tmp;
+        }
+
+        const div = m[col][col];
+        for (let c = col; c < 4; c++) m[col][c] /= div;
+
+        for (let r = 0; r < 3; r++) {
+            if (r === col) continue;
+            const factor = m[r][col];
+            for (let c = col; c < 4; c++) {
+                m[r][c] -= factor * m[col][c];
+            }
+        }
+    }
+
+    return [m[0][3], m[1][3], m[2][3]];
+}
+
+function fitGridAffine(cells) {
+    // Fits:
+    //   lon = a0 + ai*grid_i + aj*grid_j
+    //   lat = b0 + bi*grid_i + bj*grid_j
+    let A = [[0,0,0], [0,0,0], [0,0,0]];
+    let bLon = [0,0,0];
+    let bLat = [0,0,0];
+
+    for (const c of cells) {
+        const x = [1, c.grid_i, c.grid_j];
+
+        for (let r = 0; r < 3; r++) {
+            for (let col = 0; col < 3; col++) {
+                A[r][col] += x[r] * x[col];
+            }
+            bLon[r] += x[r] * c.lon;
+            bLat[r] += x[r] * c.lat;
+        }
+    }
+
+    const lonCoef = solve3x3(A, bLon);
+    const latCoef = solve3x3(A, bLat);
+
+    const a0 = lonCoef[0], ai = lonCoef[1], aj = lonCoef[2];
+    const b0 = latCoef[0], bi = latCoef[1], bj = latCoef[2];
+    const det = ai * bj - aj * bi;
+
+    if (Math.abs(det) < 1e-20) {
+        throw new Error("Invalid grid affine inverse");
+    }
+
+    return { a0, ai, aj, b0, bi, bj, det };
+}
+
+function gridToLonLat(i, j) {
+    return {
+        lon: hAffine.a0 + hAffine.ai * i + hAffine.aj * j,
+        lat: hAffine.b0 + hAffine.bi * i + hAffine.bj * j,
+    };
+}
+
+function lonLatToGrid(lon, lat) {
+    const dl = lon - hAffine.a0;
+    const dp = lat - hAffine.b0;
+
+    return {
+        i: (dl * hAffine.bj - hAffine.aj * dp) / hAffine.det,
+        j: (hAffine.ai * dp - dl * hAffine.bi) / hAffine.det,
+    };
+}
+
+function hCellAt(i, j) {
+    return hLookup.get(`${i},${j}`) || null;
+}
+
+
+function decodeDispMmFromBytes(r, g) {
+    const encoded16 = r * 256 + g;
+    const normalized = encoded16 / 65535.0;
+    return normalized * (V_MAX - V_MIN) + V_MIN;
+}
+
+async function loadHParticleHeightTexture(meta) {
+    hHeightMeta = meta;
+    hCurrentDispByRow = new Float32Array(NUM_RUMS);
+    hHeightImageCanvas = document.createElement("canvas");
+    hHeightImageCanvas.width = NUM_EPOCHS;
+    hHeightImageCanvas.height = NUM_RUMS;
+    hHeightImageCtx = hHeightImageCanvas.getContext("2d", { willReadFrequently: true });
+
+    const img = new Image();
+    img.decoding = "async";
+    img.src = HEIGHT_TEXTURE_URL;
+
+    await new Promise((resolve, reject) => {
+        img.onload = resolve;
+        img.onerror = () => reject(new Error("Could not load height_texture.png for H-particle surface heights"));
+    });
+
+    hHeightImageCtx.drawImage(img, 0, 0);
+
+    hHeightTextureReady = true;
+    updateHParticleDisplacementForEpoch(0);
+
+    console.log("[H particles] Dynamic surface height enabled", {
+        rows: NUM_RUMS,
+        epochs: NUM_EPOCHS,
+        surfaceOffsetM: H_PARTICLE_SURFACE_OFFSET_M,
+        note: "Canvas particles project at datum + vertical displacement * vertical exaggeration + offset"
+    });
+}
+
+function updateHParticleDisplacementForEpoch(epochIdx) {
+    if (!hHeightTextureReady || !hHeightImageCtx || !hCurrentDispByRow) return;
+    if (epochIdx === hCurrentDispEpoch) return;
+
+    const idx = Math.max(0, Math.min(NUM_EPOCHS - 1, Math.floor(epochIdx)));
+    const col = hHeightImageCtx.getImageData(idx, 0, 1, NUM_RUMS).data;
+
+    for (let row = 0; row < NUM_RUMS; row++) {
+        const k = row * 4;
+        hCurrentDispByRow[row] = decodeDispMmFromBytes(col[k], col[k + 1]);
+    }
+
+    hCurrentDispEpoch = idx;
+}
+
+function rowDispMm(cell) {
+    if (!cell || !hCurrentDispByRow) return 0.0;
+    const row = Number(cell.height_row);
+    if (!Number.isFinite(row) || row < 0 || row >= hCurrentDispByRow.length) return 0.0;
+    return hCurrentDispByRow[row];
+}
+
+function sampleVerticalDispMm(lon, lat) {
+    if (!hAffine || hCells.length === 0 || !hCurrentDispByRow) return 0.0;
+
+    const g = lonLatToGrid(lon, lat);
+    const i0 = Math.floor(g.i);
+    const j0 = Math.floor(g.j);
+    const fi = g.i - i0;
+    const fj = g.j - j0;
+
+    const c00 = hCellAt(i0,     j0);
+    const c10 = hCellAt(i0 + 1, j0);
+    const c01 = hCellAt(i0,     j0 + 1);
+    const c11 = hCellAt(i0 + 1, j0 + 1);
+
+    if (c00 && c10 && c01 && c11) {
+        const w00 = (1.0 - fi) * (1.0 - fj);
+        const w10 = fi * (1.0 - fj);
+        const w01 = (1.0 - fi) * fj;
+        const w11 = fi * fj;
+
+        return (
+            rowDispMm(c00) * w00 +
+            rowDispMm(c10) * w10 +
+            rowDispMm(c01) * w01 +
+            rowDispMm(c11) * w11
+        );
+    }
+
+    const nearest = hCellAt(Math.round(g.i), Math.round(g.j));
+    return rowDispMm(nearest);
+}
+
+function hParticleHeightM(lon, lat) {
+    const dispMm = sampleVerticalDispMm(lon, lat);
+    return (
+        DISPLAY_DATUM_HEIGHT_M +
+        dispMm * currentVerticalExaggeration +
+        H_PARTICLE_SURFACE_OFFSET_M
+    );
+}
+
+function weightedHorizontalSample(items) {
+    let wSum = 0.0;
+    let east = 0.0;
+    let north = 0.0;
+    let varEast = 0.0;
+    let varNorth = 0.0;
+    let covarEn = 0.0;
+
+    for (const item of items) {
+        if (!item.cell || item.weight <= 0.0) continue;
+        wSum += item.weight;
+        east += item.cell.east_mm_yr * item.weight;
+        north += item.cell.north_mm_yr * item.weight;
+        varEast += Number(item.cell.var_east || 0.0) * item.weight;
+        varNorth += Number(item.cell.var_north || 0.0) * item.weight;
+        covarEn += Number(item.cell.covar_en || 0.0) * item.weight;
+    }
+
+    if (wSum <= 0.0) return null;
+
+    east /= wSum;
+    north /= wSum;
+    varEast /= wSum;
+    varNorth /= wSum;
+    covarEn /= wSum;
+
+    const speed = Math.sqrt(east * east + north * north);
+    return {
+        east,
+        north,
+        speed,
+        var_east: Math.max(0.0, varEast),
+        var_north: Math.max(0.0, varNorth),
+        covar_en: covarEn,
+        valid: true
+    };
+}
+
+function nearestHorizontalSample(g) {
+    const nearest = hCellAt(Math.round(g.i), Math.round(g.j));
+    if (!nearest) return null;
+
+    return {
+        east: nearest.east_mm_yr,
+        north: nearest.north_mm_yr,
+        speed: nearest.speed_mm_yr,
+        var_east: Math.max(0.0, Number(nearest.var_east || 0.0)),
+        var_north: Math.max(0.0, Number(nearest.var_north || 0.0)),
+        covar_en: Number(nearest.covar_en || 0.0),
+        valid: true
+    };
+}
+
+function hasFullBilinearSupportAtGrid(g) {
+    const i0 = Math.floor(g.i);
+    const j0 = Math.floor(g.j);
+
+    return (
+        hCellAt(i0,     j0) &&
+        hCellAt(i0 + 1, j0) &&
+        hCellAt(i0,     j0 + 1) &&
+        hCellAt(i0 + 1, j0 + 1)
+    );
+}
+
+function hasEightNeighborSupport(cell) {
+    if (!cell) return false;
+    const i = cell.grid_i;
+    const j = cell.grid_j;
+
+    for (let di = -1; di <= 1; di++) {
+        for (let dj = -1; dj <= 1; dj++) {
+            if (!hCellAt(i + di, j + dj)) return false;
+        }
+    }
+    return true;
+}
+
+function sampleHorizontalField(lon, lat) {
+    if (!hAffine || hCells.length === 0) return null;
+
+    const g = lonLatToGrid(lon, lat);
+
+    if (hParticleSamplerMode === "nearest") {
+        return nearestHorizontalSample(g);
+    }
+
+    const i0 = Math.floor(g.i);
+    const j0 = Math.floor(g.j);
+    const fi = g.i - i0;
+    const fj = g.j - j0;
+
+    const c00 = hCellAt(i0,     j0);
+    const c10 = hCellAt(i0 + 1, j0);
+    const c01 = hCellAt(i0,     j0 + 1);
+    const c11 = hCellAt(i0 + 1, j0 + 1);
+
+    const samples = [
+        { cell: c00, weight: (1.0 - fi) * (1.0 - fj) },
+        { cell: c10, weight: fi * (1.0 - fj) },
+        { cell: c01, weight: (1.0 - fi) * fj },
+        { cell: c11, weight: fi * fj },
+    ];
+
+    if (hParticleSamplerMode === "bilinear") {
+        // Loose bilinear:
+        // blend all available neighbours and renormalize weights.
+        // Smoothest visually, but can imply continuity over small gaps.
+        const loose = weightedHorizontalSample(samples);
+        if (loose) return loose;
+        return nearestHorizontalSample(g);
+    }
+
+    if (hParticleSamplerMode === "conservative_v1") {
+        // Conservative bilinear v1:
+        // blend only with full 4-cell support, then fall back to nearest.
+        // Useful diagnostic, but not final because it can carry nearest-RUM
+        // velocity into unsupported blank/no-data zones.
+        if (c00 && c10 && c01 && c11) {
+            return weightedHorizontalSample(samples);
+        }
+        return nearestHorizontalSample(g);
+    }
+
+    // Conservative bilinear v2:
+    // final/scientific mode. Blend only with full 4-cell support.
+    // If support is incomplete, return null so the particle dies/respawns.
+    // This prevents velocity extrapolation into blankies, holes, and domain edges.
+    if (c00 && c10 && c01 && c11) {
+        return weightedHorizontalSample(samples);
+    }
+
+    return null;
+}
+
+function smoothstep(edge0, edge1, x) {
+    const t = Math.max(0.0, Math.min(1.0, (x - edge0) / Math.max(edge1 - edge0, 1e-9)));
+    return t * t * (3.0 - 2.0 * t);
+}
+
+function fieldSigmaThetaDeg(field) {
+    if (!field) return 0.0;
+
+    const east = Number(field.east || 0.0);
+    const north = Number(field.north || 0.0);
+    const speed = Math.sqrt(east * east + north * north);
+    const denom = Math.max(speed, H_UNCERTAINTY_SPEED_FLOOR_MM_YR);
+
+    // Unit vector perpendicular to mean horizontal velocity.
+    const nx = -north / denom;
+    const ny =  east / denom;
+
+    const varE = Math.max(0.0, Number(field.var_east || 0.0));
+    const varN = Math.max(0.0, Number(field.var_north || 0.0));
+    const covEN = Number(field.covar_en || 0.0);
+
+    const varPerp = Math.max(0.0, nx * nx * varE + 2.0 * nx * ny * covEN + ny * ny * varN);
+    const sigmaPerp = Math.sqrt(varPerp);
+
+    // Small-angle directional uncertainty proxy, radians → degrees.
+    const sigmaThetaRad = sigmaPerp / denom;
+    return Cesium.Math.toDegrees(sigmaThetaRad);
+}
+
+function hUncertaintyWobblePx(field, particle, timestampMs) {
+    if (!hUncertaintyEnabled || hUncertaintyStrength <= 0.0 || !field || !particle) return 0.0;
+
+    const thetaDeg = fieldSigmaThetaDeg(field);
+
+    // H7_0 distribution with speed floor 0.50:
+    // P75 ≈ 21.4°, P90 ≈ 28.5°, P95 ≈ 32.6°.
+    // Start subtle shimmer below P75, approach max near P95.
+    const amount = smoothstep(H_UNCERTAINTY_THETA_LOW_DEG, H_UNCERTAINTY_THETA_HIGH_DEG, thetaDeg);
+    if (amount <= 0.0) return 0.0;
+
+    const timeSec = timestampMs * 0.001;
+    const phase = particle.uncPhase || 0.0;
+    const freq = particle.uncFreq || 1.0;
+
+    // Zero-mean, non-accumulating render-only sinusoidal offset.
+    return (
+        H_UNCERTAINTY_MAX_WOBBLE_PX *
+        hUncertaintyStrength *
+        amount *
+        Math.sin(2.0 * Math.PI * freq * timeSec + phase)
+    );
+}
+
+function offsetLonLatMeters(lon, lat, eastM, northM) {
+    const latRad = Cesium.Math.toRadians(lat);
+    const metersPerDegLat = 111320.0;
+    const metersPerDegLon = Math.max(1e-9, 111320.0 * Math.cos(latRad));
+
+    return {
+        lon: lon + eastM / metersPerDegLon,
+        lat: lat + northM / metersPerDegLat
+    };
+}
+
+function randomLife() {
+    return 2.5 + Math.random() * 4.0;
+}
+
+function respawnHParticle(p) {
+    if (hValidSpawnCells.length === 0 || !hAffine) return;
+
+    for (let attempt = 0; attempt < 12; attempt++) {
+        const cell = hValidSpawnCells[Math.floor(Math.random() * hValidSpawnCells.length)];
+
+        // Spawn within approximately one RUM cell in grid coordinates.
+        const gi = cell.grid_i + (Math.random() - 0.5) * 0.9;
+        const gj = cell.grid_j + (Math.random() - 0.5) * 0.9;
+        const ll = gridToLonLat(gi, gj);
+
+        const sample = sampleHorizontalField(ll.lon, ll.lat);
+        if (!sample || sample.speed < H_PARTICLE_STALL_SPEED_MM_YR) continue;
+
+        p.lon = ll.lon;
+        p.lat = ll.lat;
+        p.age = Math.random() * randomLife();
+        p.life = randomLife();
+        p.prevX = null;
+        p.prevY = null;
+        p.prevTrueX = null;
+        p.prevTrueY = null;
+        return;
+    }
+
+    // Last-resort fallback to a valid cell centre.
+    const cell = hValidSpawnCells[Math.floor(Math.random() * hValidSpawnCells.length)];
+    p.lon = cell.lon;
+    p.lat = cell.lat;
+    p.age = 0;
+    p.life = randomLife();
+    p.prevX = null;
+    p.prevY = null;
+    p.prevTrueX = null;
+    p.prevTrueY = null;
+}
+
+function initHParticles(count = hParticleCount) {
+    hParticles = [];
+    for (let i = 0; i < count; i++) {
+        const p = {
+            lon: 0,
+            lat: 0,
+            age: 0,
+            life: randomLife(),
+            prevX: null,
+            prevY: null,
+            prevTrueX: null,
+            prevTrueY: null,
+            uncPhase: Math.random() * Math.PI * 2.0,
+            uncFreq: H_UNCERTAINTY_FREQ_MIN_HZ +
+                Math.random() * (H_UNCERTAINTY_FREQ_MAX_HZ - H_UNCERTAINTY_FREQ_MIN_HZ)
+        };
+        respawnHParticle(p);
+        hParticles.push(p);
+    }
+    clearHParticlesCanvas();
+}
+
+function hSamplerLabel() {
+    if (hParticleSamplerMode === "nearest") return "nearest";
+    if (hParticleSamplerMode === "conservative_v1") return "conservative bilinear v1";
+    if (hParticleSamplerMode === "conservative_v2") return "conservative bilinear v2";
+    if (hParticleSamplerMode === "bilinear") return "loose bilinear";
+    return hParticleSamplerMode;
+}
+
+function setH4Status() {
+    setStatus(`loaded ✓  |  H7 particles: ${hSamplerLabel()} + uncertainty shimmer`);
+}
+
+function rebuildHValidSpawnCells() {
+    if (!hCells || hCells.length === 0) {
+        hValidSpawnCells = [];
+        return;
+    }
+
+    if (hParticleSamplerMode === "conservative_v2") {
+        // Strict/scientific test:
+        // spawn only where the full local support exists.
+        hValidSpawnCells = hCells.filter(c =>
+            Number(c.speed_mm_yr) > H_PARTICLE_STALL_SPEED_MM_YR &&
+            hasEightNeighborSupport(c)
+        );
+    } else {
+        // Original behaviour for nearest, conservative v1, and loose bilinear:
+        // spawn throughout measured RUM support, excluding only near-zero cells.
+        hValidSpawnCells = hCells.filter(c =>
+            Number(c.speed_mm_yr) > H_PARTICLE_STALL_SPEED_MM_YR
+        );
+    }
+}
+
+async function loadHorizontalParticleField() {
+    try {
+        hField = await loadJson(HORIZONTAL_FIELD_URL, "load horizontal field");
+        hCells = hField.cells || [];
+
+        // Attach vertical texture row index to each real RUM cell.
+        // This lets the particle overlay follow the dynamic cap surface.
+        if (hHeightMeta && hHeightMeta.rum_index) {
+            for (const c of hCells) {
+                c.height_row = hHeightMeta.rum_index[c.rum_id];
+            }
+        }
+
+        hLookup = new Map();
+        hCellByRumId = new Map();
+        for (const c of hCells) {
+            hLookup.set(`${c.grid_i},${c.grid_j}`, c);
+            if (c.rum_id !== undefined && c.rum_id !== null) {
+                hCellByRumId.set(String(c.rum_id), c);
+            }
+        }
+
+        hSpeedP95 =
+            Number(hField.stats?.speed_p95_mm_yr) ||
+            Number(hField.stats?.speed_mm_yr?.p95) ||
+            2.0;
+
+        hAffine = fitGridAffine(hCells);
+
+        // Build spawn cells according to the selected interpolation mode.
+        // Previous three modes keep the original broad spawn behaviour.
+        // Conservative v2 alone uses strict supported-domain spawning.
+        rebuildHValidSpawnCells();
+
+        console.log("[H particles] Loaded horizontal field", {
+            cells: hCells.length,
+            spawnCells: hValidSpawnCells.length,
+            speedP95: hSpeedP95,
+            affine: hAffine,
+            dynamicSurfaceHeight: hHeightTextureReady,
+            surfaceOffsetM: H_PARTICLE_SURFACE_OFFSET_M,
+            samplerMode: hParticleSamplerMode,
+            stallSpeedMmYr: H_PARTICLE_STALL_SPEED_MM_YR,
+            spawnRule: hParticleSamplerMode === "conservative_v2"
+                ? "speed > stall threshold and full 8-neighbor support"
+                : "speed > stall threshold only",
+            horizontalUncertainty: {
+                enabled: hUncertaintyEnabled,
+                strength: hUncertaintyStrength,
+                speedFloorMmYr: H_UNCERTAINTY_SPEED_FLOOR_MM_YR,
+                thetaLowDeg: H_UNCERTAINTY_THETA_LOW_DEG,
+                thetaHighDeg: H_UNCERTAINTY_THETA_HIGH_DEG,
+                maxWobblePx: H_UNCERTAINTY_MAX_WOBBLE_PX,
+                freqHz: [H_UNCERTAINTY_FREQ_MIN_HZ, H_UNCERTAINTY_FREQ_MAX_HZ]
+            },
+            note: "var/cov fields are used for H7 render-only particle shimmer"
+        });
+
+        initHParticles(hParticleCount);
+        setHorizontalParticlesVisible(H_PARTICLES_ENABLED_INITIAL);
+
+    } catch (error) {
+        console.warn("[H particles] load failed/skipped:", error);
+        hParticleToggleBtn.textContent = "Horizontal particles: missing";
+        hParticleToggleBtn.disabled = true;
+        hParticleCanvas.style.display = "none";
+    }
+}
+
+function pauseHParticlesForCameraInteraction() {
+    if (!hParticlesVisible) return;
+
+    hCameraMoving = true;
+
+    if (hCameraStableTimer) {
+        clearTimeout(hCameraStableTimer);
+        hCameraStableTimer = null;
+    }
+
+    clearHParticlesCanvas();
+    resetHParticleScreenHistory();
+}
+
+function resumeHParticlesAfterCameraStable() {
+    if (!hParticlesVisible) return;
+
+    if (hCameraStableTimer) {
+        clearTimeout(hCameraStableTimer);
+        hCameraStableTimer = null;
+    }
+
+    hCameraStableTimer = setTimeout(function() {
+        // Do not resume while the mouse/finger is still held down
+        // or while Cesium reports the camera is still moving.
+        if (hPointerDown || hCesiumCameraMoving) {
+            return;
+        }
+
+        hCameraMoving = false;
+
+        // Start fresh in the new view.
+        rebuildHValidSpawnCells();
+        initHParticles(hParticleCount);
+        resetHParticleScreenHistory();
+        clearHParticlesCanvas();
+
+        hLastTimestamp = performance.now();
+
+        if (hParticlesVisible && !hAnimationId) {
+            hAnimationId = requestAnimationFrame(drawHorizontalParticles);
+        }
+    }, H_PARTICLE_CAMERA_STABLE_DELAY_MS);
+}
+
+function beginHParticleCameraInteraction() {
+    if (cinematic3DActive) {
+        stopCinematic3D(false);
+    }
+    hPointerDown = true;
+    pauseHParticlesForCameraInteraction();
+}
+
+function endHParticleCameraInteraction() {
+    hPointerDown = false;
+    resumeHParticlesAfterCameraStable();
+}
+
+function markHParticleCameraMoving() {
+    // Use this for wheel/inertial/changed events where there may be no mouse-down state.
+    pauseHParticlesForCameraInteraction();
+
+    if (!hPointerDown && !hCesiumCameraMoving) {
+        resumeHParticlesAfterCameraStable();
+    }
+}
+
+function drawHorizontalParticles(timestamp) {
+    if (!hParticlesVisible) {
+        hAnimationId = null;
+        return;
+    }
+
+    resizeHParticleCanvas();
+
+    if (hCameraMoving) {
+        clearHParticlesCanvas();
+        resetHParticleScreenHistory();
+        hLastTimestamp = timestamp;
+        hAnimationId = requestAnimationFrame(drawHorizontalParticles);
+        return;
+    }
+
+    if (!hLastTimestamp) hLastTimestamp = timestamp;
+    let dt = (timestamp - hLastTimestamp) / 1000.0;
+    hLastTimestamp = timestamp;
+
+    // Avoid huge particle jumps after tab switching / debugger pauses.
+    dt = Math.min(Math.max(dt, 0.0), 0.05);
+
+    // Fade old trails on a transparent canvas.
+    hCtx.save();
+    hCtx.globalCompositeOperation = "destination-out";
+    hCtx.fillStyle = `rgba(100,100,100,${(1.0 - hParticleTrailPersistence).toFixed(3)})`;
+    hCtx.fillRect(0, 0, window.innerWidth, window.innerHeight);
+    hCtx.restore();
+
+    hCtx.save();
+    hCtx.globalCompositeOperation = "source-over";
+    hCtx.lineCap = "round";
+    hCtx.lineJoin = "round";
+
+    const scratch = new Cesium.Cartesian2();
+
+    for (const p of hParticles) {
+        p.age += dt;
+
+        const field = sampleHorizontalField(p.lon, p.lat);
+
+        if (!field || field.speed < H_PARTICLE_STALL_SPEED_MM_YR || p.age > p.life) {
+            respawnHParticle(p);
+            continue;
+        }
+
+        // Visual advection. Speed is normalized by p95 so outliers do not dominate.
+        const eMps = (field.east / Math.max(hSpeedP95, 1e-9)) * H_PARTICLE_BASE_MPS * hParticleSpeedMultiplier;
+        const nMps = (field.north / Math.max(hSpeedP95, 1e-9)) * H_PARTICLE_BASE_MPS * hParticleSpeedMultiplier;
+
+        const next = offsetLonLatMeters(p.lon, p.lat, eMps * dt, nMps * dt);
+        p.lon = next.lon;
+        p.lat = next.lat;
+
+        const after = sampleHorizontalField(p.lon, p.lat);
+        if (!after) {
+            respawnHParticle(p);
+            continue;
+        }
+
+        const particleHeight = hParticleHeightM(p.lon, p.lat);
+        const cart = Cesium.Cartesian3.fromDegrees(p.lon, p.lat, particleHeight);
+        const screen = Cesium.SceneTransforms.worldToWindowCoordinates(viewer.scene, cart, scratch);
+
+        if (!screen || !Number.isFinite(screen.x) || !Number.isFinite(screen.y)) {
+            p.prevX = null;
+            p.prevY = null;
+            continue;
+        }
+
+        const alpha = Math.max(0.15, Math.min(0.85, 0.20 + 0.55 * (field.speed / Math.max(hSpeedP95, 1e-9))));
+        const lw = Math.max(0.7, Math.min(1.8, 0.7 + 0.6 * (field.speed / Math.max(hSpeedP95, 1e-9))));
+
+        let drawX = screen.x;
+        let drawY = screen.y;
+
+        // H7 uncertainty shimmer:
+        // previous TRUE screen position defines the local path normal.
+        // Wobble changes only the rendered point, never p.lon/p.lat.
+        if (p.prevTrueX !== null && p.prevTrueY !== null) {
+            const tdx = screen.x - p.prevTrueX;
+            const tdy = screen.y - p.prevTrueY;
+            const tlen = Math.sqrt(tdx * tdx + tdy * tdy);
+
+            if (tlen > 1e-3) {
+                const nx = -tdy / tlen;
+                const ny =  tdx / tlen;
+                const wobble = hUncertaintyWobblePx(field, p, timestamp);
+
+                drawX += nx * wobble;
+                drawY += ny * wobble;
+            }
+        }
+
+        if (p.prevX !== null && p.prevY !== null) {
+            const dx = drawX - p.prevX;
+            const dy = drawY - p.prevY;
+            const jump = Math.sqrt(dx * dx + dy * dy);
+
+            if (jump < 120) {
+                hCtx.strokeStyle = `rgba(100,100,100,${alpha.toFixed(3)})`;
+                hCtx.lineWidth = lw;
+                hCtx.beginPath();
+                hCtx.moveTo(p.prevX, p.prevY);
+                hCtx.lineTo(drawX, drawY);
+                hCtx.stroke();
+            }
+        }
+
+        p.prevTrueX = screen.x;
+        p.prevTrueY = screen.y;
+        p.prevX = drawX;
+        p.prevY = drawY;
+    }
+
+    hCtx.restore();
+
+    hAnimationId = requestAnimationFrame(drawHorizontalParticles);
+}
+
+function setHorizontalParticlesVisible(visible) {
+    hParticlesVisible = visible;
+    hParticleToggleBtn.textContent = visible ? "Horizontal particles: ON" : "Horizontal particles: OFF";
+    hParticleCanvas.style.display = visible ? "block" : "none";
+
+    if (visible) {
+        resizeHParticleCanvas();
+        resetHParticleScreenHistory();
+        hLastTimestamp = performance.now();
+        if (!hAnimationId) {
+            hAnimationId = requestAnimationFrame(drawHorizontalParticles);
+        }
+    } else {
+        if (hAnimationId) {
+            cancelAnimationFrame(hAnimationId);
+            hAnimationId = null;
+        }
+        clearHParticlesCanvas();
+    }
+}
+
+function setHorizontalUncertaintyVisible(visible) {
+    hUncertaintyEnabled = visible;
+    hUncertaintyToggleBtn.textContent = visible ? "H uncertainty: ON" : "H uncertainty: OFF";
+    resetHParticleScreenHistory();
+    clearHParticlesCanvas();
+}
+
+function applyHParticleControls() {
+    hParticleSamplerMode = hParticleSamplerSelect.value;
+    hParticleCount = Number(hParticleCountSlider.value);
+    hParticleSpeedMultiplier = Number(hParticleSpeedSlider.value);
+    hParticleTrailPersistence = Number(hParticleTrailSlider.value);
+    hUncertaintyStrength = Number(hUncertaintyStrengthSlider.value);
+
+    hParticleSamplerValue.textContent = hSamplerLabel();
+    hParticleCountValue.textContent = String(hParticleCount);
+    hParticleSpeedValue.textContent = hParticleSpeedMultiplier.toFixed(1);
+    hParticleTrailValue.textContent = hParticleTrailPersistence.toFixed(2);
+    hUncertaintyStrengthValue.textContent = hUncertaintyStrength.toFixed(2);
+}
+
+// ============================================================
+// MAIN
+// ============================================================
+
+async function main() {
+    setStatus("loading epoch axis + height metadata…");
+
+    const epochRes  = await fetch(EPOCH_URL);
+    const epochData = await epochRes.json();
+    const epochs    = epochData.epochs;
+    const epochUnix = epochData.epoch_unix;
+    const N         = epochs.length;
+
+    const metaRes = await fetch(HEIGHT_META_URL);
+    const heightMeta = await metaRes.json();
+    hHeightMeta = heightMeta;
+
+    V_MIN = Number(heightMeta.v_min);
+    V_MAX = Number(heightMeta.v_max);
+    NUM_EPOCHS = Number(heightMeta.n_epochs);
+    NUM_RUMS = Number(heightMeta.n_rums);
+    REAL_RUM_COUNT = Number(heightMeta.n_real_rums ?? NUM_RUMS);
+    BLANK_CELL_COUNT = Number(heightMeta.n_blank_cells ?? 0);
+
+    SIGMA_MIN = Number(heightMeta.sigma_min ?? 0.0);
+    SIGMA_MAX = Number(heightMeta.sigma_max ?? 1.0);
+    const snrThresholds = heightMeta.snr_hatch_thresholds || {};
+    SNR_NO_HATCH = Number(snrThresholds.no_hatch_min_snr ?? 3.0);
+    SNR_THICK_HATCH = Number(snrThresholds.thick_hatch_below_snr ?? 1.0);
+
+    if (!Number.isFinite(V_MIN) || !Number.isFinite(V_MAX)) {
+        throw new Error("Invalid v_min/v_max in height_meta.json");
+    }
+    if (NUM_EPOCHS !== N) {
+        throw new Error(`Epoch count mismatch: epoch_axis=${N}, height_meta=${NUM_EPOCHS}`);
+    }
+
+    console.log("[height_meta]", {
+        V_MIN,
+        V_MAX,
+        NUM_EPOCHS,
+        NUM_RUMS,
+        displayDatum: DISPLAY_DATUM_HEIGHT_M,
+        wallBase: WALL_BASE_HEIGHT_M,
+        verticalExaggeration: currentVerticalExaggeration,
+        sigmaMin: SIGMA_MIN,
+        sigmaMax: SIGMA_MAX,
+        snrNoHatch: SNR_NO_HATCH,
+        snrThickHatch: SNR_THICK_HATCH,
+        texturePacking: heightMeta.texture_packing || heightMeta.encoding
+    });
+
+    setStatus("loading particle surface heights…");
+    await loadHParticleHeightTexture(heightMeta);
+
+    const julianDates = epochUnix.map(u =>
+        Cesium.JulianDate.fromDate(new Date(u * 1000))
+    );
+
+    // ============================================================
+    // CUSTOM SHADER  — height animation via GPU texture lookup
+    // ============================================================
+    //
+    // The height texture (height_texture.png) is an 8-bit RGB PNG where
+    // the 16-bit displacement code is packed into two browser-safe channels:
+    //   R = high byte
+    //   G = low byte
+    //   B = unused
+    //
+    // Texture layout:
+    //   width  = epochs
+    //   height = texture rows (real RUMs + blankies)
+    //   column = epoch index
+    //   row    = cell/RUM index
+    //
+    // Vertex shader logic:
+    //   1. Get rum_index from the batch table for this instance
+    //   2. Compute UV into the texture (epoch on X, RUM on Y)
+    //   3. Decode pixel → displacement in mm
+    //   4. isTop = 1 if this vertex is a top vertex (positionMC.z > 0.5),  0 otherwise
+    //   5. Move the vertex in model space by: displacement * scale / datum_height
+    //      (dividing by datum_height converts world-metres → model-space units,
+    //       because the unit prism z=0..1 maps to 0..datum_height in world space)
+    //
+    // NOTE ON TEXTURE Y FLIP:
+    //   WebGL texture (0,0) = bottom-left, PNG (0,0) = top-left.
+    //   CesiumJS flips textures on load, so we use (1.0 - rumF) to compensate.
+    //   If caps appear to move in the WRONG direction or wrong RUMs animate,
+
+    
+    setStatus("building shader…");
+
+    function createHeightShader(options = {}) {
+        const withHatch = options.withHatch === true;
+
+        const shaderOptions = {
+            uniforms: {
+                u_heightTexture: {
+                    type:  Cesium.UniformType.SAMPLER_2D,
+                    value: new Cesium.TextureUniform({ url: HEIGHT_TEXTURE_URL })
+                },
+                u_epochIndex: {
+                    type:  Cesium.UniformType.FLOAT,
+                    value: 0.0
+                },
+                u_numEpochs: {
+                    type:  Cesium.UniformType.FLOAT,
+                    value: NUM_EPOCHS
+                },
+                u_numRums: {
+                    type:  Cesium.UniformType.FLOAT,
+                    value: NUM_RUMS
+                },
+                u_vMin: {
+                    type:  Cesium.UniformType.FLOAT,
+                    value: V_MIN
+                },
+                u_vMax: {
+                    type:  Cesium.UniformType.FLOAT,
+                    value: V_MAX
+                },
+                u_geometryBaseHeight: {
+                    type:  Cesium.UniformType.FLOAT,
+                    value: GEOMETRY_BASE_HEIGHT_M
+                },
+                u_geometryTopHeight: {
+                    type:  Cesium.UniformType.FLOAT,
+                    value: GEOMETRY_TOP_HEIGHT_M
+                },
+                u_wallBaseHeight: {
+                    type:  Cesium.UniformType.FLOAT,
+                    value: WALL_BASE_HEIGHT_M
+                },
+                u_displayDatumHeight: {
+                    type:  Cesium.UniformType.FLOAT,
+                    value: DISPLAY_DATUM_HEIGHT_M
+                },
+                u_verticalExaggeration: {
+                    type:  Cesium.UniformType.FLOAT,
+                    value: currentVerticalExaggeration
+                },
+                u_sigmaMin: {
+                    type:  Cesium.UniformType.FLOAT,
+                    value: SIGMA_MIN
+                },
+                u_sigmaMax: {
+                    type:  Cesium.UniformType.FLOAT,
+                    value: SIGMA_MAX
+                },
+                u_snrNoHatch: {
+                    type:  Cesium.UniformType.FLOAT,
+                    value: SNR_NO_HATCH
+                },
+                u_snrThickHatch: {
+                    type:  Cesium.UniformType.FLOAT,
+                    value: SNR_THICK_HATCH
+                },
+                u_hatchEnabled: {
+                    type:  Cesium.UniformType.FLOAT,
+                    value: withHatch && uncertaintyHatchEnabled ? 1.0 : 0.0
+                },
+            },
+
+            vertexShaderText: `
+                float decodeDispMmFromTexel(vec4 texel) {
+                    // phase9a RGB packing:
+                    // R = displacement high byte, G = displacement low byte.
+                    float hi = floor(texel.r * 255.0 + 0.5);
+                    float lo = floor(texel.g * 255.0 + 0.5);
+                    float encoded16 = hi * 256.0 + lo;
+                    float normalized = encoded16 / 65535.0;
+                    return normalized * (u_vMax - u_vMin) + u_vMin;
+                }
+
+                void vertexMain(VertexInput vsInput, inout czm_modelVertexOutput vsOutput) {
+
+                    // phase9b stores:
+                    //   texCoord_0.x = global RUM/cell row index normalized to [0, 1]
+                    //   texCoord_0.y = isTop flag
+                    float rumF  = vsInput.attributes.texCoord_0.x;
+                    float isTop = vsInput.attributes.texCoord_0.y;
+
+                    float epochIdx = floor(u_epochIndex + 0.5);
+                    float epochU = (epochIdx + 0.5) / u_numEpochs;
+
+                    float rumIdx = floor(rumF * (u_numRums - 1.0) + 0.5);
+                    float rumV = (rumIdx + 0.5) / u_numRums;
+
+                    // Keep Y flip for PNG/WebGL row orientation.
+                    vec2 uv = vec2(epochU, 1.0 - rumV);
+
+                    vec4 texel = texture(u_heightTexture, uv);
+                    float dispMm = decodeDispMmFromTexel(texel);
+
+                    // phase9b baked neutral geometry:
+                    // top cap vertices are baked at 1 m.
+                    float bakedHeight = mix(u_geometryBaseHeight, u_geometryTopHeight, isTop);
+                    float targetHeight = mix(
+                        u_wallBaseHeight,
+                        u_displayDatumHeight + dispMm * u_verticalExaggeration,
+                        isTop
+                    );
+
+                    float deltaM = targetHeight - bakedHeight;
+
+                    // Move along ellipsoid-up direction.
+                    vec3 worldPos = (czm_model * vec4(vsInput.attributes.positionMC, 1.0)).xyz;
+                    vec3 upDirWorld = normalize(worldPos);
+
+                    // Convert world-space displacement vector back into model coordinates.
+                    vec3 deltaModel = (czm_inverseModel * vec4(upDirWorld * deltaM, 0.0)).xyz;
+                    vsOutput.positionMC += deltaModel;
+                }
+            `
+        };
+
+        if (withHatch) {
+            shaderOptions.fragmentShaderText = `
+                float decodeDispMmFromTexelFrag(vec4 texel) {
+                    float hi = floor(texel.r * 255.0 + 0.5);
+                    float lo = floor(texel.g * 255.0 + 0.5);
+                    float encoded16 = hi * 256.0 + lo;
+                    float normalized = encoded16 / 65535.0;
+                    return normalized * (u_vMax - u_vMin) + u_vMin;
+                }
+
+                float decodeSigmaMmFromTexel(vec4 texel) {
+                    // B channel stores sigma normalized to [sigma_min, sigma_max].
+                    return texel.b * (u_sigmaMax - u_sigmaMin) + u_sigmaMin;
+                }
+
+                void fragmentMain(FragmentInput fsInput, inout czm_modelMaterial material) {
+                    if (u_hatchEnabled < 0.5) {
+                        return;
+                    }
+
+                    float epochIdx = floor(u_epochIndex + 0.5);
+
+                    // Epoch 0 is the reference surface: displacement is defined as 0 everywhere.
+                    // Force no hatch to avoid showing the whole map as uncertainty-dominated.
+                    if (epochIdx < 0.5) {
+                        return;
+                    }
+
+                    float rumF = fsInput.attributes.texCoord_0.x;
+
+                    float epochU = (epochIdx + 0.5) / u_numEpochs;
+                    float rumIdx = floor(rumF * (u_numRums - 1.0) + 0.5);
+                    float rumV = (rumIdx + 0.5) / u_numRums;
+
+                    vec2 sampleUV = vec2(epochU, 1.0 - rumV);
+                    vec4 texel = texture(u_heightTexture, sampleUV);
+
+                    float dispMm = decodeDispMmFromTexelFrag(texel);
+                    float sigmaMm = max(decodeSigmaMmFromTexel(texel), 0.001);
+                    float snr = abs(dispMm) / sigmaMm;
+
+                    // Three states:
+                    //   SNR >= 3 → reliable → no hatch
+                    //   1 <= SNR < 3 → moderate → thin hatch
+                    //   SNR < 1 → uncertain → thick hatch
+                    if (snr >= u_snrNoHatch) {
+                        return;
+                    }
+
+                    vec2 capUV = fsInput.attributes.texCoord_1;
+
+                    // Procedural diagonal hatch in cap-local UV space.
+                    // This is not geometry; it is cheap fragment shading.
+                    float density = 9.0;
+                    float phase = fract((capUV.x + capUV.y) * density);
+                    float d = min(phase, 1.0 - phase);
+
+                    float thickClass = 1.0 - step(u_snrThickHatch, snr);
+                    float width = mix(0.045, 0.095, thickClass);
+                    float strength = mix(0.28, 0.48, thickClass);
+
+                    float line = 1.0 - smoothstep(width, width + 0.018, d);
+
+                    vec3 hatchColor = vec3(0.06, 0.06, 0.06);
+                    material.diffuse = mix(material.diffuse, hatchColor, line * strength);
+                }
+            `;
+        }
+
+        return new Cesium.CustomShader(shaderOptions);
+    }
+
+    function createWallShader() {
+        return new Cesium.CustomShader({
+            uniforms: {
+                u_heightTexture: {
+                    type:  Cesium.UniformType.SAMPLER_2D,
+                    value: new Cesium.TextureUniform({ url: HEIGHT_TEXTURE_URL })
+                },
+                u_epochIndex: {
+                    type:  Cesium.UniformType.FLOAT,
+                    value: 0.0
+                },
+                u_numEpochs: {
+                    type:  Cesium.UniformType.FLOAT,
+                    value: NUM_EPOCHS
+                },
+                u_numRums: {
+                    type:  Cesium.UniformType.FLOAT,
+                    value: NUM_RUMS
+                },
+                u_vMin: {
+                    type:  Cesium.UniformType.FLOAT,
+                    value: V_MIN
+                },
+                u_vMax: {
+                    type:  Cesium.UniformType.FLOAT,
+                    value: V_MAX
+                },
+                u_geometryBaseHeight: {
+                    type:  Cesium.UniformType.FLOAT,
+                    value: GEOMETRY_BASE_HEIGHT_M
+                },
+                u_geometryTopHeight: {
+                    type:  Cesium.UniformType.FLOAT,
+                    value: GEOMETRY_TOP_HEIGHT_M
+                },
+                u_displayDatumHeight: {
+                    type:  Cesium.UniformType.FLOAT,
+                    value: DISPLAY_DATUM_HEIGHT_M
+                },
+                u_verticalExaggeration: {
+                    type:  Cesium.UniformType.FLOAT,
+                    value: currentVerticalExaggeration
+                },
+            },
+
+            vertexShaderText: `
+                float sampleDispMm(float rowF, float epochU) {
+                    float rowIdx = floor(rowF * (u_numRums - 1.0) + 0.5);
+                    float rowV = (rowIdx + 0.5) / u_numRums;
+
+                    // Same Y flip as cap shader.
+                    vec2 uv = vec2(epochU, 1.0 - rowV);
+
+                    vec4 texel = texture(u_heightTexture, uv);
+
+                    // phase9a RG-packed uint16 decode:
+                    // R = high byte, G = low byte.
+                    float hi = floor(texel.r * 255.0 + 0.5);
+                    float lo = floor(texel.g * 255.0 + 0.5);
+                    float encoded16 = hi * 256.0 + lo;
+                    float normalized = encoded16 / 65535.0;
+
+                    return normalized * (u_vMax - u_vMin) + u_vMin;
+                }
+
+                void vertexMain(VertexInput vsInput, inout czm_modelVertexOutput vsOutput) {
+
+                    // phase9d stores:
+                    //   texCoord_0.x = row A normalized
+                    //   texCoord_0.y = row B normalized
+                    //   texCoord_1.x = wall role: 0.0 lower edge, 1.0 upper edge
+                    float rowAF = vsInput.attributes.texCoord_0.x;
+                    float rowBF = vsInput.attributes.texCoord_0.y;
+                    float role  = vsInput.attributes.texCoord_1.x;
+
+                    float epochIdx = floor(u_epochIndex + 0.5);
+                    float epochU = (epochIdx + 0.5) / u_numEpochs;
+
+                    float dispA = sampleDispMm(rowAF, epochU);
+                    float dispB = sampleDispMm(rowBF, epochU);
+
+                    float heightA = u_displayDatumHeight + dispA * u_verticalExaggeration;
+                    float heightB = u_displayDatumHeight + dispB * u_verticalExaggeration;
+
+                    float lowH  = min(heightA, heightB);
+                    float highH = max(heightA, heightB);
+
+                    float bakedHeight = mix(u_geometryBaseHeight, u_geometryTopHeight, role);
+                    float targetHeight = mix(lowH, highH, role);
+                    float deltaM = targetHeight - bakedHeight;
+
+                    vec3 worldPos = (czm_model * vec4(vsInput.attributes.positionMC, 1.0)).xyz;
+                    vec3 upDirWorld = normalize(worldPos);
+
+                    vec3 deltaModel = (czm_inverseModel * vec4(upDirWorld * deltaM, 0.0)).xyz;
+                    vsOutput.positionMC += deltaModel;
+                }
+            `
+        });
+    }
+
+    const realShader = createHeightShader({ withHatch: true });
+    const blankShader = createHeightShader({ withHatch: false });
+    const rumWallShader = createWallShader();
+    const blankWallShader = createWallShader();
+
+    async function loadTileset(url, label) {
+        if (typeof Cesium.Cesium3DTileset.fromUrl === "function") {
+            return await Cesium.Cesium3DTileset.fromUrl(url, {
+                maximumScreenSpaceError: 4,
+                debugShowBoundingVolume: false,
+            });
+        }
+
+        const ts = new Cesium.Cesium3DTileset({
+            url: url,
+            maximumScreenSpaceError: 4,
+        });
+        await ts.readyPromise;
+        return ts;
+    }
+
+    // ---- load real RUM cap tileset ----
+    setStatus("loading real RUM tileset…");
+    let tileset;
+    let blankTileset;
+    let rumWallTileset;
+    let blankWallTileset;
+    try {
+        tileset = await loadTileset(TILESET_URL, "real RUM caps");
+        tileset.customShader = realShader;
+        viewer.scene.primitives.add(tileset);
+
+        // ---- static color on real tile load ----
+        tileset.tileLoad.addEventListener(function(tile) {
+            if (tile._isInitialized) return;
+            const content = tile.content;
+            const n = content.featuresLength;
+            for (let i = 0; i < n; i++) {
+                const feature = content.getFeature(i);
+                const up = parseFloat(feature.getProperty("up"));
+                feature.staticColor = velocityToColor(up, new Cesium.Color());
+            }
+            tile._isInitialized = true;
+        });
+
+        function applyRealCapStyle() {
+            tileset.style = new Cesium.Cesium3DTileStyle({
+                color: {
+                    evaluateColor: function(feature, result) {
+                        return feature.staticColor
+                            ? colorWithGlobalOpacity(feature.staticColor, result)
+                            : colorWithGlobalOpacity(COLOR_NODATA, result);
+                    }
+                }
+            });
+        }
+        applyRealCapStyle();
+
+        // ---- load blankie cap tileset as separate toggleable layer ----
+        setStatus("loading blankie tileset…");
+        blankTileset = await loadTileset(BLANK_TILESET_URL, "blankie caps");
+        blankTileset.customShader = blankShader;
+        blankTileset.show = BLANKIES_ENABLED_INITIAL;
+        viewer.scene.primitives.add(blankTileset);
+
+        function applyBlankCapStyle() {
+            blankTileset.style = new Cesium.Cesium3DTileStyle({
+                color: {
+                    evaluateColor: function(feature, result) {
+                        return colorWithGlobalOpacity(BLANK_COLOR, result);
+                    }
+                }
+            });
+        }
+        applyBlankCapStyle();
+
+        // ---- load real-real RUM wall tileset as separate toggleable layer ----
+        setStatus("loading RUM wall tileset…");
+        rumWallTileset = await loadTileset(REAL_WALL_TILESET_URL, "real RUM walls");
+        rumWallTileset.customShader = rumWallShader;
+        rumWallTileset.show = RUM_WALLS_ENABLED_INITIAL;
+        viewer.scene.primitives.add(rumWallTileset);
+
+        function applyRumWallStyle() {
+            rumWallTileset.style = new Cesium.Cesium3DTileStyle({
+                color: {
+                    evaluateColor: function(feature, result) {
+                        // Real-real wall color follows the higher-side RUM.
+                        // phase9d stores up_high = max(up_a, up_b).
+                        const upHigh = parseFloat(feature.getProperty("up_high"));
+                        const baseColor = Number.isFinite(upHigh)
+                            ? velocityToColor(upHigh, new Cesium.Color())
+                            : RUM_WALL_COLOR;
+                        return colorWithGlobalOpacity(baseColor, result);
+                    }
+                }
+            });
+        }
+        applyRumWallStyle();
+
+        // ---- load blankie-related wall tileset as separate toggleable layer ----
+        setStatus("loading blankie wall tileset…");
+        blankWallTileset = await loadTileset(BLANK_WALL_TILESET_URL, "blankie walls");
+        blankWallTileset.customShader = blankWallShader;
+        blankWallTileset.show = BLANK_WALLS_ENABLED_INITIAL;
+        viewer.scene.primitives.add(blankWallTileset);
+
+        function applyBlankWallStyle() {
+            blankWallTileset.style = new Cesium.Cesium3DTileStyle({
+                color: {
+                    evaluateColor: function(feature, result) {
+                        return colorWithGlobalOpacity(BLANK_WALL_COLOR, result);
+                    }
+                }
+            });
+        }
+        applyBlankWallStyle();
+
+        // ---- load subsidence bowl overlay from GeoJSON ----
+        setStatus("loading subsidence bowl…");
+        await loadBowlOutlines();
+
+        // ---- load static horizontal velocity field for prototype particles ----
+        setStatus("loading horizontal particles…");
+        await loadHorizontalParticleField();
+
+    } catch(e) {
+        setStatus("ERROR: " + e.message);
+        console.error(e);
+        return;
+    }
+
+    blankToggleBtn.textContent = blankTileset.show ? "Blankie caps: ON" : "Blankie caps: OFF";
+    blankToggleBtn.addEventListener("click", function() {
+        if (!blankTileset) return;
+        blankTileset.show = !blankTileset.show;
+        blankToggleBtn.textContent = blankTileset.show ? "Blankie caps: ON" : "Blankie caps: OFF";
+    });
+
+    rumWallToggleBtn.textContent = rumWallTileset.show ? "RUM walls: ON" : "RUM walls: OFF";
+    rumWallToggleBtn.addEventListener("click", function() {
+        if (!rumWallTileset) return;
+        rumWallTileset.show = !rumWallTileset.show;
+        rumWallToggleBtn.textContent = rumWallTileset.show ? "RUM walls: ON" : "RUM walls: OFF";
+    });
+
+    blankWallToggleBtn.textContent = blankWallTileset.show ? "Blankie walls: ON" : "Blankie walls: OFF";
+    blankWallToggleBtn.addEventListener("click", function() {
+        if (!blankWallTileset) return;
+        blankWallTileset.show = !blankWallTileset.show;
+        blankWallToggleBtn.textContent = blankWallTileset.show ? "Blankie walls: ON" : "Blankie walls: OFF";
+    });
+
+    hatchToggleBtn.textContent = uncertaintyHatchEnabled ? "Uncertainty hatch: ON" : "Uncertainty hatch: OFF";
+    hatchToggleBtn.addEventListener("click", function() {
+        uncertaintyHatchEnabled = !uncertaintyHatchEnabled;
+        realShader.setUniform("u_hatchEnabled", uncertaintyHatchEnabled ? 1.0 : 0.0);
+        hatchToggleBtn.textContent = uncertaintyHatchEnabled ? "Uncertainty hatch: ON" : "Uncertainty hatch: OFF";
+        viewer.scene.requestRender();
+    });
+
+    bowlToggleBtn.textContent = bowlsVisible ? "Subsidence bowl: ON" : "Subsidence bowl: OFF";
+    bowlToggleBtn.addEventListener("click", function() {
+        setBowlVisibility(!bowlsVisible);
+    });
+
+    hParticleToggleBtn.addEventListener("click", function() {
+        setHorizontalParticlesVisible(!hParticlesVisible);
+    });
+
+    hUncertaintyToggleBtn.textContent = hUncertaintyEnabled ? "H uncertainty: ON" : "H uncertainty: OFF";
+    hUncertaintyToggleBtn.addEventListener("click", function() {
+        setHorizontalUncertaintyVisible(!hUncertaintyEnabled);
+    });
+
+    hUncertaintyStrengthSlider.addEventListener("input", function() {
+        applyHParticleControls();
+        resetHParticleScreenHistory();
+        clearHParticlesCanvas();
+    });
+
+    hParticleSamplerSelect.addEventListener("change", function() {
+        applyHParticleControls();
+        rebuildHValidSpawnCells();
+        initHParticles(hParticleCount);
+        resetHParticleScreenHistory();
+        clearHParticlesCanvas();
+        setH4Status();
+    });
+
+    hParticleCountSlider.addEventListener("input", function() {
+        applyHParticleControls();
+        rebuildHValidSpawnCells();
+        initHParticles(hParticleCount);
+        resetHParticleScreenHistory();
+    });
+
+    hParticleSpeedSlider.addEventListener("input", function() {
+        applyHParticleControls();
+    });
+
+    hParticleTrailSlider.addEventListener("input", function() {
+        applyHParticleControls();
+    });
+
+    applyHParticleControls();
+
+    window.addEventListener("resize", function() {
+        resizeHParticleCanvas();
+        resetHParticleScreenHistory();
+        updateDistanceScale(true);
+    });
+
+    // Camera interaction handling for screen-space particle trails:
+    // pause immediately while the view is changing, then respawn after the view is stable.
+    viewer.camera.moveStart.addEventListener(function() {
+        hCesiumCameraMoving = true;
+        pauseHParticlesForCameraInteraction();
+    });
+
+    viewer.camera.moveEnd.addEventListener(function() {
+        hCesiumCameraMoving = false;
+        resumeHParticlesAfterCameraStable();
+    });
+
+    // Fallback for non-animated or tiny camera changes.
+    viewer.camera.changed.addEventListener(function() {
+        if (!hPointerDown && !hCesiumCameraMoving) {
+            markHParticleCameraMoving();
+        } else {
+            pauseHParticlesForCameraInteraction();
+        }
+    });
+
+    const hParticleInteractionHandler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas);
+
+    [
+        Cesium.ScreenSpaceEventType.LEFT_DOWN,
+        Cesium.ScreenSpaceEventType.MIDDLE_DOWN,
+        Cesium.ScreenSpaceEventType.RIGHT_DOWN,
+        Cesium.ScreenSpaceEventType.PINCH_START
+    ].forEach(function(eventType) {
+        try {
+            hParticleInteractionHandler.setInputAction(function() {
+                beginHParticleCameraInteraction();
+            }, eventType);
+        } catch (e) {}
+    });
+
+    [
+        Cesium.ScreenSpaceEventType.LEFT_UP,
+        Cesium.ScreenSpaceEventType.MIDDLE_UP,
+        Cesium.ScreenSpaceEventType.RIGHT_UP,
+        Cesium.ScreenSpaceEventType.PINCH_END
+    ].forEach(function(eventType) {
+        try {
+            hParticleInteractionHandler.setInputAction(function() {
+                endHParticleCameraInteraction();
+            }, eventType);
+        } catch (e) {}
+    });
+
+    try {
+        hParticleInteractionHandler.setInputAction(function() {
+            if (hPointerDown) {
+                pauseHParticlesForCameraInteraction();
+            }
+        }, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
+    } catch (e) {}
+
+    [
+        Cesium.ScreenSpaceEventType.WHEEL,
+        Cesium.ScreenSpaceEventType.PINCH_MOVE
+    ].forEach(function(eventType) {
+        try {
+            hParticleInteractionHandler.setInputAction(function() {
+                markHParticleCameraMoving();
+            }, eventType);
+        } catch (e) {}
+    });
+
+    viewModeToggleBtn.addEventListener("click", function() {
+        if (currentViewMode === "2D") {
+            goTo3DView();
+        } else {
+            goTo2DView(true);
+        }
+    });
+
+    rumInfoClose.addEventListener("click", hideRumInfoPopup);
+
+    epochPanel.addEventListener("pointerdown", block2DTimeControlsMessage, true);
+    epochPanel.addEventListener("click", block2DTimeControlsMessage, true);
+
+    const rumPickHandler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas);
+    rumPickHandler.setInputAction(function(click) {
+        const picked = viewer.scene.pick(click.position);
+        if (Cesium.defined(picked) && picked && typeof picked.getProperty === "function") {
+            showRumInfoPopup(picked, click.position);
+        } else {
+            hideRumInfoPopup();
+        }
+    }, Cesium.ScreenSpaceEventType.LEFT_CLICK);
+
+
+    function setVerticalExaggeration(value) {
+        currentVerticalExaggeration = Number(value);
+        verticalExagValue.textContent = currentVerticalExaggeration.toFixed(1);
+
+        realShader.setUniform("u_verticalExaggeration", currentVerticalExaggeration);
+        blankShader.setUniform("u_verticalExaggeration", currentVerticalExaggeration);
+        rumWallShader.setUniform("u_verticalExaggeration", currentVerticalExaggeration);
+        blankWallShader.setUniform("u_verticalExaggeration", currentVerticalExaggeration);
+
+        resetHParticleScreenHistory();
+        clearHParticlesCanvas();
+
+        viewer.scene.requestRender();
+    }
+
+    function applyAllOpacityStyles() {
+        applyRealCapStyle();
+        applyBlankCapStyle();
+        applyRumWallStyle();
+        applyBlankWallStyle();
+        viewer.scene.requestRender();
+    }
+
+    function setGlobalOpacity(value) {
+        globalOpacity = Number(value);
+        globalOpacitySlider.value = String(globalOpacity);
+        globalOpacityValue.textContent = globalOpacity.toFixed(2);
+        applyAllOpacityStyles();
+    }
+    window.__setGlobalOpacity = setGlobalOpacity;
+
+    verticalExagSlider.value = currentVerticalExaggeration;
+    verticalExagValue.textContent = currentVerticalExaggeration.toFixed(1);
+    verticalExagSlider.addEventListener("input", function() {
+        setVerticalExaggeration(verticalExagSlider.value);
+    });
+
+    globalOpacitySlider.value = globalOpacity;
+    globalOpacityValue.textContent = globalOpacity.toFixed(2);
+    globalOpacitySlider.addEventListener("input", function() {
+        setGlobalOpacity(globalOpacitySlider.value);
+    });
+
+    // ---- clock ----
+    viewer.clock.startTime     = julianDates[0].clone();
+    viewer.clock.stopTime      = julianDates[N - 1].clone();
+    viewer.clock.currentTime   = julianDates[0].clone();
+    viewer.clock.clockRange    = Cesium.ClockRange.LOOP_STOP;
+    viewer.clock.multiplier    = PLAYBACK_MULTIPLIER;
+    viewer.clock.shouldAnimate = false;
+
+    let currentEpochIdx = 0;
+
+    function currentEpochIndex() {
+        const secs = Cesium.JulianDate.secondsDifference(
+            viewer.clock.currentTime, julianDates[0]
+        );
+        const epochDuration = Cesium.JulianDate.secondsDifference(
+            julianDates[1], julianDates[0]
+        );
+        return Math.max(0, Math.min(N - 1, Math.round(secs / epochDuration)));
+    }
+
+    function updateEpochUI() {
+        const idx = currentEpochIndex();
+        epochSlider.value = idx;
+        epochLabel.textContent = `Epoch: ${epochs[idx]}  (${idx + 1}/${N})`;
+        currentEpochIdx = idx;
+    }
+
+    // ============================================================
+    // EPOCH → SHADER UPDATE
+    // One setUniform call per epoch change — the GPU does the rest.
+    // ============================================================
+    let lastEpochIdx = -1;
+
+    viewer.scene.postRender.addEventListener(function() {
+        const idx = currentEpochIndex();
+        if (idx === lastEpochIdx) return;
+        lastEpochIdx = idx;
+
+        // Single uniform update per layer → shaders re-sample texture on GPU.
+        realShader.setUniform("u_epochIndex", idx);
+        blankShader.setUniform("u_epochIndex", idx);
+        rumWallShader.setUniform("u_epochIndex", idx);
+        blankWallShader.setUniform("u_epochIndex", idx);
+
+        // CPU-side cache only for projecting horizontal particles at current cap height.
+        updateHParticleDisplacementForEpoch(idx);
+    });
+
+    // ---- epoch slider ----
+    epochSlider.min   = 0;
+    epochSlider.max   = N - 1;
+    epochSlider.value = 0;
+    epochInfo.textContent = `14-day epochs  |  ${N} total`;
+
+    function setEpochIndex(idx, stopPlayback = true) {
+        idx = Math.max(0, Math.min(N - 1, idx));
+        viewer.clock.currentTime = julianDates[idx].clone();
+        if (stopPlayback) {
+            viewer.clock.shouldAnimate = false;
+            epochPlayBtn.textContent = "▶";
+        }
+        updateEpochUI();
+        viewer.scene.requestRender();
+    }
+
+    epochSlider.addEventListener("input", function(evt) {
+        if (block2DTimeControlsMessage(evt)) return;
+        setEpochIndex(parseInt(epochSlider.value, 10), true);
+    });
+
+    epochFirstBtn.addEventListener("click", function(evt) {
+        if (block2DTimeControlsMessage(evt)) return;
+        setEpochIndex(0, true);
+    });
+
+    epochPrevBtn.addEventListener("click", function(evt) {
+        if (block2DTimeControlsMessage(evt)) return;
+        setEpochIndex(currentEpochIndex() - 1, true);
+    });
+
+    epochPlayBtn.addEventListener("click", function(evt) {
+        if (block2DTimeControlsMessage(evt)) return;
+        viewer.clock.shouldAnimate = !viewer.clock.shouldAnimate;
+        epochPlayBtn.textContent = viewer.clock.shouldAnimate ? "⏸" : "▶";
+    });
+
+    epochNextBtn.addEventListener("click", function(evt) {
+        if (block2DTimeControlsMessage(evt)) return;
+        setEpochIndex(currentEpochIndex() + 1, true);
+    });
+
+    epochLastBtn.addEventListener("click", function(evt) {
+        if (block2DTimeControlsMessage(evt)) return;
+        setEpochIndex(N - 1, true);
+    });
+
+    viewer.clock.onTick.addEventListener(function() {
+        updateEpochUI();
+        if (viewer.clock.shouldAnimate &&
+            Cesium.JulianDate.greaterThan(
+                viewer.clock.currentTime, viewer.clock.stopTime)) {
+            viewer.clock.currentTime = viewer.clock.startTime.clone();
+        }
+    });
+
+    // ---- camera ----
+    goTo2DView(false);
+
+    updateEpochUI();
+    updateDistanceScale(true);
+    setH4Status();
+    console.log("[b3dm] Ready. Interface widgets v2 + H7 shimmer. Cesium:", Cesium.VERSION, "CustomShader:", typeof Cesium.CustomShader);
+    console.log("[shader] u_epochIndex will update each epoch change. Check console for errors.");
+}
+
+// ---- top HUD: FPS | data count | current date/time ----
+function pad2(n) {
+    return String(n).padStart(2, "0");
+}
+
+function recordingClockLabel() {
+    const d = new Date();
+    return `${pad2(d.getMonth() + 1)}-${pad2(d.getDate())} ${pad2(d.getHours())}:${pad2(d.getMinutes())}`;
+}
+
+let _fpsCount = 0, _fpsLast = performance.now();
+viewer.scene.postRender.addEventListener(() => {
+    update3DCinematicOrbit();
+    updateDistanceScale(false);
+    _fpsCount++;
+    const now = performance.now();
+    if (now - _fpsLast >= 1000) {
+        fpsCounter.textContent = `FPS: ${_fpsCount} | ${REAL_RUM_COUNT} RUM + ${BLANK_CELL_COUNT} blankie | ${recordingClockLabel()}`;
+        _fpsCount = 0;
+        _fpsLast = now;
+    }
+});
+
+document.getElementById("resetBtn").addEventListener("click", () => {
+    goTo2DView(true);
+});
+
+main().catch(e => {
+    setStatus("ERROR: " + e.message);
+    console.error(e);
+});
+</script>
+</body>
+</html>
