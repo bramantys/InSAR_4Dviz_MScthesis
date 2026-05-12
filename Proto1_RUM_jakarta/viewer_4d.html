@@ -253,9 +253,12 @@
             border: 1px solid rgba(255,255,255,0.15);
         }
 
+        /* ---- top-right viewer widgets ---- */
+
         #resetBtn {
             position: absolute;
-            top: 14px; right: 14px;
+            top: 50px;
+            left: 14px;
             z-index: 9999;
             background: rgba(0,0,0,0.72);
             color: white;
@@ -266,11 +269,14 @@
             font-size: 12px;
             cursor: pointer;
         }
-        #resetBtn:hover { background: rgba(40,40,40,0.9); }
+        #resetBtn:hover {
+            background: rgba(40,40,40,0.9);
+        }
 
         #viewModeToggleBtn {
             position: absolute;
-            left: 16px; bottom: 142px;
+            left: 16px;
+            bottom: 142px;
             z-index: 9999;
             min-width: 168px;
             background: rgba(0,0,0,0.78);
@@ -284,227 +290,49 @@
             cursor: pointer;
             box-shadow: 0 6px 18px rgba(0,0,0,0.28);
         }
-        #viewModeToggleBtn:hover { background: rgba(40,40,40,0.94); }
+        #viewModeToggleBtn:hover {
+            background: rgba(40,40,40,0.94);
+        }
 
-        #rumInfoPopup {
+        /* Layer toggles: compact column placed left of Display controls */
+        #layerTogglePanel {
             position: absolute;
-            z-index: 10001;
-            width: 286px;
-            max-width: calc(100vw - 24px);
-            display: none;
-            background: rgba(0,0,0,0.84);
-            color: white;
-            border: 1px solid rgba(255,255,255,0.22);
-            border-radius: 10px;
-            box-shadow: 0 8px 26px rgba(0,0,0,0.35);
-            padding: 10px 12px;
-            font-family: Arial, sans-serif;
-            font-size: 12px;
+            top: 14px;
+            right: 270px;
+            z-index: 9999;
+            width: 170px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
             pointer-events: auto;
         }
-        #rumInfoPopup .popupTop {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 8px;
-            border-bottom: 1px solid rgba(255,255,255,0.15);
-            padding-bottom: 6px;
-        }
-        #rumInfoTitle {
-            font-weight: bold;
-            color: #7ef;
-            overflow: hidden;
-            text-overflow: ellipsis;
+
+        #layerTogglePanel button {
+            width: 100%;
+            background: rgba(0,0,0,0.72);
+            color: white;
+            border: 1px solid #444;
+            border-radius: 8px;
+            padding: 7px 12px;
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            cursor: pointer;
+            text-align: center;
             white-space: nowrap;
         }
-        #rumInfoClose {
-            background: transparent;
-            color: white;
-            border: 0;
-            font-size: 18px;
-            line-height: 1;
-            cursor: pointer;
-            padding: 0 2px;
-        }
-        #rumInfoBody {
-            color: #ddd;
-            line-height: 1.35;
-        }
-        .rumInfoRow {
-            display: flex;
-            justify-content: space-between;
-            gap: 10px;
-            border-bottom: 1px solid rgba(255,255,255,0.07);
-            padding: 3px 0;
-        }
-        .rumInfoKey {
-            color: #aaa;
-            flex: 0 0 122px;
-        }
-        .rumInfoVal {
-            color: #fff;
-            text-align: right;
-            overflow-wrap: anywhere;
-        }
-        .rumInfoNote {
-            color: #aaa;
-            font-size: 11px;
-            margin-top: 7px;
+
+        #layerTogglePanel button:hover {
+            background: rgba(40,40,40,0.9);
         }
 
-        #rumInfoCrosshair {
-            position: absolute;
-            z-index: 10000;
-            width: 22px;
-            height: 22px;
-            display: none;
-            pointer-events: none;
-            transform: translate(-11px, -11px);
-        }
-        #rumInfoCrosshair::before,
-        #rumInfoCrosshair::after {
-            content: "";
-            position: absolute;
-            background: rgba(255,255,255,0.92);
-            box-shadow: 0 0 3px rgba(0,0,0,0.9);
-        }
-        #rumInfoCrosshair::before {
-            left: 10px; top: 0;
-            width: 2px; height: 22px;
-        }
-        #rumInfoCrosshair::after {
-            left: 0; top: 10px;
-            width: 22px; height: 2px;
-        }
-        #rumInfoStem {
-            position: absolute;
-            z-index: 10000;
-            display: none;
-            width: 2px;
-            background: rgba(255,255,255,0.88);
-            box-shadow: 0 0 3px rgba(0,0,0,0.9);
-            pointer-events: none;
-        }
-
-        #epochPanel.timeLocked {
-            opacity: 0.55;
-        }
-        #epochPanel.timeLocked input,
-        #epochPanel.timeLocked button {
-            cursor: not-allowed;
-        }
-
-        #blankToggleBtn {
-            position: absolute;
-            top: 98px; right: 14px;
-            z-index: 9999;
-            background: rgba(0,0,0,0.72);
-            color: white;
-            border: 1px solid #444;
-            border-radius: 8px;
-            padding: 7px 14px;
-            font-family: Arial, sans-serif;
-            font-size: 12px;
-            cursor: pointer;
-        }
-        #blankToggleBtn:hover { background: rgba(40,40,40,0.9); }
-
-        #rumWallToggleBtn {
-            position: absolute;
-            top: 140px; right: 14px;
-            z-index: 9999;
-            background: rgba(0,0,0,0.72);
-            color: white;
-            border: 1px solid #444;
-            border-radius: 8px;
-            padding: 7px 14px;
-            font-family: Arial, sans-serif;
-            font-size: 12px;
-            cursor: pointer;
-        }
-        #rumWallToggleBtn:hover { background: rgba(40,40,40,0.9); }
-
-        #blankWallToggleBtn {
-            position: absolute;
-            top: 182px; right: 14px;
-            z-index: 9999;
-            background: rgba(0,0,0,0.72);
-            color: white;
-            border: 1px solid #444;
-            border-radius: 8px;
-            padding: 7px 14px;
-            font-family: Arial, sans-serif;
-            font-size: 12px;
-            cursor: pointer;
-        }
-        #blankWallToggleBtn:hover { background: rgba(40,40,40,0.9); }
-
-        #hatchToggleBtn {
-            position: absolute;
-            top: 224px; right: 14px;
-            z-index: 9999;
-            background: rgba(0,0,0,0.72);
-            color: white;
-            border: 1px solid #444;
-            border-radius: 8px;
-            padding: 7px 14px;
-            font-family: Arial, sans-serif;
-            font-size: 12px;
-            cursor: pointer;
-        }
-        #hatchToggleBtn:hover { background: rgba(40,40,40,0.9); }
-
-        #bowlToggleBtn {
-            position: absolute;
-            top: 266px; right: 14px;
-            z-index: 9999;
-            background: rgba(0,0,0,0.72);
-            color: white;
-            border: 1px solid #444;
-            border-radius: 8px;
-            padding: 7px 14px;
-            font-family: Arial, sans-serif;
-            font-size: 12px;
-            cursor: pointer;
-        }
-        #bowlToggleBtn:hover { background: rgba(40,40,40,0.9); }
-
-        #hParticleToggleBtn {
-            position: absolute;
-            top: 308px; right: 14px;
-            z-index: 9999;
-            background: rgba(0,0,0,0.72);
-            color: white;
-            border: 1px solid #444;
-            border-radius: 8px;
-            padding: 7px 14px;
-            font-family: Arial, sans-serif;
-            font-size: 12px;
-            cursor: pointer;
-        }
-        #hParticleToggleBtn:hover { background: rgba(40,40,40,0.9); }
-
-        #hUncertaintyToggleBtn {
-            position: absolute;
-            top: 350px; right: 14px;
-            z-index: 9999;
-            background: rgba(0,0,0,0.72);
-            color: white;
-            border: 1px solid #444;
-            border-radius: 8px;
-            padding: 7px 14px;
-            font-family: Arial, sans-serif;
-            font-size: 12px;
-            cursor: pointer;
-        }
-        #hUncertaintyToggleBtn:hover { background: rgba(40,40,40,0.9); }
-
+        /* Display controls: fixed exactly at top-right */
         #displayPanel {
             position: absolute;
-            top: 392px; right: 14px;
+            top: 14px;
+            right: 14px;
             z-index: 9999;
-            width: 230px;
+            width: 240px;
+            box-sizing: border-box;
             background: rgba(0,0,0,0.72);
             color: white;
             border: 1px solid rgba(255,255,255,0.15);
@@ -513,10 +341,12 @@
             font-family: Arial, sans-serif;
             font-size: 12px;
         }
+
         #displayPanel .panelTitle {
             font-weight: bold;
             margin-bottom: 8px;
         }
+
         #displayPanel label {
             display: flex;
             justify-content: space-between;
@@ -524,11 +354,13 @@
             margin-top: 8px;
             color: #ddd;
         }
+
         #displayPanel input[type="range"],
         #displayPanel select {
             width: 100%;
             margin: 4px 0 2px;
         }
+
         #displayPanel select {
             background: rgba(20,20,20,0.92);
             color: white;
@@ -537,16 +369,19 @@
             padding: 4px 6px;
             font-size: 12px;
         }
+
         #displayPanel .hint {
             margin-top: 6px;
             color: #aaa;
             font-size: 10px;
             line-height: 1.25;
         }
+
         #displayPanel .panelDivider {
             margin: 10px 0 6px;
             border-top: 1px solid rgba(255,255,255,0.16);
         }
+
     </style>
 </head>
 <body>
@@ -557,13 +392,17 @@
 <div id="statusBadge">loading…</div>
 <button id="resetBtn">Reset view</button>
 <button id="viewModeToggleBtn">View: 2D</button>
-<button id="blankToggleBtn">Blankie caps: ON</button>
-<button id="rumWallToggleBtn">RUM walls: ON</button>
-<button id="blankWallToggleBtn">Blankie walls: ON</button>
-<button id="hatchToggleBtn">Uncertainty hatch: ON</button>
-<button id="bowlToggleBtn">Subsidence bowl: OFF</button>
-<button id="hParticleToggleBtn">Horizontal particles: ON</button>
-<button id="hUncertaintyToggleBtn">H uncertainty: ON</button>
+
+<div id="layerTogglePanel">
+    <button id="blankToggleBtn">Blankie caps: ON</button>
+    <button id="rumWallToggleBtn">RUM walls: ON</button>
+    <button id="blankWallToggleBtn">Blankie walls: ON</button>
+    <button id="hatchToggleBtn">Uncertainty hatch: ON</button>
+    <button id="bowlToggleBtn">Subsidence bowl: OFF</button>
+    <button id="hParticleToggleBtn">Horizontal particles: ON</button>
+    <button id="hUncertaintyToggleBtn">H uncertainty: ON</button>
+</div>
+
 <div id="fpsCounter">FPS: —</div>
 
 <div id="rumInfoPopup">
