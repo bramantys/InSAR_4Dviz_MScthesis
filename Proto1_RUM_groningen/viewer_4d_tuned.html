@@ -3152,6 +3152,610 @@ document.getElementById("resetBtn").addEventListener("click", () => {
     goTo2DView(true);
 });
 
+// ============================================================
+// PATCH: RUM INFO POPUP + CROSSHAIR + STEM
+// Copy-pasteable patch for viewer_4d variants
+// Paste before: main().catch(...)
+// ============================================================
+
+(function installRumInfoPopupPatch() {
+    if (window.__rumInfoPopupPatchInstalled) {
+        console.log("[RUM info patch] already installed");
+        return;
+    }
+    window.__rumInfoPopupPatchInstalled = true;
+
+    // ------------------------------------------------------------
+    // 1. Inject CSS
+    // ------------------------------------------------------------
+    if (!document.getElementById("rum-info-popup-patch-style")) {
+        const style = document.createElement("style");
+        style.id = "rum-info-popup-patch-style";
+        style.textContent = `
+            #rumInfoPopup {
+                position: absolute;
+                z-index: 10050;
+                width: 300px;
+                max-width: calc(100vw - 24px);
+                display: none;
+                background: rgba(0,0,0,0.86);
+                color: white;
+                border: 1px solid rgba(255,255,255,0.25);
+                border-radius: 10px;
+                box-shadow: 0 8px 26px rgba(0,0,0,0.38);
+                padding: 10px 12px;
+                font-family: Arial, sans-serif;
+                font-size: 12px;
+                pointer-events: auto;
+                box-sizing: border-box;
+            }
+
+            #rumInfoPopup .popupTop {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                gap: 8px;
+                margin-bottom: 8px;
+                border-bottom: 1px solid rgba(255,255,255,0.15);
+                padding-bottom: 6px;
+            }
+
+            #rumInfoTitle {
+                font-weight: bold;
+                color: #7ef;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+
+            #rumInfoClose {
+                background: transparent;
+                color: white;
+                border: 0;
+                font-size: 18px;
+                line-height: 1;
+                cursor: pointer;
+                padding: 0 2px;
+            }
+
+            #rumInfoBody {
+                color: #ddd;
+                line-height: 1.35;
+            }
+
+            .rumInfoRow {
+                display: flex;
+                justify-content: space-between;
+                gap: 10px;
+                border-bottom: 1px solid rgba(255,255,255,0.07);
+                padding: 3px 0;
+            }
+
+            .rumInfoKey {
+                color: #aaa;
+                flex: 0 0 126px;
+            }
+
+            .rumInfoVal {
+                color: #fff;
+                text-align: right;
+                overflow-wrap: anywhere;
+            }
+
+            .rumInfoNote {
+                color: #aaa;
+                font-size: 11px;
+                margin-top: 7px;
+            }
+
+            #rumInfoCrosshair {
+                position: absolute;
+                z-index: 10049;
+                width: 22px;
+                height: 22px;
+                display: none;
+                pointer-events: none;
+                transform: translate(-50%, -50%);
+                box-sizing: border-box;
+            }
+
+            #rumInfoCrosshair::before,
+            #rumInfoCrosshair::after {
+                content: "";
+                position: absolute;
+                background: #00eaff;
+                box-shadow: 0 0 4px rgba(0,0,0,0.95);
+            }
+
+            #rumInfoCrosshair::before {
+                left: 10px;
+                top: 0;
+                width: 2px;
+                height: 22px;
+            }
+
+            #rumInfoCrosshair::after {
+                left: 0;
+                top: 10px;
+                width: 22px;
+                height: 2px;
+            }
+
+            #rumInfoStem {
+                position: absolute;
+                z-index: 10048;
+                width: 2px;
+                display: none;
+                pointer-events: none;
+                background: #00eaff;
+                box-shadow: 0 0 4px rgba(0,0,0,0.95);
+                transform: translateX(-50%);
+            }
+        `;
+        document.head.appendChild(style);
+    }
+
+    // ------------------------------------------------------------
+    // 2. Ensure HTML elements exist
+    // ------------------------------------------------------------
+    function ensureRumInfoElements() {
+        let popup = document.getElementById("rumInfoPopup");
+        if (!popup) {
+            popup = document.createElement("div");
+            popup.id = "rumInfoPopup";
+            popup.innerHTML = `
+                <div class="popupTop">
+                    <div id="rumInfoTitle">RUM info</div>
+                    <button id="rumInfoClose" title="Close">×</button>
+                </div>
+                <div id="rumInfoBody"></div>
+            `;
+            document.body.appendChild(popup);
+        }
+
+        if (!document.getElementById("rumInfoTitle")) {
+            const top = document.createElement("div");
+            top.className = "popupTop";
+            top.innerHTML = `
+                <div id="rumInfoTitle">RUM info</div>
+                <button id="rumInfoClose" title="Close">×</button>
+            `;
+            popup.prepend(top);
+        }
+
+        if (!document.getElementById("rumInfoBody")) {
+            const body = document.createElement("div");
+            body.id = "rumInfoBody";
+            popup.appendChild(body);
+        }
+
+        if (!document.getElementById("rumInfoStem")) {
+            const stem = document.createElement("div");
+            stem.id = "rumInfoStem";
+            document.body.appendChild(stem);
+        }
+
+        if (!document.getElementById("rumInfoCrosshair")) {
+            const crosshair = document.createElement("div");
+            crosshair.id = "rumInfoCrosshair";
+            document.body.appendChild(crosshair);
+        }
+    }
+
+    ensureRumInfoElements();
+
+    const patchPopup = document.getElementById("rumInfoPopup");
+    const patchTitle = document.getElementById("rumInfoTitle");
+    const patchBody = document.getElementById("rumInfoBody");
+    const patchClose = document.getElementById("rumInfoClose");
+    const patchStem = document.getElementById("rumInfoStem");
+    const patchCrosshair = document.getElementById("rumInfoCrosshair");
+
+    // ------------------------------------------------------------
+    // 3. Helpers
+    // ------------------------------------------------------------
+    function patchSafeNumber(value) {
+        const n = Number(value);
+        return Number.isFinite(n) ? n : null;
+    }
+
+    function patchFmtNum(value, decimals = 2, suffix = "") {
+        const n = patchSafeNumber(value);
+        if (n === null) return "—";
+        return `${n.toFixed(decimals)}${suffix}`;
+    }
+
+    function patchGetProperty(feature, names) {
+        if (!feature || typeof feature.getProperty !== "function") return undefined;
+
+        for (const name of names) {
+            try {
+                const value = feature.getProperty(name);
+                if (value !== undefined && value !== null && value !== "") return value;
+            } catch (e) {}
+        }
+
+        return undefined;
+    }
+
+    function patchGetPropertyIds(feature) {
+        try {
+            if (feature && typeof feature.getPropertyIds === "function") {
+                return feature.getPropertyIds();
+            }
+        } catch (e) {}
+        return [];
+    }
+
+    function patchRow(label, value) {
+        return `
+            <div class="rumInfoRow">
+                <div class="rumInfoKey">${label}</div>
+                <div class="rumInfoVal">${value}</div>
+            </div>
+        `;
+    }
+
+    function patchHidePopup() {
+        if (patchPopup) patchPopup.style.display = "none";
+        if (patchStem) patchStem.style.display = "none";
+        if (patchCrosshair) patchCrosshair.style.display = "none";
+    }
+
+    function patchPositionPopup(screenPosition) {
+        const margin = 12;
+        const width = 300;
+        const targetX = Number(screenPosition.x || 0);
+        const targetY = Number(screenPosition.y || 0);
+        const desiredStem = 48;
+
+        // Show first so offsetHeight is measurable.
+        patchPopup.style.display = "block";
+
+        const boxH = patchPopup.offsetHeight || 220;
+
+        let x = targetX - width * 0.5;
+        let y = targetY - desiredStem - boxH;
+
+        x = Math.max(margin, Math.min(window.innerWidth - width - margin, x));
+
+        // If clicked point is too close to top, put popup below point instead.
+        let popupBelow = false;
+        if (y < margin) {
+            y = targetY + desiredStem;
+            popupBelow = true;
+        }
+
+        y = Math.max(margin, Math.min(window.innerHeight - boxH - margin, y));
+
+        patchPopup.style.left = `${x}px`;
+        patchPopup.style.top = `${y}px`;
+
+        patchCrosshair.style.left = `${targetX}px`;
+        patchCrosshair.style.top = `${targetY}px`;
+        patchCrosshair.style.display = "block";
+
+        const popupTop = y;
+        const popupBottom = y + boxH;
+
+        let stemTop, stemHeight;
+        if (!popupBelow) {
+            stemTop = popupBottom;
+            stemHeight = Math.max(8, targetY - popupBottom);
+        } else {
+            stemTop = targetY;
+            stemHeight = Math.max(8, popupTop - targetY);
+        }
+
+        patchStem.style.left = `${targetX}px`;
+        patchStem.style.top = `${stemTop}px`;
+        patchStem.style.height = `${stemHeight}px`;
+        patchStem.style.display = "block";
+    }
+
+    function patchShowPopup(feature, screenPosition) {
+        if (!feature || !patchPopup) return;
+
+        const ids = patchGetPropertyIds(feature);
+
+        const rumIdRaw = patchGetProperty(feature, [
+            "rum_id", "RUM_ID", "rumId", "id", "name"
+        ]);
+
+        const rumId =
+            rumIdRaw !== undefined && rumIdRaw !== null
+                ? String(rumIdRaw)
+                : "";
+
+        if (!rumId || !rumId.startsWith("RUM_")) {
+            patchTitle.textContent = "Selected feature";
+            patchBody.innerHTML = `
+                <div class="rumInfoNote">
+                    This picked object is not a real RUM cap feature, or this tile does not expose a RUM ID.
+                </div>
+                <div class="rumInfoNote">
+                    Available properties: ${ids.length ? ids.join(", ") : "—"}
+                </div>
+            `;
+            patchPositionPopup(screenPosition);
+            return;
+        }
+
+        const up = patchSafeNumber(
+            patchGetProperty(feature, ["up", "up_mm_yr", "vertical_velocity"])
+        );
+
+        let dispMm = null;
+        try {
+            if (
+                typeof hHeightMeta !== "undefined" &&
+                hHeightMeta &&
+                hHeightMeta.rum_index &&
+                typeof hCurrentDispByRow !== "undefined" &&
+                hCurrentDispByRow
+            ) {
+                const row = hHeightMeta.rum_index[rumId];
+                if (
+                    row !== undefined &&
+                    row !== null &&
+                    row >= 0 &&
+                    row < hCurrentDispByRow.length
+                ) {
+                    dispMm = hCurrentDispByRow[row];
+                }
+            }
+        } catch (e) {}
+
+        let hCell = null;
+        try {
+            if (
+                typeof hCellByRumId !== "undefined" &&
+                hCellByRumId &&
+                typeof hCellByRumId.get === "function"
+            ) {
+                hCell = hCellByRumId.get(rumId);
+            }
+        } catch (e) {}
+
+        const east = hCell ? patchSafeNumber(hCell.east_mm_yr) : null;
+        const north = hCell ? patchSafeNumber(hCell.north_mm_yr) : null;
+        const speed = hCell ? patchSafeNumber(hCell.speed_mm_yr) : null;
+
+        const varE = hCell ? patchSafeNumber(hCell.var_east) : null;
+        const varN = hCell ? patchSafeNumber(hCell.var_north) : null;
+        const covEN = hCell ? patchSafeNumber(hCell.covar_en) : null;
+
+        const sigmaE = varE !== null ? Math.sqrt(Math.max(0.0, varE)) : null;
+        const sigmaN = varN !== null ? Math.sqrt(Math.max(0.0, varN)) : null;
+
+        patchTitle.textContent = rumId;
+
+        patchBody.innerHTML =
+            patchRow("Vertical velocity", patchFmtNum(up, 2, " mm/yr")) +
+            patchRow("Current displacement", patchFmtNum(dispMm, 2, " mm")) +
+            patchRow("Horizontal east", patchFmtNum(east, 3, " mm/yr")) +
+            patchRow("Horizontal north", patchFmtNum(north, 3, " mm/yr")) +
+            patchRow("Horizontal speed", patchFmtNum(speed, 3, " mm/yr")) +
+            patchRow("sigma east", patchFmtNum(sigmaE, 3, " mm/yr")) +
+            patchRow("sigma north", patchFmtNum(sigmaN, 3, " mm/yr")) +
+            patchRow("cov EN", patchFmtNum(covEN, 3, "")) +
+            `<div class="rumInfoNote">
+                Click marker = selected RUM cap. Values come from the picked 3D tile and horizontal_field.json.
+            </div>`;
+
+        patchPositionPopup(screenPosition);
+    }
+
+    // ------------------------------------------------------------
+    // 4. Attach events
+    // ------------------------------------------------------------
+    if (patchClose) {
+        patchClose.addEventListener("click", patchHidePopup);
+    }
+
+    try {
+        const rumPickHandlerPatch = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas);
+
+        rumPickHandlerPatch.setInputAction(function(click) {
+            const picked = viewer.scene.pick(click.position);
+
+            if (
+                Cesium.defined(picked) &&
+                picked &&
+                typeof picked.getProperty === "function"
+            ) {
+                patchShowPopup(picked, click.position);
+            } else {
+                patchHidePopup();
+            }
+        }, Cesium.ScreenSpaceEventType.LEFT_CLICK);
+
+        window.__rumPickHandlerPatch = rumPickHandlerPatch;
+        console.log("[RUM info patch] click handler installed");
+    } catch (e) {
+        console.warn("[RUM info patch] could not install click handler:", e);
+    }
+
+    // Hide popup when switching view / reset if those buttons exist.
+    try {
+        const resetBtn = document.getElementById("resetBtn");
+        if (resetBtn) resetBtn.addEventListener("click", patchHidePopup);
+
+        const viewBtn = document.getElementById("viewModeToggleBtn");
+        if (viewBtn) viewBtn.addEventListener("click", patchHidePopup);
+    } catch (e) {}
+
+    window.__hideRumInfoPopupPatch = patchHidePopup;
+    console.log("[RUM info patch] installed");
+})();
+
+// ============================================================
+// HOTFIX: RUM INFO POPUP v2
+// - shrink popup/font to 75%
+// - hide popup during drag / pan / zoom so marker does not drift
+// Paste below existing RUM info popup patch
+// ============================================================
+
+(function installRumInfoPopupHotfixV2() {
+    if (window.__rumInfoPopupHotfixV2Installed) {
+        console.log("[RUM info hotfix v2] already installed");
+        return;
+    }
+    window.__rumInfoPopupHotfixV2Installed = true;
+
+    // ------------------------------------------------------------
+    // 1. 75% popup size override
+    // ------------------------------------------------------------
+    if (!document.getElementById("rum-info-popup-hotfix-v2-style")) {
+        const style = document.createElement("style");
+        style.id = "rum-info-popup-hotfix-v2-style";
+        style.textContent = `
+            #rumInfoPopup {
+                width: 225px !important;
+                font-size: 9px !important;
+                padding: 7px 9px !important;
+                border-radius: 8px !important;
+                box-shadow: 0 6px 18px rgba(0,0,0,0.34) !important;
+            }
+
+            #rumInfoPopup .popupTop {
+                margin-bottom: 6px !important;
+                padding-bottom: 4px !important;
+                gap: 6px !important;
+            }
+
+            #rumInfoTitle {
+                font-size: 9.5px !important;
+            }
+
+            #rumInfoClose {
+                font-size: 14px !important;
+                padding: 0 1px !important;
+            }
+
+            #rumInfoBody {
+                line-height: 1.25 !important;
+            }
+
+            .rumInfoRow {
+                gap: 7px !important;
+                padding: 2px 0 !important;
+            }
+
+            .rumInfoKey {
+                flex: 0 0 94px !important;
+            }
+
+            .rumInfoVal {
+                font-size: 9px !important;
+            }
+
+            .rumInfoNote {
+                font-size: 8px !important;
+                margin-top: 5px !important;
+            }
+
+            #rumInfoCrosshair {
+                width: 16px !important;
+                height: 16px !important;
+            }
+
+            #rumInfoCrosshair::before {
+                left: 7px !important;
+                top: 0 !important;
+                width: 2px !important;
+                height: 16px !important;
+            }
+
+            #rumInfoCrosshair::after {
+                left: 0 !important;
+                top: 7px !important;
+                width: 16px !important;
+                height: 2px !important;
+            }
+
+            #rumInfoStem {
+                width: 1.5px !important;
+            }
+        `;
+        document.head.appendChild(style);
+    }
+
+    // ------------------------------------------------------------
+    // 2. Hide popup when camera interaction starts
+    // ------------------------------------------------------------
+    function hideRumPopupHotfix() {
+        try {
+            if (typeof window.__hideRumInfoPopupPatch === "function") {
+                window.__hideRumInfoPopupPatch();
+                return;
+            }
+        } catch (e) {}
+
+        const popup = document.getElementById("rumInfoPopup");
+        const stem = document.getElementById("rumInfoStem");
+        const crosshair = document.getElementById("rumInfoCrosshair");
+
+        if (popup) popup.style.display = "none";
+        if (stem) stem.style.display = "none";
+        if (crosshair) crosshair.style.display = "none";
+    }
+
+    const canvas = viewer?.scene?.canvas;
+    if (!canvas) {
+        console.warn("[RUM info hotfix v2] Cesium canvas not found");
+        return;
+    }
+
+    let pointerDown = false;
+    let dragged = false;
+    let startX = 0;
+    let startY = 0;
+
+    canvas.addEventListener("pointerdown", function(e) {
+        pointerDown = true;
+        dragged = false;
+        startX = e.clientX;
+        startY = e.clientY;
+    }, true);
+
+    canvas.addEventListener("pointermove", function(e) {
+        if (!pointerDown) return;
+
+        const dx = e.clientX - startX;
+        const dy = e.clientY - startY;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+
+        if (dist > 3) {
+            dragged = true;
+            hideRumPopupHotfix();
+        }
+    }, true);
+
+    canvas.addEventListener("pointerup", function() {
+        if (dragged) {
+            // Hide again after Cesium finishes any click/mouseup handlers.
+            setTimeout(hideRumPopupHotfix, 0);
+            setTimeout(hideRumPopupHotfix, 80);
+        }
+
+        pointerDown = false;
+        dragged = false;
+    }, true);
+
+    canvas.addEventListener("pointercancel", function() {
+        pointerDown = false;
+        dragged = false;
+        hideRumPopupHotfix();
+    }, true);
+
+    canvas.addEventListener("wheel", function() {
+        hideRumPopupHotfix();
+    }, { passive: true, capture: true });
+
+    console.log("[RUM info hotfix v2] installed: smaller popup + hide-on-drag");
+})();
+
 main().catch(e => {
     setStatus("ERROR: " + e.message);
     console.error(e);
