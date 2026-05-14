@@ -1,0 +1,125 @@
+{
+  "schema_version": "0.1",
+  "project": {
+  "dataset_id": "synth_bowl",
+  "dataset_title": "Synthetic Bowl Test — Gameplan1.1",
+  "dataset_label_short": "Synth Bowl",
+  "template_status": "synthetic_blind_test_dataset",
+    "do_not_open_transfer_dataset_yet": true
+  },
+  "paths": {
+    "raw_source_dir": "Data/1_OG",
+    "data_dir": "Data",
+    "tiles_dir": "Data/tiles",
+    "blank_tiles_dir": "Data/tiles_blank",
+    "real_walls_tiles_dir": "Data/tiles_walls_real",
+    "blank_walls_tiles_dir": "Data/tiles_walls_blank",
+    "old_source_preparation_dir": "pipeline/_old_source_preparation"
+  },
+  "source_inputs": {
+    "primary_source_csv": "Data/1_OG/synthetic_enu_estimates.csv",
+    "primary_source_json": "",
+    "primary_source_pkl": "",
+    "source_crs": "EPSG:23830",
+    "source_coordinate_fields": {
+      "x": "x_rum",
+      "y": "y_rum"
+    },
+    "source_velocity_fields": {
+      "east": "east",
+      "north": "north",
+      "up": "up"
+    },
+    "source_variance_fields": {
+      "var_east": "var_east",
+      "var_north": "var_north",
+      "var_up": "var_up",
+      "covar_en": "covar_en"
+    }
+  },
+  "prepared_inputs": {
+    "points_geojson": "Data/synthetic_points_wgs84_with_rumid.geojson",
+    "plain_points_geojson": "Data/synthetic_points_wgs84.geojson",
+    "vertical_epoch_json": "Data/synthetic_vertical_epochs_1b_linear_14d_synthsigma.json",
+    "vertical_epoch_json_without_enhanced_sigma": "Data/synthetic_vertical_epochs_1b_linear_14d.json",
+    "bowl_outlines_geojson": "Data/synthetic_bowl_outlines_wgs84.geojson",
+    "contours_geojson": "Data/synthetic_contours_wgs84.geojson"
+  },
+  "generated_outputs": {
+    "rum_footprints": "Data/synthetic_rum_footprints.json",
+    "packed_series": "Data/synthetic_packed_series.json",
+    "blank_cells": "Data/synthetic_blank_cells.json",
+    "height_texture": "Data/tiles/height_texture.png",
+    "height_meta": "Data/tiles/height_meta.json",
+    "epoch_axis": "Data/tiles/epoch_axis.json",
+    "horizontal_field": "Data/horizontal_field.json",
+    "real_caps_tileset": "Data/tiles/tileset.json",
+    "blank_caps_tileset": "Data/tiles_blank/tileset.json",
+    "real_walls_tileset": "Data/tiles_walls_real/tileset.json",
+    "blank_walls_tileset": "Data/tiles_walls_blank/tileset.json"
+  },
+  "expected_counts": {
+    "rum_count": null,
+    "epoch_count": 288,
+    "grid_spacing_m_nominal": 450.0
+  },
+  "bbox_check": {
+    "enabled": true,
+    "lon_min": 107.45,
+    "lon_max": 107.82,
+    "lat_min": -6.02,
+    "lat_max": -5.75
+  },
+  "epoch_generation": {
+    "synthetic_bowl_test_is_velocity_only": true,
+    "default_start_date": "2014-01-01",
+    "default_end_date": "2025-01-01",
+    "default_interval_days": 14,
+    "default_interval_months_debug": 3,
+    "main_epoch_product": "1b_linear_14d",
+    "enhanced_sigma_product": "1b_linear_14d_synthsigma",
+    "notes": [
+      "source data (csv) file is synthetic, epoch (is also) velocity based synthetic data",
+      "260426_generate_synthetic_epochs.py creates synthetic vertical_mm and initial sigma_mm.",
+      "synth_sigma.py modifies sigma_mm only and keeps vertical_mm unchanged."
+    ]
+  },
+  "height_texture": {
+    "v_min_mm": -1500.0,
+    "v_max_mm": 1500.0,
+    "packing": "uint16_rg8_plus_sigma_b8",
+    "channels": {
+      "R": "displacement high byte",
+      "G": "displacement low byte",
+      "B": "sigma_mm normalized"
+    }
+  },
+  "viewer": {
+    "main_viewer": "viewer_4d.html",
+    "title": "Synthetic Bowl Test 4D — RUM Viewer",
+    "camera_center_lon": 107.635,
+    "camera_center_lat": -5.885,
+    "camera_2d_height_m": 65000.0,
+    "camera_reset_height_m": 90000.0,
+    "camera_2d_global_opacity": 0.70,
+    "camera_3d_global_opacity": 1.00,
+    "display_datum_height_m": 1000.0,
+    "wall_base_height_m": 999.0,
+    "vertical_exaggeration_m_per_mm": 5.0
+  },
+  "transfer_test": {
+    "future_dataset": "NA",
+    "raw_source_dir_rule": "Data/1_OG",
+    "allowed_first_changes": [
+      "config values",
+      "input file mapping",
+      "CRS mapping if needed",
+      "epoch preparation mode"
+    ],
+    "not_allowed_first_changes": [
+      "viewer logic rewrite",
+      "manual NA-specific hacks",
+      "opening NA before Synthetic Bowl Test template freeze"
+    ]
+  }
+}

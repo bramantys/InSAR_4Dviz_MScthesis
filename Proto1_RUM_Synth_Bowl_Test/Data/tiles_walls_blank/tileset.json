@@ -1,0 +1,22 @@
+{
+  "asset": {
+    "version": "1.0",
+    "generator": "empty-placeholder-for-no-blank-cells"
+  },
+  "geometricError": 0,
+  "root": {
+    "boundingVolume": {
+      "region": [
+        1.877447414213655,
+        -0.10742044389349181,
+        1.883376567103978,
+        -0.10202391667064711,
+        -1000.0,
+        10000.0
+      ]
+    },
+    "geometricError": 0,
+    "refine": "ADD",
+    "children": []
+  }
+}
