@@ -1,0 +1,1041 @@
+  SUMMARY
+======================================================================
+  [OK]   Step 01 complete — source table converted to WGS84 GeoJSON
+  [OK]   Next template step: 02_prepare_vertical_epochs_from_velocity.py
+
+Step 02 - Prepare vertical epochs from velocity
+
+======================================================================
+  Configuration
+======================================================================
+  Project root       : D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\4.3.1.V1_Synth_Bowl_Test
+  Points GeoJSON     : D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\4.3.1.V1_Synth_Bowl_Test\Data\synthetic_points_wgs84_with_rumid.geojson
+  Main output        : D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\4.3.1.V1_Synth_Bowl_Test\Data\synthetic_vertical_epochs_1b_linear_14d.json
+  Sparse debug output: D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\4.3.1.V1_Synth_Bowl_Test\Data\synthetic_vertical_epochs_1a_linear_3mo.json
+  Dataset ID         : synth_bowl
+  Up field           : up
+  Var-up field       : var_up
+  Date range         : 2014-01-01 → 2025-01-01
+  Main interval      : 14 days
+  Sparse interval    : 3 months
+  Noise fraction     : 0.1
+
+======================================================================
+  Loading points GeoJSON
+======================================================================
+  [OK]   Loaded features: 4364
+  [OK]   All features have numeric 'up'
+  [OK]   All features have numeric 'var_up'
+
+======================================================================
+  Building epoch axes
+======================================================================
+  [OK]   Main dense epochs : 288 (2014-01-01 → 2025-01-01)
+  [OK]   Sparse debug epochs: 45 (2014-01-01 → 2025-01-01)
+
+======================================================================
+  Generating main dense linear epoch product
+======================================================================
+  [OK]   Written: D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\4.3.1.V1_Synth_Bowl_Test\Data\synthetic_vertical_epochs_1b_linear_14d.json (19.22 MB)
+  [OK]   RUMs: 4364, epochs: 288
+
+======================================================================
+  Generating optional sparse debug epoch product
+======================================================================
+  [OK]   Written: D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\4.3.1.V1_Synth_Bowl_Test\Data\synthetic_vertical_epochs_1a_linear_3mo.json (3.32 MB)
+  [OK]   RUMs: 4364, epochs: 45
+
+======================================================================
+  Spot check
+======================================================================
+  RUM_1650000_820000       up=  -5.000 mm/yr  v0=   0.000 mm  vLast= -54.965 mm  sLast=   1.540 mm
+  RUM_1650450_820000       up=  -5.000 mm/yr  v0=   0.000 mm  vLast= -55.401 mm  sLast=   1.540 mm
+  RUM_1650900_820000       up=  -5.000 mm/yr  v0=   0.000 mm  vLast= -54.887 mm  sLast=   1.540 mm
+  RUM_1651350_820000       up=  -5.000 mm/yr  v0=   0.000 mm  vLast= -55.200 mm  sLast=   1.540 mm
+  RUM_1651800_820000       up=  -5.000 mm/yr  v0=   0.000 mm  vLast= -54.970 mm  sLast=   1.540 mm
+
+======================================================================
+  SUMMARY
+======================================================================
+  [OK]   Step 02 complete — velocity-based product converted to synthetic vertical epochs
+  [OK]   Next template step: patch/run 03_build_footprints.py
+
+Step 03 - Build corrected RUM footprints
+
+======================================================================
+  Configuration
+======================================================================
+  Project root      : D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\4.3.1.V1_Synth_Bowl_Test
+  Points GeoJSON    : D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\4.3.1.V1_Synth_Bowl_Test\Data\synthetic_points_wgs84_with_rumid.geojson
+  Epoch JSON        : D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\4.3.1.V1_Synth_Bowl_Test\Data\synthetic_vertical_epochs_1b_linear_14d.json
+  Output footprints : D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\4.3.1.V1_Synth_Bowl_Test\Data\synthetic_rum_footprints.json
+  Nominal spacing   : 450.000 m
+
+======================================================================
+  Loading inputs
+======================================================================
+  [OK]   Loaded point features: 4364
+  [OK]   Loaded epoch series: 4364 RUMs
+
+======================================================================
+  Extracting valid RUM centers
+======================================================================
+  [OK]   Valid RUM centers: 4364
+
+======================================================================
+  Building shared ENU frame
+======================================================================
+  [OK]   Centroid lon=107.641193, lat=-5.882139
+
+======================================================================
+  Converting centers to local ENU
+======================================================================
+  [OK]   Converted 4364 centers in 0.02s
+
+======================================================================
+  Inferring RUM grid model
+======================================================================
+  [OK]   Grid axis angle      : 1.370991°
+  [OK]   Nearest-neighbor dist: 438.300 m
+  [OK]   Spacing U            : 438.307 m
+  [OK]   Spacing V            : 438.303 m
+  [OK]   Offset U             : 182.998 m
+  [OK]   Offset V             : 4.591 m
+  [OK]   Inference time       : 9.84s
+  [OK]   Spacing U close to nominal (11.69 m difference)
+  [OK]   Spacing V close to nominal (11.70 m difference)
+
+======================================================================
+  Computing grid-aligned footprints
+======================================================================
+  [OK]   Computed footprints: 4364 in 0.22s
+  [OK]   Zero grid collisions
+
+======================================================================
+  Geometry spot check
+======================================================================
+  [OK] RUM_1650000_820000       grid=(-40,-27) diag=621.99 m expected=619.86 m diff=2.14 m
+  [OK] RUM_1650000_820450       grid=(-40,-26) diag=621.99 m expected=619.86 m diff=2.14 m
+  [OK] RUM_1650000_820900       grid=(-40,-25) diag=621.99 m expected=619.86 m diff=2.14 m
+  [OK] RUM_1650000_821350       grid=(-40,-24) diag=621.99 m expected=619.86 m diff=2.14 m
+  [OK] RUM_1650000_821800       grid=(-40,-23) diag=621.99 m expected=619.86 m diff=2.14 m
+
+======================================================================
+  Coverage bounding box
+======================================================================
+  Center lon: 107.482019 → 107.799732
+  Center lat: -5.992882 → -5.771423
+  Corner lon: 107.480014 → 107.801777
+  Corner lat: -5.994840 → -5.769327
+
+======================================================================
+  Writing output
+======================================================================
+  [OK]   Written: D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\4.3.1.V1_Synth_Bowl_Test\Data\synthetic_rum_footprints.json (1.36 MB)
+
+======================================================================
+  SUMMARY
+======================================================================
+  [OK]   Step 03 complete — corrected RUM footprints created
+  [OK]   Next template step: 04_enhance_vertical_sigma_optional.py
+
+Step 04 - Enhance vertical sigma optional
+
+======================================================================
+  Configuration
+======================================================================
+  Project root         : D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\4.3.1.V1_Synth_Bowl_Test
+  Input epoch JSON     : D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\4.3.1.V1_Synth_Bowl_Test\Data\synthetic_vertical_epochs_1b_linear_14d.json
+  Footprints           : D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\4.3.1.V1_Synth_Bowl_Test\Data\synthetic_rum_footprints.json
+  Output epoch JSON    : D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\4.3.1.V1_Synth_Bowl_Test\Data\synthetic_vertical_epochs_1b_linear_14d_synthsigma.json
+  Dataset              : synth_bowl
+  Base sigma interior  : 0.25 mm
+  Base sigma edge      : 3.5 mm
+  Base sigma isolated  : 7.0 mm
+  Time growth          : 2.0
+  Seasonal amplitude   : 0.4
+  Seasonal peak month  : 1
+  Spike epochs count   : 3
+
+======================================================================
+  Loading inputs
+======================================================================
+  [OK]   Loaded epoch data: 4364 RUMs × 288 epochs
+  [OK]   Loaded footprints: 4364 RUMs/cells
+
+======================================================================
+  Classifying RUMs by grid topology
+======================================================================
+  [OK]   Interior :  4082 RUMs ( 93.5%)
+  [OK]   Edge     :   282 RUMs (  6.5%)
+  [OK]   Isolated :     0 RUMs (  0.0%)
+
+======================================================================
+  Selecting global uncertainty spike epochs
+======================================================================
+  Spike at epoch  82: 2017-02-22
+  Spike at epoch 110: 2018-03-21
+  Spike at epoch 195: 2021-06-23
+
+======================================================================
+  Synthesizing sigma_mm
+======================================================================
+  [OK]   Synthesized sigma for 4364 RUMs in 4.25s
+
+======================================================================
+  Sigma distribution
+======================================================================
+  Min    :   0.1586 mm
+  P10    :   0.2997 mm
+  Median :   0.4587 mm
+  P90    :   2.8673 mm
+  Max    :  11.4360 mm
+
+======================================================================
+  SNR distribution
+======================================================================
+  SNR <0.5  :   0.6%  
+  SNR 0.5-1 :   0.7%  
+  SNR 1-3   :   2.6%  
+  SNR >3    :  96.1%  #################################
+  [OK]   96.1% high-SNR observations; most of the map remains visually reliable
+
+======================================================================
+  Writing output
+======================================================================
+  [OK]   Written: D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\4.3.1.V1_Synth_Bowl_Test\Data\synthetic_vertical_epochs_1b_linear_14d_synthsigma.json (19.43 MB)
+
+======================================================================
+  SUMMARY
+======================================================================
+  [OK]   Step 04 complete — enhanced sigma epoch JSON created
+  [OK]   vertical_mm unchanged; sigma_mm replaced/enhanced
+  [OK]   Next template step: 05_validate_prepared_inputs.py
+  Elapsed: 7.77s
+
+Step 05 - Validate prepared inputs
+
+======================================================================
+  Configuration
+======================================================================
+  Project root     : D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\4.3.1.V1_Synth_Bowl_Test
+  Points GeoJSON   : D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\4.3.1.V1_Synth_Bowl_Test\Data\synthetic_points_wgs84_with_rumid.geojson
+  Epoch JSON       : D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\4.3.1.V1_Synth_Bowl_Test\Data\synthetic_vertical_epochs_1b_linear_14d_synthsigma.json
+  Footprints JSON  : D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\4.3.1.V1_Synth_Bowl_Test\Data\synthetic_rum_footprints.json
+  Expected RUMs    : 4364
+  Expected epochs  : 288
+  Expected spacing : 450.000 m ± 67.500 m
+
+======================================================================
+  1. File existence
+======================================================================
+  [OK]   D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\4.3.1.V1_Synth_Bowl_Test\Data\synthetic_points_wgs84_with_rumid.geojson (1.77 MB)
+  [OK]   D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\4.3.1.V1_Synth_Bowl_Test\Data\synthetic_vertical_epochs_1b_linear_14d_synthsigma.json (19.43 MB)
+  [OK]   D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\4.3.1.V1_Synth_Bowl_Test\Data\synthetic_rum_footprints.json (1.36 MB)
+
+======================================================================
+  2. Loading files
+======================================================================
+  [OK]   GeoJSON features : 4364
+  [OK]   Epoch count      : 288
+  [OK]   Epoch series RUMs: 4364
+  [OK]   Footprints       : 4364
+
+======================================================================
+  3. Count checks
+======================================================================
+  [OK]   GeoJSON features: 4364
+  [OK]   Epoch series RUMs: 4364
+  [OK]   Footprints: 4364
+  [OK]   Epoch count: 288
+  [OK]   epoch_unix length matches epochs
+
+======================================================================
+  4. RUM ID matching
+======================================================================
+  [OK]   All GeoJSON features have rum_id
+  [OK]   Matched across all three inputs: 4364
+  [OK]   GeoJSON only vs epoch: 0
+  [OK]   Epoch only vs GeoJSON: 0
+  [OK]   GeoJSON only vs footprints: 0
+  [OK]   Footprints only vs GeoJSON: 0
+  [OK]   Epoch only vs footprints: 0
+  [OK]   Footprints only vs epoch: 0
+
+======================================================================
+  5. Coordinate range
+======================================================================
+  Lon range: 107.482019 → 107.799732
+  Lat range: -5.992882 → -5.771423
+  Config bbox: lon 107.45 → 107.82, lat -6.02 → -5.75
+  [OK]   All point coordinates inside configured bbox
+
+======================================================================
+  6. Grid spacing / topology sanity
+======================================================================
+  [OK]   grid_i range: -40 → 39
+  [OK]   grid_j range: -27 → 27
+  [OK]   No duplicate grid cells in footprints
+  Median footprint diagonal: 622.003 m
+  Nominal expected diagonal: 636.396 m
+  [OK]   Footprint diagonal close to nominal spacing
+  Inferred grid spacing U/V: 438.307 / 438.303 m
+  Inferred grid axis angle : 1.370991°
+
+======================================================================
+  7. Epoch value and sigma sanity
+======================================================================
+  [OK]   All checked RUM series lengths match epoch count
+  RUM_1650000_820000       n=288 v=[  -54.96,    0.00] mm s=[   3.208,  10.947] mm up=  -5.000 mm/yr
+  RUM_1650000_820450       n=288 v=[  -55.19,    0.00] mm s=[   3.178,  10.677] mm up=  -5.000 mm/yr
+  RUM_1650000_820900       n=288 v=[  -55.14,    0.00] mm s=[   2.631,   9.921] mm up=  -5.000 mm/yr
+  RUM_1650000_821350       n=288 v=[  -55.10,    0.00] mm s=[   3.339,  10.935] mm up=  -5.000 mm/yr
+  RUM_1650000_821800       n=288 v=[  -55.11,    0.00] mm s=[   3.325,  11.034] mm up=  -5.000 mm/yr
+  epoch0 vertical        min=    0.0000 p05=    0.0000 med=    0.0000 mean=    0.0000 p95=    0.0000 max=    0.0000 mm
+  last vertical          min= -406.2074 p05= -156.6715 med=  -55.1180 mean=  -74.8716 p95=  -22.1587 max=  -21.5560 mm
+  sigma sampled          min=    0.1628 p05=    0.2510 med=    0.4650 mean=    1.1782 p95=    5.1195 max=    9.7986 mm
+  [OK]   Epoch 0 displacement is zero for all RUMs
+
+======================================================================
+  8. Footprint geometry sanity
+======================================================================
+  [OK]   All footprints have center coordinates
+  [OK]   All footprints have 4 valid corners
+
+======================================================================
+  SUMMARY
+======================================================================
+  [OK]   ALL VALIDATION CHECKS PASSED — ready for Step 06 pack vertical series
+
+Step 06 - Pack vertical series
+
+======================================================================
+  Configuration
+======================================================================
+  Project root       : D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\4.3.1.V1_Synth_Bowl_Test
+  Epoch JSON         : D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\4.3.1.V1_Synth_Bowl_Test\Data\synthetic_vertical_epochs_1b_linear_14d_synthsigma.json
+  Packed output      : D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\4.3.1.V1_Synth_Bowl_Test\Data\synthetic_packed_series.json
+  Vertical decimals  : 2
+  Sigma decimals     : 3
+
+======================================================================
+  Loading epoch JSON
+======================================================================
+  [OK]   Loaded 4364 RUMs × 288 epochs
+
+======================================================================
+  Checking / building epoch time axis
+======================================================================
+  [OK]   Using epoch_decimal_year from source
+  [OK]   Using epoch_unix from source
+  First epoch: 2014-01-01  dec=2014.00000000  unix=1388534400
+  Last epoch : 2025-01-01  dec=2025.00000000  unix=1735689600
+  First spacings average: 14.000 days
+
+======================================================================
+  Packing vertical and sigma time series
+======================================================================
+  [OK]   Packed 4364 RUMs in 1.31s
+
+======================================================================
+  Round-trip verification
+======================================================================
+  RUM_1650000_820000       max vertical rounding error = 0.005000 mm
+  RUM_1650000_820450       max vertical rounding error = 0.005000 mm
+  RUM_1650000_820900       max vertical rounding error = 0.005000 mm
+  RUM_1650000_821350       max vertical rounding error = 0.005000 mm
+  RUM_1650000_821800       max vertical rounding error = 0.005000 mm
+  [OK]   Round-trip error within tolerance (0.006000 mm)
+
+======================================================================
+  Size estimate
+======================================================================
+  Sample vertical string length: 1961 chars
+  Sample sigma string length   : 1732 chars
+  Estimated packed text size   : 16.12 MB
+
+======================================================================
+  Writing output
+======================================================================
+  [OK]   Written: D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\4.3.1.V1_Synth_Bowl_Test\Data\synthetic_packed_series.json (15.77 MB)
+
+======================================================================
+  SUMMARY
+======================================================================
+  [OK]   Step 06 complete — vertical/sigma series packed
+  [OK]   Next template step: 08_build_tile_index.py
+  Elapsed: 1.95s
+
+Step 08 - Build tile index
+
+======================================================================
+  Configuration
+======================================================================
+  Project root         : D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\4.3.1.V1_Synth_Bowl_Test
+  Footprints           : D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\4.3.1.V1_Synth_Bowl_Test\Data\synthetic_rum_footprints.json
+  Tiles dir            : D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\4.3.1.V1_Synth_Bowl_Test\Data\tiles
+  Tileset output       : D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\4.3.1.V1_Synth_Bowl_Test\Data\tiles\tileset.json
+  Assignments output   : D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\4.3.1.V1_Synth_Bowl_Test\Data\tiles\tile_assignments.json
+  Tile grid            : 8 × 6
+  Height bounds        : -1000.0 → 10000.0 m
+
+======================================================================
+  Loading footprints
+======================================================================
+  [OK]   Loaded footprints: 4364
+  Footprint bbox lon: 107.480014 → 107.801777
+  Footprint bbox lat: -5.994840 → -5.769327
+  Reference latitude: -5.882084
+  [OK]   Using half-cell size for tightened bboxes: 225.000 m
+
+======================================================================
+  Building 8 × 6 tile grid
+======================================================================
+
+======================================================================
+  Assigning RUMs to tiles
+======================================================================
+  [OK]   Assigned 4364 RUMs to 48 active tiles in 0.01s
+  [OK]   Empty tiles: 0
+  RUMs per tile: min=78, median=91, max=103
+
+======================================================================
+  Tightening tile bounding boxes
+======================================================================
+  [OK]   Tile bounding boxes built
+
+======================================================================
+  Building tileset.json
+======================================================================
+  [OK]   tileset.json contains 1 root + 48 children
+
+======================================================================
+  Writing outputs
+======================================================================
+  [OK]   Written tileset    : D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\4.3.1.V1_Synth_Bowl_Test\Data\tiles\tileset.json (24.3 KB)
+  [OK]   Written assignments: D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\4.3.1.V1_Synth_Bowl_Test\Data\tiles\tile_assignments.json (98.6 KB)
+
+======================================================================
+  SUMMARY
+======================================================================
+  [OK]   Step 08 complete — tile index and tileset manifest created
+  [OK]   Next template step: 09_export_epoch_axis.py
+  Elapsed: 0.06s
+
+Step 09 - Export epoch axis
+
+======================================================================
+  Configuration
+======================================================================
+  Project root  : D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\4.3.1.V1_Synth_Bowl_Test
+  Packed series : D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\4.3.1.V1_Synth_Bowl_Test\Data\synthetic_packed_series.json
+  Output axis   : D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\4.3.1.V1_Synth_Bowl_Test\Data\tiles\epoch_axis.json
+
+======================================================================
+  Loading packed series
+======================================================================
+  [OK]   Loaded epoch axis: 288 epochs
+  First epoch: 2014-01-01
+  Last epoch : 2025-01-01
+
+======================================================================
+  Writing epoch axis
+======================================================================
+  [OK]   Written: D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\4.3.1.V1_Synth_Bowl_Test\Data\tiles\epoch_axis.json (11.5 KB)
+
+======================================================================
+  SUMMARY
+======================================================================
+  [OK]   Step 09 complete — viewer epoch axis exported
+  [OK]   Next template step: 10_build_blank_cells.py
+  Elapsed: 0.05s
+
+Step 10 - Build blank cells
+
+======================================================================
+  Configuration
+======================================================================
+  Project root       : D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\4.3.1.V1_Synth_Bowl_Test
+  Footprints         : D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\4.3.1.V1_Synth_Bowl_Test\Data\synthetic_rum_footprints.json
+  Packed series      : D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\4.3.1.V1_Synth_Bowl_Test\Data\synthetic_packed_series.json
+  Blank output       : D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\4.3.1.V1_Synth_Bowl_Test\Data\synthetic_blank_cells.json
+  Fill by row spans  : True
+  Fill by col spans  : True
+  Max fill passes    : 25
+  Fallback to zero   : True
+
+======================================================================
+  Loading inputs
+======================================================================
+  [OK]   Loaded real footprints: 4364
+  [OK]   Loaded packed series  : 4364 RUMs × 288 epochs
+
+======================================================================
+  Rebuilding ENU frame from real centers
+======================================================================
+  [OK]   Centroid lon=107.641193, lat=-5.882139
+  [OK]   Grid axis=1.370991°, spacing=(438.307, 438.303) m
+
+======================================================================
+  Detecting missing interior cells
+======================================================================
+  [OK]   Real cells : 4364
+  [OK]   Blank cells: 36
+
+======================================================================
+  Loading real vertical time series
+======================================================================
+  [OK]   Loaded real cell series: 4364
+
+======================================================================
+  Interpolating blank vertical time series
+======================================================================
+  Pass 01: filled 20 blanks (20/36)
+  Pass 02: filled 12 blanks (32/36)
+  Pass 03: filled 4 blanks (36/36)
+  [OK]   Interpolated 36 blank series in 0.13s
+
+======================================================================
+  Computing blank footprints
+======================================================================
+  Blank vertical range: -120.550 → 0.000 mm
+  [OK]   Computed blank cells: 36
+
+======================================================================
+  Writing output
+======================================================================
+  [OK]   Written: D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\4.3.1.V1_Synth_Bowl_Test\Data\synthetic_blank_cells.json (0.09 MB)
+
+======================================================================
+  SUMMARY
+======================================================================
+  [OK]   Step 10 complete — blank cells generated
+  [OK]   Next template step: 11_build_height_texture.py
+  Elapsed: 0.52s
+
+Step 11 - Build height texture
+
+======================================================================
+  Configuration
+======================================================================
+  Project root        : D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\4.3.1.V1_Synth_Bowl_Test
+  Packed series       : D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\4.3.1.V1_Synth_Bowl_Test\Data\synthetic_packed_series.json
+  Tile assignments    : D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\4.3.1.V1_Synth_Bowl_Test\Data\tiles\tile_assignments.json
+  Blank cells         : D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\4.3.1.V1_Synth_Bowl_Test\Data\synthetic_blank_cells.json
+  Output PNG          : D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\4.3.1.V1_Synth_Bowl_Test\Data\tiles\height_texture.png
+  Output meta         : D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\4.3.1.V1_Synth_Bowl_Test\Data\tiles\height_meta.json
+  Displacement range  : -1500.0 → 1500.0 mm
+  Include blank cells : True
+
+======================================================================
+  Loading packed real RUM series
+======================================================================
+  [OK]   Loaded real RUMs: 4364 × 288 epochs
+
+======================================================================
+  Building stable real RUM row order
+======================================================================
+  [OK]   Real RUM rows: 4364
+  First real RUM: RUM_1650000_820000 row=0
+  Last real RUM : RUM_1685550_844300 row=4363
+
+======================================================================
+  Loading blank cells
+======================================================================
+  [OK]   Blank rows: 36
+  First blank: BLANK_-13_-1
+  Last blank : BLANK_-8_4
+  [OK]   Total texture rows: 4400 (4364 real + 36 blank)
+
+======================================================================
+  Building displacement + sigma matrices (4400 × 288)
+======================================================================
+  [OK]   Matrices built in 0.48s
+  Actual displacement range: -406.210 → 0.000 mm
+  Normalization range      : -1500.000 → 1500.000 mm
+  [OK]   Epoch 0 is exactly 0 mm for all texture rows
+  Real sigma range: 0.1590 → 11.4360 mm
+  Real sigma P50/P90/P95: 0.4590 / 2.8670 / 4.9260 mm
+  SNR class distribution over real RUM observations:
+    SNR ≥ 3                 no hatch    :  96.1%
+    1 ≤ SNR < 3           thin hatch  :   2.6%
+    SNR < 1                 thick hatch :   1.3%
+
+======================================================================
+  Normalizing and RGB-packing
+======================================================================
+  [OK]   RG-packed displacement precision: 0.045777 mm/step
+  [OK]   B-packed sigma precision        : 0.044224 mm/step
+  [OK]   Matrix shape                    : (4400, 288, 3)
+
+======================================================================
+  Writing RGB PNG
+======================================================================
+  [OK]   Written PNG: D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\4.3.1.V1_Synth_Bowl_Test\Data\tiles\height_texture.png (2239.9 KB)
+  [OK]   Dimensions : 288px wide × 4400px tall × RGB
+
+======================================================================
+  Writing metadata
+======================================================================
+  [OK]   Written metadata: D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\4.3.1.V1_Synth_Bowl_Test\Data\tiles\height_meta.json (526.2 KB)
+
+======================================================================
+  Round-trip verification
+======================================================================
+  [OK] RUM_1650000_820000       row=    0 disp= -27.4400→ -27.4434 mm err=0.00335 R=125 G=168; sigma=5.0310→5.0236 mm B=110
+  [OK] RUM_1650450_820000       row=    1 disp= -27.5300→ -27.5349 mm err=0.00490 R=125 G=166; sigma=4.5850→4.5814 mm B=100
+  [OK] BLANK_-13_-1             row= 4364 disp= -53.1050→ -53.1243 mm err=0.01929 R=123 G=119; sigma=blank/unused
+  [OK] BLANK_-12_-1             row= 4365 disp= -57.7800→ -57.7935 mm err=0.01355 R=123 G=17; sigma=blank/unused
+
+======================================================================
+  SUMMARY
+======================================================================
+  [OK]   Step 11 complete — height texture generated: 288 × 4400 pixels
+  [OK]   Rows: 4364 real RUMs + 36 blank cells
+  [OK]   Next template step: 12_build_real_caps_b3dm.py
+  Elapsed: 0.88s
+
+Step 12 - Build real RUM caps B3DM
+
+======================================================================
+  Configuration
+======================================================================
+  Project root       : D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\4.3.1.V1_Synth_Bowl_Test
+  Footprints         : D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\4.3.1.V1_Synth_Bowl_Test\Data\synthetic_rum_footprints.json
+  Packed series      : D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\4.3.1.V1_Synth_Bowl_Test\Data\synthetic_packed_series.json
+  Tile assignments   : D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\4.3.1.V1_Synth_Bowl_Test\Data\tiles\tile_assignments.json
+  Height meta        : D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\4.3.1.V1_Synth_Bowl_Test\Data\tiles\height_meta.json
+  Tiles dir          : D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\4.3.1.V1_Synth_Bowl_Test\Data\tiles
+  Tileset            : D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\4.3.1.V1_Synth_Bowl_Test\Data\tiles\tileset.json
+  Geometry top height: 1.0 m
+
+======================================================================
+  Loading inputs
+======================================================================
+  [OK]   Footprints       : 4364 RUMs
+  [OK]   Packed series    : 4364 RUMs
+  [OK]   Tile assignments : 48 tiles
+  [OK]   Height meta rows : 4400
+  [OK]   Texture row fraction range for real RUMs: 0.000000 → 0.991816
+
+======================================================================
+  Writing 48 real cap .b3dm files
+======================================================================
+  [10/48] 1_3.b3dm   99 RUMs     19.0 KB (0.0s)
+  [20/48] 3_1.b3dm   94 RUMs     18.4 KB (0.0s)
+  [30/48] 4_5.b3dm   92 RUMs     17.9 KB (0.1s)
+  [40/48] 6_3.b3dm   97 RUMs     18.7 KB (0.1s)
+  [48/48] 7_5.b3dm   81 RUMs     16.0 KB (0.1s)
+
+======================================================================
+  Updating tileset.json
+======================================================================
+  [OK]   tileset.json updated/confirmed: content.uri uses .b3dm
+  [OK]   Tileset height bounds: -1000.0 → 10000.0 m
+
+======================================================================
+  SUMMARY
+======================================================================
+  [OK]   Step 12 complete — 48 real cap tiles written (0.83 MB)
+  [OK]   Next template step: 13_build_blank_caps_b3dm.py
+  Elapsed: 0.22s
+
+Step 13 - Build blank caps B3DM
+
+======================================================================
+  Configuration
+======================================================================
+  Project root       : D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\4.3.1.V1_Synth_Bowl_Test
+  Blank cells        : D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\4.3.1.V1_Synth_Bowl_Test\Data\synthetic_blank_cells.json
+  Height meta        : D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\4.3.1.V1_Synth_Bowl_Test\Data\tiles\height_meta.json
+  Main assignments   : D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\4.3.1.V1_Synth_Bowl_Test\Data\tiles\tile_assignments.json
+  Output dir         : D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\4.3.1.V1_Synth_Bowl_Test\Data\tiles_blank
+  Output tileset     : D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\4.3.1.V1_Synth_Bowl_Test\Data\tiles_blank\tileset.json
+  Output assignments : D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\4.3.1.V1_Synth_Bowl_Test\Data\tiles_blank\blank_tile_assignments.json
+  Tile grid          : 8 × 6
+  Geometry top height: 1.0 m
+
+======================================================================
+  Loading inputs
+======================================================================
+  [OK]   Blank cells : 36
+  [OK]   Blank index : 36
+  [OK]   n_rows      : 4400
+  [OK]   Tile grid   : 8 × 6
+
+======================================================================
+  Assigning blank cells to tile grid
+======================================================================
+  [OK]   Assigned 36 blank cells to 36 active blank tiles
+  Blank cells per tile: min=1, median=1, max=1
+
+======================================================================
+  Writing 36 blank cap .b3dm files
+======================================================================
+  [10/36] 1_3.b3dm       1 blanks      1.6 KB (0.0s)
+  [20/36] 4_1.b3dm       1 blanks      1.6 KB (0.0s)
+  [30/36] 6_5.b3dm       1 blanks      1.6 KB (0.0s)
+  [36/36] 7_5.b3dm       1 blanks      1.6 KB (0.0s)
+
+======================================================================
+  Writing blank tileset.json
+======================================================================
+  [OK]   Written tileset    : D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\4.3.1.V1_Synth_Bowl_Test\Data\tiles_blank\tileset.json (14.6 KB)
+  [OK]   Written assignments: D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\4.3.1.V1_Synth_Bowl_Test\Data\tiles_blank\blank_tile_assignments.json (7.6 KB)
+
+======================================================================
+  SUMMARY
+======================================================================
+  [OK]   Step 13 complete — 36 blank cap tiles written (0.06 MB)
+  [OK]   Next template step: 14_build_walls_b3dm.py
+  Elapsed: 0.04s
+
+Step 14 - Build walls B3DM
+
+======================================================================
+  Configuration
+======================================================================
+  Project root        : D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\4.3.1.V1_Synth_Bowl_Test
+  Real footprints     : D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\4.3.1.V1_Synth_Bowl_Test\Data\synthetic_rum_footprints.json
+  Blank cells         : D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\4.3.1.V1_Synth_Bowl_Test\Data\synthetic_blank_cells.json
+  Height meta         : D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\4.3.1.V1_Synth_Bowl_Test\Data\tiles\height_meta.json
+  Packed series       : D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\4.3.1.V1_Synth_Bowl_Test\Data\synthetic_packed_series.json
+  Main assignments    : D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\4.3.1.V1_Synth_Bowl_Test\Data\tiles\tile_assignments.json
+  Real walls output   : D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\4.3.1.V1_Synth_Bowl_Test\Data\tiles_walls_real
+  Blank walls output  : D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\4.3.1.V1_Synth_Bowl_Test\Data\tiles_walls_blank
+  Tile grid           : 8 × 6
+  Build north/east    : True / True
+  Build outer walls   : False
+
+======================================================================
+  Loading inputs
+======================================================================
+  [OK]   Real cells      : 4364
+  [OK]   Blank cells     : 36
+  [OK]   Height rows     : 4400
+  [OK]   Packed velocities: 4364 real RUMs
+  [OK]   Tile grid       : 8 × 6
+
+======================================================================
+  Building combined cell topology
+======================================================================
+  [OK]   Combined cells: 4400 (4364 real + 36 blank)
+
+======================================================================
+  Building and splitting height-difference walls
+======================================================================
+  [OK]   Real-real walls      : 8581
+  [OK]   Blank-related walls  : 84
+  [OK]   Total internal walls : 8665
+
+======================================================================
+  Writing layer: real_rum_walls
+======================================================================
+  [OK]   real_rum_walls: 8581 walls → 48 active tiles
+  Walls per tile: min=155, median=183, max=192
+  [10/48] 1_3.b3dm      183 walls     63.6 KB (0.1s)
+  [20/48] 3_1.b3dm      185 walls     65.9 KB (0.3s)
+  [30/48] 4_5.b3dm      177 walls     62.3 KB (0.4s)
+  [40/48] 6_3.b3dm      189 walls     65.9 KB (0.5s)
+  [48/48] 7_5.b3dm      171 walls     60.6 KB (0.6s)
+  [OK]   Written tileset    : D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\4.3.1.V1_Synth_Bowl_Test\Data\tiles_walls_real\tileset.json (19.3 KB)
+  [OK]   Written assignments: D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\4.3.1.V1_Synth_Bowl_Test\Data\tiles_walls_real\wall_tile_assignments.json (449.1 KB)
+
+======================================================================
+  Writing layer: blankie_walls
+======================================================================
+  [OK]   blankie_walls: 84 walls → 48 active tiles
+  Walls per tile: min=1, median=2, max=3
+  [10/48] 1_3.b3dm        1 walls      2.0 KB (0.0s)
+  [20/48] 3_1.b3dm        1 walls      2.0 KB (0.0s)
+  [30/48] 4_5.b3dm        1 walls      2.0 KB (0.0s)
+  [40/48] 6_3.b3dm        1 walls      2.0 KB (0.0s)
+  [48/48] 7_5.b3dm        3 walls      2.6 KB (0.0s)
+  [OK]   Written tileset    : D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\4.3.1.V1_Synth_Bowl_Test\Data\tiles_walls_blank\tileset.json (19.3 KB)
+  [OK]   Written assignments: D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\4.3.1.V1_Synth_Bowl_Test\Data\tiles_walls_blank\wall_tile_assignments.json (12.4 KB)
+
+======================================================================
+  SUMMARY
+======================================================================
+  [OK]   Real RUM wall layer: 8581 walls, 48 tiles, 2.95 MB
+  [OK]   Blankie wall layer : 84 walls, 48 tiles, 0.10 MB
+  [OK]   Step 14 complete — dynamic wall layers written
+  [OK]   Next template step: 16_build_horizontal_field.py
+  Elapsed: 0.82s
+
+Step 16 - Build horizontal field
+
+======================================================================
+  Configuration
+======================================================================
+  Project root     : D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\4.3.1.V1_Synth_Bowl_Test
+  Points GeoJSON   : D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\4.3.1.V1_Synth_Bowl_Test\Data\synthetic_points_wgs84_with_rumid.geojson
+  Footprints       : D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\4.3.1.V1_Synth_Bowl_Test\Data\synthetic_rum_footprints.json
+  Output field     : D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\4.3.1.V1_Synth_Bowl_Test\Data\horizontal_field.json
+  Velocity fields  : east=east, north=north, up=up
+  Covariance fields: var_east, var_north, covar_en
+  Coordinate fields: x=x_rum, y=y_rum
+
+======================================================================
+  Loading inputs
+======================================================================
+  [OK]   Loaded point features: 4364
+  [OK]   Loaded footprints    : 4364
+
+======================================================================
+  Indexing velocity source by rum_id
+======================================================================
+  [OK]   Velocity records indexed: 4364
+
+======================================================================
+  Covariance field availability in source
+======================================================================
+  var_east            :  4364/ 4364 numeric
+  [OK]   var_east complete
+  var_north           :  4364/ 4364 numeric
+  [OK]   var_north complete
+  covar_en            :  4364/ 4364 numeric
+  [OK]   covar_en complete
+
+======================================================================
+  Joining velocities to corrected RUM footprints
+======================================================================
+  [OK]   Joined cells: 4364
+
+======================================================================
+  Grid/domain metadata
+======================================================================
+  [OK]   grid_i range: -40 → 39
+  [OK]   grid_j range: -27 → 27
+  [OK]   bbox lon: 107.480014 → 107.801777
+  [OK]   bbox lat: -5.994840 → -5.769327
+  [OK]   No duplicate grid locations in horizontal field
+
+======================================================================
+  Velocity statistics
+======================================================================
+  east_mm_yr           min=  -15.000 p05=   -2.517 med=    2.500 mean=    3.301 p95=   15.000 p99=   15.000 max=   17.505  mm/yr
+  north_mm_yr          min=  -16.205 p05=   -4.878 med=   -1.200 mean=   -0.860 p95=    3.000 p99=    4.929 max=   13.805  mm/yr
+  speed_mm_yr          min=    0.277 p05=    2.431 med=    2.773 mean=    5.236 p95=   15.297 p99=   15.297 max=   18.571  mm/yr
+  up_mm_yr_ref         min=  -36.919 p05=  -14.247 med=   -5.000 mean=   -6.806 p95=   -2.000 p99=   -2.000 max=   -2.000  mm/yr
+
+======================================================================
+  Covariance validity quick check
+======================================================================
+  [OK]   Finite EN covariance records: 4364/4364
+  [OK]   No negative horizontal variances
+  [OK]   Horizontal covariance matrices PSD within tolerance
+
+======================================================================
+  Writing horizontal field
+======================================================================
+  [OK]   Written: D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\4.3.1.V1_Synth_Bowl_Test\Data\horizontal_field.json (1778.3 KB)
+
+======================================================================
+  SUMMARY
+======================================================================
+  [OK]   Step 16 complete — static horizontal field package created
+  [OK]   Next template step: 17_check_horizontal_field.py
+  Elapsed: 0.31s
+
+Step 17 - Check horizontal field
+
+======================================================================
+  Configuration
+======================================================================
+  Project root       : D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\4.3.1.V1_Synth_Bowl_Test
+  Horizontal field   : D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\4.3.1.V1_Synth_Bowl_Test\Data\horizontal_field.json
+  Debug vector output: D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\4.3.1.V1_Synth_Bowl_Test\Data\horizontal_debug_vectors.geojson
+  Max vector length  : 350.0 m
+  Debug grid stride  : 2
+  Include top speeds : 50
+
+======================================================================
+  Loading horizontal field
+======================================================================
+  [OK]   Cells loaded  : 4364
+  [OK]   Lookup entries: 4364
+  bbox: lon 107.480014 → 107.801777, lat -5.994840 → -5.769327
+
+======================================================================
+  Basic integrity checks
+======================================================================
+  [OK]   No duplicate RUM IDs
+  [OK]   No duplicate grid cells
+  [OK]   No bad numeric lon/lat/vector/speed values
+
+======================================================================
+  Grid occupancy
+======================================================================
+  grid_i: -40 → 39 (80 columns)
+  grid_j: -27 → 27 (55 rows)
+  bounding rectangle cells: 4400
+  valid RUM cells: 4364
+  occupancy: 99.2%
+  4-neighbor count distribution:
+    2 neighbors:    4 cells
+    3 neighbors:  286 cells
+    4 neighbors: 4074 cells
+  8-neighbor count distribution:
+    3 neighbors:    4 cells
+    5 neighbors:  278 cells
+    6 neighbors:    8 cells
+    7 neighbors:    4 cells
+    8 neighbors: 4070 cells
+
+======================================================================
+  Velocity statistics
+======================================================================
+  east               min=  -15.000 p01=  -15.000 p05=   -2.517 med=    2.500 mean=    3.301 p95=   15.000 p99=   15.000 max=   17.505 mm/yr
+  north              min=  -16.205 p01=   -8.857 p05=   -4.878 med=   -1.200 mean=   -0.860 p95=    3.000 p99=    4.929 max=   13.805 mm/yr
+  speed              min=    0.277 p01=    1.204 p05=    2.431 med=    2.773 mean=    5.236 p95=   15.297 p99=   15.297 max=   18.571 mm/yr
+  [OK]   Recommended first particle speed normalization: p95 = 15.297 mm/yr
+
+======================================================================
+  Horizontal covariance sanity
+======================================================================
+  [OK]   Finite covariance records: 4364/4364
+  [OK]   No negative horizontal variances
+  [OK]   Covariance matrices are positive semi-definite within tolerance
+
+======================================================================
+  Outlier vectors
+======================================================================
+  #01 RUM_1683750_824950       grid=(  35, -16) speed=  18.571 mm/yr east=   17.505 north=   -6.202 lon=107.782844 lat=-5.942083
+  #02 RUM_1683750_824500       grid=(  35, -17) speed=  17.913 mm/yr east=   17.505 north=    3.802 lon=107.782941 lat=-5.946043
+  #03 RUM_1684200_825400       grid=(  36, -15) speed=  17.857 mm/yr east=    7.502 north=  -16.205 lon=107.786702 lat=-5.938026
+  #04 RUM_1683750_825400       grid=(  35, -15) speed=  17.760 mm/yr east=   13.191 north=  -11.891 lon=107.782747 lat=-5.938123
+  #05 RUM_1684650_825400       grid=(  37, -15) speed=  16.397 mm/yr east=   -2.502 north=  -16.205 lon=107.790657 lat=-5.937929
+  #06 RUM_1683750_824050       grid=(  35, -18) speed=  16.251 mm/yr east=   13.191 north=    9.491 lon=107.783037 lat=-5.950003
+  #07 RUM_1684200_824050       grid=(  36, -18) speed=  15.711 mm/yr east=    7.502 north=   13.805 lon=107.786992 lat=-5.949906
+  #08 RUM_1661700_825400       grid=( -14, -15) speed=  15.535 mm/yr east=   14.232 north=   -6.228 lon=107.588872 lat=-5.942831
+  #09 RUM_1661700_825850       grid=( -14, -14) speed=  15.450 mm/yr east=   12.843 north=   -8.588 lon=107.588777 lat=-5.938868
+  #10 RUM_1668000_829450       grid=(   0,  -6) speed=  15.297 mm/yr east=   15.000 north=    3.000 lon=107.643423 lat=-5.905832
+  #11 RUM_1668000_829900       grid=(   0,  -5) speed=  15.297 mm/yr east=   15.000 north=    3.000 lon=107.643327 lat=-5.901870
+  #12 RUM_1668000_830350       grid=(   0,  -4) speed=  15.297 mm/yr east=   15.000 north=    3.000 lon=107.643232 lat=-5.897907
+
+======================================================================
+  Writing debug vector GeoJSON
+======================================================================
+  [OK]   Exported vector shafts: 1147
+  [OK]   GeoJSON features incl. arrowheads: 3441
+  [OK]   Written: D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\4.3.1.V1_Synth_Bowl_Test\Data\horizontal_debug_vectors.geojson (1007.8 KB)
+
+======================================================================
+  Interpretation
+======================================================================
+  Check debug vectors in GIS/Cesium if needed:
+    1. Vectors should point in plausible regional directions.
+    2. No obvious lon/lat flip or east/north swap.
+    3. Outlier vectors should be inspected, not automatically removed.
+    4. This debug arrow layer is NOT the final particle visualization.
+
+======================================================================
+  SUMMARY
+======================================================================
+  [OK]   Step 17 complete — horizontal field sanity check passed and debug vectors exported
+  [OK]   Next template step: 18_check_horizontal_uncertainty.py
+  Elapsed: 0.22s
+
+Step 18 - Check horizontal uncertainty
+
+======================================================================
+  Configuration
+======================================================================
+  Project root             : D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\4.3.1.V1_Synth_Bowl_Test
+  Horizontal field          : D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\4.3.1.V1_Synth_Bowl_Test\Data\horizontal_field.json
+  Output report             : D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\4.3.1.V1_Synth_Bowl_Test\Data\horizontal_uncertainty_check.json
+  Speed floor               : 0.500 mm/yr
+  Preferred shimmer strength: 0.50
+  Max recommended wobble    : 35.0°
+
+======================================================================
+  Loading horizontal field
+======================================================================
+  [OK]   Loaded cells: 4364
+
+======================================================================
+  Extracting velocity and covariance arrays
+======================================================================
+  [OK]   Finite velocity + EN covariance records: 4364/4364
+
+======================================================================
+  Covariance matrix validity
+======================================================================
+  [OK]   No negative variances
+  [OK]   All covariance matrices PSD within tolerance
+  determinant              n= 4364 min=    0.000 p25=    0.030 med=    0.067 p75=    1.486 p90=   14.517 p95=   82.031 max=   82.031 (mm/yr)^4
+  trace                    n= 4364 min=    0.014 p25=    0.355 med=    0.533 p75=    2.450 p90=    8.390 p95=   21.875 max=   21.875 (mm/yr)^2
+
+======================================================================
+  Sigma component distributions
+======================================================================
+  sigma_east               n= 4364 min=    0.080 p25=    0.350 med=    0.490 p75=    1.107 p90=    1.619 p95=    2.500 max=    2.500 mm/yr
+  sigma_north              n= 4364 min=    0.088 p25=    0.437 med=    0.534 p75=    1.107 p90=    2.402 p95=    3.953 max=    3.953 mm/yr
+  speed                    n= 4364 min=    0.277 p25=    2.773 med=    2.773 p75=    5.604 p90=   15.008 p95=   15.297 max=   18.571 mm/yr
+
+======================================================================
+  Principal uncertainty ellipse axes
+======================================================================
+  sigma_major              n= 4364 min=    0.089 p25=    0.457 med=    0.556 p75=    1.161 p90=    2.439 p95=    4.131 max=    4.131 mm/yr
+  sigma_minor              n= 4364 min=    0.079 p25=    0.350 med=    0.478 p75=    1.038 p90=    1.562 p95=    2.192 max=    2.192 mm/yr
+  major axis angle         n= 4364 min=   82.620 p25=   90.000 med=  110.070 p75=  112.589 p90=  135.000 p95=  135.000 max=  135.000 deg from east
+
+======================================================================
+  Direction uncertainty for particle shimmer
+======================================================================
+  sigma_theta              n= 4364 min=    0.538 p25=    3.218 med=   10.505 p75=   21.958 p90=   38.653 p95=   54.616 max=  334.489 deg
+  Cells below speed floor: 5/4364
+  Cells above 35.0° sigma_theta: 463/4364
+  [WARN] P95 sigma_theta = 54.62° > 35.0°
+
+======================================================================
+  Suggested viewer interpretation
+======================================================================
+  Mean particle path:
+    Keep unchanged: use east_mm_yr and north_mm_yr only.
+
+  Uncertainty channel:
+    Use covariance only for render-side shimmer/diffuseness.
+    Suggested default uncertainty shimmer strength: 0.50
+    Suggested speed floor for angle uncertainty: 0.50 mm/yr
+
+  Useful reference:
+    sigma_theta P75 ≈ 22.0°
+    sigma_theta P90 ≈ 38.7°
+    sigma_theta P95 ≈ 54.6°
+
+======================================================================
+  Outlier uncertainty cells
+======================================================================
+  #01 RUM_1684200_838900       grid=(  36,  15) speed=  0.277 mm/yr sigma_theta= 334.49° sigma_major=  4.131 sigma_minor=  2.192
+  #02 RUM_1684200_839350       grid=(  36,  16) speed=  0.763 mm/yr sigma_theta= 309.36° sigma_major=  4.131 sigma_minor=  2.192
+  #03 RUM_1681950_839800       grid=(  31,  17) speed=  1.183 mm/yr sigma_theta= 195.88° sigma_major=  4.131 sigma_minor=  2.192
+  #04 RUM_1682400_839800       grid=(  32,  17) speed=  1.209 mm/yr sigma_theta= 185.83° sigma_major=  4.131 sigma_minor=  2.192
+  #05 RUM_1655400_839350       grid=( -28,  16) speed=  0.512 mm/yr sigma_theta= 181.00° sigma_major=  1.648 sigma_minor=  1.055
+  #06 RUM_1683750_838000       grid=(  35,  13) speed=  1.305 mm/yr sigma_theta= 173.33° sigma_major=  4.131 sigma_minor=  2.192
+  #07 RUM_1683750_838450       grid=(  35,  14) speed=  0.835 mm/yr sigma_theta= 159.38° sigma_major=  4.131 sigma_minor=  2.192
+  #08 RUM_1684200_839800       grid=(  36,  17) speed=  1.462 mm/yr sigma_theta= 157.33° sigma_major=  4.131 sigma_minor=  2.192
+  #09 RUM_1655850_839350       grid=( -27,  16) speed=  0.411 mm/yr sigma_theta= 147.72° sigma_major=  1.633 sigma_minor=  1.046
+  #10 RUM_1655850_838900       grid=( -27,  15) speed=  0.680 mm/yr sigma_theta= 140.08° sigma_major=  1.666 sigma_minor=  1.067
+  #11 RUM_1684200_838450       grid=(  36,  14) speed=  1.505 mm/yr sigma_theta= 132.00° sigma_major=  4.131 sigma_minor=  2.192
+  #12 RUM_1682850_837550       grid=(  33,  12) speed=  1.818 mm/yr sigma_theta= 126.45° sigma_major=  4.131 sigma_minor=  2.192
+
+======================================================================
+  Writing report
+======================================================================
+  [OK]   Written: D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\4.3.1.V1_Synth_Bowl_Test\Data\horizontal_uncertainty_check.json (3.5 KB)
+
+======================================================================
+  SUMMARY
+======================================================================
+  [OK]   Step 18 complete — horizontal uncertainty diagnostics finished
+  [OK]   Template rebuild pipeline is now complete through vertical + horizontal products
+  Elapsed: 0.18s
+
+
+============================================================
+PIPELINE COMPLETE
+============================================================
+
+(base) PS D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\4.3.1.V1_Synth_Bowl_Test> 

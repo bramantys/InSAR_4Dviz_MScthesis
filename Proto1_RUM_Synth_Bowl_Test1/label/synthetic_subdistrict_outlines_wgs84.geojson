@@ -1,0 +1,3857 @@
+{
+  "type": "FeatureCollection",
+  "name": "synthbowl_subdistrict_outlines_local",
+  "crs": {
+    "type": "name",
+    "properties": {
+      "name": "LOCAL_SYNTHBOWL_METRIC_COORDINATES_FROM_SYNTHETIC_CSV"
+    }
+  },
+  "metadata": {
+    "source_files": [
+      "batch_A1_complete_district_576RUM.csv",
+      "batch_A2_complete_district_225RUM.csv",
+      "batch_A3_complete_district_225RUM.csv",
+      "batch_A4_complete_district_225RUM_REV1.csv",
+      "batch_A5_complete_district_225RUM.csv",
+      "batch_B1_complete_district_81RUM.csv",
+      "batch_B2_B3_complete_districts_162RUM_REV1_H1mm.csv",
+      "batch_B4_B5_B6_complete_districts.csv",
+      "batch_C1_complete_district_576RUM.csv",
+      "batch_C2_C3_complete_districts_1440RUM.csv",
+      "batch_D1_D2_complete_districts_392RUM.csv",
+      "batch_D3_E3_NC_complete_districts_784RUM.csv",
+      "batch_F1_F6_complete_districts_1176RUM_REV1_F4fixed.csv"
+    ],
+    "coordinate_note": "Coordinates are the synthetic CSV x_rum/y_rum metric coordinates expanded by half a RUM size. No WGS84 transform was applied.",
+    "feature_note": "One feature per district/subdistrict group. Bounding polygons are rectangular envelopes of RUM cells.",
+    "manual_patch_note": "B4/B5 background east sign was treated as manually corrected to southeast in notes/final compiled CSV; outlines are location-only and unaffected by velocity sign."
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "label": "A1",
+        "district_id": "A1",
+        "subdistrict": "-",
+        "type": "bowl",
+        "theme": "subsidence bowl + background field",
+        "test_goal": "Baseline bowl; background horizontal uncertainty repaired; background vertical remains 0.",
+        "rum_count": 576,
+        "grid_rows": 24,
+        "grid_cols": 24,
+        "rum_size_m": 450.0,
+        "center_x": 1665175.0,
+        "center_y": 830175.0,
+        "min_x": 1659775.0,
+        "max_x": 1670575.0,
+        "min_y": 824775.0,
+        "max_y": 835575.0,
+        "h_min_mm_yr": 0.0,
+        "h_median_mm_yr": 1.289323,
+        "h_max_mm_yr": 9.999533,
+        "up_min_mm_yr": -24.809856,
+        "up_median_mm_yr": 0.0,
+        "up_max_mm_yr": 0.0,
+        "sigma_e_median_mm_yr": 2.5,
+        "sigma_n_median_mm_yr": 3.75,
+        "sparse_rows": 0
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              107.57207175,
+              -5.94874431
+            ],
+            [
+              107.66705791,
+              -5.94644669
+            ],
+            [
+              107.66477417,
+              -5.85135987
+            ],
+            [
+              107.56980332,
+              -5.8536205
+            ],
+            [
+              107.57207175,
+              -5.94874431
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "label": "A2",
+        "district_id": "A2",
+        "subdistrict": "-",
+        "type": "bowl",
+        "theme": "subsidence bowl + background field",
+        "test_goal": "Symmetric bowl comparison; background H about 1 mm/yr; background uncertainty repaired; background up +1.5 visual aid.",
+        "rum_count": 225,
+        "grid_rows": 15,
+        "grid_cols": 15,
+        "rum_size_m": 450.0,
+        "center_x": 1673950.0,
+        "center_y": 832200.0,
+        "min_x": 1670575.0,
+        "max_x": 1677325.0,
+        "min_y": 828825.0,
+        "max_y": 835575.0,
+        "h_min_mm_yr": 0.0,
+        "h_median_mm_yr": 0.900254,
+        "h_max_mm_yr": 9.999527,
+        "up_min_mm_yr": -25.0,
+        "up_median_mm_yr": 1.5,
+        "up_max_mm_yr": 1.5,
+        "sigma_e_median_mm_yr": 2.5,
+        "sigma_n_median_mm_yr": 3.75,
+        "sparse_rows": 0
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              107.66619711,
+              -5.91078927
+            ],
+            [
+              107.72554085,
+              -5.90935413
+            ],
+            [
+              107.72411195,
+              -5.84993925
+            ],
+            [
+              107.66477417,
+              -5.85135987
+            ],
+            [
+              107.66619711,
+              -5.91078927
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "label": "A3",
+        "district_id": "A3",
+        "subdistrict": "-",
+        "type": "bowl",
+        "theme": "subsidence bowl + background field",
+        "test_goal": "Symmetric bowl; background H about 1 mm/yr; background uncertainty repaired; background up remains 0.",
+        "rum_count": 225,
+        "grid_rows": 15,
+        "grid_cols": 15,
+        "rum_size_m": 450.0,
+        "center_x": 1680700.0,
+        "center_y": 832200.0,
+        "min_x": 1677325.0,
+        "max_x": 1684075.0,
+        "min_y": 828825.0,
+        "max_y": 835575.0,
+        "h_min_mm_yr": 0.0,
+        "h_median_mm_yr": 0.900254,
+        "h_max_mm_yr": 17.999149,
+        "up_min_mm_yr": -45.0,
+        "up_median_mm_yr": 0.0,
+        "up_max_mm_yr": 0.0,
+        "sigma_e_median_mm_yr": 2.5,
+        "sigma_n_median_mm_yr": 3.75,
+        "sparse_rows": 0
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              107.72554085,
+              -5.90935413
+            ],
+            [
+              107.78486989,
+              -5.90791299
+            ],
+            [
+              107.78343504,
+              -5.8485127
+            ],
+            [
+              107.72411195,
+              -5.84993925
+            ],
+            [
+              107.72554085,
+              -5.90935413
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "label": "A4",
+        "district_id": "A4",
+        "subdistrict": "-",
+        "type": "bowl",
+        "theme": "subsidence bowl + background field",
+        "test_goal": "Bowl with high uncertainty; background up +1.5; inside-bowl horizontal uncertainty 1.5\u00d7 higher than high background.",
+        "rum_count": 225,
+        "grid_rows": 15,
+        "grid_cols": 15,
+        "rum_size_m": 450.0,
+        "center_x": 1687450.0,
+        "center_y": 832200.0,
+        "min_x": 1684075.0,
+        "max_x": 1690825.0,
+        "min_y": 828825.0,
+        "max_y": 835575.0,
+        "h_min_mm_yr": 0.0,
+        "h_median_mm_yr": 0.900254,
+        "h_max_mm_yr": 9.999527,
+        "up_min_mm_yr": -25.0,
+        "up_median_mm_yr": 1.5,
+        "up_max_mm_yr": 1.5,
+        "sigma_e_median_mm_yr": 2.5,
+        "sigma_n_median_mm_yr": 3.75,
+        "sparse_rows": 0
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              107.78486989,
+              -5.90791299
+            ],
+            [
+              107.84418417,
+              -5.90646588
+            ],
+            [
+              107.84274339,
+              -5.84708023
+            ],
+            [
+              107.78343504,
+              -5.8485127
+            ],
+            [
+              107.78486989,
+              -5.90791299
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "label": "A5",
+        "district_id": "A5",
+        "subdistrict": "-",
+        "type": "bowl",
+        "theme": "subsidence bowl + background field",
+        "test_goal": "Asymmetric horizontal bowl; background H about 1 mm/yr; low/confident inside-bowl uncertainty; background up remains 0.",
+        "rum_count": 225,
+        "grid_rows": 15,
+        "grid_cols": 15,
+        "rum_size_m": 450.0,
+        "center_x": 1694200.0,
+        "center_y": 832200.0,
+        "min_x": 1690825.0,
+        "max_x": 1697575.0,
+        "min_y": 828825.0,
+        "max_y": 835575.0,
+        "h_min_mm_yr": 0.0,
+        "h_median_mm_yr": 0.900254,
+        "h_max_mm_yr": 19.999054,
+        "up_min_mm_yr": -25.0,
+        "up_median_mm_yr": 0.0,
+        "up_max_mm_yr": 0.0,
+        "sigma_e_median_mm_yr": 2.5,
+        "sigma_n_median_mm_yr": 3.75,
+        "sparse_rows": 0
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              107.84418417,
+              -5.90646588
+            ],
+            [
+              107.90348363,
+              -5.90501278
+            ],
+            [
+              107.90203692,
+              -5.84564185
+            ],
+            [
+              107.84274339,
+              -5.84708023
+            ],
+            [
+              107.84418417,
+              -5.90646588
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "label": "B1",
+        "district_id": "B1",
+        "subdistrict": "-",
+        "type": "bowl",
+        "theme": "small/compact bowl + directed background field",
+        "test_goal": "B1 baseline: background H about 1 mm/yr, north-like original; background up 0.",
+        "rum_count": 81,
+        "grid_rows": 9,
+        "grid_cols": 9,
+        "rum_size_m": 450.0,
+        "center_x": 1672600.0,
+        "center_y": 826800.0,
+        "min_x": 1670575.0,
+        "max_x": 1674625.0,
+        "min_y": 824775.0,
+        "max_y": 828825.0,
+        "h_min_mm_yr": 0.0,
+        "h_median_mm_yr": 0.866051,
+        "h_max_mm_yr": 9.787839,
+        "up_min_mm_yr": -25.0,
+        "up_median_mm_yr": 0.0,
+        "up_max_mm_yr": 0.0,
+        "sigma_e_median_mm_yr": 2.5,
+        "sigma_n_median_mm_yr": 3.75,
+        "sparse_rows": 0
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              107.66705791,
+              -5.94644669
+            ],
+            [
+              107.70266807,
+              -5.94558109
+            ],
+            [
+              107.70180511,
+              -5.9099289
+            ],
+            [
+              107.66619711,
+              -5.91078927
+            ],
+            [
+              107.66705791,
+              -5.94644669
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "label": "B2",
+        "district_id": "B2",
+        "subdistrict": "-",
+        "type": "bowl",
+        "theme": "small/compact bowl + directed background field",
+        "test_goal": "Background H=1 mm/yr south, medium/high-style repaired uncertainty, up +1 visual aid.",
+        "rum_count": 81,
+        "grid_rows": 9,
+        "grid_cols": 9,
+        "rum_size_m": 450.0,
+        "center_x": 1676650.0,
+        "center_y": 826800.0,
+        "min_x": 1674625.0,
+        "max_x": 1678675.0,
+        "min_y": 824775.0,
+        "max_y": 828825.0,
+        "h_min_mm_yr": 0.0,
+        "h_median_mm_yr": 1.0,
+        "h_max_mm_yr": 9.787839,
+        "up_min_mm_yr": -25.0,
+        "up_median_mm_yr": 1.0,
+        "up_max_mm_yr": 1.0,
+        "sigma_e_median_mm_yr": 2.5,
+        "sigma_n_median_mm_yr": 3.75,
+        "sparse_rows": 0
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              107.70266807,
+              -5.94558109
+            ],
+            [
+              107.73827295,
+              -5.94471333
+            ],
+            [
+              107.73740783,
+              -5.90906638
+            ],
+            [
+              107.70180511,
+              -5.9099289
+            ],
+            [
+              107.70266807,
+              -5.94558109
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "label": "B3",
+        "district_id": "B3",
+        "subdistrict": "-",
+        "type": "bowl",
+        "theme": "small/compact bowl + directed background field",
+        "test_goal": "Background H=1 mm/yr southeast, medium/high-style repaired uncertainty, up 0.",
+        "rum_count": 81,
+        "grid_rows": 9,
+        "grid_cols": 9,
+        "rum_size_m": 450.0,
+        "center_x": 1680700.0,
+        "center_y": 826800.0,
+        "min_x": 1678675.0,
+        "max_x": 1682725.0,
+        "min_y": 824775.0,
+        "max_y": 828825.0,
+        "h_min_mm_yr": 0.0,
+        "h_median_mm_yr": 1.0,
+        "h_max_mm_yr": 9.787839,
+        "up_min_mm_yr": -25.0,
+        "up_median_mm_yr": 0.0,
+        "up_max_mm_yr": 0.0,
+        "sigma_e_median_mm_yr": 2.5,
+        "sigma_n_median_mm_yr": 3.75,
+        "sparse_rows": 0
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              107.73827295,
+              -5.94471333
+            ],
+            [
+              107.77387253,
+              -5.9438434
+            ],
+            [
+              107.77300526,
+              -5.9082017
+            ],
+            [
+              107.73740783,
+              -5.90906638
+            ],
+            [
+              107.73827295,
+              -5.94471333
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "label": "B4",
+        "district_id": "B4",
+        "subdistrict": "-",
+        "type": "bowl",
+        "theme": "small/compact bowl + directed background field",
+        "test_goal": "Background H=2.5 mm/yr southeast after manual sign fix; uncertainty same as B3; up +1.",
+        "rum_count": 81,
+        "grid_rows": 9,
+        "grid_cols": 9,
+        "rum_size_m": 450.0,
+        "center_x": 1684750.0,
+        "center_y": 826800.0,
+        "min_x": 1682725.0,
+        "max_x": 1686775.0,
+        "min_y": 824775.0,
+        "max_y": 828825.0,
+        "h_min_mm_yr": 0.0,
+        "h_median_mm_yr": 2.5,
+        "h_max_mm_yr": 9.787839,
+        "up_min_mm_yr": -25.0,
+        "up_median_mm_yr": 1.0,
+        "up_max_mm_yr": 1.0,
+        "sigma_e_median_mm_yr": 2.5,
+        "sigma_n_median_mm_yr": 3.75,
+        "sparse_rows": 0
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              107.77387253,
+              -5.9438434
+            ],
+            [
+              107.8094668,
+              -5.9429713
+            ],
+            [
+              107.80859737,
+              -5.90733486
+            ],
+            [
+              107.77300526,
+              -5.9082017
+            ],
+            [
+              107.77387253,
+              -5.9438434
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "label": "B5",
+        "district_id": "B5",
+        "subdistrict": "-",
+        "type": "bowl",
+        "theme": "small/compact bowl + directed background field",
+        "test_goal": "Background H=2.5 mm/yr southeast after manual sign fix; very low uncertainty; up 0.",
+        "rum_count": 81,
+        "grid_rows": 9,
+        "grid_cols": 9,
+        "rum_size_m": 450.0,
+        "center_x": 1688800.0,
+        "center_y": 826800.0,
+        "min_x": 1686775.0,
+        "max_x": 1690825.0,
+        "min_y": 824775.0,
+        "max_y": 828825.0,
+        "h_min_mm_yr": 0.0,
+        "h_median_mm_yr": 2.5,
+        "h_max_mm_yr": 9.787839,
+        "up_min_mm_yr": -25.0,
+        "up_median_mm_yr": 0.0,
+        "up_max_mm_yr": 0.0,
+        "sigma_e_median_mm_yr": 0.08,
+        "sigma_n_median_mm_yr": 0.12,
+        "sparse_rows": 0
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              107.8094668,
+              -5.9429713
+            ],
+            [
+              107.84505575,
+              -5.94209703
+            ],
+            [
+              107.84418417,
+              -5.90646588
+            ],
+            [
+              107.80859737,
+              -5.90733486
+            ],
+            [
+              107.8094668,
+              -5.9429713
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "label": "B6",
+        "district_id": "B6",
+        "subdistrict": "-",
+        "type": "bowl",
+        "theme": "small/compact bowl + directed background field",
+        "test_goal": "Long bowl; background H=2.5 mm/yr pointing to bowl center; very low uncertainty; up +1.",
+        "rum_count": 135,
+        "grid_rows": 9,
+        "grid_cols": 15,
+        "rum_size_m": 450.0,
+        "center_x": 1694200.0,
+        "center_y": 826800.0,
+        "min_x": 1690825.0,
+        "max_x": 1697575.0,
+        "min_y": 824775.0,
+        "max_y": 828825.0,
+        "h_min_mm_yr": 0.0,
+        "h_median_mm_yr": 2.5,
+        "h_max_mm_yr": 9.911346,
+        "up_min_mm_yr": -25.0,
+        "up_median_mm_yr": 1.0,
+        "up_max_mm_yr": 1.0,
+        "sigma_e_median_mm_yr": 0.08,
+        "sigma_n_median_mm_yr": 0.12,
+        "sparse_rows": 0
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              107.84505575,
+              -5.94209703
+            ],
+            [
+              107.9043588,
+              -5.94063511
+            ],
+            [
+              107.90348363,
+              -5.90501278
+            ],
+            [
+              107.84418417,
+              -5.90646588
+            ],
+            [
+              107.84505575,
+              -5.94209703
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "label": "C1_1.1",
+        "district_id": "C1",
+        "subdistrict": "C1_1.1",
+        "type": "field",
+        "theme": "uniform north-flow field matrix",
+        "test_goal": "C1 velocity/uncertainty matrix. Velocity level 1: low split H=0.5/1.0. Uncertainty level 1: low uncertainty = 0.1\u00d7 C1 reference. Edge strips zeroed; up is visual-layout aid.",
+        "rum_count": 64,
+        "grid_rows": 8,
+        "grid_cols": 8,
+        "rum_size_m": 450.0,
+        "center_x": 1668775.0,
+        "center_y": 815775.0,
+        "min_x": 1666975.0,
+        "max_x": 1670575.0,
+        "min_y": 813975.0,
+        "max_y": 817575.0,
+        "h_min_mm_yr": 0.0,
+        "h_median_mm_yr": 0.5,
+        "h_max_mm_yr": 1.0,
+        "up_min_mm_yr": 0.5,
+        "up_median_mm_yr": 0.5,
+        "up_max_mm_yr": 0.5,
+        "sigma_e_median_mm_yr": 0.25,
+        "sigma_n_median_mm_yr": 0.375,
+        "sparse_rows": 0
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              107.63771604,
+              -6.04231224
+            ],
+            [
+              107.66937912,
+              -6.04153229
+            ],
+            [
+              107.66860122,
+              -6.00983723
+            ],
+            [
+              107.63693987,
+              -6.01061306
+            ],
+            [
+              107.63771604,
+              -6.04231224
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "label": "C1_1.2",
+        "district_id": "C1",
+        "subdistrict": "C1_1.2",
+        "type": "field",
+        "theme": "uniform north-flow field matrix",
+        "test_goal": "C1 velocity/uncertainty matrix. Velocity level 1: low split H=0.5/1.0. Uncertainty level 2: medium uncertainty = C1 reference. Edge strips zeroed; up is visual-layout aid.",
+        "rum_count": 64,
+        "grid_rows": 8,
+        "grid_cols": 8,
+        "rum_size_m": 450.0,
+        "center_x": 1665175.0,
+        "center_y": 822975.0,
+        "min_x": 1663375.0,
+        "max_x": 1666975.0,
+        "min_y": 821175.0,
+        "max_y": 824775.0,
+        "h_min_mm_yr": 0.0,
+        "h_median_mm_yr": 0.5,
+        "h_max_mm_yr": 1.0,
+        "up_min_mm_yr": 0.25,
+        "up_median_mm_yr": 0.25,
+        "up_max_mm_yr": 0.25,
+        "sigma_e_median_mm_yr": 2.5,
+        "sigma_n_median_mm_yr": 3.75,
+        "sparse_rows": 0
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              107.60450408,
+              -5.97968372
+            ],
+            [
+              107.63616786,
+              -5.97891374
+            ],
+            [
+              107.6354,
+              -5.94721428
+            ],
+            [
+              107.60373795,
+              -5.94798015
+            ],
+            [
+              107.60450408,
+              -5.97968372
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "label": "C1_1.3",
+        "district_id": "C1",
+        "subdistrict": "C1_1.3",
+        "type": "field",
+        "theme": "uniform north-flow field matrix",
+        "test_goal": "C1 velocity/uncertainty matrix. Velocity level 1: low split H=0.5/1.0. Uncertainty level 3: high uncertainty = 2\u00d7 C1 reference. Edge strips zeroed; up is visual-layout aid.",
+        "rum_count": 64,
+        "grid_rows": 8,
+        "grid_cols": 8,
+        "rum_size_m": 450.0,
+        "center_x": 1661575.0,
+        "center_y": 819375.0,
+        "min_x": 1659775.0,
+        "max_x": 1663375.0,
+        "min_y": 817575.0,
+        "max_y": 821175.0,
+        "h_min_mm_yr": 0.0,
+        "h_median_mm_yr": 0.5,
+        "h_max_mm_yr": 1.0,
+        "up_min_mm_yr": 0.25,
+        "up_median_mm_yr": 0.25,
+        "up_max_mm_yr": 0.25,
+        "sigma_e_median_mm_yr": 5.0,
+        "sigma_n_median_mm_yr": 7.5,
+        "sparse_rows": 0
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              107.57360471,
+              -6.01215951
+            ],
+            [
+              107.60527436,
+              -6.01138715
+            ],
+            [
+              107.60450408,
+              -5.97968372
+            ],
+            [
+              107.57283616,
+              -5.98045198
+            ],
+            [
+              107.57360471,
+              -6.01215951
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "label": "C1_2.1",
+        "district_id": "C1",
+        "subdistrict": "C1_2.1",
+        "type": "field",
+        "theme": "uniform north-flow field matrix",
+        "test_goal": "C1 velocity/uncertainty matrix. Velocity level 2: medium split H=2/4. Uncertainty level 1: low uncertainty = 0.1\u00d7 C1 reference. Edge strips zeroed; up is visual-layout aid.",
+        "rum_count": 64,
+        "grid_rows": 8,
+        "grid_cols": 8,
+        "rum_size_m": 450.0,
+        "center_x": 1665175.0,
+        "center_y": 819375.0,
+        "min_x": 1663375.0,
+        "max_x": 1666975.0,
+        "min_y": 817575.0,
+        "max_y": 821175.0,
+        "h_min_mm_yr": 0.0,
+        "h_median_mm_yr": 2.0,
+        "h_max_mm_yr": 4.0,
+        "up_min_mm_yr": 0.5,
+        "up_median_mm_yr": 0.5,
+        "up_max_mm_yr": 0.5,
+        "sigma_e_median_mm_yr": 0.25,
+        "sigma_n_median_mm_yr": 0.375,
+        "sparse_rows": 0
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              107.60527436,
+              -6.01138715
+            ],
+            [
+              107.63693987,
+              -6.01061306
+            ],
+            [
+              107.63616786,
+              -5.97891374
+            ],
+            [
+              107.60450408,
+              -5.97968372
+            ],
+            [
+              107.60527436,
+              -6.01138715
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "label": "C1_2.2",
+        "district_id": "C1",
+        "subdistrict": "C1_2.2",
+        "type": "field",
+        "theme": "uniform north-flow field matrix",
+        "test_goal": "C1 velocity/uncertainty matrix. Velocity level 2: medium split H=2/4. Uncertainty level 2: medium uncertainty = C1 reference. Edge strips zeroed; up is visual-layout aid.",
+        "rum_count": 64,
+        "grid_rows": 8,
+        "grid_cols": 8,
+        "rum_size_m": 450.0,
+        "center_x": 1661575.0,
+        "center_y": 815775.0,
+        "min_x": 1659775.0,
+        "max_x": 1663375.0,
+        "min_y": 813975.0,
+        "max_y": 817575.0,
+        "h_min_mm_yr": 0.0,
+        "h_median_mm_yr": 2.0,
+        "h_max_mm_yr": 4.0,
+        "up_min_mm_yr": 0.5,
+        "up_median_mm_yr": 0.5,
+        "up_max_mm_yr": 0.5,
+        "sigma_e_median_mm_yr": 2.5,
+        "sigma_n_median_mm_yr": 3.75,
+        "sparse_rows": 0
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              107.5743774,
+              -6.04386691
+            ],
+            [
+              107.60604879,
+              -6.04309045
+            ],
+            [
+              107.60527436,
+              -6.01138715
+            ],
+            [
+              107.57360471,
+              -6.01215951
+            ],
+            [
+              107.5743774,
+              -6.04386691
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "label": "C1_2.3",
+        "district_id": "C1",
+        "subdistrict": "C1_2.3",
+        "type": "field",
+        "theme": "uniform north-flow field matrix",
+        "test_goal": "C1 velocity/uncertainty matrix. Velocity level 2: medium split H=2/4. Uncertainty level 3: high uncertainty = 2\u00d7 C1 reference. Edge strips zeroed; up is visual-layout aid.",
+        "rum_count": 64,
+        "grid_rows": 8,
+        "grid_cols": 8,
+        "rum_size_m": 450.0,
+        "center_x": 1668775.0,
+        "center_y": 822975.0,
+        "min_x": 1666975.0,
+        "max_x": 1670575.0,
+        "min_y": 821175.0,
+        "max_y": 824775.0,
+        "h_min_mm_yr": 0.0,
+        "h_median_mm_yr": 2.0,
+        "h_max_mm_yr": 4.0,
+        "up_min_mm_yr": 0.5,
+        "up_median_mm_yr": 0.5,
+        "up_max_mm_yr": 0.5,
+        "sigma_e_median_mm_yr": 5.0,
+        "sigma_n_median_mm_yr": 7.5,
+        "sparse_rows": 0
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              107.63616786,
+              -5.97891374
+            ],
+            [
+              107.66782748,
+              -5.97814202
+            ],
+            [
+              107.66705791,
+              -5.94644669
+            ],
+            [
+              107.6354,
+              -5.94721428
+            ],
+            [
+              107.63616786,
+              -5.97891374
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "label": "C1_3.1",
+        "district_id": "C1",
+        "subdistrict": "C1_3.1",
+        "type": "field",
+        "theme": "uniform north-flow field matrix",
+        "test_goal": "C1 velocity/uncertainty matrix. Velocity level 3: high split H=5/10. Uncertainty level 1: low uncertainty = 0.1\u00d7 C1 reference. Edge strips zeroed; up is visual-layout aid.",
+        "rum_count": 64,
+        "grid_rows": 8,
+        "grid_cols": 8,
+        "rum_size_m": 450.0,
+        "center_x": 1661575.0,
+        "center_y": 822975.0,
+        "min_x": 1659775.0,
+        "max_x": 1663375.0,
+        "min_y": 821175.0,
+        "max_y": 824775.0,
+        "h_min_mm_yr": 0.0,
+        "h_median_mm_yr": 5.0,
+        "h_max_mm_yr": 10.0,
+        "up_min_mm_yr": 0.5,
+        "up_median_mm_yr": 0.5,
+        "up_max_mm_yr": 0.5,
+        "sigma_e_median_mm_yr": 0.25,
+        "sigma_n_median_mm_yr": 0.375,
+        "sparse_rows": 0
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              107.57283616,
+              -5.98045198
+            ],
+            [
+              107.60450408,
+              -5.97968372
+            ],
+            [
+              107.60373795,
+              -5.94798015
+            ],
+            [
+              107.57207175,
+              -5.94874431
+            ],
+            [
+              107.57283616,
+              -5.98045198
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "label": "C1_3.2",
+        "district_id": "C1",
+        "subdistrict": "C1_3.2",
+        "type": "field",
+        "theme": "uniform north-flow field matrix",
+        "test_goal": "C1 velocity/uncertainty matrix. Velocity level 3: high split H=5/10. Uncertainty level 2: medium uncertainty = C1 reference. Edge strips zeroed; up is visual-layout aid.",
+        "rum_count": 64,
+        "grid_rows": 8,
+        "grid_cols": 8,
+        "rum_size_m": 450.0,
+        "center_x": 1668775.0,
+        "center_y": 819375.0,
+        "min_x": 1666975.0,
+        "max_x": 1670575.0,
+        "min_y": 817575.0,
+        "max_y": 821175.0,
+        "h_min_mm_yr": 0.0,
+        "h_median_mm_yr": 5.0,
+        "h_max_mm_yr": 10.0,
+        "up_min_mm_yr": 0.25,
+        "up_median_mm_yr": 0.25,
+        "up_max_mm_yr": 0.25,
+        "sigma_e_median_mm_yr": 2.5,
+        "sigma_n_median_mm_yr": 3.75,
+        "sparse_rows": 0
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              107.63693987,
+              -6.01061306
+            ],
+            [
+              107.66860122,
+              -6.00983723
+            ],
+            [
+              107.66782748,
+              -5.97814202
+            ],
+            [
+              107.63616786,
+              -5.97891374
+            ],
+            [
+              107.63693987,
+              -6.01061306
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "label": "C1_3.3",
+        "district_id": "C1",
+        "subdistrict": "C1_3.3",
+        "type": "field",
+        "theme": "uniform north-flow field matrix",
+        "test_goal": "C1 velocity/uncertainty matrix. Velocity level 3: high split H=5/10. Uncertainty level 3: high uncertainty = 2\u00d7 C1 reference. Edge strips zeroed; up is visual-layout aid.",
+        "rum_count": 64,
+        "grid_rows": 8,
+        "grid_cols": 8,
+        "rum_size_m": 450.0,
+        "center_x": 1665175.0,
+        "center_y": 815775.0,
+        "min_x": 1663375.0,
+        "max_x": 1666975.0,
+        "min_y": 813975.0,
+        "max_y": 817575.0,
+        "h_min_mm_yr": 0.0,
+        "h_median_mm_yr": 5.0,
+        "h_max_mm_yr": 10.0,
+        "up_min_mm_yr": 0.25,
+        "up_median_mm_yr": 0.25,
+        "up_max_mm_yr": 0.25,
+        "sigma_e_median_mm_yr": 5.0,
+        "sigma_n_median_mm_yr": 7.5,
+        "sparse_rows": 0
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              107.60604879,
+              -6.04309045
+            ],
+            [
+              107.63771604,
+              -6.04231224
+            ],
+            [
+              107.63693987,
+              -6.01061306
+            ],
+            [
+              107.60527436,
+              -6.01138715
+            ],
+            [
+              107.60604879,
+              -6.04309045
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "label": "C2_1.3",
+        "district_id": "C2",
+        "subdistrict": "C2_1.3",
+        "type": "field",
+        "theme": "sparse anomaly in uniform field",
+        "test_goal": "Sparse low-velocity anomaly in high-velocity north field; both medium uncertainty; renamed from C2_1.1; top row H=1.",
+        "rum_count": 144,
+        "grid_rows": 12,
+        "grid_cols": 12,
+        "rum_size_m": 450.0,
+        "center_x": 1678675.0,
+        "center_y": 822075.0,
+        "min_x": 1675975.0,
+        "max_x": 1681375.0,
+        "min_y": 819375.0,
+        "max_y": 824775.0,
+        "h_min_mm_yr": 1.0,
+        "h_median_mm_yr": 6.0,
+        "h_max_mm_yr": 6.0,
+        "up_min_mm_yr": 0.0,
+        "up_median_mm_yr": 0.0,
+        "up_max_mm_yr": 1.5,
+        "sigma_e_median_mm_yr": 2.5,
+        "sigma_n_median_mm_yr": 3.75,
+        "sparse_rows": 16
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              107.71569674,
+              -5.99282574
+            ],
+            [
+              107.76317024,
+              -5.99165795
+            ],
+            [
+              107.76200659,
+              -5.94413362
+            ],
+            [
+              107.71453695,
+              -5.94529208
+            ],
+            [
+              107.71569674,
+              -5.99282574
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "label": "C2_2.1",
+        "district_id": "C2",
+        "subdistrict": "C2_2.1",
+        "type": "field",
+        "theme": "sparse uncertainty anomaly in uniform field",
+        "test_goal": "Sparse low-uncertainty anomaly in high-uncertainty north field; H=4 everywhere except top row H=1.",
+        "rum_count": 144,
+        "grid_rows": 12,
+        "grid_cols": 12,
+        "rum_size_m": 450.0,
+        "center_x": 1678675.0,
+        "center_y": 816675.0,
+        "min_x": 1675975.0,
+        "max_x": 1681375.0,
+        "min_y": 813975.0,
+        "max_y": 819375.0,
+        "h_min_mm_yr": 1.0,
+        "h_median_mm_yr": 4.0,
+        "h_max_mm_yr": 4.0,
+        "up_min_mm_yr": 0.0,
+        "up_median_mm_yr": 1.5,
+        "up_max_mm_yr": 1.5,
+        "sigma_e_median_mm_yr": 5.0,
+        "sigma_n_median_mm_yr": 7.5,
+        "sparse_rows": 16
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              107.71686593,
+              -6.04035909
+            ],
+            [
+              107.76434333,
+              -6.03918197
+            ],
+            [
+              107.76317024,
+              -5.99165795
+            ],
+            [
+              107.71569674,
+              -5.99282574
+            ],
+            [
+              107.71686593,
+              -6.04035909
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "label": "C2_2.3",
+        "district_id": "C2",
+        "subdistrict": "C2_2.3",
+        "type": "field",
+        "theme": "sparse uncertainty anomaly in uniform field",
+        "test_goal": "Sparse high-uncertainty anomaly in low-uncertainty north field; H=4 everywhere except top row H=1.",
+        "rum_count": 144,
+        "grid_rows": 12,
+        "grid_cols": 12,
+        "rum_size_m": 450.0,
+        "center_x": 1673275.0,
+        "center_y": 816675.0,
+        "min_x": 1670575.0,
+        "max_x": 1675975.0,
+        "min_y": 813975.0,
+        "max_y": 819375.0,
+        "h_min_mm_yr": 1.0,
+        "h_median_mm_yr": 4.0,
+        "h_max_mm_yr": 4.0,
+        "up_min_mm_yr": 0.0,
+        "up_median_mm_yr": 0.0,
+        "up_max_mm_yr": 1.5,
+        "sigma_e_median_mm_yr": 0.25,
+        "sigma_n_median_mm_yr": 0.375,
+        "sparse_rows": 16
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              107.66937912,
+              -6.04153229
+            ],
+            [
+              107.71686593,
+              -6.04035909
+            ],
+            [
+              107.71569674,
+              -5.99282574
+            ],
+            [
+              107.66821383,
+              -5.99398964
+            ],
+            [
+              107.66937912,
+              -6.04153229
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "label": "C2_3.1",
+        "district_id": "C2",
+        "subdistrict": "C2_3.1",
+        "type": "field",
+        "theme": "sparse anomaly in uniform field",
+        "test_goal": "Sparse high-velocity anomaly in low-velocity north field; both medium uncertainty; top row H=1.",
+        "rum_count": 144,
+        "grid_rows": 12,
+        "grid_cols": 12,
+        "rum_size_m": 450.0,
+        "center_x": 1673275.0,
+        "center_y": 822075.0,
+        "min_x": 1670575.0,
+        "max_x": 1675975.0,
+        "min_y": 819375.0,
+        "max_y": 824775.0,
+        "h_min_mm_yr": 1.0,
+        "h_median_mm_yr": 2.0,
+        "h_max_mm_yr": 6.0,
+        "up_min_mm_yr": 0.0,
+        "up_median_mm_yr": 1.5,
+        "up_max_mm_yr": 1.5,
+        "sigma_e_median_mm_yr": 2.5,
+        "sigma_n_median_mm_yr": 3.75,
+        "sparse_rows": 16
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              107.66821383,
+              -5.99398964
+            ],
+            [
+              107.71569674,
+              -5.99282574
+            ],
+            [
+              107.71453695,
+              -5.94529208
+            ],
+            [
+              107.66705791,
+              -5.94644669
+            ],
+            [
+              107.66821383,
+              -5.99398964
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "label": "C3_N.15",
+        "district_id": "C3",
+        "subdistrict": "C3_N.15",
+        "type": "field",
+        "theme": "sparse direction anomaly in uniform field",
+        "test_goal": "C3 direction anomaly test: sparse 15\u00b0 anomaly in north field; H=4 and medium uncertainty; top row H=1.",
+        "rum_count": 144,
+        "grid_rows": 12,
+        "grid_cols": 12,
+        "rum_size_m": 450.0,
+        "center_x": 1694875.0,
+        "center_y": 816675.0,
+        "min_x": 1692175.0,
+        "max_x": 1697575.0,
+        "min_y": 813975.0,
+        "max_y": 819375.0,
+        "h_min_mm_yr": 1.0,
+        "h_median_mm_yr": 4.0,
+        "h_max_mm_yr": 4.0,
+        "up_min_mm_yr": 0.0,
+        "up_median_mm_yr": 0.0,
+        "up_max_mm_yr": 1.5,
+        "sigma_e_median_mm_yr": 2.5,
+        "sigma_n_median_mm_yr": 3.75,
+        "sparse_rows": 16
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              107.85926979,
+              -6.03681599
+            ],
+            [
+              107.90671878,
+              -6.03562713
+            ],
+            [
+              107.90553402,
+              -5.98813128
+            ],
+            [
+              107.85808892,
+              -5.98931071
+            ],
+            [
+              107.85926979,
+              -6.03681599
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "label": "C3_N.30",
+        "district_id": "C3",
+        "subdistrict": "C3_N.30",
+        "type": "field",
+        "theme": "sparse direction anomaly in uniform field",
+        "test_goal": "C3 direction anomaly test: sparse 30\u00b0 anomaly in north field; H=4 and medium uncertainty; top row H=1.",
+        "rum_count": 144,
+        "grid_rows": 12,
+        "grid_cols": 12,
+        "rum_size_m": 450.0,
+        "center_x": 1689475.0,
+        "center_y": 816675.0,
+        "min_x": 1686775.0,
+        "max_x": 1692175.0,
+        "min_y": 813975.0,
+        "max_y": 819375.0,
+        "h_min_mm_yr": 1.0,
+        "h_median_mm_yr": 4.0,
+        "h_max_mm_yr": 4.0,
+        "up_min_mm_yr": 0.0,
+        "up_median_mm_yr": 1.5,
+        "up_max_mm_yr": 1.5,
+        "sigma_e_median_mm_yr": 2.5,
+        "sigma_n_median_mm_yr": 3.75,
+        "sparse_rows": 16
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              107.8118113,
+              -6.03800093
+            ],
+            [
+              107.85926979,
+              -6.03681599
+            ],
+            [
+              107.85808892,
+              -5.98931071
+            ],
+            [
+              107.81063431,
+              -5.99048627
+            ],
+            [
+              107.8118113,
+              -6.03800093
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "label": "C3_N.E",
+        "district_id": "C3",
+        "subdistrict": "C3_N.E",
+        "type": "field",
+        "theme": "sparse direction anomaly in uniform field",
+        "test_goal": "C3 direction anomaly test: sparse 90\u00b0/east anomaly in north field; H=4 and medium uncertainty; top row H=1.",
+        "rum_count": 144,
+        "grid_rows": 12,
+        "grid_cols": 12,
+        "rum_size_m": 450.0,
+        "center_x": 1684075.0,
+        "center_y": 822075.0,
+        "min_x": 1681375.0,
+        "max_x": 1686775.0,
+        "min_y": 819375.0,
+        "max_y": 824775.0,
+        "h_min_mm_yr": 1.0,
+        "h_median_mm_yr": 4.0,
+        "h_max_mm_yr": 4.0,
+        "up_min_mm_yr": 0.0,
+        "up_median_mm_yr": 1.5,
+        "up_max_mm_yr": 1.5,
+        "sigma_e_median_mm_yr": 2.5,
+        "sigma_n_median_mm_yr": 3.75,
+        "sparse_rows": 16
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              107.76317024,
+              -5.99165795
+            ],
+            [
+              107.81063431,
+              -5.99048627
+            ],
+            [
+              107.8094668,
+              -5.9429713
+            ],
+            [
+              107.76200659,
+              -5.94413362
+            ],
+            [
+              107.76317024,
+              -5.99165795
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "label": "C3_N.NE",
+        "district_id": "C3",
+        "subdistrict": "C3_N.NE",
+        "type": "field",
+        "theme": "sparse direction anomaly in uniform field",
+        "test_goal": "C3 direction anomaly test: sparse 45\u00b0/northeast anomaly in north field; H=4 and medium uncertainty; top row H=1.",
+        "rum_count": 144,
+        "grid_rows": 12,
+        "grid_cols": 12,
+        "rum_size_m": 450.0,
+        "center_x": 1684075.0,
+        "center_y": 816675.0,
+        "min_x": 1681375.0,
+        "max_x": 1686775.0,
+        "min_y": 813975.0,
+        "max_y": 819375.0,
+        "h_min_mm_yr": 1.0,
+        "h_median_mm_yr": 4.0,
+        "h_max_mm_yr": 4.0,
+        "up_min_mm_yr": 0.0,
+        "up_median_mm_yr": 0.0,
+        "up_max_mm_yr": 1.5,
+        "sigma_e_median_mm_yr": 2.5,
+        "sigma_n_median_mm_yr": 3.75,
+        "sparse_rows": 16
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              107.76434333,
+              -6.03918197
+            ],
+            [
+              107.8118113,
+              -6.03800093
+            ],
+            [
+              107.81063431,
+              -5.99048627
+            ],
+            [
+              107.76317024,
+              -5.99165795
+            ],
+            [
+              107.76434333,
+              -6.03918197
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "label": "C3_N.S",
+        "district_id": "C3",
+        "subdistrict": "C3_N.S",
+        "type": "field",
+        "theme": "sparse direction anomaly in uniform field",
+        "test_goal": "C3 direction anomaly test: sparse 180\u00b0/south anomaly in north field; H=4 and medium uncertainty; top row H=1.",
+        "rum_count": 144,
+        "grid_rows": 12,
+        "grid_cols": 12,
+        "rum_size_m": 450.0,
+        "center_x": 1689475.0,
+        "center_y": 822075.0,
+        "min_x": 1686775.0,
+        "max_x": 1692175.0,
+        "min_y": 819375.0,
+        "max_y": 824775.0,
+        "h_min_mm_yr": 1.0,
+        "h_median_mm_yr": 4.0,
+        "h_max_mm_yr": 4.0,
+        "up_min_mm_yr": 0.0,
+        "up_median_mm_yr": 0.0,
+        "up_max_mm_yr": 1.5,
+        "sigma_e_median_mm_yr": 2.5,
+        "sigma_n_median_mm_yr": 3.75,
+        "sparse_rows": 16
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              107.81063431,
+              -5.99048627
+            ],
+            [
+              107.85808892,
+              -5.98931071
+            ],
+            [
+              107.85691755,
+              -5.94180513
+            ],
+            [
+              107.8094668,
+              -5.9429713
+            ],
+            [
+              107.81063431,
+              -5.99048627
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "label": "C3_N.SE",
+        "district_id": "C3",
+        "subdistrict": "C3_N.SE",
+        "type": "field",
+        "theme": "sparse direction anomaly in uniform field",
+        "test_goal": "C3 direction anomaly test: sparse 135\u00b0/southeast anomaly in north field; H=4 and medium uncertainty; top row H=1.",
+        "rum_count": 144,
+        "grid_rows": 12,
+        "grid_cols": 12,
+        "rum_size_m": 450.0,
+        "center_x": 1694875.0,
+        "center_y": 822075.0,
+        "min_x": 1692175.0,
+        "max_x": 1697575.0,
+        "min_y": 819375.0,
+        "max_y": 824775.0,
+        "h_min_mm_yr": 1.0,
+        "h_median_mm_yr": 4.0,
+        "h_max_mm_yr": 4.0,
+        "up_min_mm_yr": 0.0,
+        "up_median_mm_yr": 1.5,
+        "up_max_mm_yr": 1.5,
+        "sigma_e_median_mm_yr": 2.5,
+        "sigma_n_median_mm_yr": 3.75,
+        "sparse_rows": 16
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              107.85808892,
+              -5.98931071
+            ],
+            [
+              107.90553402,
+              -5.98813128
+            ],
+            [
+              107.9043588,
+              -5.94063511
+            ],
+            [
+              107.85691755,
+              -5.94180513
+            ],
+            [
+              107.85808892,
+              -5.98931071
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "label": "D1_1_3.1",
+        "district_id": "D1",
+        "subdistrict": "D1_1_3.1",
+        "type": "field",
+        "theme": "full circle motion",
+        "test_goal": "clockwise arc quadrant. High/low H rescaled to 5/1.5 mm/yr; high/low uncertainty uses C1 high/low reference; quadrant-specific vertical aid.",
+        "rum_count": 27,
+        "grid_rows": 6,
+        "grid_cols": 6,
+        "rum_size_m": 450.0,
+        "center_x": 1664100.0,
+        "center_y": 812000.0,
+        "min_x": 1662925.0,
+        "max_x": 1665625.0,
+        "min_y": 810825.0,
+        "max_y": 813525.0,
+        "h_min_mm_yr": 5.0,
+        "h_median_mm_yr": 5.0,
+        "h_max_mm_yr": 5.0,
+        "up_min_mm_yr": 0.5,
+        "up_median_mm_yr": 0.5,
+        "up_max_mm_yr": 0.5,
+        "sigma_e_median_mm_yr": 0.25,
+        "sigma_n_median_mm_yr": 0.375,
+        "sparse_rows": 0
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              107.60277093,
+              -6.07092833
+            ],
+            [
+              107.62652329,
+              -6.0703423
+            ],
+            [
+              107.62593854,
+              -6.04656686
+            ],
+            [
+              107.60218716,
+              -6.04715057
+            ],
+            [
+              107.60277093,
+              -6.07092833
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "label": "D1_2_1.1",
+        "district_id": "D1",
+        "subdistrict": "D1_2_1.1",
+        "type": "field",
+        "theme": "full circle motion",
+        "test_goal": "clockwise arc quadrant. High/low H rescaled to 5/1.5 mm/yr; high/low uncertainty uses C1 high/low reference; quadrant-specific vertical aid.",
+        "rum_count": 27,
+        "grid_rows": 6,
+        "grid_cols": 6,
+        "rum_size_m": 450.0,
+        "center_x": 1661750.0,
+        "center_y": 812000.0,
+        "min_x": 1660225.0,
+        "max_x": 1662925.0,
+        "min_y": 810825.0,
+        "max_y": 813525.0,
+        "h_min_mm_yr": 1.5,
+        "h_median_mm_yr": 1.5,
+        "h_max_mm_yr": 1.5,
+        "up_min_mm_yr": 0.75,
+        "up_median_mm_yr": 0.75,
+        "up_max_mm_yr": 0.75,
+        "sigma_e_median_mm_yr": 0.25,
+        "sigma_n_median_mm_yr": 0.375,
+        "sparse_rows": 0
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              107.57901624,
+              -6.07151337
+            ],
+            [
+              107.60277093,
+              -6.07092833
+            ],
+            [
+              107.60218716,
+              -6.04715057
+            ],
+            [
+              107.57843345,
+              -6.0477333
+            ],
+            [
+              107.57901624,
+              -6.07151337
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "label": "D1_3_3.3",
+        "district_id": "D1",
+        "subdistrict": "D1_3_3.3",
+        "type": "field",
+        "theme": "full circle motion",
+        "test_goal": "clockwise arc quadrant. High/low H rescaled to 5/1.5 mm/yr; high/low uncertainty uses C1 high/low reference; quadrant-specific vertical aid.",
+        "rum_count": 27,
+        "grid_rows": 6,
+        "grid_cols": 6,
+        "rum_size_m": 450.0,
+        "center_x": 1661750.0,
+        "center_y": 809650.0,
+        "min_x": 1660225.0,
+        "max_x": 1662925.0,
+        "min_y": 808125.0,
+        "max_y": 810825.0,
+        "h_min_mm_yr": 5.0,
+        "h_median_mm_yr": 5.0,
+        "h_max_mm_yr": 5.0,
+        "up_min_mm_yr": 0.5,
+        "up_median_mm_yr": 0.5,
+        "up_max_mm_yr": 0.5,
+        "sigma_e_median_mm_yr": 5.0,
+        "sigma_n_median_mm_yr": 7.5,
+        "sparse_rows": 0
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              107.57960136,
+              -6.09529335
+            ],
+            [
+              107.60335704,
+              -6.09470601
+            ],
+            [
+              107.60277093,
+              -6.07092833
+            ],
+            [
+              107.57901624,
+              -6.07151337
+            ],
+            [
+              107.57960136,
+              -6.09529335
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "label": "D1_4_1.3",
+        "district_id": "D1",
+        "subdistrict": "D1_4_1.3",
+        "type": "field",
+        "theme": "full circle motion",
+        "test_goal": "clockwise arc quadrant. High/low H rescaled to 5/1.5 mm/yr; high/low uncertainty uses C1 high/low reference; quadrant-specific vertical aid.",
+        "rum_count": 27,
+        "grid_rows": 6,
+        "grid_cols": 6,
+        "rum_size_m": 450.0,
+        "center_x": 1664100.0,
+        "center_y": 809650.0,
+        "min_x": 1662925.0,
+        "max_x": 1665625.0,
+        "min_y": 808125.0,
+        "max_y": 810825.0,
+        "h_min_mm_yr": 1.5,
+        "h_median_mm_yr": 1.5,
+        "h_max_mm_yr": 1.5,
+        "up_min_mm_yr": 0.75,
+        "up_median_mm_yr": 0.75,
+        "up_max_mm_yr": 0.75,
+        "sigma_e_median_mm_yr": 5.0,
+        "sigma_n_median_mm_yr": 7.5,
+        "sparse_rows": 0
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              107.60335704,
+              -6.09470601
+            ],
+            [
+              107.62711038,
+              -6.09411767
+            ],
+            [
+              107.62652329,
+              -6.0703423
+            ],
+            [
+              107.60277093,
+              -6.07092833
+            ],
+            [
+              107.60335704,
+              -6.09470601
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "label": "D1_bg",
+        "district_id": "D1",
+        "subdistrict": "D1_bg",
+        "type": "field",
+        "theme": "circle-motion background",
+        "test_goal": "D1 background: H=1 pointing to arc center; vertical aid differs between D1/D2.",
+        "rum_count": 84,
+        "grid_rows": 14,
+        "grid_cols": 14,
+        "rum_size_m": 450.0,
+        "center_x": 1662925.0,
+        "center_y": 810825.0,
+        "min_x": 1659775.0,
+        "max_x": 1666075.0,
+        "min_y": 807675.0,
+        "max_y": 813975.0,
+        "h_min_mm_yr": 1.0,
+        "h_median_mm_yr": 1.0,
+        "h_max_mm_yr": 1.0,
+        "up_min_mm_yr": 0.0,
+        "up_median_mm_yr": 0.0,
+        "up_max_mm_yr": 0.0,
+        "sigma_e_median_mm_yr": 0.25,
+        "sigma_n_median_mm_yr": 0.375,
+        "sparse_rows": 0
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              107.57573957,
+              -6.09935454
+            ],
+            [
+              107.63116715,
+              -6.09798201
+            ],
+            [
+              107.62979961,
+              -6.04250696
+            ],
+            [
+              107.5743774,
+              -6.04386691
+            ],
+            [
+              107.57573957,
+              -6.09935454
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "label": "D1_center",
+        "district_id": "D1",
+        "subdistrict": "D1_center",
+        "type": "field",
+        "theme": "circle-motion center",
+        "test_goal": "D1 center marker: zero horizontal motion; used as visual circle center.",
+        "rum_count": 4,
+        "grid_rows": 2,
+        "grid_cols": 2,
+        "rum_size_m": 450.0,
+        "center_x": 1662925.0,
+        "center_y": 810825.0,
+        "min_x": 1662475.0,
+        "max_x": 1663375.0,
+        "min_y": 810375.0,
+        "max_y": 811275.0,
+        "h_min_mm_yr": 0.0,
+        "h_median_mm_yr": 0.0,
+        "h_max_mm_yr": 0.0,
+        "up_min_mm_yr": 0.0,
+        "up_median_mm_yr": 0.0,
+        "up_max_mm_yr": 0.0,
+        "sigma_e_median_mm_yr": 0.25,
+        "sigma_n_median_mm_yr": 0.375,
+        "sparse_rows": 0
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              107.59890947,
+              -6.07498892
+            ],
+            [
+              107.60682737,
+              -6.07479361
+            ],
+            [
+              107.60663234,
+              -6.06686784
+            ],
+            [
+              107.59871455,
+              -6.06706288
+            ],
+            [
+              107.59890947,
+              -6.07498892
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "label": "D2_1_3.1",
+        "district_id": "D2",
+        "subdistrict": "D2_1_3.1",
+        "type": "field",
+        "theme": "full circle motion",
+        "test_goal": "counter-clockwise arc quadrant. High/low H rescaled to 5/1.5 mm/yr; high/low uncertainty uses C1 high/low reference; quadrant-specific vertical aid.",
+        "rum_count": 27,
+        "grid_rows": 6,
+        "grid_cols": 6,
+        "rum_size_m": 450.0,
+        "center_x": 1670400.0,
+        "center_y": 812000.0,
+        "min_x": 1669225.0,
+        "max_x": 1671925.0,
+        "min_y": 810825.0,
+        "max_y": 813525.0,
+        "h_min_mm_yr": 5.0,
+        "h_median_mm_yr": 5.0,
+        "h_max_mm_yr": 5.0,
+        "up_min_mm_yr": 0.5,
+        "up_median_mm_yr": 0.5,
+        "up_max_mm_yr": 0.5,
+        "sigma_e_median_mm_yr": 0.25,
+        "sigma_n_median_mm_yr": 0.375,
+        "sparse_rows": 0
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              107.65818946,
+              -6.0695594
+            ],
+            [
+              107.68193636,
+              -6.06897107
+            ],
+            [
+              107.68134932,
+              -6.04520104
+            ],
+            [
+              107.6576034,
+              -6.04578704
+            ],
+            [
+              107.65818946,
+              -6.0695594
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "label": "D2_2_1.1",
+        "district_id": "D2",
+        "subdistrict": "D2_2_1.1",
+        "type": "field",
+        "theme": "full circle motion",
+        "test_goal": "counter-clockwise arc quadrant. High/low H rescaled to 5/1.5 mm/yr; high/low uncertainty uses C1 high/low reference; quadrant-specific vertical aid.",
+        "rum_count": 27,
+        "grid_rows": 6,
+        "grid_cols": 6,
+        "rum_size_m": 450.0,
+        "center_x": 1668050.0,
+        "center_y": 812000.0,
+        "min_x": 1666525.0,
+        "max_x": 1669225.0,
+        "min_y": 810825.0,
+        "max_y": 813525.0,
+        "h_min_mm_yr": 1.5,
+        "h_median_mm_yr": 1.5,
+        "h_max_mm_yr": 1.5,
+        "up_min_mm_yr": 0.0,
+        "up_median_mm_yr": 0.0,
+        "up_max_mm_yr": 0.0,
+        "sigma_e_median_mm_yr": 0.25,
+        "sigma_n_median_mm_yr": 0.375,
+        "sparse_rows": 0
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              107.63444022,
+              -6.07014674
+            ],
+            [
+              107.65818946,
+              -6.0695594
+            ],
+            [
+              107.6576034,
+              -6.04578704
+            ],
+            [
+              107.63385514,
+              -6.04637207
+            ],
+            [
+              107.63444022,
+              -6.07014674
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "label": "D2_3_3.3",
+        "district_id": "D2",
+        "subdistrict": "D2_3_3.3",
+        "type": "field",
+        "theme": "full circle motion",
+        "test_goal": "counter-clockwise arc quadrant. High/low H rescaled to 5/1.5 mm/yr; high/low uncertainty uses C1 high/low reference; quadrant-specific vertical aid.",
+        "rum_count": 27,
+        "grid_rows": 6,
+        "grid_cols": 6,
+        "rum_size_m": 450.0,
+        "center_x": 1668050.0,
+        "center_y": 809650.0,
+        "min_x": 1666525.0,
+        "max_x": 1669225.0,
+        "min_y": 808125.0,
+        "max_y": 810825.0,
+        "h_min_mm_yr": 5.0,
+        "h_median_mm_yr": 5.0,
+        "h_max_mm_yr": 5.0,
+        "up_min_mm_yr": 0.5,
+        "up_median_mm_yr": 0.5,
+        "up_max_mm_yr": 0.5,
+        "sigma_e_median_mm_yr": 5.0,
+        "sigma_n_median_mm_yr": 7.5,
+        "sparse_rows": 0
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              107.63502764,
+              -6.09392134
+            ],
+            [
+              107.65877787,
+              -6.09333168
+            ],
+            [
+              107.65818946,
+              -6.0695594
+            ],
+            [
+              107.63444022,
+              -6.07014674
+            ],
+            [
+              107.63502764,
+              -6.09392134
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "label": "D2_4_1.3",
+        "district_id": "D2",
+        "subdistrict": "D2_4_1.3",
+        "type": "field",
+        "theme": "full circle motion",
+        "test_goal": "counter-clockwise arc quadrant. High/low H rescaled to 5/1.5 mm/yr; high/low uncertainty uses C1 high/low reference; quadrant-specific vertical aid.",
+        "rum_count": 27,
+        "grid_rows": 6,
+        "grid_cols": 6,
+        "rum_size_m": 450.0,
+        "center_x": 1670400.0,
+        "center_y": 809650.0,
+        "min_x": 1669225.0,
+        "max_x": 1671925.0,
+        "min_y": 808125.0,
+        "max_y": 810825.0,
+        "h_min_mm_yr": 1.5,
+        "h_median_mm_yr": 1.5,
+        "h_max_mm_yr": 1.5,
+        "up_min_mm_yr": 0.0,
+        "up_median_mm_yr": 0.0,
+        "up_max_mm_yr": 0.0,
+        "sigma_e_median_mm_yr": 5.0,
+        "sigma_n_median_mm_yr": 7.5,
+        "sparse_rows": 0
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              107.65877787,
+              -6.09333168
+            ],
+            [
+              107.68252575,
+              -6.09274103
+            ],
+            [
+              107.68193636,
+              -6.06897107
+            ],
+            [
+              107.65818946,
+              -6.0695594
+            ],
+            [
+              107.65877787,
+              -6.09333168
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "label": "D2_bg",
+        "district_id": "D2",
+        "subdistrict": "D2_bg",
+        "type": "field",
+        "theme": "circle-motion background",
+        "test_goal": "D2 background: H=1 pointing to arc center; vertical aid differs between D1/D2.",
+        "rum_count": 84,
+        "grid_rows": 14,
+        "grid_cols": 14,
+        "rum_size_m": 450.0,
+        "center_x": 1669225.0,
+        "center_y": 810825.0,
+        "min_x": 1666075.0,
+        "max_x": 1672375.0,
+        "min_y": 807675.0,
+        "max_y": 813975.0,
+        "h_min_mm_yr": 1.0,
+        "h_median_mm_yr": 1.0,
+        "h_max_mm_yr": 1.0,
+        "up_min_mm_yr": 0.75,
+        "up_median_mm_yr": 0.75,
+        "up_max_mm_yr": 0.75,
+        "sigma_e_median_mm_yr": 0.25,
+        "sigma_n_median_mm_yr": 0.375,
+        "sparse_rows": 0
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              107.63116715,
+              -6.09798201
+            ],
+            [
+              107.68658199,
+              -6.09660408
+            ],
+            [
+              107.6852091,
+              -6.04114166
+            ],
+            [
+              107.62979961,
+              -6.04250696
+            ],
+            [
+              107.63116715,
+              -6.09798201
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "label": "D2_center",
+        "district_id": "D2",
+        "subdistrict": "D2_center",
+        "type": "field",
+        "theme": "circle-motion center",
+        "test_goal": "D2 center marker: zero horizontal motion; used as visual circle center.",
+        "rum_count": 4,
+        "grid_rows": 2,
+        "grid_cols": 2,
+        "rum_size_m": 450.0,
+        "center_x": 1669225.0,
+        "center_y": 810825.0,
+        "min_x": 1668775.0,
+        "max_x": 1669675.0,
+        "min_y": 810375.0,
+        "max_y": 811275.0,
+        "h_min_mm_yr": 0.0,
+        "h_median_mm_yr": 0.0,
+        "h_max_mm_yr": 0.0,
+        "up_min_mm_yr": 0.75,
+        "up_median_mm_yr": 0.75,
+        "up_max_mm_yr": 0.75,
+        "sigma_e_median_mm_yr": 0.25,
+        "sigma_n_median_mm_yr": 0.375,
+        "sparse_rows": 0
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              107.6543293,
+              -6.07361948
+            ],
+            [
+              107.66224537,
+              -6.0734234
+            ],
+            [
+              107.66204958,
+              -6.06549943
+            ],
+            [
+              107.65413361,
+              -6.06569524
+            ],
+            [
+              107.6543293,
+              -6.07361948
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "label": "D3_1.1",
+        "district_id": "D3",
+        "subdistrict": "D3_1.1",
+        "type": "field",
+        "theme": "converging V-shaped fields",
+        "test_goal": "D3 90\u00b0 two-field interaction, combination j=1. H classes rescaled low/medium/high to 1.5/3/6 mm/yr; medium/high uncertainty corrected from C1 reference; vertical aid separates left/right field.",
+        "rum_count": 42,
+        "grid_rows": 7,
+        "grid_cols": 6,
+        "rum_size_m": 450.0,
+        "center_x": 1674625.0,
+        "center_y": 812400.0,
+        "min_x": 1673275.0,
+        "max_x": 1675975.0,
+        "min_y": 810825.0,
+        "max_y": 813975.0,
+        "h_min_mm_yr": 3.0,
+        "h_median_mm_yr": 3.0,
+        "h_max_mm_yr": 3.0,
+        "up_min_mm_yr": 0.0,
+        "up_median_mm_yr": 0.0,
+        "up_max_mm_yr": 0.0,
+        "sigma_e_median_mm_yr": 2.5,
+        "sigma_n_median_mm_yr": 3.75,
+        "sparse_rows": 0
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              107.69380893,
+              -6.06867654
+            ],
+            [
+              107.71755231,
+              -6.06808674
+            ],
+            [
+              107.71686593,
+              -6.04035909
+            ],
+            [
+              107.6931237,
+              -6.04094618
+            ],
+            [
+              107.69380893,
+              -6.06867654
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "label": "D3_1.2",
+        "district_id": "D3",
+        "subdistrict": "D3_1.2",
+        "type": "field",
+        "theme": "converging V-shaped fields",
+        "test_goal": "D3 90\u00b0 two-field interaction, combination j=2. H classes rescaled low/medium/high to 1.5/3/6 mm/yr; medium/high uncertainty corrected from C1 reference; vertical aid separates left/right field.",
+        "rum_count": 42,
+        "grid_rows": 7,
+        "grid_cols": 6,
+        "rum_size_m": 450.0,
+        "center_x": 1677325.0,
+        "center_y": 812400.0,
+        "min_x": 1675975.0,
+        "max_x": 1678675.0,
+        "min_y": 810825.0,
+        "max_y": 813975.0,
+        "h_min_mm_yr": 1.5,
+        "h_median_mm_yr": 3.75,
+        "h_max_mm_yr": 6.0,
+        "up_min_mm_yr": -0.75,
+        "up_median_mm_yr": -0.5,
+        "up_max_mm_yr": -0.25,
+        "sigma_e_median_mm_yr": 2.5,
+        "sigma_n_median_mm_yr": 3.75,
+        "sparse_rows": 0
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              107.71755231,
+              -6.06808674
+            ],
+            [
+              107.74129333,
+              -6.06749595
+            ],
+            [
+              107.74060581,
+              -6.03977102
+            ],
+            [
+              107.71686593,
+              -6.04035909
+            ],
+            [
+              107.71755231,
+              -6.06808674
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "label": "D3_1.3",
+        "district_id": "D3",
+        "subdistrict": "D3_1.3",
+        "type": "field",
+        "theme": "converging V-shaped fields",
+        "test_goal": "D3 90\u00b0 two-field interaction, combination j=3. H classes rescaled low/medium/high to 1.5/3/6 mm/yr; medium/high uncertainty corrected from C1 reference; vertical aid separates left/right field.",
+        "rum_count": 42,
+        "grid_rows": 7,
+        "grid_cols": 6,
+        "rum_size_m": 450.0,
+        "center_x": 1680025.0,
+        "center_y": 812400.0,
+        "min_x": 1678675.0,
+        "max_x": 1681375.0,
+        "min_y": 810825.0,
+        "max_y": 813975.0,
+        "h_min_mm_yr": 1.5,
+        "h_median_mm_yr": 2.25,
+        "h_max_mm_yr": 3.0,
+        "up_min_mm_yr": -0.75,
+        "up_median_mm_yr": -0.5,
+        "up_max_mm_yr": -0.25,
+        "sigma_e_median_mm_yr": 5.0,
+        "sigma_n_median_mm_yr": 7.5,
+        "sparse_rows": 0
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              107.74129333,
+              -6.06749595
+            ],
+            [
+              107.765032,
+              -6.06690417
+            ],
+            [
+              107.76434333,
+              -6.03918197
+            ],
+            [
+              107.74060581,
+              -6.03977102
+            ],
+            [
+              107.74129333,
+              -6.06749595
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "label": "D3_2.1",
+        "district_id": "D3",
+        "subdistrict": "D3_2.1",
+        "type": "field",
+        "theme": "converging V-shaped fields",
+        "test_goal": "D3 45\u00b0 two-field interaction, combination j=1. H classes rescaled low/medium/high to 1.5/3/6 mm/yr; medium/high uncertainty corrected from C1 reference; vertical aid separates left/right field.",
+        "rum_count": 42,
+        "grid_rows": 7,
+        "grid_cols": 6,
+        "rum_size_m": 450.0,
+        "center_x": 1682725.0,
+        "center_y": 812400.0,
+        "min_x": 1681375.0,
+        "max_x": 1684075.0,
+        "min_y": 810825.0,
+        "max_y": 813975.0,
+        "h_min_mm_yr": 3.0,
+        "h_median_mm_yr": 3.0,
+        "h_max_mm_yr": 3.0,
+        "up_min_mm_yr": 0.0,
+        "up_median_mm_yr": 0.0,
+        "up_max_mm_yr": 0.0,
+        "sigma_e_median_mm_yr": 2.5,
+        "sigma_n_median_mm_yr": 3.75,
+        "sparse_rows": 0
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              107.765032,
+              -6.06690417
+            ],
+            [
+              107.7887683,
+              -6.06631142
+            ],
+            [
+              107.7880785,
+              -6.03859194
+            ],
+            [
+              107.76434333,
+              -6.03918197
+            ],
+            [
+              107.765032,
+              -6.06690417
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "label": "D3_2.2",
+        "district_id": "D3",
+        "subdistrict": "D3_2.2",
+        "type": "field",
+        "theme": "converging V-shaped fields",
+        "test_goal": "D3 45\u00b0 two-field interaction, combination j=2. H classes rescaled low/medium/high to 1.5/3/6 mm/yr; medium/high uncertainty corrected from C1 reference; vertical aid separates left/right field.",
+        "rum_count": 42,
+        "grid_rows": 7,
+        "grid_cols": 6,
+        "rum_size_m": 450.0,
+        "center_x": 1685425.0,
+        "center_y": 812400.0,
+        "min_x": 1684075.0,
+        "max_x": 1686775.0,
+        "min_y": 810825.0,
+        "max_y": 813975.0,
+        "h_min_mm_yr": 1.5,
+        "h_median_mm_yr": 3.75,
+        "h_max_mm_yr": 6.0,
+        "up_min_mm_yr": -0.75,
+        "up_median_mm_yr": -0.5,
+        "up_max_mm_yr": -0.25,
+        "sigma_e_median_mm_yr": 2.5,
+        "sigma_n_median_mm_yr": 3.75,
+        "sparse_rows": 0
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              107.7887683,
+              -6.06631142
+            ],
+            [
+              107.81250224,
+              -6.06571768
+            ],
+            [
+              107.8118113,
+              -6.03800093
+            ],
+            [
+              107.7880785,
+              -6.03859194
+            ],
+            [
+              107.7887683,
+              -6.06631142
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "label": "D3_2.3",
+        "district_id": "D3",
+        "subdistrict": "D3_2.3",
+        "type": "field",
+        "theme": "converging V-shaped fields",
+        "test_goal": "D3 45\u00b0 two-field interaction, combination j=3. H classes rescaled low/medium/high to 1.5/3/6 mm/yr; medium/high uncertainty corrected from C1 reference; vertical aid separates left/right field.",
+        "rum_count": 42,
+        "grid_rows": 7,
+        "grid_cols": 6,
+        "rum_size_m": 450.0,
+        "center_x": 1688125.0,
+        "center_y": 812400.0,
+        "min_x": 1686775.0,
+        "max_x": 1689475.0,
+        "min_y": 810825.0,
+        "max_y": 813975.0,
+        "h_min_mm_yr": 1.5,
+        "h_median_mm_yr": 2.25,
+        "h_max_mm_yr": 3.0,
+        "up_min_mm_yr": -0.75,
+        "up_median_mm_yr": -0.5,
+        "up_max_mm_yr": -0.25,
+        "sigma_e_median_mm_yr": 5.0,
+        "sigma_n_median_mm_yr": 7.5,
+        "sparse_rows": 0
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              107.81250224,
+              -6.06571768
+            ],
+            [
+              107.83623382,
+              -6.06512295
+            ],
+            [
+              107.83554173,
+              -6.03740895
+            ],
+            [
+              107.8118113,
+              -6.03800093
+            ],
+            [
+              107.81250224,
+              -6.06571768
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "label": "D3_3.1",
+        "district_id": "D3",
+        "subdistrict": "D3_3.1",
+        "type": "field",
+        "theme": "converging V-shaped fields",
+        "test_goal": "D3 30\u00b0 two-field interaction, combination j=1. H classes rescaled low/medium/high to 1.5/3/6 mm/yr; medium/high uncertainty corrected from C1 reference; vertical aid separates left/right field.",
+        "rum_count": 42,
+        "grid_rows": 7,
+        "grid_cols": 6,
+        "rum_size_m": 450.0,
+        "center_x": 1690825.0,
+        "center_y": 812400.0,
+        "min_x": 1689475.0,
+        "max_x": 1692175.0,
+        "min_y": 810825.0,
+        "max_y": 813975.0,
+        "h_min_mm_yr": 3.0,
+        "h_median_mm_yr": 3.0,
+        "h_max_mm_yr": 3.0,
+        "up_min_mm_yr": 0.0,
+        "up_median_mm_yr": 0.0,
+        "up_max_mm_yr": 0.0,
+        "sigma_e_median_mm_yr": 2.5,
+        "sigma_n_median_mm_yr": 3.75,
+        "sparse_rows": 0
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              107.83623382,
+              -6.06512295
+            ],
+            [
+              107.85996302,
+              -6.06452725
+            ],
+            [
+              107.85926979,
+              -6.03681599
+            ],
+            [
+              107.83554173,
+              -6.03740895
+            ],
+            [
+              107.83623382,
+              -6.06512295
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "label": "D3_3.2",
+        "district_id": "D3",
+        "subdistrict": "D3_3.2",
+        "type": "field",
+        "theme": "converging V-shaped fields",
+        "test_goal": "D3 30\u00b0 two-field interaction, combination j=2. H classes rescaled low/medium/high to 1.5/3/6 mm/yr; medium/high uncertainty corrected from C1 reference; vertical aid separates left/right field.",
+        "rum_count": 42,
+        "grid_rows": 7,
+        "grid_cols": 6,
+        "rum_size_m": 450.0,
+        "center_x": 1693525.0,
+        "center_y": 812400.0,
+        "min_x": 1692175.0,
+        "max_x": 1694875.0,
+        "min_y": 810825.0,
+        "max_y": 813975.0,
+        "h_min_mm_yr": 1.5,
+        "h_median_mm_yr": 3.75,
+        "h_max_mm_yr": 6.0,
+        "up_min_mm_yr": -0.75,
+        "up_median_mm_yr": -0.5,
+        "up_max_mm_yr": -0.25,
+        "sigma_e_median_mm_yr": 2.5,
+        "sigma_n_median_mm_yr": 3.75,
+        "sparse_rows": 0
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              107.85996302,
+              -6.06452725
+            ],
+            [
+              107.88368984,
+              -6.06393056
+            ],
+            [
+              107.88299547,
+              -6.03622205
+            ],
+            [
+              107.85926979,
+              -6.03681599
+            ],
+            [
+              107.85996302,
+              -6.06452725
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "label": "D3_3.3",
+        "district_id": "D3",
+        "subdistrict": "D3_3.3",
+        "type": "field",
+        "theme": "converging V-shaped fields",
+        "test_goal": "D3 30\u00b0 two-field interaction, combination j=3. H classes rescaled low/medium/high to 1.5/3/6 mm/yr; medium/high uncertainty corrected from C1 reference; vertical aid separates left/right field.",
+        "rum_count": 42,
+        "grid_rows": 7,
+        "grid_cols": 6,
+        "rum_size_m": 450.0,
+        "center_x": 1696225.0,
+        "center_y": 812400.0,
+        "min_x": 1694875.0,
+        "max_x": 1697575.0,
+        "min_y": 810825.0,
+        "max_y": 813975.0,
+        "h_min_mm_yr": 1.5,
+        "h_median_mm_yr": 2.25,
+        "h_max_mm_yr": 3.0,
+        "up_min_mm_yr": -0.75,
+        "up_median_mm_yr": -0.5,
+        "up_max_mm_yr": -0.25,
+        "sigma_e_median_mm_yr": 5.0,
+        "sigma_n_median_mm_yr": 7.5,
+        "sparse_rows": 0
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              107.88368984,
+              -6.06393056
+            ],
+            [
+              107.90741429,
+              -6.0633329
+            ],
+            [
+              107.90671878,
+              -6.03562713
+            ],
+            [
+              107.88299547,
+              -6.03622205
+            ],
+            [
+              107.88368984,
+              -6.06393056
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "label": "E3_1.1",
+        "district_id": "E3",
+        "subdistrict": "E3_1.1",
+        "type": "field",
+        "theme": "diverging V-shaped fields",
+        "test_goal": "E3 90\u00b0 two-field interaction, combination j=1. H classes rescaled low/medium/high to 1.5/3/6 mm/yr; medium/high uncertainty corrected from C1 reference; vertical aid separates left/right field.",
+        "rum_count": 42,
+        "grid_rows": 7,
+        "grid_cols": 6,
+        "rum_size_m": 450.0,
+        "center_x": 1674625.0,
+        "center_y": 809250.0,
+        "min_x": 1673275.0,
+        "max_x": 1675975.0,
+        "min_y": 807675.0,
+        "max_y": 810825.0,
+        "h_min_mm_yr": 3.0,
+        "h_median_mm_yr": 3.0,
+        "h_max_mm_yr": 3.0,
+        "up_min_mm_yr": 0.5,
+        "up_median_mm_yr": 0.5,
+        "up_max_mm_yr": 0.5,
+        "sigma_e_median_mm_yr": 2.5,
+        "sigma_n_median_mm_yr": 3.75,
+        "sparse_rows": 0
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              107.69449736,
+              -6.0964068
+            ],
+            [
+              107.71824188,
+              -6.09581428
+            ],
+            [
+              107.71755231,
+              -6.06808674
+            ],
+            [
+              107.69380893,
+              -6.06867654
+            ],
+            [
+              107.69449736,
+              -6.0964068
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "label": "E3_1.2",
+        "district_id": "E3",
+        "subdistrict": "E3_1.2",
+        "type": "field",
+        "theme": "diverging V-shaped fields",
+        "test_goal": "E3 90\u00b0 two-field interaction, combination j=2. H classes rescaled low/medium/high to 1.5/3/6 mm/yr; medium/high uncertainty corrected from C1 reference; vertical aid separates left/right field.",
+        "rum_count": 42,
+        "grid_rows": 7,
+        "grid_cols": 6,
+        "rum_size_m": 450.0,
+        "center_x": 1677325.0,
+        "center_y": 809250.0,
+        "min_x": 1675975.0,
+        "max_x": 1678675.0,
+        "min_y": 807675.0,
+        "max_y": 810825.0,
+        "h_min_mm_yr": 1.5,
+        "h_median_mm_yr": 3.75,
+        "h_max_mm_yr": 6.0,
+        "up_min_mm_yr": -2.5,
+        "up_median_mm_yr": -0.75,
+        "up_max_mm_yr": 1.0,
+        "sigma_e_median_mm_yr": 2.5,
+        "sigma_n_median_mm_yr": 3.75,
+        "sparse_rows": 0
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              107.71824188,
+              -6.09581428
+            ],
+            [
+              107.74198405,
+              -6.09522077
+            ],
+            [
+              107.74129333,
+              -6.06749595
+            ],
+            [
+              107.71755231,
+              -6.06808674
+            ],
+            [
+              107.71824188,
+              -6.09581428
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "label": "E3_1.3",
+        "district_id": "E3",
+        "subdistrict": "E3_1.3",
+        "type": "field",
+        "theme": "diverging V-shaped fields",
+        "test_goal": "E3 90\u00b0 two-field interaction, combination j=3. H classes rescaled low/medium/high to 1.5/3/6 mm/yr; medium/high uncertainty corrected from C1 reference; vertical aid separates left/right field.",
+        "rum_count": 42,
+        "grid_rows": 7,
+        "grid_cols": 6,
+        "rum_size_m": 450.0,
+        "center_x": 1680025.0,
+        "center_y": 809250.0,
+        "min_x": 1678675.0,
+        "max_x": 1681375.0,
+        "min_y": 807675.0,
+        "max_y": 810825.0,
+        "h_min_mm_yr": 1.5,
+        "h_median_mm_yr": 2.25,
+        "h_max_mm_yr": 3.0,
+        "up_min_mm_yr": -2.5,
+        "up_median_mm_yr": -0.75,
+        "up_max_mm_yr": 1.0,
+        "sigma_e_median_mm_yr": 5.0,
+        "sigma_n_median_mm_yr": 7.5,
+        "sparse_rows": 0
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              107.74198405,
+              -6.09522077
+            ],
+            [
+              107.76572387,
+              -6.09462627
+            ],
+            [
+              107.765032,
+              -6.06690417
+            ],
+            [
+              107.74129333,
+              -6.06749595
+            ],
+            [
+              107.74198405,
+              -6.09522077
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "label": "E3_2.1",
+        "district_id": "E3",
+        "subdistrict": "E3_2.1",
+        "type": "field",
+        "theme": "diverging V-shaped fields",
+        "test_goal": "E3 45\u00b0 two-field interaction, combination j=1. H classes rescaled low/medium/high to 1.5/3/6 mm/yr; medium/high uncertainty corrected from C1 reference; vertical aid separates left/right field.",
+        "rum_count": 42,
+        "grid_rows": 7,
+        "grid_cols": 6,
+        "rum_size_m": 450.0,
+        "center_x": 1682725.0,
+        "center_y": 809250.0,
+        "min_x": 1681375.0,
+        "max_x": 1684075.0,
+        "min_y": 807675.0,
+        "max_y": 810825.0,
+        "h_min_mm_yr": 3.0,
+        "h_median_mm_yr": 3.0,
+        "h_max_mm_yr": 3.0,
+        "up_min_mm_yr": 0.5,
+        "up_median_mm_yr": 0.5,
+        "up_max_mm_yr": 0.5,
+        "sigma_e_median_mm_yr": 2.5,
+        "sigma_n_median_mm_yr": 3.75,
+        "sparse_rows": 0
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              107.76572387,
+              -6.09462627
+            ],
+            [
+              107.78946132,
+              -6.09403079
+            ],
+            [
+              107.7887683,
+              -6.06631142
+            ],
+            [
+              107.765032,
+              -6.06690417
+            ],
+            [
+              107.76572387,
+              -6.09462627
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "label": "E3_2.2",
+        "district_id": "E3",
+        "subdistrict": "E3_2.2",
+        "type": "field",
+        "theme": "diverging V-shaped fields",
+        "test_goal": "E3 45\u00b0 two-field interaction, combination j=2. H classes rescaled low/medium/high to 1.5/3/6 mm/yr; medium/high uncertainty corrected from C1 reference; vertical aid separates left/right field.",
+        "rum_count": 42,
+        "grid_rows": 7,
+        "grid_cols": 6,
+        "rum_size_m": 450.0,
+        "center_x": 1685425.0,
+        "center_y": 809250.0,
+        "min_x": 1684075.0,
+        "max_x": 1686775.0,
+        "min_y": 807675.0,
+        "max_y": 810825.0,
+        "h_min_mm_yr": 1.5,
+        "h_median_mm_yr": 3.75,
+        "h_max_mm_yr": 6.0,
+        "up_min_mm_yr": -2.5,
+        "up_median_mm_yr": -0.75,
+        "up_max_mm_yr": 1.0,
+        "sigma_e_median_mm_yr": 2.5,
+        "sigma_n_median_mm_yr": 3.75,
+        "sparse_rows": 0
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              107.78946132,
+              -6.09403079
+            ],
+            [
+              107.81319641,
+              -6.09343431
+            ],
+            [
+              107.81250224,
+              -6.06571768
+            ],
+            [
+              107.7887683,
+              -6.06631142
+            ],
+            [
+              107.78946132,
+              -6.09403079
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "label": "E3_2.3",
+        "district_id": "E3",
+        "subdistrict": "E3_2.3",
+        "type": "field",
+        "theme": "diverging V-shaped fields",
+        "test_goal": "E3 45\u00b0 two-field interaction, combination j=3. H classes rescaled low/medium/high to 1.5/3/6 mm/yr; medium/high uncertainty corrected from C1 reference; vertical aid separates left/right field.",
+        "rum_count": 42,
+        "grid_rows": 7,
+        "grid_cols": 6,
+        "rum_size_m": 450.0,
+        "center_x": 1688125.0,
+        "center_y": 809250.0,
+        "min_x": 1686775.0,
+        "max_x": 1689475.0,
+        "min_y": 807675.0,
+        "max_y": 810825.0,
+        "h_min_mm_yr": 1.5,
+        "h_median_mm_yr": 2.25,
+        "h_max_mm_yr": 3.0,
+        "up_min_mm_yr": -2.5,
+        "up_median_mm_yr": -0.75,
+        "up_max_mm_yr": 1.0,
+        "sigma_e_median_mm_yr": 5.0,
+        "sigma_n_median_mm_yr": 7.5,
+        "sparse_rows": 0
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              107.81319641,
+              -6.09343431
+            ],
+            [
+              107.83692913,
+              -6.09283685
+            ],
+            [
+              107.83623382,
+              -6.06512295
+            ],
+            [
+              107.81250224,
+              -6.06571768
+            ],
+            [
+              107.81319641,
+              -6.09343431
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "label": "E3_3.1",
+        "district_id": "E3",
+        "subdistrict": "E3_3.1",
+        "type": "field",
+        "theme": "diverging V-shaped fields",
+        "test_goal": "E3 30\u00b0 two-field interaction, combination j=1. H classes rescaled low/medium/high to 1.5/3/6 mm/yr; medium/high uncertainty corrected from C1 reference; vertical aid separates left/right field.",
+        "rum_count": 42,
+        "grid_rows": 7,
+        "grid_cols": 6,
+        "rum_size_m": 450.0,
+        "center_x": 1690825.0,
+        "center_y": 809250.0,
+        "min_x": 1689475.0,
+        "max_x": 1692175.0,
+        "min_y": 807675.0,
+        "max_y": 810825.0,
+        "h_min_mm_yr": 3.0,
+        "h_median_mm_yr": 3.0,
+        "h_max_mm_yr": 3.0,
+        "up_min_mm_yr": 0.5,
+        "up_median_mm_yr": 0.5,
+        "up_max_mm_yr": 0.5,
+        "sigma_e_median_mm_yr": 2.5,
+        "sigma_n_median_mm_yr": 3.75,
+        "sparse_rows": 0
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              107.83692913,
+              -6.09283685
+            ],
+            [
+              107.86065948,
+              -6.09223841
+            ],
+            [
+              107.85996302,
+              -6.06452725
+            ],
+            [
+              107.83623382,
+              -6.06512295
+            ],
+            [
+              107.83692913,
+              -6.09283685
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "label": "E3_3.2",
+        "district_id": "E3",
+        "subdistrict": "E3_3.2",
+        "type": "field",
+        "theme": "diverging V-shaped fields",
+        "test_goal": "E3 30\u00b0 two-field interaction, combination j=2. H classes rescaled low/medium/high to 1.5/3/6 mm/yr; medium/high uncertainty corrected from C1 reference; vertical aid separates left/right field.",
+        "rum_count": 42,
+        "grid_rows": 7,
+        "grid_cols": 6,
+        "rum_size_m": 450.0,
+        "center_x": 1693525.0,
+        "center_y": 809250.0,
+        "min_x": 1692175.0,
+        "max_x": 1694875.0,
+        "min_y": 807675.0,
+        "max_y": 810825.0,
+        "h_min_mm_yr": 1.5,
+        "h_median_mm_yr": 3.75,
+        "h_max_mm_yr": 6.0,
+        "up_min_mm_yr": -2.5,
+        "up_median_mm_yr": -0.75,
+        "up_max_mm_yr": 1.0,
+        "sigma_e_median_mm_yr": 2.5,
+        "sigma_n_median_mm_yr": 3.75,
+        "sparse_rows": 0
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              107.86065948,
+              -6.09223841
+            ],
+            [
+              107.88438745,
+              -6.09163897
+            ],
+            [
+              107.88368984,
+              -6.06393056
+            ],
+            [
+              107.85996302,
+              -6.06452725
+            ],
+            [
+              107.86065948,
+              -6.09223841
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "label": "E3_3.3",
+        "district_id": "E3",
+        "subdistrict": "E3_3.3",
+        "type": "field",
+        "theme": "diverging V-shaped fields",
+        "test_goal": "E3 30\u00b0 two-field interaction, combination j=3. H classes rescaled low/medium/high to 1.5/3/6 mm/yr; medium/high uncertainty corrected from C1 reference; vertical aid separates left/right field.",
+        "rum_count": 42,
+        "grid_rows": 7,
+        "grid_cols": 6,
+        "rum_size_m": 450.0,
+        "center_x": 1696225.0,
+        "center_y": 809250.0,
+        "min_x": 1694875.0,
+        "max_x": 1697575.0,
+        "min_y": 807675.0,
+        "max_y": 810825.0,
+        "h_min_mm_yr": 1.5,
+        "h_median_mm_yr": 2.25,
+        "h_max_mm_yr": 3.0,
+        "up_min_mm_yr": -2.5,
+        "up_median_mm_yr": -0.75,
+        "up_max_mm_yr": 1.0,
+        "sigma_e_median_mm_yr": 5.0,
+        "sigma_n_median_mm_yr": 7.5,
+        "sparse_rows": 0
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              107.88438745,
+              -6.09163897
+            ],
+            [
+              107.90811304,
+              -6.09103856
+            ],
+            [
+              107.90741429,
+              -6.0633329
+            ],
+            [
+              107.88368984,
+              -6.06393056
+            ],
+            [
+              107.88438745,
+              -6.09163897
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "label": "F1",
+        "district_id": "F1",
+        "subdistrict": "F1",
+        "type": "field",
+        "theme": "gradual transition field",
+        "test_goal": "Gradual collision small; H=4 medium uncertainty except top row zero; vertical left/right = -0.75/-0.25.",
+        "rum_count": 196,
+        "grid_rows": 14,
+        "grid_cols": 14,
+        "rum_size_m": 450.0,
+        "center_x": 1662925.0,
+        "center_y": 804525.0,
+        "min_x": 1659775.0,
+        "max_x": 1666075.0,
+        "min_y": 801375.0,
+        "max_y": 807675.0,
+        "h_min_mm_yr": 0.0,
+        "h_median_mm_yr": 4.0,
+        "h_max_mm_yr": 4.0,
+        "up_min_mm_yr": -0.75,
+        "up_median_mm_yr": -0.5,
+        "up_max_mm_yr": -0.25,
+        "sigma_e_median_mm_yr": 2.5,
+        "sigma_n_median_mm_yr": 3.75,
+        "sparse_rows": 14
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              107.57711442,
+              -6.15484174
+            ],
+            [
+              107.63254741,
+              -6.15345663
+            ],
+            [
+              107.63116715,
+              -6.09798201
+            ],
+            [
+              107.57573957,
+              -6.09935454
+            ],
+            [
+              107.57711442,
+              -6.15484174
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "label": "F2",
+        "district_id": "F2",
+        "subdistrict": "F2",
+        "type": "field",
+        "theme": "gradual transition field",
+        "test_goal": "Gradual collision large; H=4 medium uncertainty except top row zero; vertical left/right = -0.75/-0.25.",
+        "rum_count": 196,
+        "grid_rows": 14,
+        "grid_cols": 14,
+        "rum_size_m": 450.0,
+        "center_x": 1669225.0,
+        "center_y": 804525.0,
+        "min_x": 1666075.0,
+        "max_x": 1672375.0,
+        "min_y": 801375.0,
+        "max_y": 807675.0,
+        "h_min_mm_yr": 0.0,
+        "h_median_mm_yr": 4.0,
+        "h_max_mm_yr": 4.0,
+        "up_min_mm_yr": -0.75,
+        "up_median_mm_yr": -0.5,
+        "up_max_mm_yr": -0.25,
+        "sigma_e_median_mm_yr": 2.5,
+        "sigma_n_median_mm_yr": 3.75,
+        "sparse_rows": 14
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              107.63254741,
+              -6.15345663
+            ],
+            [
+              107.68796767,
+              -6.15206608
+            ],
+            [
+              107.68658199,
+              -6.09660408
+            ],
+            [
+              107.63116715,
+              -6.09798201
+            ],
+            [
+              107.63254741,
+              -6.15345663
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "label": "F3",
+        "district_id": "F3",
+        "subdistrict": "F3",
+        "type": "field",
+        "theme": "random/no-pattern field",
+        "test_goal": "Random directions, H range 0\u20132 mm/yr, uncertainty random from 0 to C1 high, vertical 0 everywhere.",
+        "rum_count": 196,
+        "grid_rows": 14,
+        "grid_cols": 14,
+        "rum_size_m": 450.0,
+        "center_x": 1675525.0,
+        "center_y": 804525.0,
+        "min_x": 1672375.0,
+        "max_x": 1678675.0,
+        "min_y": 801375.0,
+        "max_y": 807675.0,
+        "h_min_mm_yr": 0.000695,
+        "h_median_mm_yr": 1.050266,
+        "h_max_mm_yr": 1.997718,
+        "up_min_mm_yr": 0.0,
+        "up_median_mm_yr": 0.0,
+        "up_max_mm_yr": 0.0,
+        "sigma_e_median_mm_yr": 2.442007,
+        "sigma_n_median_mm_yr": 3.663011,
+        "sparse_rows": 14
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              107.68796767,
+              -6.15206608
+            ],
+            [
+              107.74337513,
+              -6.15067009
+            ],
+            [
+              107.74198405,
+              -6.09522077
+            ],
+            [
+              107.68658199,
+              -6.09660408
+            ],
+            [
+              107.68796767,
+              -6.15206608
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "label": "F4",
+        "district_id": "F4",
+        "subdistrict": "F4",
+        "type": "field",
+        "theme": "gradual transition field",
+        "test_goal": "Gradual divergence large; H=4 medium uncertainty except top row zero; vertical left/right = +0.5/+0.25.",
+        "rum_count": 196,
+        "grid_rows": 14,
+        "grid_cols": 14,
+        "rum_size_m": 450.0,
+        "center_x": 1681825.0,
+        "center_y": 804525.0,
+        "min_x": 1678675.0,
+        "max_x": 1684975.0,
+        "min_y": 801375.0,
+        "max_y": 807675.0,
+        "h_min_mm_yr": 0.0,
+        "h_median_mm_yr": 4.0,
+        "h_max_mm_yr": 4.0,
+        "up_min_mm_yr": 0.25,
+        "up_median_mm_yr": 0.375,
+        "up_max_mm_yr": 0.5,
+        "sigma_e_median_mm_yr": 2.5,
+        "sigma_n_median_mm_yr": 3.75,
+        "sparse_rows": 14
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              107.74337513,
+              -6.15067009
+            ],
+            [
+              107.79876976,
+              -6.14926866
+            ],
+            [
+              107.79737328,
+              -6.09383207
+            ],
+            [
+              107.74198405,
+              -6.09522077
+            ],
+            [
+              107.74337513,
+              -6.15067009
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "label": "F5",
+        "district_id": "F5",
+        "subdistrict": "F5",
+        "type": "field",
+        "theme": "gradual transition field",
+        "test_goal": "Gradual divergence medium; H=4 medium uncertainty except top row zero; vertical left/right = +0.5/+0.25.",
+        "rum_count": 196,
+        "grid_rows": 14,
+        "grid_cols": 14,
+        "rum_size_m": 450.0,
+        "center_x": 1688125.0,
+        "center_y": 804525.0,
+        "min_x": 1684975.0,
+        "max_x": 1691275.0,
+        "min_y": 801375.0,
+        "max_y": 807675.0,
+        "h_min_mm_yr": 0.0,
+        "h_median_mm_yr": 4.0,
+        "h_max_mm_yr": 4.0,
+        "up_min_mm_yr": 0.25,
+        "up_median_mm_yr": 0.375,
+        "up_max_mm_yr": 0.5,
+        "sigma_e_median_mm_yr": 2.5,
+        "sigma_n_median_mm_yr": 3.75,
+        "sparse_rows": 14
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              107.79876976,
+              -6.14926866
+            ],
+            [
+              107.85415149,
+              -6.14786182
+            ],
+            [
+              107.85274963,
+              -6.092438
+            ],
+            [
+              107.79737328,
+              -6.09383207
+            ],
+            [
+              107.79876976,
+              -6.14926866
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "label": "F6",
+        "district_id": "F6",
+        "subdistrict": "F6",
+        "type": "field",
+        "theme": "gradual transition field",
+        "test_goal": "Gradual divergence small; H=4 medium uncertainty except top row zero; vertical left/right = +0.5/+0.25.",
+        "rum_count": 196,
+        "grid_rows": 14,
+        "grid_cols": 14,
+        "rum_size_m": 450.0,
+        "center_x": 1694425.0,
+        "center_y": 804525.0,
+        "min_x": 1691275.0,
+        "max_x": 1697575.0,
+        "min_y": 801375.0,
+        "max_y": 807675.0,
+        "h_min_mm_yr": 0.0,
+        "h_median_mm_yr": 4.0,
+        "h_max_mm_yr": 4.0,
+        "up_min_mm_yr": 0.25,
+        "up_median_mm_yr": 0.375,
+        "up_max_mm_yr": 0.5,
+        "sigma_e_median_mm_yr": 2.5,
+        "sigma_n_median_mm_yr": 3.75,
+        "sparse_rows": 14
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              107.85415149,
+              -6.14786182
+            ],
+            [
+              107.90952029,
+              -6.14644955
+            ],
+            [
+              107.90811304,
+              -6.09103856
+            ],
+            [
+              107.85274963,
+              -6.092438
+            ],
+            [
+              107.85415149,
+              -6.14786182
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "label": "NC_nothing_happened",
+        "district_id": "NC",
+        "subdistrict": "NC_nothing_happened",
+        "type": "neutral/zero field",
+        "theme": "neutral strip",
+        "test_goal": "Zero horizontal and vertical motion, zero uncertainty; intended to save particles / visual gap.",
+        "rum_count": 28,
+        "grid_rows": 14,
+        "grid_cols": 2,
+        "rum_size_m": 450.0,
+        "center_x": 1672825.0,
+        "center_y": 810825.0,
+        "min_x": 1672375.0,
+        "max_x": 1673275.0,
+        "min_y": 807675.0,
+        "max_y": 813975.0,
+        "h_min_mm_yr": 0.0,
+        "h_median_mm_yr": 0.0,
+        "h_max_mm_yr": 0.0,
+        "up_min_mm_yr": 0.0,
+        "up_median_mm_yr": 0.0,
+        "up_max_mm_yr": 0.0,
+        "sigma_e_median_mm_yr": 0.0,
+        "sigma_n_median_mm_yr": 0.0,
+        "sparse_rows": 0
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              107.68658199,
+              -6.09660408
+            ],
+            [
+              107.69449736,
+              -6.0964068
+            ],
+            [
+              107.6931237,
+              -6.04094618
+            ],
+            [
+              107.6852091,
+              -6.04114166
+            ],
+            [
+              107.68658199,
+              -6.09660408
+            ]
+          ]
+        ]
+      }
+    }
+  ],
+  "crs_conversion": {
+    "source_crs": "EPSG:23830",
+    "target_crs": "EPSG:4326",
+    "axis_order": "always_xy",
+    "source_note": "Converted from synthetic outline local/projected x/y coordinates using project_config.json source_crs."
+  }
+}

@@ -1,0 +1,1457 @@
+{
+  "type": "FeatureCollection",
+  "name": "synthbowl_district_outlines_local",
+  "crs": {
+    "type": "name",
+    "properties": {
+      "name": "LOCAL_SYNTHBOWL_METRIC_COORDINATES_FROM_SYNTHETIC_CSV"
+    }
+  },
+  "metadata": {
+    "source_files": [
+      "batch_A1_complete_district_576RUM.csv",
+      "batch_A2_complete_district_225RUM.csv",
+      "batch_A3_complete_district_225RUM.csv",
+      "batch_A4_complete_district_225RUM_REV1.csv",
+      "batch_A5_complete_district_225RUM.csv",
+      "batch_B1_complete_district_81RUM.csv",
+      "batch_B2_B3_complete_districts_162RUM_REV1_H1mm.csv",
+      "batch_B4_B5_B6_complete_districts.csv",
+      "batch_C1_complete_district_576RUM.csv",
+      "batch_C2_C3_complete_districts_1440RUM.csv",
+      "batch_D1_D2_complete_districts_392RUM.csv",
+      "batch_D3_E3_NC_complete_districts_784RUM.csv",
+      "batch_F1_F6_complete_districts_1176RUM_REV1_F4fixed.csv"
+    ],
+    "coordinate_note": "Coordinates are the synthetic CSV x_rum/y_rum metric coordinates expanded by half a RUM size. No WGS84 transform was applied.",
+    "feature_note": "One feature per district/subdistrict group. Bounding polygons are rectangular envelopes of RUM cells.",
+    "manual_patch_note": "B4/B5 background east sign was treated as manually corrected to southeast in notes/final compiled CSV; outlines are location-only and unaffected by velocity sign."
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "label": "A1",
+        "district_id": "A1",
+        "subdistrict": "ALL",
+        "type": "bowl",
+        "theme": "district outline",
+        "test_goal": "District-level outline/dissolve of all subdistrict features.",
+        "rum_count": 576,
+        "grid_rows": 24,
+        "grid_cols": 24,
+        "rum_size_m": 450.0,
+        "center_x": 1665175.0,
+        "center_y": 830175.0,
+        "min_x": 1659775.0,
+        "max_x": 1670575.0,
+        "min_y": 824775.0,
+        "max_y": 835575.0,
+        "h_min_mm_yr": 0.0,
+        "h_median_mm_yr": 1.289323,
+        "h_max_mm_yr": 9.999533,
+        "up_min_mm_yr": -24.809856,
+        "up_median_mm_yr": 0.0,
+        "up_max_mm_yr": 0.0,
+        "sigma_e_median_mm_yr": 2.5,
+        "sigma_n_median_mm_yr": 3.75,
+        "sparse_rows": 0
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              1659775.0,
+              824775.0
+            ],
+            [
+              1670575.0,
+              824775.0
+            ],
+            [
+              1670575.0,
+              835575.0
+            ],
+            [
+              1659775.0,
+              835575.0
+            ],
+            [
+              1659775.0,
+              824775.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "label": "A2",
+        "district_id": "A2",
+        "subdistrict": "ALL",
+        "type": "bowl",
+        "theme": "district outline",
+        "test_goal": "District-level outline/dissolve of all subdistrict features.",
+        "rum_count": 225,
+        "grid_rows": 15,
+        "grid_cols": 15,
+        "rum_size_m": 450.0,
+        "center_x": 1673950.0,
+        "center_y": 832200.0,
+        "min_x": 1670575.0,
+        "max_x": 1677325.0,
+        "min_y": 828825.0,
+        "max_y": 835575.0,
+        "h_min_mm_yr": 0.0,
+        "h_median_mm_yr": 0.900254,
+        "h_max_mm_yr": 9.999527,
+        "up_min_mm_yr": -25.0,
+        "up_median_mm_yr": 1.5,
+        "up_max_mm_yr": 1.5,
+        "sigma_e_median_mm_yr": 2.5,
+        "sigma_n_median_mm_yr": 3.75,
+        "sparse_rows": 0
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              1670575.0,
+              828825.0
+            ],
+            [
+              1677325.0,
+              828825.0
+            ],
+            [
+              1677325.0,
+              835575.0
+            ],
+            [
+              1670575.0,
+              835575.0
+            ],
+            [
+              1670575.0,
+              828825.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "label": "A3",
+        "district_id": "A3",
+        "subdistrict": "ALL",
+        "type": "bowl",
+        "theme": "district outline",
+        "test_goal": "District-level outline/dissolve of all subdistrict features.",
+        "rum_count": 225,
+        "grid_rows": 15,
+        "grid_cols": 15,
+        "rum_size_m": 450.0,
+        "center_x": 1680700.0,
+        "center_y": 832200.0,
+        "min_x": 1677325.0,
+        "max_x": 1684075.0,
+        "min_y": 828825.0,
+        "max_y": 835575.0,
+        "h_min_mm_yr": 0.0,
+        "h_median_mm_yr": 0.900254,
+        "h_max_mm_yr": 17.999149,
+        "up_min_mm_yr": -45.0,
+        "up_median_mm_yr": 0.0,
+        "up_max_mm_yr": 0.0,
+        "sigma_e_median_mm_yr": 2.5,
+        "sigma_n_median_mm_yr": 3.75,
+        "sparse_rows": 0
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              1677325.0,
+              828825.0
+            ],
+            [
+              1684075.0,
+              828825.0
+            ],
+            [
+              1684075.0,
+              835575.0
+            ],
+            [
+              1677325.0,
+              835575.0
+            ],
+            [
+              1677325.0,
+              828825.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "label": "A4",
+        "district_id": "A4",
+        "subdistrict": "ALL",
+        "type": "bowl",
+        "theme": "district outline",
+        "test_goal": "District-level outline/dissolve of all subdistrict features.",
+        "rum_count": 225,
+        "grid_rows": 15,
+        "grid_cols": 15,
+        "rum_size_m": 450.0,
+        "center_x": 1687450.0,
+        "center_y": 832200.0,
+        "min_x": 1684075.0,
+        "max_x": 1690825.0,
+        "min_y": 828825.0,
+        "max_y": 835575.0,
+        "h_min_mm_yr": 0.0,
+        "h_median_mm_yr": 0.900254,
+        "h_max_mm_yr": 9.999527,
+        "up_min_mm_yr": -25.0,
+        "up_median_mm_yr": 1.5,
+        "up_max_mm_yr": 1.5,
+        "sigma_e_median_mm_yr": 2.5,
+        "sigma_n_median_mm_yr": 3.75,
+        "sparse_rows": 0
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              1684075.0,
+              828825.0
+            ],
+            [
+              1690825.0,
+              828825.0
+            ],
+            [
+              1690825.0,
+              835575.0
+            ],
+            [
+              1684075.0,
+              835575.0
+            ],
+            [
+              1684075.0,
+              828825.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "label": "A5",
+        "district_id": "A5",
+        "subdistrict": "ALL",
+        "type": "bowl",
+        "theme": "district outline",
+        "test_goal": "District-level outline/dissolve of all subdistrict features.",
+        "rum_count": 225,
+        "grid_rows": 15,
+        "grid_cols": 15,
+        "rum_size_m": 450.0,
+        "center_x": 1694200.0,
+        "center_y": 832200.0,
+        "min_x": 1690825.0,
+        "max_x": 1697575.0,
+        "min_y": 828825.0,
+        "max_y": 835575.0,
+        "h_min_mm_yr": 0.0,
+        "h_median_mm_yr": 0.900254,
+        "h_max_mm_yr": 19.999054,
+        "up_min_mm_yr": -25.0,
+        "up_median_mm_yr": 0.0,
+        "up_max_mm_yr": 0.0,
+        "sigma_e_median_mm_yr": 2.5,
+        "sigma_n_median_mm_yr": 3.75,
+        "sparse_rows": 0
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              1690825.0,
+              828825.0
+            ],
+            [
+              1697575.0,
+              828825.0
+            ],
+            [
+              1697575.0,
+              835575.0
+            ],
+            [
+              1690825.0,
+              835575.0
+            ],
+            [
+              1690825.0,
+              828825.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "label": "B1",
+        "district_id": "B1",
+        "subdistrict": "ALL",
+        "type": "bowl",
+        "theme": "district outline",
+        "test_goal": "District-level outline/dissolve of all subdistrict features.",
+        "rum_count": 81,
+        "grid_rows": 9,
+        "grid_cols": 9,
+        "rum_size_m": 450.0,
+        "center_x": 1672600.0,
+        "center_y": 826800.0,
+        "min_x": 1670575.0,
+        "max_x": 1674625.0,
+        "min_y": 824775.0,
+        "max_y": 828825.0,
+        "h_min_mm_yr": 0.0,
+        "h_median_mm_yr": 0.866051,
+        "h_max_mm_yr": 9.787839,
+        "up_min_mm_yr": -25.0,
+        "up_median_mm_yr": 0.0,
+        "up_max_mm_yr": 0.0,
+        "sigma_e_median_mm_yr": 2.5,
+        "sigma_n_median_mm_yr": 3.75,
+        "sparse_rows": 0
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              1670575.0,
+              824775.0
+            ],
+            [
+              1674625.0,
+              824775.0
+            ],
+            [
+              1674625.0,
+              828825.0
+            ],
+            [
+              1670575.0,
+              828825.0
+            ],
+            [
+              1670575.0,
+              824775.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "label": "B2",
+        "district_id": "B2",
+        "subdistrict": "ALL",
+        "type": "bowl",
+        "theme": "district outline",
+        "test_goal": "District-level outline/dissolve of all subdistrict features.",
+        "rum_count": 81,
+        "grid_rows": 9,
+        "grid_cols": 9,
+        "rum_size_m": 450.0,
+        "center_x": 1676650.0,
+        "center_y": 826800.0,
+        "min_x": 1674625.0,
+        "max_x": 1678675.0,
+        "min_y": 824775.0,
+        "max_y": 828825.0,
+        "h_min_mm_yr": 0.0,
+        "h_median_mm_yr": 1.0,
+        "h_max_mm_yr": 9.787839,
+        "up_min_mm_yr": -25.0,
+        "up_median_mm_yr": 1.0,
+        "up_max_mm_yr": 1.0,
+        "sigma_e_median_mm_yr": 2.5,
+        "sigma_n_median_mm_yr": 3.75,
+        "sparse_rows": 0
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              1674625.0,
+              824775.0
+            ],
+            [
+              1678675.0,
+              824775.0
+            ],
+            [
+              1678675.0,
+              828825.0
+            ],
+            [
+              1674625.0,
+              828825.0
+            ],
+            [
+              1674625.0,
+              824775.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "label": "B3",
+        "district_id": "B3",
+        "subdistrict": "ALL",
+        "type": "bowl",
+        "theme": "district outline",
+        "test_goal": "District-level outline/dissolve of all subdistrict features.",
+        "rum_count": 81,
+        "grid_rows": 9,
+        "grid_cols": 9,
+        "rum_size_m": 450.0,
+        "center_x": 1680700.0,
+        "center_y": 826800.0,
+        "min_x": 1678675.0,
+        "max_x": 1682725.0,
+        "min_y": 824775.0,
+        "max_y": 828825.0,
+        "h_min_mm_yr": 0.0,
+        "h_median_mm_yr": 1.0,
+        "h_max_mm_yr": 9.787839,
+        "up_min_mm_yr": -25.0,
+        "up_median_mm_yr": 0.0,
+        "up_max_mm_yr": 0.0,
+        "sigma_e_median_mm_yr": 2.5,
+        "sigma_n_median_mm_yr": 3.75,
+        "sparse_rows": 0
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              1678675.0,
+              824775.0
+            ],
+            [
+              1682725.0,
+              824775.0
+            ],
+            [
+              1682725.0,
+              828825.0
+            ],
+            [
+              1678675.0,
+              828825.0
+            ],
+            [
+              1678675.0,
+              824775.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "label": "B4",
+        "district_id": "B4",
+        "subdistrict": "ALL",
+        "type": "bowl",
+        "theme": "district outline",
+        "test_goal": "District-level outline/dissolve of all subdistrict features.",
+        "rum_count": 81,
+        "grid_rows": 9,
+        "grid_cols": 9,
+        "rum_size_m": 450.0,
+        "center_x": 1684750.0,
+        "center_y": 826800.0,
+        "min_x": 1682725.0,
+        "max_x": 1686775.0,
+        "min_y": 824775.0,
+        "max_y": 828825.0,
+        "h_min_mm_yr": 0.0,
+        "h_median_mm_yr": 2.5,
+        "h_max_mm_yr": 9.787839,
+        "up_min_mm_yr": -25.0,
+        "up_median_mm_yr": 1.0,
+        "up_max_mm_yr": 1.0,
+        "sigma_e_median_mm_yr": 2.5,
+        "sigma_n_median_mm_yr": 3.75,
+        "sparse_rows": 0
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              1682725.0,
+              824775.0
+            ],
+            [
+              1686775.0,
+              824775.0
+            ],
+            [
+              1686775.0,
+              828825.0
+            ],
+            [
+              1682725.0,
+              828825.0
+            ],
+            [
+              1682725.0,
+              824775.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "label": "B5",
+        "district_id": "B5",
+        "subdistrict": "ALL",
+        "type": "bowl",
+        "theme": "district outline",
+        "test_goal": "District-level outline/dissolve of all subdistrict features.",
+        "rum_count": 81,
+        "grid_rows": 9,
+        "grid_cols": 9,
+        "rum_size_m": 450.0,
+        "center_x": 1688800.0,
+        "center_y": 826800.0,
+        "min_x": 1686775.0,
+        "max_x": 1690825.0,
+        "min_y": 824775.0,
+        "max_y": 828825.0,
+        "h_min_mm_yr": 0.0,
+        "h_median_mm_yr": 2.5,
+        "h_max_mm_yr": 9.787839,
+        "up_min_mm_yr": -25.0,
+        "up_median_mm_yr": 0.0,
+        "up_max_mm_yr": 0.0,
+        "sigma_e_median_mm_yr": 0.08,
+        "sigma_n_median_mm_yr": 0.12,
+        "sparse_rows": 0
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              1686775.0,
+              824775.0
+            ],
+            [
+              1690825.0,
+              824775.0
+            ],
+            [
+              1690825.0,
+              828825.0
+            ],
+            [
+              1686775.0,
+              828825.0
+            ],
+            [
+              1686775.0,
+              824775.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "label": "B6",
+        "district_id": "B6",
+        "subdistrict": "ALL",
+        "type": "bowl",
+        "theme": "district outline",
+        "test_goal": "District-level outline/dissolve of all subdistrict features.",
+        "rum_count": 135,
+        "grid_rows": 9,
+        "grid_cols": 15,
+        "rum_size_m": 450.0,
+        "center_x": 1694200.0,
+        "center_y": 826800.0,
+        "min_x": 1690825.0,
+        "max_x": 1697575.0,
+        "min_y": 824775.0,
+        "max_y": 828825.0,
+        "h_min_mm_yr": 0.0,
+        "h_median_mm_yr": 2.5,
+        "h_max_mm_yr": 9.911346,
+        "up_min_mm_yr": -25.0,
+        "up_median_mm_yr": 1.0,
+        "up_max_mm_yr": 1.0,
+        "sigma_e_median_mm_yr": 0.08,
+        "sigma_n_median_mm_yr": 0.12,
+        "sparse_rows": 0
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              1690825.0,
+              824775.0
+            ],
+            [
+              1697575.0,
+              824775.0
+            ],
+            [
+              1697575.0,
+              828825.0
+            ],
+            [
+              1690825.0,
+              828825.0
+            ],
+            [
+              1690825.0,
+              824775.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "label": "C1",
+        "district_id": "C1",
+        "subdistrict": "ALL",
+        "type": "field",
+        "theme": "district outline",
+        "test_goal": "District-level outline/dissolve of all subdistrict features.",
+        "rum_count": 576,
+        "grid_rows": 24,
+        "grid_cols": 24,
+        "rum_size_m": 450.0,
+        "center_x": 1665175.0,
+        "center_y": 819375.0,
+        "min_x": 1659775.0,
+        "max_x": 1670575.0,
+        "min_y": 813975.0,
+        "max_y": 824775.0,
+        "h_min_mm_yr": 0.0,
+        "h_median_mm_yr": 1.5,
+        "h_max_mm_yr": 10.0,
+        "up_min_mm_yr": 0.25,
+        "up_median_mm_yr": 0.5,
+        "up_max_mm_yr": 0.5,
+        "sigma_e_median_mm_yr": 1.375,
+        "sigma_n_median_mm_yr": 2.0625,
+        "sparse_rows": 0
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              1659775.0,
+              813975.0
+            ],
+            [
+              1670575.0,
+              813975.0
+            ],
+            [
+              1670575.0,
+              824775.0
+            ],
+            [
+              1659775.0,
+              824775.0
+            ],
+            [
+              1659775.0,
+              813975.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "label": "C2",
+        "district_id": "C2",
+        "subdistrict": "ALL",
+        "type": "field",
+        "theme": "district outline",
+        "test_goal": "District-level outline/dissolve of all subdistrict features.",
+        "rum_count": 576,
+        "grid_rows": 24,
+        "grid_cols": 24,
+        "rum_size_m": 450.0,
+        "center_x": 1675975.0,
+        "center_y": 819375.0,
+        "min_x": 1670575.0,
+        "max_x": 1681375.0,
+        "min_y": 813975.0,
+        "max_y": 824775.0,
+        "h_min_mm_yr": 1.0,
+        "h_median_mm_yr": 4.0,
+        "h_max_mm_yr": 6.0,
+        "up_min_mm_yr": 0.0,
+        "up_median_mm_yr": 0.75,
+        "up_max_mm_yr": 1.5,
+        "sigma_e_median_mm_yr": 2.5,
+        "sigma_n_median_mm_yr": 3.75,
+        "sparse_rows": 64
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              1670575.0,
+              813975.0
+            ],
+            [
+              1681375.0,
+              813975.0
+            ],
+            [
+              1681375.0,
+              824775.0
+            ],
+            [
+              1670575.0,
+              824775.0
+            ],
+            [
+              1670575.0,
+              813975.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "label": "C3",
+        "district_id": "C3",
+        "subdistrict": "ALL",
+        "type": "field",
+        "theme": "district outline",
+        "test_goal": "District-level outline/dissolve of all subdistrict features.",
+        "rum_count": 864,
+        "grid_rows": 24,
+        "grid_cols": 36,
+        "rum_size_m": 450.0,
+        "center_x": 1689475.0,
+        "center_y": 819375.0,
+        "min_x": 1681375.0,
+        "max_x": 1697575.0,
+        "min_y": 813975.0,
+        "max_y": 824775.0,
+        "h_min_mm_yr": 1.0,
+        "h_median_mm_yr": 4.0,
+        "h_max_mm_yr": 4.0,
+        "up_min_mm_yr": 0.0,
+        "up_median_mm_yr": 0.75,
+        "up_max_mm_yr": 1.5,
+        "sigma_e_median_mm_yr": 2.5,
+        "sigma_n_median_mm_yr": 3.75,
+        "sparse_rows": 96
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              1681375.0,
+              813975.0
+            ],
+            [
+              1697575.0,
+              813975.0
+            ],
+            [
+              1697575.0,
+              824775.0
+            ],
+            [
+              1681375.0,
+              824775.0
+            ],
+            [
+              1681375.0,
+              813975.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "label": "D1",
+        "district_id": "D1",
+        "subdistrict": "ALL",
+        "type": "field",
+        "theme": "district outline",
+        "test_goal": "District-level outline/dissolve of all subdistrict features.",
+        "rum_count": 196,
+        "grid_rows": 14,
+        "grid_cols": 14,
+        "rum_size_m": 450.0,
+        "center_x": 1662925.0,
+        "center_y": 810825.0,
+        "min_x": 1659775.0,
+        "max_x": 1666075.0,
+        "min_y": 807675.0,
+        "max_y": 813975.0,
+        "h_min_mm_yr": 0.0,
+        "h_median_mm_yr": 1.5,
+        "h_max_mm_yr": 5.0,
+        "up_min_mm_yr": 0.0,
+        "up_median_mm_yr": 0.5,
+        "up_max_mm_yr": 0.75,
+        "sigma_e_median_mm_yr": 0.25,
+        "sigma_n_median_mm_yr": 0.375,
+        "sparse_rows": 0
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              1659775.0,
+              807675.0
+            ],
+            [
+              1666075.0,
+              807675.0
+            ],
+            [
+              1666075.0,
+              813975.0
+            ],
+            [
+              1659775.0,
+              813975.0
+            ],
+            [
+              1659775.0,
+              807675.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "label": "D2",
+        "district_id": "D2",
+        "subdistrict": "ALL",
+        "type": "field",
+        "theme": "district outline",
+        "test_goal": "District-level outline/dissolve of all subdistrict features.",
+        "rum_count": 196,
+        "grid_rows": 14,
+        "grid_cols": 14,
+        "rum_size_m": 450.0,
+        "center_x": 1669225.0,
+        "center_y": 810825.0,
+        "min_x": 1666075.0,
+        "max_x": 1672375.0,
+        "min_y": 807675.0,
+        "max_y": 813975.0,
+        "h_min_mm_yr": 0.0,
+        "h_median_mm_yr": 1.5,
+        "h_max_mm_yr": 5.0,
+        "up_min_mm_yr": 0.0,
+        "up_median_mm_yr": 0.5,
+        "up_max_mm_yr": 0.75,
+        "sigma_e_median_mm_yr": 0.25,
+        "sigma_n_median_mm_yr": 0.375,
+        "sparse_rows": 0
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              1666075.0,
+              807675.0
+            ],
+            [
+              1672375.0,
+              807675.0
+            ],
+            [
+              1672375.0,
+              813975.0
+            ],
+            [
+              1666075.0,
+              813975.0
+            ],
+            [
+              1666075.0,
+              807675.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "label": "D3",
+        "district_id": "D3",
+        "subdistrict": "ALL",
+        "type": "field",
+        "theme": "district outline",
+        "test_goal": "District-level outline/dissolve of all subdistrict features.",
+        "rum_count": 378,
+        "grid_rows": 7,
+        "grid_cols": 54,
+        "rum_size_m": 450.0,
+        "center_x": 1685425.0,
+        "center_y": 812400.0,
+        "min_x": 1673275.0,
+        "max_x": 1697575.0,
+        "min_y": 810825.0,
+        "max_y": 813975.0,
+        "h_min_mm_yr": 1.5,
+        "h_median_mm_yr": 3.0,
+        "h_max_mm_yr": 6.0,
+        "up_min_mm_yr": -0.75,
+        "up_median_mm_yr": -0.25,
+        "up_max_mm_yr": 0.0,
+        "sigma_e_median_mm_yr": 2.5,
+        "sigma_n_median_mm_yr": 3.75,
+        "sparse_rows": 0
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              1673275.0,
+              810825.0
+            ],
+            [
+              1697575.0,
+              810825.0
+            ],
+            [
+              1697575.0,
+              813975.0
+            ],
+            [
+              1673275.0,
+              813975.0
+            ],
+            [
+              1673275.0,
+              810825.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "label": "E3",
+        "district_id": "E3",
+        "subdistrict": "ALL",
+        "type": "field",
+        "theme": "district outline",
+        "test_goal": "District-level outline/dissolve of all subdistrict features.",
+        "rum_count": 378,
+        "grid_rows": 7,
+        "grid_cols": 54,
+        "rum_size_m": 450.0,
+        "center_x": 1685425.0,
+        "center_y": 809250.0,
+        "min_x": 1673275.0,
+        "max_x": 1697575.0,
+        "min_y": 807675.0,
+        "max_y": 810825.0,
+        "h_min_mm_yr": 1.5,
+        "h_median_mm_yr": 3.0,
+        "h_max_mm_yr": 6.0,
+        "up_min_mm_yr": -2.5,
+        "up_median_mm_yr": 0.5,
+        "up_max_mm_yr": 1.0,
+        "sigma_e_median_mm_yr": 2.5,
+        "sigma_n_median_mm_yr": 3.75,
+        "sparse_rows": 0
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              1673275.0,
+              807675.0
+            ],
+            [
+              1697575.0,
+              807675.0
+            ],
+            [
+              1697575.0,
+              810825.0
+            ],
+            [
+              1673275.0,
+              810825.0
+            ],
+            [
+              1673275.0,
+              807675.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "label": "F1",
+        "district_id": "F1",
+        "subdistrict": "ALL",
+        "type": "field",
+        "theme": "district outline",
+        "test_goal": "District-level outline/dissolve of all subdistrict features.",
+        "rum_count": 196,
+        "grid_rows": 14,
+        "grid_cols": 14,
+        "rum_size_m": 450.0,
+        "center_x": 1662925.0,
+        "center_y": 804525.0,
+        "min_x": 1659775.0,
+        "max_x": 1666075.0,
+        "min_y": 801375.0,
+        "max_y": 807675.0,
+        "h_min_mm_yr": 0.0,
+        "h_median_mm_yr": 4.0,
+        "h_max_mm_yr": 4.0,
+        "up_min_mm_yr": -0.75,
+        "up_median_mm_yr": -0.5,
+        "up_max_mm_yr": -0.25,
+        "sigma_e_median_mm_yr": 2.5,
+        "sigma_n_median_mm_yr": 3.75,
+        "sparse_rows": 14
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              1659775.0,
+              801375.0
+            ],
+            [
+              1666075.0,
+              801375.0
+            ],
+            [
+              1666075.0,
+              807675.0
+            ],
+            [
+              1659775.0,
+              807675.0
+            ],
+            [
+              1659775.0,
+              801375.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "label": "F2",
+        "district_id": "F2",
+        "subdistrict": "ALL",
+        "type": "field",
+        "theme": "district outline",
+        "test_goal": "District-level outline/dissolve of all subdistrict features.",
+        "rum_count": 196,
+        "grid_rows": 14,
+        "grid_cols": 14,
+        "rum_size_m": 450.0,
+        "center_x": 1669225.0,
+        "center_y": 804525.0,
+        "min_x": 1666075.0,
+        "max_x": 1672375.0,
+        "min_y": 801375.0,
+        "max_y": 807675.0,
+        "h_min_mm_yr": 0.0,
+        "h_median_mm_yr": 4.0,
+        "h_max_mm_yr": 4.0,
+        "up_min_mm_yr": -0.75,
+        "up_median_mm_yr": -0.5,
+        "up_max_mm_yr": -0.25,
+        "sigma_e_median_mm_yr": 2.5,
+        "sigma_n_median_mm_yr": 3.75,
+        "sparse_rows": 14
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              1666075.0,
+              801375.0
+            ],
+            [
+              1672375.0,
+              801375.0
+            ],
+            [
+              1672375.0,
+              807675.0
+            ],
+            [
+              1666075.0,
+              807675.0
+            ],
+            [
+              1666075.0,
+              801375.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "label": "F3",
+        "district_id": "F3",
+        "subdistrict": "ALL",
+        "type": "field",
+        "theme": "district outline",
+        "test_goal": "District-level outline/dissolve of all subdistrict features.",
+        "rum_count": 196,
+        "grid_rows": 14,
+        "grid_cols": 14,
+        "rum_size_m": 450.0,
+        "center_x": 1675525.0,
+        "center_y": 804525.0,
+        "min_x": 1672375.0,
+        "max_x": 1678675.0,
+        "min_y": 801375.0,
+        "max_y": 807675.0,
+        "h_min_mm_yr": 0.000695,
+        "h_median_mm_yr": 1.050266,
+        "h_max_mm_yr": 1.997718,
+        "up_min_mm_yr": 0.0,
+        "up_median_mm_yr": 0.0,
+        "up_max_mm_yr": 0.0,
+        "sigma_e_median_mm_yr": 2.442007,
+        "sigma_n_median_mm_yr": 3.663011,
+        "sparse_rows": 14
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              1672375.0,
+              801375.0
+            ],
+            [
+              1678675.0,
+              801375.0
+            ],
+            [
+              1678675.0,
+              807675.0
+            ],
+            [
+              1672375.0,
+              807675.0
+            ],
+            [
+              1672375.0,
+              801375.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "label": "F4",
+        "district_id": "F4",
+        "subdistrict": "ALL",
+        "type": "field",
+        "theme": "district outline",
+        "test_goal": "District-level outline/dissolve of all subdistrict features.",
+        "rum_count": 196,
+        "grid_rows": 14,
+        "grid_cols": 14,
+        "rum_size_m": 450.0,
+        "center_x": 1681825.0,
+        "center_y": 804525.0,
+        "min_x": 1678675.0,
+        "max_x": 1684975.0,
+        "min_y": 801375.0,
+        "max_y": 807675.0,
+        "h_min_mm_yr": 0.0,
+        "h_median_mm_yr": 4.0,
+        "h_max_mm_yr": 4.0,
+        "up_min_mm_yr": 0.25,
+        "up_median_mm_yr": 0.375,
+        "up_max_mm_yr": 0.5,
+        "sigma_e_median_mm_yr": 2.5,
+        "sigma_n_median_mm_yr": 3.75,
+        "sparse_rows": 14
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              1678675.0,
+              801375.0
+            ],
+            [
+              1684975.0,
+              801375.0
+            ],
+            [
+              1684975.0,
+              807675.0
+            ],
+            [
+              1678675.0,
+              807675.0
+            ],
+            [
+              1678675.0,
+              801375.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "label": "F5",
+        "district_id": "F5",
+        "subdistrict": "ALL",
+        "type": "field",
+        "theme": "district outline",
+        "test_goal": "District-level outline/dissolve of all subdistrict features.",
+        "rum_count": 196,
+        "grid_rows": 14,
+        "grid_cols": 14,
+        "rum_size_m": 450.0,
+        "center_x": 1688125.0,
+        "center_y": 804525.0,
+        "min_x": 1684975.0,
+        "max_x": 1691275.0,
+        "min_y": 801375.0,
+        "max_y": 807675.0,
+        "h_min_mm_yr": 0.0,
+        "h_median_mm_yr": 4.0,
+        "h_max_mm_yr": 4.0,
+        "up_min_mm_yr": 0.25,
+        "up_median_mm_yr": 0.375,
+        "up_max_mm_yr": 0.5,
+        "sigma_e_median_mm_yr": 2.5,
+        "sigma_n_median_mm_yr": 3.75,
+        "sparse_rows": 14
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              1684975.0,
+              801375.0
+            ],
+            [
+              1691275.0,
+              801375.0
+            ],
+            [
+              1691275.0,
+              807675.0
+            ],
+            [
+              1684975.0,
+              807675.0
+            ],
+            [
+              1684975.0,
+              801375.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "label": "F6",
+        "district_id": "F6",
+        "subdistrict": "ALL",
+        "type": "field",
+        "theme": "district outline",
+        "test_goal": "District-level outline/dissolve of all subdistrict features.",
+        "rum_count": 196,
+        "grid_rows": 14,
+        "grid_cols": 14,
+        "rum_size_m": 450.0,
+        "center_x": 1694425.0,
+        "center_y": 804525.0,
+        "min_x": 1691275.0,
+        "max_x": 1697575.0,
+        "min_y": 801375.0,
+        "max_y": 807675.0,
+        "h_min_mm_yr": 0.0,
+        "h_median_mm_yr": 4.0,
+        "h_max_mm_yr": 4.0,
+        "up_min_mm_yr": 0.25,
+        "up_median_mm_yr": 0.375,
+        "up_max_mm_yr": 0.5,
+        "sigma_e_median_mm_yr": 2.5,
+        "sigma_n_median_mm_yr": 3.75,
+        "sparse_rows": 14
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              1691275.0,
+              801375.0
+            ],
+            [
+              1697575.0,
+              801375.0
+            ],
+            [
+              1697575.0,
+              807675.0
+            ],
+            [
+              1691275.0,
+              807675.0
+            ],
+            [
+              1691275.0,
+              801375.0
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "label": "NC",
+        "district_id": "NC",
+        "subdistrict": "ALL",
+        "type": "neutral/zero field",
+        "theme": "district outline",
+        "test_goal": "District-level outline/dissolve of all subdistrict features.",
+        "rum_count": 28,
+        "grid_rows": 14,
+        "grid_cols": 2,
+        "rum_size_m": 450.0,
+        "center_x": 1672825.0,
+        "center_y": 810825.0,
+        "min_x": 1672375.0,
+        "max_x": 1673275.0,
+        "min_y": 807675.0,
+        "max_y": 813975.0,
+        "h_min_mm_yr": 0.0,
+        "h_median_mm_yr": 0.0,
+        "h_max_mm_yr": 0.0,
+        "up_min_mm_yr": 0.0,
+        "up_median_mm_yr": 0.0,
+        "up_max_mm_yr": 0.0,
+        "sigma_e_median_mm_yr": 0.0,
+        "sigma_n_median_mm_yr": 0.0,
+        "sparse_rows": 0
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              1672375.0,
+              807675.0
+            ],
+            [
+              1673275.0,
+              807675.0
+            ],
+            [
+              1673275.0,
+              813975.0
+            ],
+            [
+              1672375.0,
+              813975.0
+            ],
+            [
+              1672375.0,
+              807675.0
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

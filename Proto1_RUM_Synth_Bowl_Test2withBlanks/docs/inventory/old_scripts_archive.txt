@@ -1,0 +1,23 @@
+index.html
+phase9a_height_texture1.py
+phase9a_height_texture2.py
+phase9a_height_texture_rg_packed.py
+phase9b_b3dm.py
+phase9b_b3dm_with_normals.py
+phase9c_blank_caps_b3dm.py
+phase9c_height_binary_NOTUSED.py
+phase9d_walls_b3dm.py
+phase9d_walls_split_b3dm.py
+phase9d_walls_split_b3dm_upcolor.py
+V3_4D 9a 9b before RUM animationt.txt
+V3_4D RUM color changes with epoch_heatmap_flat.txt
+viewer_4d.html
+viewer_4d_1.html
+viewer_4d_2.html
+viewer_4d_controls.html
+viewer_4d_efficientbutburikson.html
+viewer_4d_H6good.html
+viewer_4d_rg_packed.html
+viewer_4d_split_walls.html
+viewer_4d_with_blankies.html
+viewer_4d_with_blankies_walls.html

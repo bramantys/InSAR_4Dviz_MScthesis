@@ -1,0 +1,116 @@
+{
+  "schema_version": "horizontal_uncertainty_check_v1",
+  "source_horizontal_field": "D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\4.3.1.V6_Synth_Bowl_Test_withBlanks\\Data\\horizontal_field.json",
+  "speed_floor_mm_yr": 0.5,
+  "preferred_shimmer_strength": 0.5,
+  "max_recommended_wobble_deg": 35.0,
+  "counts": {
+    "cells_total": 5746,
+    "finite_velocity_covariance": 5746,
+    "negative_variance_records": 0,
+    "non_psd_records": 0,
+    "below_speed_floor": 335,
+    "above_max_recommended_wobble": 3992
+  },
+  "stats": {
+    "speed_mm_yr": {
+      "count": 5746,
+      "min": 0.0,
+      "p05": 0.3042441736077459,
+      "p25": 1.0169529961723895,
+      "median": 3.0000000000000004,
+      "mean": 3.1520880348448825,
+      "p75": 4.0,
+      "p90": 6.0,
+      "p95": 8.567402853688902,
+      "p99": 10.0,
+      "max": 19.999054344493516
+    },
+    "sigma_east_mm_yr": {
+      "count": 5746,
+      "min": 0.0,
+      "p05": 0.0076402421427596125,
+      "p25": 0.4680535932605659,
+      "median": 2.5,
+      "mean": 2.1710039318380856,
+      "p75": 2.5,
+      "p90": 4.918539459525627,
+      "p95": 5.0,
+      "p99": 5.0,
+      "max": 5.0
+    },
+    "sigma_north_mm_yr": {
+      "count": 5746,
+      "min": 0.0,
+      "p05": 0.011460366486286554,
+      "p25": 0.7020803898908489,
+      "median": 3.75,
+      "mean": 3.2565058996225735,
+      "p75": 3.75,
+      "p90": 7.377809189288441,
+      "p95": 7.5,
+      "p99": 7.5,
+      "max": 7.5
+    },
+    "sigma_major_mm_yr": {
+      "count": 5746,
+      "min": 0.0,
+      "p05": 0.01155993582396094,
+      "p25": 0.7081801694587255,
+      "median": 3.7825805615836865,
+      "mean": 3.2847989097415455,
+      "p75": 3.7825805615836865,
+      "p90": 7.441908700393588,
+      "p95": 7.565161123167373,
+      "p99": 7.565161123167373,
+      "max": 7.565161123167373
+    },
+    "sigma_minor_mm_yr": {
+      "count": 5746,
+      "min": 0.0,
+      "p05": 0.007488737126238609,
+      "p25": 0.4587721521832209,
+      "median": 2.450425329433493,
+      "mean": 2.1279532111612642,
+      "p75": 2.450425329433493,
+      "p90": 4.821005470175889,
+      "p95": 4.900850658866986,
+      "p99": 4.900850658866986,
+      "max": 4.900850658866986
+    },
+    "major_axis_angle_deg_from_east": {
+      "count": 5746,
+      "min": 90.0,
+      "p05": 99.89353494469258,
+      "p25": 99.89943817726247,
+      "median": 99.89943817726247,
+      "mean": 99.51174929523394,
+      "p75": 99.89943817726247,
+      "p90": 99.89943817726247,
+      "p95": 99.89943817726247,
+      "p99": 99.90534748195556,
+      "max": 99.91335348740438
+    },
+    "sigma_theta_deg": {
+      "count": 5746,
+      "min": 0.0,
+      "p05": 0.04916868287838826,
+      "p25": 23.527368712106174,
+      "median": 37.665107287271724,
+      "mean": 82.7820577130456,
+      "p75": 129.8844758870329,
+      "p90": 221.2600844227339,
+      "p95": 284.5119240996955,
+      "p99": 390.34314056160804,
+      "max": 808.3694205658956
+    }
+  },
+  "viewer_recommendation": {
+    "mean_particle_path": "Use east_mm_yr and north_mm_yr unchanged.",
+    "uncertainty_visualization": "Use covariance only for render-side shimmer/diffuseness/wobble.",
+    "default_uncertainty_strength": 0.5,
+    "speed_floor_mm_yr": 0.5
+  },
+  "created_by": "18_check_horizontal_uncertainty.py",
+  "created_unix": 1779000525
+}
