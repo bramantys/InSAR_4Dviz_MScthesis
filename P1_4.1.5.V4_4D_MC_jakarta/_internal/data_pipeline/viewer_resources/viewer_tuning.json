@@ -1,0 +1,722 @@
+{
+  "schema": "viewer_tuning_v2_measurement_model",
+  "generated_by": "18_build_viewer_tuning.py",
+  "project": {
+    "project_key": "jakarta",
+    "dataset_title": null,
+    "source_file": "data/jakarta_enu_estimates.csv",
+    "source_crs": "EPSG:23830",
+    "rum_size_m": 450.0,
+    "expected_rum_count": null,
+    "epoch_generation": {
+      "vertical_measurement_behavior": "sinusoidal",
+      "vertical_measurement_noise": "medium",
+      "vertical_model": "linear",
+      "uncertainty_quality": "high",
+      "start_date": "2014-06-01",
+      "end_date": "2018-09-22",
+      "interval_days": 14
+    }
+  },
+  "products": {
+    "points_geojson": {
+      "path": "_internal/data_pipeline/points_wgs84_with_rumid.geojson",
+      "exists": true,
+      "size_bytes": 2005619
+    },
+    "vertical_epochs": {
+      "path": "_internal/data_pipeline/vertical_epochs.json",
+      "exists": true,
+      "size_bytes": 14554685
+    },
+    "rum_footprints": {
+      "path": "_internal/data_pipeline/rum_footprints.json",
+      "exists": true,
+      "size_bytes": 4060433
+    },
+    "packed_series": {
+      "path": "_internal/data_pipeline/packed_series.json",
+      "exists": true,
+      "size_bytes": 13407116
+    },
+    "blank_cells": {
+      "path": "_internal/data_pipeline/blank_cells.json",
+      "exists": true,
+      "size_bytes": 832883
+    },
+    "height_texture": {
+      "path": "_internal/data_pipeline/tiles/height_texture.png",
+      "exists": true,
+      "size_bytes": 592194
+    },
+    "height_meta": {
+      "path": "_internal/data_pipeline/tiles/height_meta.json",
+      "exists": true,
+      "size_bytes": 282416
+    },
+    "epoch_axis": {
+      "path": "_internal/data_pipeline/tiles/epoch_axis.json",
+      "exists": true,
+      "size_bytes": 7712
+    },
+    "tile_index": {
+      "path": "_internal/data_pipeline/tiles/tile_index.json",
+      "exists": true,
+      "size_bytes": 102650
+    },
+    "real_caps_tileset": {
+      "path": "_internal/data_pipeline/tiles/tileset.json",
+      "exists": true,
+      "size_bytes": 47699
+    },
+    "blank_caps_tileset": {
+      "path": "_internal/data_pipeline/tiles_blank/tileset.json",
+      "exists": true,
+      "size_bytes": 32896
+    },
+    "real_walls_tileset": {
+      "path": "_internal/data_pipeline/tiles_walls_real/tileset.json",
+      "exists": true,
+      "size_bytes": 48825
+    },
+    "blank_walls_tileset": {
+      "path": "_internal/data_pipeline/tiles_walls_blank/tileset.json",
+      "exists": true,
+      "size_bytes": 32057
+    },
+    "horizontal_field": {
+      "path": "_internal/data_pipeline/horizontal_field.json",
+      "exists": true,
+      "size_bytes": 2460289
+    },
+    "horizontal_particle_field": {
+      "path": "_internal/data_pipeline/horizontal_particle_field.json",
+      "exists": true,
+      "size_bytes": 1034878
+    },
+    "horizontal_uncertainty_check": {
+      "path": "_internal/data_pipeline/horizontal_uncertainty_check.json",
+      "exists": true,
+      "size_bytes": 2992392
+    },
+    "horizontal_arrows_tileset": {
+      "path": "_internal/data_pipeline/horizontal_dev/arrows/tileset.json",
+      "exists": true,
+      "size_bytes": 50072
+    },
+    "horizontal_ellipses_tileset": {
+      "path": "_internal/data_pipeline/horizontal_dev/ellipses/tileset.json",
+      "exists": true,
+      "size_bytes": 50176
+    },
+    "validation_report": {
+      "path": "_internal/data_pipeline/validation_report.json",
+      "exists": true,
+      "size_bytes": 2155
+    }
+  },
+  "camera": {
+    "available": true,
+    "bbox_wgs84": {
+      "west": 106.66252853,
+      "south": -6.35042028,
+      "east": 107.04049131,
+      "north": -6.074919
+    },
+    "center_lon": 106.85150992,
+    "center_lat": -6.21266964,
+    "width_m": 41827.713716,
+    "height_m": 30668.80249,
+    "diagonal_m": 51866.492853,
+    "range_m": 124479.582847,
+    "heading_deg": 0.0,
+    "pitch_deg": -50.0,
+    "roll_deg": 0.0
+  },
+  "time": {
+    "epoch_count": 114,
+    "first_epoch": "2014-06-01",
+    "last_epoch": "2018-09-22",
+    "default_epoch_index": 113,
+    "default_epoch": "2018-09-22",
+    "epochs_path_hint": "tiles/epoch_axis.json"
+  },
+  "data_summary": {
+    "bbox_wgs84": {
+      "west": 106.66252853,
+      "south": -6.35042028,
+      "east": 107.04049131,
+      "north": -6.074919
+    },
+    "vertical": {
+      "measurement": {
+        "min_mm": -344.9583,
+        "p02_mm": -85.50878,
+        "p50_mm": -16.1502,
+        "p98_mm": 10.2724,
+        "max_mm": 50.3364,
+        "source": "packed_series.metadata.summary",
+        "role": "trendline_popup_labelling"
+      },
+      "model": {
+        "min_mm": -350.9898,
+        "p02_mm": -89.0525,
+        "p50_mm": -19.4879,
+        "p98_mm": -0.0,
+        "max_mm": 35.0598,
+        "source": "height_meta.summary",
+        "role": "rum_height_choropleth_caps_walls_blankies",
+        "clip_fraction": 0.0
+      },
+      "sigma": {
+        "min_mm": 0.1112,
+        "p02_mm": 0.1323,
+        "p50_mm": 0.1898,
+        "p98_mm": 2.1972,
+        "max_mm": 6.6821,
+        "source": "height_meta.summary",
+        "role": "uncertainty_snr_hatch_visualization",
+        "clip_fraction": 0.02000076022239961,
+        "packing_max_mm": 2.1972459999999963
+      },
+      "texture": {
+        "model_v_min_mm": -1500.0,
+        "model_v_max_mm": 1500.0,
+        "sigma_max_mm": 2.1972459999999963,
+        "height_texture_source": "model_mm_plus_sigma_mm",
+        "source": "height_meta.packing"
+      }
+    },
+    "velocity": {
+      "east_min_mm_yr": -9.7568774,
+      "east_max_mm_yr": 8.93538421,
+      "north_min_mm_yr": -4.50438888,
+      "north_max_mm_yr": 16.38244523,
+      "speed_min_mm_yr": 0.0001357919504241691,
+      "speed_p50_mm_yr": 0.5301939293177177,
+      "speed_p98_mm_yr": 2.9573332398219376,
+      "speed_max_mm_yr": 16.862952415308175,
+      "up_min_mm_yr": -81.447926,
+      "up_p02_mm_yr": -31.23222964,
+      "up_p50_mm_yr": -10.110237,
+      "up_p98_mm_yr": -0.12338948000000591,
+      "up_max_mm_yr": 8.135704
+    },
+    "blank_cells": {
+      "blank_count": 298,
+      "status": "blank_cells_detected",
+      "interior_rule": "row_and_col",
+      "real_rum_count": 4779
+    },
+    "horizontal_uncertainty": {
+      "record_count": 4779,
+      "available_covariance_count": 4779,
+      "unavailable_covariance_count": 0,
+      "confidence_probability": 0.95,
+      "confidence_scale": 2.447746830680816,
+      "unit_assumption": "covariance in (mm/yr)^2; ellipse axes in mm/yr; no hidden /100 scaling",
+      "std_east_min_mm_yr": 0.017273,
+      "std_east_p50_mm_yr": 0.423261,
+      "std_east_p98_mm_yr": 0.7668600799999992,
+      "std_east_max_mm_yr": 0.966403,
+      "std_north_min_mm_yr": 0.006197,
+      "std_north_p50_mm_yr": 0.4883,
+      "std_north_p98_mm_yr": 1.0280059199999996,
+      "std_north_max_mm_yr": 2.299162,
+      "std_major_min_1sigma_mm_yr": 0.017306,
+      "std_major_p50_1sigma_mm_yr": 0.68942,
+      "std_major_p98_1sigma_mm_yr": 1.0411021200000001,
+      "std_major_max_1sigma_mm_yr": 2.29917,
+      "std_minor_min_1sigma_mm_yr": 0.006103,
+      "std_minor_p50_1sigma_mm_yr": 0.243127,
+      "std_minor_p98_1sigma_mm_yr": 0.36714895999999997,
+      "std_minor_max_1sigma_mm_yr": 0.810811,
+      "ellipse_major_p50_mm_yr": 1.687525,
+      "ellipse_major_p98_mm_yr": 2.54835516,
+      "ellipse_major_max_mm_yr": 5.627786,
+      "ellipse_minor_p50_mm_yr": 0.595112,
+      "ellipse_minor_p98_mm_yr": 0.8986874,
+      "ellipse_minor_max_mm_yr": 1.984661,
+      "axis_ratio_p50": 2.835641,
+      "axis_ratio_p98": 2.835642,
+      "axis_ratio_max": 2.835706,
+      "speed_over_std_major_p50": 0.80124,
+      "speed_over_std_major_p98": 6.408826839999999,
+      "determinant_min": 0.0,
+      "determinant_p50": 0.028095,
+      "determinant_max": 3.475216,
+      "warnings_count": 0
+    },
+    "validation": {
+      "rum_count": 4779,
+      "epoch_count": 114,
+      "first_epoch": "2014-06-01",
+      "last_epoch": "2018-09-22",
+      "point_bbox_wgs84": {
+        "west": 106.6646,
+        "south": -6.3484,
+        "east": 107.0385,
+        "north": -6.077
+      },
+      "point_bbox_source": {
+        "min_x": 1556242.1812,
+        "min_y": 781489.2521,
+        "max_x": 1598542.1812,
+        "max_y": 812539.2521
+      },
+      "footprint_bbox_wgs84": {
+        "west": 106.66252853,
+        "south": -6.35042028,
+        "east": 107.04049131,
+        "north": -6.074919
+      },
+      "footprint_bbox_source": {
+        "min_x": 1556017.1812,
+        "min_y": 781264.2521,
+        "max_x": 1598767.1812,
+        "max_y": 812764.2521
+      },
+      "grid": {
+        "origin_x": 1556242.1812,
+        "origin_y": 781489.2521,
+        "spacing_m": 450.0,
+        "min_i": 0,
+        "max_i": 94,
+        "min_j": 0,
+        "max_j": 69,
+        "n_cols": 95,
+        "n_rows": 70,
+        "max_snap_residual_x_m": 0.0,
+        "max_snap_residual_y_m": 0.0,
+        "snap_residual_warning_threshold_m": 67.5,
+        "has_large_snap_residual": false
+      },
+      "measurement_min_mm": -344.9583,
+      "measurement_p02_mm": -85.5088,
+      "measurement_p50_mm": -16.1502,
+      "measurement_p98_mm": 10.2724,
+      "measurement_max_mm": 50.3364,
+      "model_min_mm": -350.9898,
+      "model_p02_mm": -88.2479,
+      "model_p50_mm": -19.1942,
+      "model_p98_mm": -0.0,
+      "model_max_mm": 35.0598,
+      "sigma_min_mm": 0.1112,
+      "sigma_p02_mm": 0.132,
+      "sigma_p50_mm": 0.1871,
+      "sigma_p98_mm": 1.8715,
+      "sigma_max_mm": 6.6821,
+      "up_min_mm_yr": -81.4479,
+      "up_max_mm_yr": 8.1357,
+      "warnings_count": 1,
+      "errors_count": 0
+    }
+  },
+  "visual_defaults": {
+    "vertical_exaggeration": {
+      "recommended": 10.0,
+      "recommended_m_per_mm": 10.0,
+      "slider_min": 0.0,
+      "slider_max": 20.0,
+      "slider_step": 0.25,
+      "unit": "m_per_mm",
+      "ui_label": "Vertical exaggeration",
+      "interpretation": "1x means 1 mm MODEL displacement = 1 m display height",
+      "data_role": "model_mm",
+      "max_abs_model_displacement_mm": 350.9898,
+      "model_min_mm": -350.9898,
+      "model_max_mm": 35.0598,
+      "reason": "heuristic_from_absolute_model_displacement_range",
+      "note": "Uses MODEL range only. MEASUREMENT noise/sinusoid is for trendline and does not affect RUM height exaggeration."
+    },
+    "color_scale": {
+      "mode": "adaptive_asymmetric_11step",
+      "velocity_field": "up_mm_yr",
+      "variance_field": "covariance.var_up",
+      "unit": "mm/yr",
+      "interpretation": {
+        "negative": "subsidence",
+        "zero": "stable / no vertical motion reference",
+        "positive": "uplift",
+        "red_side": "subsidence",
+        "blue_side": "uplift",
+        "stable_band": "|up| ≤ 1 mm/yr is the near-zero/stable reference band",
+        "palette": "RdBu_11"
+      },
+      "recommended_min_mm_yr": -50.0,
+      "recommended_center_mm_yr": 0.0,
+      "recommended_max_mm_yr": 10.0,
+      "near_zero_threshold_mm_yr": 1.0,
+      "L_sub_raw_mm_yr": 31.60741,
+      "L_up_raw_mm_yr": 7.55587,
+      "L_sub_far_raw_mm_yr": 45.863902,
+      "L_up_far_raw_mm_yr": 7.990745,
+      "L_sub_mm_yr": 35.0,
+      "L_up_mm_yr": 8.0,
+      "L_sub_extreme_mm_yr": 50.0,
+      "L_up_extreme_mm_yr": 10.0,
+      "tau_raw_mm_yr": 0.685195,
+      "tau_mm_yr": 1.0,
+      "neg_active": true,
+      "pos_active": true,
+      "n_valid": 4779,
+      "n_sub": 4622,
+      "n_up": 49,
+      "uncertainty_percentile": 75.0,
+      "colour_percentile": 98.0,
+      "extreme_colour_percentile": 99.5,
+      "min_active_fraction": 0.01,
+      "palette_name": "RdBu_11",
+      "palette_colours": [
+        "#67001f",
+        "#b2182b",
+        "#ef8a62",
+        "#fddbc7",
+        "#f7f7f7",
+        "#f7f7f7",
+        "#f7f7f7",
+        "#d1e5f0",
+        "#67a9cf",
+        "#2166ac",
+        "#053061"
+      ],
+      "color_stop_count": 11,
+      "data_min_mm_yr": -81.447926,
+      "data_p02_mm_yr": -31.23223,
+      "data_p50_mm_yr": -10.110237,
+      "data_p98_mm_yr": -0.123389,
+      "data_max_mm_yr": 8.135704,
+      "color_stops": [
+        {
+          "value_mm_yr": -50.0,
+          "color": "#67001f",
+          "role": "clipped_extreme_subsidence",
+          "position_pct": 0.0
+        },
+        {
+          "value_mm_yr": -35.0,
+          "color": "#b2182b",
+          "role": "far_subsidence",
+          "position_pct": 18.624
+        },
+        {
+          "value_mm_yr": -18.0,
+          "color": "#ef8a62",
+          "role": "moderate_subsidence",
+          "position_pct": 39.73
+        },
+        {
+          "value_mm_yr": -3.0,
+          "color": "#fddbc7",
+          "role": "near_stable_subsidence",
+          "position_pct": 58.354
+        },
+        {
+          "value_mm_yr": -1.0,
+          "color": "#f7f7f7",
+          "role": "stable_boundary_low",
+          "position_pct": 60.837
+        },
+        {
+          "value_mm_yr": 0.0,
+          "color": "#f7f7f7",
+          "role": "zero_reference",
+          "position_pct": 68.837
+        },
+        {
+          "value_mm_yr": 1.0,
+          "color": "#f7f7f7",
+          "role": "stable_boundary_high",
+          "position_pct": 76.837
+        },
+        {
+          "value_mm_yr": 2.0,
+          "color": "#d1e5f0",
+          "role": "near_stable_uplift",
+          "position_pct": 79.411
+        },
+        {
+          "value_mm_yr": 4.5,
+          "color": "#67a9cf",
+          "role": "moderate_uplift",
+          "position_pct": 85.845
+        },
+        {
+          "value_mm_yr": 8.0,
+          "color": "#2166ac",
+          "role": "far_uplift",
+          "position_pct": 94.853
+        },
+        {
+          "value_mm_yr": 10.0,
+          "color": "#053061",
+          "role": "clipped_extreme_uplift",
+          "position_pct": 100.0
+        }
+      ],
+      "legend_layout": {
+        "mode": "asymmetric_zero_with_stable_plateau_damped_11step",
+        "zero_position_pct": 68.837,
+        "raw_zero_position_pct": 81.395,
+        "damped_zero_position_pct": 68.837,
+        "zero_position_damping": 0.6,
+        "zero_position_min_pct": 35.0,
+        "zero_position_max_pct": 72.0,
+        "stable_band_width_pct": 16.0,
+        "stable_left_pct": 60.837,
+        "stable_right_pct": 76.837,
+        "far_subsidence_pct": 18.624,
+        "near_stable_subsidence_pct": 58.354,
+        "near_stable_uplift_pct": 79.411,
+        "far_uplift_pct": 94.853,
+        "extreme_subsidence_pct": 0.0,
+        "extreme_uplift_pct": 100.0,
+        "note": "Legend positions are visual; shader colours remain value-based. P98 and shoulder stops add colour richness around a strict white stable plateau; P99.5 controls the clipped end colours."
+      },
+      "legend": {
+        "title": "Vertical Velocity [mm/yr]",
+        "unit": "mm/yr",
+        "labels": [
+          {
+            "value_mm_yr": -35.0,
+            "label": "≤−35",
+            "position_pct": 18.624,
+            "role": "far_minus_label"
+          },
+          {
+            "value_mm_yr": -18.0,
+            "label": "−18",
+            "position_pct": 39.73,
+            "role": "mid_minus_label"
+          },
+          {
+            "value_mm_yr": -1.0,
+            "label": "−1",
+            "position_pct": 60.837,
+            "role": "stable_min_label"
+          },
+          {
+            "value_mm_yr": 0.0,
+            "label": "0",
+            "position_pct": 68.837,
+            "role": "zero_label"
+          },
+          {
+            "value_mm_yr": 1.0,
+            "label": "+1",
+            "position_pct": 76.837,
+            "role": "stable_plus_label"
+          },
+          {
+            "value_mm_yr": 4.5,
+            "label": "+4.5",
+            "position_pct": 85.845,
+            "role": "mid_plus_label"
+          },
+          {
+            "value_mm_yr": 8.0,
+            "label": "≥+8",
+            "position_pct": 94.853,
+            "role": "far_plus_label"
+          }
+        ],
+        "readability_note": "Seven labels are shown for readability: P98 far minus, mid minus, stable min, zero, stable plus, mid plus, P98 far plus. P99.5 extremes and shoulder stops remain encoded in color_stops but are not labelled at 0% or 100%."
+      },
+      "clipping": {
+        "low": "up <= -50 mm/yr uses darkest red",
+        "high": "up >= +10 mm/yr uses darkest blue",
+        "actual_values_remain_available": true
+      },
+      "note": "Adaptive asymmetric 11-step scale. Near-zero band uses P75(2*sqrt(var_up)); subsidence/uplift far stops use sign-specific P98 and clipped extreme stops use P99.5. The legend zero is allowed to move off-centre and -tau/0/+tau are explicit colour stops. Limits are visualisation limits, not hazard thresholds."
+    },
+    "height_texture": {
+      "row_flip": true,
+      "source_role": "model_mm_plus_sigma_mm",
+      "note": "PNG/WebGL row orientation correction. Viewer should sample 1.0 - row_v when true."
+    },
+    "view_modes": {
+      "global_opacity": {
+        "2d": 0.7,
+        "3d": 1.0
+      }
+    },
+    "layer_style": {
+      "blank_caps": {
+        "color_rgb": [
+          0.28,
+          0.28,
+          0.28
+        ],
+        "alpha": 0.55
+      },
+      "real_walls": {
+        "darken": 0.72,
+        "alpha": 1.0
+      },
+      "blank_walls": {
+        "color_rgb": [
+          0.22,
+          0.22,
+          0.22
+        ],
+        "darken": 0.62,
+        "alpha": 0.6
+      },
+      "wall_shading": {
+        "shade_min": 0.45,
+        "shade_max": 0.95,
+        "light_dir_ec": [
+          0.25,
+          0.35,
+          0.9
+        ]
+      }
+    },
+    "sigma": {
+      "texture_sigma_max_mm": 2.1972459999999963,
+      "sigma_clip_fraction": 0.02000076022239961,
+      "interpretation": "vertical uncertainty / hatch channel; p98 clipping is acceptable for visual contrast"
+    },
+    "layer_visibility": {
+      "dev": {
+        "real_caps": true,
+        "blank_caps": true,
+        "real_walls": true,
+        "blank_walls": true,
+        "horizontal_arrows": true,
+        "horizontal_ellipses": true
+      },
+      "output": {
+        "real_caps": true,
+        "blank_caps": true,
+        "real_walls": true,
+        "blank_walls": true,
+        "horizontal_arrows": false,
+        "horizontal_ellipses": false
+      }
+    },
+    "horizontal_particles": {
+      "enabled_initial": true,
+      "default_engine_mode": "primitive_points",
+      "particle_count": 5000,
+      "speed_multiplier": 1.5,
+      "trail_persistence": 0.92,
+      "size_multiplier": 1.0,
+      "opacity": 1.0,
+      "base_mps": 1800.0,
+      "surface_offset_m": 20.0,
+      "stall_speed_mm_yr": 0.05,
+      "max_trail_screen_jump_px": 120.0,
+      "camera_stable_delay_ms": 1,
+      "sampler_mode": "conservative_v2",
+      "primitive_points": {
+        "pixel_size": 5.0,
+        "outline_width": 1.0,
+        "color_rgb": [
+          0.02,
+          0.02,
+          0.02
+        ],
+        "outline_rgb": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "debug_enabled": false,
+        "debug_log_interval_ms": 15000,
+        "depth_test": "enabled; disableDepthTestDistance=0",
+        "render_contract": "Cesium PointPrimitiveCollection dots in the WebGL scene; depth-tested; no trails yet"
+      },
+      "canvas": {
+        "uncertainty_enabled_initial": true,
+        "uncertainty_strength": 0.5,
+        "uncertainty_speed_floor_mm_yr": 0.5,
+        "uncertainty_theta_low_deg": 8.0,
+        "uncertainty_theta_high_deg": 32.5,
+        "uncertainty_max_wobble_px": 5.0,
+        "uncertainty_freq_min_hz": 0.7,
+        "uncertainty_freq_max_hz": 1.6,
+        "render_contract": "screen-space canvas trails; fallback/comparison only; no true depth test"
+      },
+      "height_contract": "particle Z = display datum + MODEL surface displacement at particle XY/current epoch + surface_offset_m"
+    },
+    "horizontal_layers": {
+      "arrows_tileset": "_internal/data_pipeline/horizontal_dev/arrows/tileset.json",
+      "ellipses_tileset": "_internal/data_pipeline/horizontal_dev/ellipses/tileset.json",
+      "particle_field": "_internal/data_pipeline/horizontal_particle_field.json",
+      "vertical_follow_contract": "B3DM TEXCOORD_0.y = row_v; shader samples same MODEL/sigma texture as caps",
+      "ellipse_scaling_note": "Ellipse axes are from Step16 covariance eigenvalues in mm/yr; no hidden /100 scaling.",
+      "static_glyph_contract": {
+        "source": "Step17 tileset extras when available; project_config/pipeline defaults as fallback",
+        "minimum_speed_mm_yr": 0.02,
+        "visibility_sigma_multiplier": 1.0,
+        "visibility_label": "1σ",
+        "ellipse_sigma_multiplier": 2.0,
+        "ellipse_label": "2σ",
+        "arrow_reference_percentile": 99.5,
+        "arrow_speed_ref_mm_yr": 4.459920059999982,
+        "arrow_max_length_m": 352.0088101117291,
+        "arrow_max_length_rum_fraction": 0.8,
+        "arrow_scale_m_per_mm_yr": 78.92715684947288,
+        "arrow_anchor_fraction_at_rum_center": 0.75,
+        "ellipse_center_placement": "arrowhead",
+        "ellipse_reference_percentile": 99.5,
+        "ellipse_max_diameter_m": 330.008259479746,
+        "ellipse_max_diameter_rum_fraction": 0.75,
+        "ellipse_scale_m_per_mm_yr": 78.92715684947288,
+        "ellipse_scale_mode": "same_as_arrow",
+        "rule_summary": "show arrows/ellipses when speed ≥ 1σ major uncertainty; draw ellipse axes as 2σ; place ellipse at arrowhead; RUM centre at configured arrow anchor fraction"
+      },
+      "glyph_style": {
+        "source": "18_build_viewer_tuning.py presentation constants",
+        "arrow_color_rgba": [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "ellipse_color_rgba": [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "arrow_lift_rgb": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "ellipse_lift_rgb": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "arrow_opacity": 1.0,
+        "ellipse_opacity": 1.0,
+        "note": "Lift is shader-side additive colour, not true glow/halo."
+      }
+    },
+    "vertical_series_contract": {
+      "measurement_array": "packed_series.arrays.measurement_mm",
+      "model_array": "packed_series.arrays.model_mm",
+      "sigma_array": "packed_series.arrays.sigma_mm",
+      "trendline_role": "measurement_mm",
+      "height_texture_role": "model_mm",
+      "uncertainty_role": "sigma_mm"
+    }
+  },
+  "viewer_resource_paths": {
+    "packed_series": "_internal/data_pipeline/packed_series.json",
+    "height_texture": "_internal/data_pipeline/tiles/height_texture.png",
+    "height_meta": "_internal/data_pipeline/tiles/height_meta.json",
+    "epoch_axis": "_internal/data_pipeline/tiles/epoch_axis.json",
+    "real_caps_tileset": "_internal/data_pipeline/tiles/tileset.json",
+    "blank_caps_tileset": "_internal/data_pipeline/tiles_blank/tileset.json",
+    "real_walls_tileset": "_internal/data_pipeline/tiles_walls_real/tileset.json",
+    "blank_walls_tileset": "_internal/data_pipeline/tiles_walls_blank/tileset.json",
+    "horizontal_arrows_tileset": "_internal/data_pipeline/horizontal_dev/arrows/tileset.json",
+    "horizontal_ellipses_tileset": "_internal/data_pipeline/horizontal_dev/ellipses/tileset.json",
+    "horizontal_particle_field": "_internal/data_pipeline/horizontal_particle_field.json"
+  },
+  "warnings": []
+}

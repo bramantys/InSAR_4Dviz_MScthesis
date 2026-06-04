@@ -1,0 +1,505 @@
+{
+  "run_id": "20260604_070841",
+  "status": "SUCCESS_WITH_WARNINGS",
+  "started_at": "2026-06-04T07:08:41+02:00",
+  "ended_at": "2026-06-04T07:09:23+02:00",
+  "duration_seconds": 42.416,
+  "run_metadata": {
+    "schema_version": "0.3",
+    "project_key": "synthbowl1",
+    "dataset_title": "Synthbowl1 4D RUM Viewer",
+    "source_file": "data/synthbowl1_enu_estimates.csv",
+    "source_crs": "EPSG:23830",
+    "rum_size_m": 450.0,
+    "expected_rum_count": null,
+    "synthetic_epochs": {
+      "vertical_measurement_behavior": "sinusoidal",
+      "vertical_measurement_noise": "medium",
+      "vertical_measurement_noise_sigma_mm": 5.0,
+      "vertical_model": "linear",
+      "uncertainty_quality": "high",
+      "start_date": "2014-06-01",
+      "end_date": "2018-09-22",
+      "interval_days": 14,
+      "expected_epoch_count": 114
+    },
+    "paths": {
+      "pipeline_output_dir": "_internal/data_pipeline",
+      "run_records_dir": "run_records",
+      "viewer_tuning": "_internal/data_pipeline/viewer_resources/viewer_tuning.json"
+    }
+  },
+  "steps": [
+    {
+      "step": "01",
+      "script": "01_convert_source_to_geojson.py",
+      "title": "Convert source table to WGS84 GeoJSON",
+      "importance": "core",
+      "status": "OK",
+      "returncode": 0,
+      "started_at": "2026-06-04T07:08:41+02:00",
+      "ended_at": "2026-06-04T07:08:44+02:00",
+      "duration_seconds": 3.298,
+      "command": [
+        "C:\\Users\\DELL\\miniconda3\\python.exe",
+        "D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\\_internal\\pipeline\\01_convert_source_to_geojson.py"
+      ],
+      "warnings": [],
+      "errors": [],
+      "stdout": "\n========================================================================\n  Configuration\n========================================================================\n  Project root       : D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\n  Source file        : data/synthbowl1_enu_estimates.csv\n  Source CRS         : EPSG:23830\n  X/Y fields         : x_rum, y_rum\n  Plain GeoJSON      : D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\\_internal\\data_pipeline\\points_wgs84.geojson\n  RUM ID GeoJSON     : D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\\_internal\\data_pipeline\\points_wgs84_with_rumid.geojson\n\n========================================================================\n  Loading source table\n========================================================================\n  [OK]   Loaded 6384 rows × 19 columns\n  Columns: rum_id, x_rum, y_rum, east, north, up, var_east, var_north, var_up, covar_en, covar_eu, covar_nu, district_id, subdistrict, rum_size_m, excel_col, excel_row, is_sparse, Unnamed: 18\n\n========================================================================\n  Checking required columns\n========================================================================\n  [OK]   Required coordinate and velocity columns found\n  [OK]   All configured uncertainty columns found\n\n========================================================================\n  Cleaning coordinates\n========================================================================\n  [OK]   All source coordinates are finite\n\n========================================================================\n  Building RUM IDs\n========================================================================\n  [OK]   Using existing RUM ID column: rum_id\n  [OK]   Stable RUM IDs ready: 6384\n\n========================================================================\n  Transforming coordinates\n========================================================================\n  [OK]   Coordinate transform: EPSG:23830 -> EPSG:4326\n  [OK]   Transformed 6384 coordinates\n  BBox WGS84: west=107.57182914, south=-6.1528107, east=107.90749258, north=-5.84766895\n\n========================================================================\n  Writing GeoJSON outputs\n========================================================================\n  [OK]   Wrote RUM ID GeoJSON: D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\\_internal\\data_pipeline\\points_wgs84_with_rumid.geojson (2.77 MB)\n  [OK]   Wrote plain GeoJSON: D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\\_internal\\data_pipeline\\points_wgs84.geojson (2.77 MB)\n\n========================================================================\n  Summary\n========================================================================\n  [OK]   Step 01 complete in 2.43 s\n  Source rows input          : 6384\n  Rows used                  : 6384\n  Rows dropped               : 0\n  Output RUM count           : 6384\n  BBox west/south/east/north : 107.57182914, -6.1528107, 107.90749258, -5.84766895\n",
+      "stderr": ""
+    },
+    {
+      "step": "02",
+      "script": "02_prepare_vertical_epochs_from_velocity.py",
+      "title": "Prepare synthetic vertical measurement/model epochs from velocity",
+      "importance": "core",
+      "status": "OK",
+      "returncode": 0,
+      "started_at": "2026-06-04T07:08:44+02:00",
+      "ended_at": "2026-06-04T07:08:50+02:00",
+      "duration_seconds": 5.575,
+      "command": [
+        "C:\\Users\\DELL\\miniconda3\\python.exe",
+        "D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\\_internal\\pipeline\\02_prepare_vertical_epochs_from_velocity.py"
+      ],
+      "warnings": [],
+      "errors": [],
+      "stdout": "\n========================================================================\n  Configuration\n========================================================================\n  Project root             : D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\n  Points GeoJSON           : D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\\_internal\\data_pipeline\\points_wgs84_with_rumid.geojson\n  Base epoch output        : D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\\_internal\\data_pipeline\\vertical_epochs_base.json\n  Working epoch output     : D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\\_internal\\data_pipeline\\vertical_epochs.json\n  Up velocity field        : up\n  Up variance field        : var_up\n  Date range               : 2014-06-01 → 2018-09-22\n  Interval                 : 14 days\n  MEASUREMENT behavior     : sinusoidal\n  MEASUREMENT noise        : medium (5.0 mm)\n  MEASUREMENT outlier p    : 0.0\n  MEASUREMENT outlier σ    : 0.0 mm\n  MODEL behavior           : linear\n  Random seed              : 42\n  MEASUREMENT sinus amp    : 5.0 mm\n  MEASUREMENT sinus period : 365.25 days\n  MEASUREMENT sinus phase  : 45.0 days\n\n========================================================================\n  Building time axis\n========================================================================\n  [OK]   Built 114 epochs\n  First epoch              : 2014-06-01\n  Last epoch               : 2018-09-22\n  First interval           : 14 days\n\n========================================================================\n  Loading RUM point product\n========================================================================\n  [OK]   Loaded 6384 RUM point features\n\n========================================================================\n  Generating synthetic vertical MEASUREMENT and MODEL series\n========================================================================\n  [OK]   Generated synthetic series for 6384 RUMs × 114 epochs\n  [OK]   Applied Gaussian measurement noise to 721392 epoch values\n  [OK]   Applied synthetic measurement outliers to 0 epoch values\n\n========================================================================\n  Writing epoch products\n========================================================================\n  [OK]   Wrote base synthetic epochs: D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\\_internal\\data_pipeline\\vertical_epochs_base.json (15.46 MB)\n  [OK]   Wrote working epoch product: D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\\_internal\\data_pipeline\\vertical_epochs.json (15.46 MB)\n\n========================================================================\n  Summary\n========================================================================\n  [OK]   Step 02 complete in 5.43 s\n  RUM count                : 6384\n  Epoch count              : 114\n  Up velocity range        : -45.0000 to 1.5000 mm/yr\n  MEASUREMENT range        : -188.9744 to 35.0796 mm\n  MODEL range              : -193.9220 to 6.4641 mm\n  Sigma range              : 0.0000 to 1.0221 mm\n  MEASUREMENT behavior     : sinusoidal\n  MEASUREMENT noise        : medium (5.0 mm)\n  MODEL behavior           : linear\n",
+      "stderr": ""
+    },
+    {
+      "step": "03",
+      "script": "03_build_footprints.py",
+      "title": "Build corrected RUM footprints",
+      "importance": "core",
+      "status": "OK",
+      "returncode": 0,
+      "started_at": "2026-06-04T07:08:50+02:00",
+      "ended_at": "2026-06-04T07:08:51+02:00",
+      "duration_seconds": 1.476,
+      "command": [
+        "C:\\Users\\DELL\\miniconda3\\python.exe",
+        "D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\\_internal\\pipeline\\03_build_footprints.py"
+      ],
+      "warnings": [],
+      "errors": [],
+      "stdout": "\n========================================================================\n  Configuration\n========================================================================\n  Project root       : D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\n  Points input       : D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\\_internal\\data_pipeline\\points_wgs84_with_rumid.geojson\n  Footprints output  : D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\\_internal\\data_pipeline\\rum_footprints.json\n  Source CRS         : EPSG:23830\n  RUM size           : 450.0 m\n\n========================================================================\n  Loading RUM centers\n========================================================================\n  [OK]   Loaded 6384 center points\n  Center bbox source : {'min_x': 1660000.0, 'min_y': 801600.0, 'max_x': 1697350.0, 'max_y': 835350.0}\n  Center bbox WGS84  : {'west': 107.57182914, 'south': -6.1528107, 'east': 107.90749258, 'north': -5.84766895}\n\n========================================================================\n  Inferring grid indices\n========================================================================\n  [OK]   Grid inferred: 84 cols × 76 rows from spacing 450.0 m\n  Grid i range       : 0 → 83\n  Grid j range       : 0 → 75\n  Max snap residual  : x=0.0 m, y=0.0 m\n\n========================================================================\n  Building projected-square WGS84 footprints\n========================================================================\n  [OK]   No duplicate inferred grid cells\n  [OK]   Built 6384 WGS84 footprint polygons\n  Footprint bbox source : {'min_x': 1659775.0, 'min_y': 801375.0, 'max_x': 1697575.0, 'max_y': 835575.0}\n  Footprint bbox WGS84  : {'west': 107.56980332, 'south': -6.15484174, 'east': 107.90952029, 'north': -5.84564185}\n\n========================================================================\n  Writing footprint product\n========================================================================\n  [OK]   Wrote RUM footprints: D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\\_internal\\data_pipeline\\rum_footprints.json (5.07 MB)\n\n========================================================================\n  Summary\n========================================================================\n  [OK]   Step 03 complete in 1.20 s\n  RUM footprints      : 6384\n  RUM size            : 450.0 m\n  Grid size           : 84 cols × 76 rows\n  BBox WGS84          : 107.56980332, -6.15484174, 107.90952029, -5.84564185\n",
+      "stderr": ""
+    },
+    {
+      "step": "04",
+      "script": "04_enhance_vertical_sigma.py",
+      "title": "Enhance vertical sigma / uncertainty field",
+      "importance": "core",
+      "status": "OK",
+      "returncode": 0,
+      "started_at": "2026-06-04T07:08:51+02:00",
+      "ended_at": "2026-06-04T07:08:59+02:00",
+      "duration_seconds": 7.455,
+      "command": [
+        "C:\\Users\\DELL\\miniconda3\\python.exe",
+        "D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\\_internal\\pipeline\\04_enhance_vertical_sigma.py"
+      ],
+      "warnings": [],
+      "errors": [],
+      "stdout": "\n========================================================================\n  Configuration\n========================================================================\n  Project root          : D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\n  Base epoch input      : D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\\_internal\\data_pipeline\\vertical_epochs_base.json\n  Footprints input      : D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\\_internal\\data_pipeline\\rum_footprints.json\n  Enhanced epoch output : D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\\_internal\\data_pipeline\\vertical_epochs.json\n  Quality preset        : high\n\n========================================================================\n  Loading inputs\n========================================================================\n  [OK]   Loaded base epoch product: 6384 RUMs × 114 epochs\n  [OK]   Loaded footprint grid for 6384 RUMs\n\n========================================================================\n  Classifying topology\n========================================================================\n  [OK]   Topology classes: interior=6380, edge=4, isolated=0\n\n========================================================================\n  Building temporal sigma components\n========================================================================\n  [OK]   Temporal growth factor end/start: 1.400\n  [OK]   Seasonal multiplier range: 0.850 to 1.150\n  [OK]   Synthetic spike epochs: [82]\n\n========================================================================\n  Enhancing sigma\n========================================================================\n  [OK]   Vertical MEASUREMENT and MODEL roles preserved\n  [OK]   Enhanced sigma for 6384 RUMs\n\n========================================================================\n  Writing enhanced epoch product\n========================================================================\n  [OK]   Wrote enhanced vertical epochs: D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\\_internal\\data_pipeline\\vertical_epochs.json (16.24 MB)\n\n========================================================================\n  Summary\n========================================================================\n  [OK]   Step 04 complete in 7.09 s\n  Quality preset         : high\n  RUM count              : 6384\n  Epoch count            : 114\n  Topology interior/edge/isolated: 6380/4/0\n  Enhanced sigma min     : 0.1095 mm\n  Enhanced sigma median  : 0.1849 mm\n  Enhanced sigma max     : 3.9446 mm\n",
+      "stderr": ""
+    },
+    {
+      "step": "05",
+      "script": "05_validate_prepared_inputs.py",
+      "title": "Validate prepared inputs",
+      "importance": "validation",
+      "status": "WARN",
+      "returncode": 0,
+      "started_at": "2026-06-04T07:08:59+02:00",
+      "ended_at": "2026-06-04T07:09:01+02:00",
+      "duration_seconds": 2.624,
+      "command": [
+        "C:\\Users\\DELL\\miniconda3\\python.exe",
+        "D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\\_internal\\pipeline\\05_validate_prepared_inputs.py"
+      ],
+      "warnings": [
+        "[WARN] No expected_rum_count provided; count mismatch check skipped",
+        "[WARN] Step 05 validation passed with warnings in 2.47 s"
+      ],
+      "errors": [],
+      "stdout": "\n========================================================================\n  Configuration\n========================================================================\n  Project root          : D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\n  Points input          : D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\\_internal\\data_pipeline\\points_wgs84_with_rumid.geojson\n  Epoch input           : D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\\_internal\\data_pipeline\\vertical_epochs.json\n  Footprints input      : D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\\_internal\\data_pipeline\\rum_footprints.json\n  Validation report     : D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\\_internal\\data_pipeline\\validation_report.json\n  Expected RUM count    : None\n  Expected epoch count  : 114\n  Expected RUM size     : 450.0 m\n\n========================================================================\n  Checking required files\n========================================================================\n  [OK]   points file exists: 2.77 MB\n  [OK]   epochs file exists: 16.24 MB\n  [OK]   footprints file exists: 5.07 MB\n\n========================================================================\n  Loading products\n========================================================================\n  [OK]   JSON products loaded\n\n========================================================================\n  Validating points\n========================================================================\n  [OK]   Point product valid: 6384 points, unique rum_id values\n\n========================================================================\n  Validating footprints\n========================================================================\n  [OK]   Footprint product valid: 6384 polygons, 6384 occupied grid cells\n\n========================================================================\n  Validating epoch series\n========================================================================\n  [OK]   Vertical epoch product valid: 6384 RUMs × 114 epochs\n  [OK]   Validated MEASUREMENT, MODEL, and sigma arrays\n\n========================================================================\n  Cross-checking products\n========================================================================\n  [WARN] No expected_rum_count provided; count mismatch check skipped\n  [OK]   Footprint rum_size_m matches config: 450.0 m\n  [OK]   RUM ID sets match across points, footprints, and epoch series\n  [OK]   Cross-product counts are consistent\n\n========================================================================\n  Writing validation report\n========================================================================\n  [OK]   Wrote validation report: D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\\_internal\\data_pipeline\\validation_report.json (2.1 KB)\n\n========================================================================\n  Summary\n========================================================================\n  [WARN] Step 05 validation passed with warnings in 2.47 s\n  RUM count              : 6384\n  Epoch count            : 114\n  MEASUREMENT range      : -188.9744 to 35.0796 mm\n  MODEL range            : -193.922 to 6.4641 mm\n  Sigma range            : 0.1095 to 3.9446 mm\n  Warnings               : 2\n  Errors                 : 0\n",
+      "stderr": ""
+    },
+    {
+      "step": "06",
+      "script": "06_pack_vertical_series.py",
+      "title": "Pack vertical measurement/model and sigma series",
+      "importance": "core",
+      "status": "OK",
+      "returncode": 0,
+      "started_at": "2026-06-04T07:09:01+02:00",
+      "ended_at": "2026-06-04T07:09:08+02:00",
+      "duration_seconds": 6.815,
+      "command": [
+        "C:\\Users\\DELL\\miniconda3\\python.exe",
+        "D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\\_internal\\pipeline\\06_pack_vertical_series.py"
+      ],
+      "warnings": [],
+      "errors": [],
+      "stdout": "\n========================================================================\n  Configuration\n========================================================================\n  Project root       : D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\n  Epoch input        : D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\\_internal\\data_pipeline\\vertical_epochs.json\n  Packed output      : D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\\_internal\\data_pipeline\\packed_series.json\n\n========================================================================\n  Loading vertical epoch product\n========================================================================\n  [OK]   Loaded 6384 RUM series × 114 epochs\n  [OK]   Built deterministic rum_order and rum_index\n\n========================================================================\n  Packing arrays\n========================================================================\n  [OK]   Packed measurement_mm flat array length: 727776\n  [OK]   Packed model_mm flat array length: 727776\n  [OK]   Packed sigma_mm flat array length: 727776\n\n========================================================================\n  Building metadata summary\n========================================================================\n\n========================================================================\n  Writing packed series\n========================================================================\n  [OK]   Wrote packed series: D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\\_internal\\data_pipeline\\packed_series.json (14.77 MB)\n\n========================================================================\n  Summary\n========================================================================\n  [OK]   Step 06 complete in 6.65 s\n  RUM count              : 6384\n  Epoch count            : 114\n  Packed array length    : 727776\n  MEASUREMENT range      : -188.9744 to 35.0796 mm\n  MODEL range            : -193.9220 to 6.4641 mm\n  Sigma range            : 0.1095 to 3.9446 mm\n  Source up range        : -45.0000 to 1.5000 mm/yr\n",
+      "stderr": ""
+    },
+    {
+      "step": "07",
+      "script": "07_build_tile_index.py",
+      "title": "Build spatial tile index",
+      "importance": "core",
+      "status": "OK",
+      "returncode": 0,
+      "started_at": "2026-06-04T07:09:08+02:00",
+      "ended_at": "2026-06-04T07:09:09+02:00",
+      "duration_seconds": 1.112,
+      "command": [
+        "C:\\Users\\DELL\\miniconda3\\python.exe",
+        "D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\\_internal\\pipeline\\07_build_tile_index.py"
+      ],
+      "warnings": [],
+      "errors": [],
+      "stdout": "\n========================================================================\n  Configuration\n========================================================================\n  Project root        : D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\n  Footprints input    : D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\\_internal\\data_pipeline\\rum_footprints.json\n  Packed input        : D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\\_internal\\data_pipeline\\packed_series.json\n  Tile index output   : D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\\_internal\\data_pipeline\\tiles\\tile_index.json\n  Assignments output  : D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\\_internal\\data_pipeline\\tiles\\tile_assignments.json\n  Requested tile grid : 8 cols × 6 rows\n\n========================================================================\n  Loading inputs\n========================================================================\n  [OK]   Loaded footprints and packed series\n  [OK]   Packed series: 6384 RUMs × 114 epochs\n\n========================================================================\n  Building feature records\n========================================================================\n  [OK]   Prepared 6384 footprint records with row indices\n\n========================================================================\n  Partitioning spatial tiles\n========================================================================\n  [OK]   Built tile index: 48 non-empty tiles, 0 empty tiles\n  Tile grid actual     : 8 cols × 6 rows\n  RUMs per non-empty tile: min=120, max=143\n\n========================================================================\n  Writing tile index products\n========================================================================\n  [OK]   Wrote tile index: D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\\_internal\\data_pipeline\\tiles\\tile_index.json (126.9 KB)\n  [OK]   Wrote tile assignments: D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\\_internal\\data_pipeline\\tiles\\tile_assignments.json (668.8 KB)\n\n========================================================================\n  Summary\n========================================================================\n  [OK]   Step 07 complete in 0.98 s\n  RUM count              : 6384\n  Tile count             : 48\n  Non-empty tiles         : 48\n  Empty tiles             : 0\n  RUMs per tile           : 120 to 143\n",
+      "stderr": ""
+    },
+    {
+      "step": "08",
+      "script": "08_export_epoch_axis.py",
+      "title": "Export epoch axis",
+      "importance": "core",
+      "status": "OK",
+      "returncode": 0,
+      "started_at": "2026-06-04T07:09:09+02:00",
+      "ended_at": "2026-06-04T07:09:10+02:00",
+      "duration_seconds": 0.636,
+      "command": [
+        "C:\\Users\\DELL\\miniconda3\\python.exe",
+        "D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\\_internal\\pipeline\\08_export_epoch_axis.py"
+      ],
+      "warnings": [],
+      "errors": [],
+      "stdout": "\n========================================================================\n  Configuration\n========================================================================\n  Project root       : D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\n  Packed input       : D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\\_internal\\data_pipeline\\packed_series.json\n  Epoch axis output  : D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\\_internal\\data_pipeline\\tiles\\epoch_axis.json\n\n========================================================================\n  Loading packed series\n========================================================================\n  [OK]   Loaded epoch axis with 114 epochs\n  First epoch        : 2014-06-01\n  Last epoch         : 2018-09-22\n  Default index      : 113\n  Interval mode      : 14 days\n\n========================================================================\n  Writing epoch axis\n========================================================================\n  [OK]   Wrote epoch axis: D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\\_internal\\data_pipeline\\tiles\\epoch_axis.json (7.5 KB)\n\n========================================================================\n  Summary\n========================================================================\n  [OK]   Step 08 complete in 0.52 s\n  Epoch count            : 114\n  First / last            : 2014-06-01 / 2018-09-22\n  Default epoch           : 2018-09-22\n  Interval min/mode/max   : 6 / 14 / 14 days\n",
+      "stderr": ""
+    },
+    {
+      "step": "09",
+      "script": "09_build_blank_cells.py",
+      "title": "Build blank/no-data cells",
+      "importance": "core",
+      "status": "OK",
+      "returncode": 0,
+      "started_at": "2026-06-04T07:09:10+02:00",
+      "ended_at": "2026-06-04T07:09:11+02:00",
+      "duration_seconds": 1.07,
+      "command": [
+        "C:\\Users\\DELL\\miniconda3\\python.exe",
+        "D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\\_internal\\pipeline\\09_build_blank_cells.py"
+      ],
+      "warnings": [],
+      "errors": [],
+      "stdout": "\n========================================================================\n  Configuration\n========================================================================\n  Project root        : D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\n  Footprints input    : D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\\_internal\\data_pipeline\\rum_footprints.json\n  Packed input        : D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\\_internal\\data_pipeline\\packed_series.json\n  Blank output        : D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\\_internal\\data_pipeline\\blank_cells.json\n  Source CRS          : EPSG:23830\n  RUM size            : 450.0 m\n  Interior rule       : row_and_col\n\n========================================================================\n  Loading inputs\n========================================================================\n  [OK]   Loaded 6384 real RUM grid cells\n  [OK]   Loaded packed series with 6384 row indices\n\n========================================================================\n  Detecting interior blank cells\n========================================================================\n  [OK]   No blank cells detected; this is valid\n  [OK]   Wrote empty blank-cell product: D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\\_internal\\data_pipeline\\blank_cells.json (2.1 KB)\n\n========================================================================\n  Summary\n========================================================================\n  [OK]   Step 09 complete in 0.77 s\n  Blank count            : 0\n  Status                 : no_blank_cells_detected\n",
+      "stderr": ""
+    },
+    {
+      "step": "10",
+      "script": "10_build_height_texture.py",
+      "title": "Build height/sigma texture",
+      "importance": "core",
+      "status": "WARN",
+      "returncode": 0,
+      "started_at": "2026-06-04T07:09:11+02:00",
+      "ended_at": "2026-06-04T07:09:15+02:00",
+      "duration_seconds": 4.089,
+      "command": [
+        "C:\\Users\\DELL\\miniconda3\\python.exe",
+        "D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\\_internal\\pipeline\\10_build_height_texture.py"
+      ],
+      "warnings": [
+        "[WARN] Sigma clipped pixels: 14547 (1.9988%)"
+      ],
+      "errors": [],
+      "stdout": "\n========================================================================\n  Configuration\n========================================================================\n  Project root       : D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\n  Packed input       : D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\\_internal\\data_pipeline\\packed_series.json\n  Blank input        : D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\\_internal\\data_pipeline\\blank_cells.json\n  Texture output     : D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\\_internal\\data_pipeline\\tiles\\height_texture.png\n  Metadata output    : D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\\_internal\\data_pipeline\\tiles\\height_meta.json\n  MODEL packing range: -1500.0 to 1500.0 mm\n  Sigma scale mode   : p98\n\n========================================================================\n  Loading inputs\n========================================================================\n  [OK]   Loaded packed series: 6384 RUM rows × 114 epochs\n  [OK]   Loaded blank-cell product: status=no_blank_cells_detected, features=0\n\n========================================================================\n  Preparing texture rows\n========================================================================\n  [OK]   Texture dimensions: 114 × 6384\n  [OK]   Rows: real=6384, blank=0\n\n========================================================================\n  Computing packing scales\n========================================================================\n  Actual MODEL range    : -193.9220 to 6.4641 mm\n  Actual sigma range    : 0.1095 to 3.9446 mm\n  Sigma p98             : 1.2630 mm\n  Sigma packing max     : 1.2630 mm\n\n========================================================================\n  Building texture\n========================================================================\n  [OK]   No MODEL clipping\n  [WARN] Sigma clipped pixels: 14547 (1.9988%)\n\n========================================================================\n  Writing height metadata\n========================================================================\n  [OK]   Wrote height texture: D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\\_internal\\data_pipeline\\tiles\\height_texture.png (478.3 KB)\n  [OK]   Wrote height metadata: D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\\_internal\\data_pipeline\\tiles\\height_meta.json (279.4 KB)\n\n========================================================================\n  Summary\n========================================================================\n  [OK]   Step 10 complete in 3.92 s\n  Texture size           : 114 × 6384\n  Real / blank rows      : 6384 / 0\n  MODEL actual range     : -193.9220 to 6.4641 mm\n  Packing vmin/vmax      : -1500.0000 to 1500.0000 mm\n  Sigma actual range     : 0.1095 to 3.9446 mm\n  Sigma packing max      : 1.2630 mm\n",
+      "stderr": ""
+    },
+    {
+      "step": "11",
+      "script": "11_build_real_caps_b3dm.py",
+      "title": "Build real cap B3DM tiles",
+      "importance": "core",
+      "status": "OK",
+      "returncode": 0,
+      "started_at": "2026-06-04T07:09:15+02:00",
+      "ended_at": "2026-06-04T07:09:16+02:00",
+      "duration_seconds": 1.115,
+      "command": [
+        "C:\\Users\\DELL\\miniconda3\\python.exe",
+        "D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\\_internal\\pipeline\\11_build_real_caps_b3dm.py"
+      ],
+      "warnings": [],
+      "errors": [],
+      "stdout": "\n========================================================================\n  Configuration\n========================================================================\n  Project root       : D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\n  Footprints input   : D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\\_internal\\data_pipeline\\rum_footprints.json\n  Packed input       : D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\\_internal\\data_pipeline\\packed_series.json\n  Height meta input  : D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\\_internal\\data_pipeline\\tiles\\height_meta.json\n  Tile index input   : D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\\_internal\\data_pipeline\\tiles\\tile_index.json\n  Tileset output     : D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\\_internal\\data_pipeline\\tiles\\tileset.json\n  Display datum      : 1000.0 m\n\n========================================================================\n  Loading inputs\n========================================================================\n  [OK]   Loaded 6384 footprints\n  [OK]   Loaded 6384 packed row indices\n  [OK]   Loaded tile index with 48 tiles\n\n========================================================================\n  Building B3DM cap tiles\n========================================================================\n  [OK]   Built 48 real cap B3DM tiles\n  [OK]   Total RUM caps: 6384\n  Total vertices       : 25536\n  Total triangles      : 12768\n\n========================================================================\n  Writing tileset\n========================================================================\n  [OK]   Wrote real caps tileset: D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\\_internal\\data_pipeline\\tiles\\tileset.json (46.6 KB)\n\n========================================================================\n  Summary\n========================================================================\n  [OK]   Step 11 complete in 0.98 s\n  Real cap tiles         : 48\n  Real RUM caps          : 6384\n  Vertices / triangles   : 25536 / 12768\n  Tileset                : D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\\_internal\\data_pipeline\\tiles\\tileset.json\n",
+      "stderr": ""
+    },
+    {
+      "step": "12",
+      "script": "12_build_blank_caps_b3dm.py",
+      "title": "Build blank cap B3DM tiles",
+      "importance": "core",
+      "status": "OK",
+      "returncode": 0,
+      "started_at": "2026-06-04T07:09:16+02:00",
+      "ended_at": "2026-06-04T07:09:16+02:00",
+      "duration_seconds": 0.12,
+      "command": [
+        "C:\\Users\\DELL\\miniconda3\\python.exe",
+        "D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\\_internal\\pipeline\\12_build_blank_caps_b3dm.py"
+      ],
+      "warnings": [],
+      "errors": [],
+      "stdout": "\n========================================================================\n  Configuration\n========================================================================\n  Project root       : D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\n  Blank cells input  : D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\\_internal\\data_pipeline\\blank_cells.json\n  Height meta input  : D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\\_internal\\data_pipeline\\tiles\\height_meta.json\n  Tile index input   : D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\\_internal\\data_pipeline\\tiles\\tile_index.json\n  Tileset output     : D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\\_internal\\data_pipeline\\tiles_blank\\tileset.json\n  Display datum      : 1000.0 m\n\n========================================================================\n  Loading inputs\n========================================================================\n  [OK]   Loaded blank-cell product: status=no_blank_cells_detected, features=0\n  [OK]   Loaded height meta: texture height=6384\n\n========================================================================\n  Writing empty blank tileset\n========================================================================\n  [OK]   Wrote empty blank caps tileset: D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\\_internal\\data_pipeline\\tiles_blank\\tileset.json (0.8 KB)\n\n========================================================================\n  Summary\n========================================================================\n  [OK]   Step 12 complete in 0.02 s\n  Blank count            : 0\n  Blank cap tiles         : 0\n",
+      "stderr": ""
+    },
+    {
+      "step": "13",
+      "script": "13_build_walls_b3dm.py",
+      "title": "Build wall B3DM tiles",
+      "importance": "core",
+      "status": "OK",
+      "returncode": 0,
+      "started_at": "2026-06-04T07:09:16+02:00",
+      "ended_at": "2026-06-04T07:09:18+02:00",
+      "duration_seconds": 1.185,
+      "command": [
+        "C:\\Users\\DELL\\miniconda3\\python.exe",
+        "D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\\_internal\\pipeline\\13_build_walls_b3dm.py"
+      ],
+      "warnings": [],
+      "errors": [],
+      "stdout": "\n========================================================================\n  Configuration\n========================================================================\n  Project root          : D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\n  Footprints input      : D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\\_internal\\data_pipeline\\rum_footprints.json\n  Blank cells input     : D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\\_internal\\data_pipeline\\blank_cells.json\n  Packed input          : D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\\_internal\\data_pipeline\\packed_series.json\n  Height meta input     : D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\\_internal\\data_pipeline\\tiles\\height_meta.json\n  Tile index input      : D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\\_internal\\data_pipeline\\tiles\\tile_index.json\n  Real walls tileset    : D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\\_internal\\data_pipeline\\tiles_walls_real\\tileset.json\n  Blank walls tileset   : D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\\_internal\\data_pipeline\\tiles_walls_blank\\tileset.json\n\n========================================================================\n  Loading inputs\n========================================================================\n  [OK]   Loaded footprints: 6384 features\n  [OK]   Loaded blank cells: 0 features\n  [OK]   Loaded packed series and height metadata\n\n========================================================================\n  Building real walls\n========================================================================\n  [OK]   Real wall tiles: 48, cells=6384, walls=12608\n\n========================================================================\n  Building blank walls\n========================================================================\n  [OK]   Blank wall tiles: 0, cells=0, walls=0\n\n========================================================================\n  Summary\n========================================================================\n  [OK]   Step 13 complete in 1.03 s\n  Real wall tiles        : 48\n  Real wall quads        : 12608\n  Blank wall tiles       : 0\n  Blank wall quads       : 0\n  Real vertices/triangles: 50432 / 25216\n  Blank vertices/triangles: 0 / 0\n",
+      "stderr": ""
+    },
+    {
+      "step": "14",
+      "script": "14_build_horizontal_field.py",
+      "title": "Build horizontal velocity field",
+      "importance": "core",
+      "status": "OK",
+      "returncode": 0,
+      "started_at": "2026-06-04T07:09:18+02:00",
+      "ended_at": "2026-06-04T07:09:19+02:00",
+      "duration_seconds": 1.423,
+      "command": [
+        "C:\\Users\\DELL\\miniconda3\\python.exe",
+        "D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\\_internal\\pipeline\\14_build_horizontal_field.py"
+      ],
+      "warnings": [],
+      "errors": [],
+      "stdout": "\n========================================================================\n  Configuration\n========================================================================\n  Project root          : D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\n  Footprints input      : D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\\_internal\\data_pipeline\\rum_footprints.json\n  Packed input          : D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\\_internal\\data_pipeline\\packed_series.json\n  Horizontal output     : D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\\_internal\\data_pipeline\\horizontal_field.json\n  Particle output       : D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\\_internal\\data_pipeline\\horizontal_particle_field.json\n  East/North/Up fields  : east, north, up\n\n========================================================================\n  Loading inputs\n========================================================================\n  [OK]   Loaded footprints: 6384 features\n  [OK]   Loaded packed row index: 6384 RUMs\n\n========================================================================\n  Building horizontal records\n========================================================================\n  [OK]   All horizontal velocity values available\n  [OK]   Covariance available for 6384 / 6384 records\n\n========================================================================\n  Writing horizontal field\n========================================================================\n  [OK]   Wrote horizontal field: D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\\_internal\\data_pipeline\\horizontal_field.json (2.86 MB)\n  [OK]   Wrote particle field: D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\\_internal\\data_pipeline\\horizontal_particle_field.json (1.21 MB)\n\n========================================================================\n  Summary\n========================================================================\n  [OK]   Step 14 complete in 1.28 s\n  Records                : 6384\n  East range             : -17.8877 to 17.8877 mm/yr\n  North range            : -19.6962 to 17.7265 mm/yr\n  Speed range            : 0.0000 to 19.9991 mm/yr\n  Speed p50/p98          : 3.0000 / 10.0000 mm/yr\n  Covariance availability: 6384 / 6384\n  Particle field records : 6384\n  Particle/full size     : 0.423x\n",
+      "stderr": ""
+    },
+    {
+      "step": "15",
+      "script": "15_check_horizontal_field.py",
+      "title": "Check horizontal field",
+      "importance": "dev_validation",
+      "status": "WARN",
+      "returncode": 0,
+      "started_at": "2026-06-04T07:09:19+02:00",
+      "ended_at": "2026-06-04T07:09:19+02:00",
+      "duration_seconds": 0.28,
+      "command": [
+        "C:\\Users\\DELL\\miniconda3\\python.exe",
+        "D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\\_internal\\pipeline\\15_check_horizontal_field.py"
+      ],
+      "warnings": [
+        "[WARN] Near-zero horizontal vectors skipped in unit-vector validation: 392 (speed <= 0.05 mm/yr)"
+      ],
+      "errors": [],
+      "stdout": "\n========================================================================\n  Configuration\n========================================================================\n  Project root          : D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\n  Horizontal input      : D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\\_internal\\data_pipeline\\horizontal_field.json\n  Debug vector output   : D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\\_internal\\data_pipeline\\horizontal_debug_vectors.geojson\n\n========================================================================\n  Loading horizontal field\n========================================================================\n  [OK]   Loaded horizontal field: 6384 records\n\n========================================================================\n  Validating horizontal field\n========================================================================\n  [WARN] Near-zero horizontal vectors skipped in unit-vector validation: 392 (speed <= 0.05 mm/yr)\n  [OK]   row_index values are unique and continuous\n  [OK]   Horizontal vector values are finite and internally consistent\n  [OK]   Covariance available for 6384 / 6384 records\n\n========================================================================\n  Writing debug vectors\n========================================================================\n  [OK]   Wrote debug vectors: D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\\_internal\\data_pipeline\\horizontal_debug_vectors.geojson (255.4 KB)\n  [OK]   Debug vector count: 772\n\n========================================================================\n  Summary\n========================================================================\n  [OK]   Step 15 complete in 0.18 s\n  Records                : 6384\n  Speed range            : 0.000000 to 19.999054 mm/yr\n  Speed p50/p98          : 3.000000 / 10.000000 mm/yr\n  Covariance available   : 6384 / 6384\n  Weak direction skipped : 392\n  Std east/north p50     : 2.5 / 3.75 mm/yr\n  Warnings               : 1\n",
+      "stderr": ""
+    },
+    {
+      "step": "16",
+      "script": "16_check_horizontal_uncertainty.py",
+      "title": "Check horizontal uncertainty",
+      "importance": "dev_validation",
+      "status": "OK",
+      "returncode": 0,
+      "started_at": "2026-06-04T07:09:19+02:00",
+      "ended_at": "2026-06-04T07:09:20+02:00",
+      "duration_seconds": 0.656,
+      "command": [
+        "C:\\Users\\DELL\\miniconda3\\python.exe",
+        "D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\\_internal\\pipeline\\16_check_horizontal_uncertainty.py"
+      ],
+      "warnings": [],
+      "errors": [],
+      "stdout": "\n========================================================================\n  Configuration\n========================================================================\n  Project root           : D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\n  Horizontal input       : D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\\_internal\\data_pipeline\\horizontal_field.json\n  Uncertainty output     : D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\\_internal\\data_pipeline\\horizontal_uncertainty_check.json\n  Confidence probability : 0.95\n  Confidence scale       : 2.44774683\n  Unit assumption        : covariance=(mm/yr)^2, axes=mm/yr, no /100 scaling\n\n========================================================================\n  Loading horizontal field\n========================================================================\n  [OK]   Loaded horizontal field: 6384 records\n\n========================================================================\n  Analyzing covariance / ellipse parameters\n========================================================================\n  [OK]   Computed ellipse parameters for 6384 records\n  [OK]   Covariance eigenvalue analysis complete\n\n========================================================================\n  Writing uncertainty check product\n========================================================================\n  [OK]   Wrote horizontal uncertainty check: D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\\_internal\\data_pipeline\\horizontal_uncertainty_check.json (3.68 MB)\n\n========================================================================\n  Summary\n========================================================================\n  [OK]   Step 16 complete in 0.55 s\n  Records with covariance: 6384 / 6384\n  1σ major p50/p98       : 3.782581 / 7.565161 mm/yr\n  95% ellipse major p50  : 9.258800 mm/yr\n  Axis ratio p50/p98     : 1.543642 / 1.543738\n  Speed/std-major p50    : 1.057479\n  Warnings               : 0\n",
+      "stderr": ""
+    },
+    {
+      "step": "17",
+      "script": "17_build_horizontal_arrow_ellipse_b3dm.py",
+      "title": "Build horizontal arrows and confidence ellipses",
+      "importance": "dev_product",
+      "status": "OK",
+      "returncode": 0,
+      "started_at": "2026-06-04T07:09:20+02:00",
+      "ended_at": "2026-06-04T07:09:22+02:00",
+      "duration_seconds": 2.357,
+      "command": [
+        "C:\\Users\\DELL\\miniconda3\\python.exe",
+        "D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\\_internal\\pipeline\\17_build_horizontal_arrow_ellipse_b3dm.py"
+      ],
+      "warnings": [],
+      "errors": [],
+      "stdout": "\n========================================================================\n  Configuration\n========================================================================\n  Project root              : D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\n  Horizontal input          : D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\\_internal\\data_pipeline\\horizontal_field.json\n  Uncertainty input         : D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\\_internal\\data_pipeline\\horizontal_uncertainty_check.json\n  Height meta input         : D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\\_internal\\data_pipeline\\tiles\\height_meta.json\n  Tile index input          : D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\\_internal\\data_pipeline\\tiles\\tile_index.json\n  Arrows tileset output     : D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\\_internal\\data_pipeline\\horizontal_dev\\arrows\\tileset.json\n  Ellipses tileset output   : D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\\_internal\\data_pipeline\\horizontal_dev\\ellipses\\tileset.json\n  Ellipse scaling note      : Step16 axes in mm/yr, no hidden /100\n\n========================================================================\n  Loading inputs\n========================================================================\n  [OK]   Loaded horizontal records: 6384\n  [OK]   Loaded uncertainty records: 6384\n  [OK]   Loaded tile index: 48 tiles\n\n========================================================================\n  Deriving horizontal visual scale\n========================================================================\n  RUM size source            : horizontal_records_inferred\n  Scaling mode              : auto_percentile_by_rum_size_same_as_arrow\n  RUM size                  : 438.526 m\n  Arrow reference           : P99.5 speed = 15.595815 mm/yr\n  Arrow max length          : 350.820 m\n  Arrow scale               : 22.494525 m per mm/yr\n  Arrow anchor fraction     : 0.750 (tail=0, head=1)\n  Arrow visibility          : speed >= 0.010000 mm/yr\n  Ellipse reference         : P99.5 major axis = 18.517599 mm/yr\n  Ellipse max diameter      : 328.894 m\n  Ellipse scale mode        : same_as_arrow\n  Ellipse centre placement  : arrowhead\n  Ellipse clip mode         : none\n  Ellipse scale             : 22.494525 m per mm/yr\n\n========================================================================\n  Building arrow B3DM tileset\n========================================================================\n  [OK]   Arrow tiles: 48, arrows=5996\n\n========================================================================\n  Building confidence ellipse B3DM tileset\n========================================================================\n  [OK]   Ellipse tiles: 48, ellipses=5996\n\n========================================================================\n  Summary\n========================================================================\n  [OK]   Step 17 complete in 2.24 s\n  Arrow tiles/features      : 48 / 5996\n  Ellipse tiles/features    : 48 / 5996\n  Arrow vertices/triangles  : 41972 / 17988\n  Ellipse vertices/triangles: 767488 / 767488\n  Skipped low-speed records : 388\n  Skipped insignificant     : 0\n  Arrows tileset            : D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\\_internal\\data_pipeline\\horizontal_dev\\arrows\\tileset.json\n  Ellipses tileset          : D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\\_internal\\data_pipeline\\horizontal_dev\\ellipses\\tileset.json\n",
+      "stderr": ""
+    },
+    {
+      "step": "18",
+      "script": "18_build_viewer_tuning.py",
+      "title": "Build data-derived viewer tuning",
+      "importance": "viewer_product",
+      "status": "OK",
+      "returncode": 0,
+      "started_at": "2026-06-04T07:09:22+02:00",
+      "ended_at": "2026-06-04T07:09:23+02:00",
+      "duration_seconds": 1.018,
+      "command": [
+        "C:\\Users\\DELL\\miniconda3\\python.exe",
+        "D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\\_internal\\pipeline\\18_build_viewer_tuning.py"
+      ],
+      "warnings": [],
+      "errors": [],
+      "stdout": "\n========================================================================\n  Configuration\n========================================================================\n  Project root       : D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\n  Viewer tuning out  : D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\\_internal\\data_pipeline\\viewer_resources\\viewer_tuning.json\n  Dataset title      : None\n  Project key        : synthbowl1\n\n========================================================================\n  Loading final products\n========================================================================\n  [OK]   All core viewer products exist\n\n========================================================================\n  Deriving viewer knobs\n========================================================================\n  [OK]   Derived camera, epoch, color-scale, vertical-exaggeration, and horizontal glyph defaults\n  [OK]   Blank layer default can stay available; source has zero blank cells\n\n========================================================================\n  Writing viewer tuning JSON\n========================================================================\n  [OK]   Wrote viewer tuning: D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\1_RUM\\4.1.5.V4_4D_MC_synthbowl\\_internal\\data_pipeline\\viewer_resources\\viewer_tuning.json (23.1 KB)\n\n========================================================================\n  Summary\n========================================================================\n  [OK]   Step 18 complete in 0.87 s\n  Camera center          : 107.7396618, -6.00024179\n  Camera range           : 122359.188344 m\n  Model exaggeration     : 10.0x\n  Color scale            : -45.0 to 3.0 mm/yr (center=0.0, tau=0.5)\n  Default epoch          : 2018-09-22\n  Blank count            : 0\n  Warnings               : 0\n",
+      "stderr": ""
+    }
+  ],
+  "warnings": [
+    {
+      "step": "05",
+      "message": "[WARN] No expected_rum_count provided; count mismatch check skipped"
+    },
+    {
+      "step": "05",
+      "message": "[WARN] Step 05 validation passed with warnings in 2.47 s"
+    },
+    {
+      "step": "10",
+      "message": "[WARN] Sigma clipped pixels: 14547 (1.9988%)"
+    },
+    {
+      "step": "15",
+      "message": "[WARN] Near-zero horizontal vectors skipped in unit-vector validation: 392 (speed <= 0.05 mm/yr)"
+    }
+  ],
+  "errors": [],
+  "outputs": {
+    "rum_footprints": {
+      "path": "_internal/data_pipeline/rum_footprints.json",
+      "exists": true,
+      "size_bytes": 5312949
+    },
+    "packed_series": {
+      "path": "_internal/data_pipeline/packed_series.json",
+      "exists": true,
+      "size_bytes": 15491633
+    },
+    "blank_cells": {
+      "path": "_internal/data_pipeline/blank_cells.json",
+      "exists": true,
+      "size_bytes": 2121
+    },
+    "height_texture": {
+      "path": "_internal/data_pipeline/tiles/height_texture.png",
+      "exists": true,
+      "size_bytes": 489734
+    },
+    "height_meta": {
+      "path": "_internal/data_pipeline/tiles/height_meta.json",
+      "exists": true,
+      "size_bytes": 286155
+    },
+    "epoch_axis": {
+      "path": "_internal/data_pipeline/tiles/epoch_axis.json",
+      "exists": true,
+      "size_bytes": 7712
+    },
+    "horizontal_field": {
+      "path": "_internal/data_pipeline/horizontal_field.json",
+      "exists": true,
+      "size_bytes": 2999328
+    },
+    "horizontal_particle_field": {
+      "path": "_internal/data_pipeline/horizontal_particle_field.json",
+      "exists": true,
+      "size_bytes": 1268641
+    },
+    "horizontal_debug_vectors": {
+      "path": "_internal/data_pipeline/horizontal_debug_vectors.geojson",
+      "exists": true,
+      "size_bytes": 261542
+    },
+    "horizontal_uncertainty_check": {
+      "path": "_internal/data_pipeline/horizontal_uncertainty_check.json",
+      "exists": true,
+      "size_bytes": 3859202
+    },
+    "horizontal_arrows_tileset": {
+      "path": "_internal/data_pipeline/horizontal_dev/arrows/tileset.json",
+      "exists": true,
+      "size_bytes": 50048
+    },
+    "horizontal_ellipses_tileset": {
+      "path": "_internal/data_pipeline/horizontal_dev/ellipses/tileset.json",
+      "exists": true,
+      "size_bytes": 50152
+    },
+    "horizontal_arrows_wgs84": {
+      "path": "_internal/data_pipeline/horizontal_dev/horizontal_arrows_wgs84.geojson",
+      "exists": false,
+      "size_bytes": null
+    },
+    "horizontal_confidence_ellipses_wgs84": {
+      "path": "_internal/data_pipeline/horizontal_dev/horizontal_confidence_ellipses_wgs84.geojson",
+      "exists": false,
+      "size_bytes": null
+    },
+    "viewer_tuning": {
+      "path": "_internal/data_pipeline/viewer_resources/viewer_tuning.json",
+      "exists": true,
+      "size_bytes": 23677
+    },
+    "real_caps_tileset": {
+      "path": "_internal/data_pipeline/tiles/tileset.json",
+      "exists": true,
+      "size_bytes": 47681
+    },
+    "blank_caps_tileset": {
+      "path": "_internal/data_pipeline/tiles_blank/tileset.json",
+      "exists": true,
+      "size_bytes": 840
+    },
+    "real_walls_tileset": {
+      "path": "_internal/data_pipeline/tiles_walls_real/tileset.json",
+      "exists": true,
+      "size_bytes": 48807
+    },
+    "blank_walls_tileset": {
+      "path": "_internal/data_pipeline/tiles_walls_blank/tileset.json",
+      "exists": true,
+      "size_bytes": 747
+    }
+  },
+  "run_record_paths": {
+    "latest_log": "D:/Kuliah/Q7/Thesis/260413_Gameplan1/4.Web/4.1.CesiumApp/1_RUM/4.1.5.V4_4D_MC_synthbowl/run_records/latest_run.log",
+    "latest_manifest": "D:/Kuliah/Q7/Thesis/260413_Gameplan1/4.Web/4.1.CesiumApp/1_RUM/4.1.5.V4_4D_MC_synthbowl/run_records/latest_manifest.json",
+    "archived_log": "D:/Kuliah/Q7/Thesis/260413_Gameplan1/4.Web/4.1.CesiumApp/1_RUM/4.1.5.V4_4D_MC_synthbowl/run_records/archive/20260604_070841_run.log",
+    "archived_manifest": "D:/Kuliah/Q7/Thesis/260413_Gameplan1/4.Web/4.1.CesiumApp/1_RUM/4.1.5.V4_4D_MC_synthbowl/run_records/archive/20260604_070841_manifest.json"
+  }
+}
