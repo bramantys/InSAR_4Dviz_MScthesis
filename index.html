@@ -8,12 +8,13 @@
       font-family: Arial, sans-serif;
       margin: 40px;
       line-height: 1.5;
-      max-width: 900px;
+      max-width: 980px;
+      color: #202124;
     }
     a {
       display: block;
       margin: 12px 0;
-      font-size: 20px;
+      font-size: 14px;
     }
     code {
       background: #eee;
@@ -23,6 +24,52 @@
     .meta {
       color: #555;
       margin-top: -8px;
+    }
+    .meta a {
+      display: inline;
+      margin: 0;
+      font-size: inherit;
+    }
+    .section-note {
+      color: #555;
+      margin-top: -6px;
+    }
+    .viewer-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(260px, 1fr));
+      gap: 12px 16px;
+      margin: 16px 0 24px;
+    }
+    .viewer-card {
+      display: block;
+      margin: 0;
+      padding: 14px 16px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      text-decoration: none;
+      color: #1a73e8;
+      background: #dae4dd;
+      font-size: 17px;
+    }
+    .viewer-card:hover {
+      background: #f1f6ff;
+      border-color: #b7d0ff;
+    }
+    .viewer-card strong {
+      display: block;
+      color: #202124;
+      font-size: 15px;
+      margin-bottom: 3px;
+    }
+    .single-card {
+      margin: 12px 0 28px;
+    }
+    .old-list a {
+      font-size: 14px;
+    }
+    @media (max-width: 700px) {
+      body { margin: 24px; }
+      .viewer-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -39,16 +86,56 @@
     Recommended use: desktop or laptop browser with WebGL enabled.
   </p>
 
-  <h2>Open Prototype1 viewers</h2>
-  <a href="Proto1_RUM_jakarta/viewer_4d.html">1. Jakarta 4D RUM Viewer</a>
-  <a href="Proto1_RUM_groningen/viewer_4d.html">2. Groningen 4D RUM Viewer</a>
-  <a href="Proto1_RUM_groningen/viewer_4d_tuned.html">3. Groningen tuned 4D RUM Viewer</a>
+  <h2>Prototype1 viewers · new UI</h2>
+  <p class="section-note">
+    New Prototype1 UI with horizontal uncertainty comparison: Monte Carlo realizations and uncertainty shimmer.
+  </p>
 
-  <a href="Proto1_RUM_Synth_Bowl_Test1/viewer_4d.html">4. Synthetic Bowl Test (No blank RUM)</a>
-  <a href="Proto1_RUM_Synth_Bowl_Test2withBlanks/viewer_4d.html">5. Synthetic Bowl Test (With Blank RUM)</a>
+  <div class="viewer-grid">
+    <a class="viewer-card" href="4DViz_thesis/P1_4.1.5.V4_4D_MC_jakarta/viz1_dev_v4_montecarlo.html">
+      <strong>Jakarta</strong>
+      Monte Carlo viewer
+    </a>
+    <a class="viewer-card" href="4DViz_thesis/P1_4.1.5.V4_4D_MC_jakarta/viz1_dev_v4_shimmer.html">
+      <strong>Jakarta</strong>
+      Uncertainty shimmer viewer
+    </a>
 
-  <a href="synthetic_test_toggle_announcement.JPG">info : new toggle available for Synthetic Bowl Test</a>
-  
+    <a class="viewer-card" href="4DViz_thesis/P1_4.1.5.V4_4D_MC_gron/viz1_dev_v4_montecarlo.html">
+      <strong>Groningen</strong>
+      Monte Carlo viewer
+    </a>
+    <a class="viewer-card" href="4DViz_thesis/P1_4.1.5.V4_4D_MC_gron/viz1_dev_v4_shimmer.html">
+      <strong>Groningen</strong>
+      Uncertainty shimmer viewer
+    </a>
+
+    <a class="viewer-card" href="4DViz_thesis/P1_4.1.5.V4_4D_MC_synthbowl/viz1_dev_v4_montecarlo.html">
+      <strong>Synthbowl</strong>
+      Monte Carlo viewer
+    </a>
+    <a class="viewer-card" href="4DViz_thesis/P1_4.1.5.V4_4D_MC_synthbowl/viz1_dev_v4_shimmer.html">
+      <strong>Synthbowl</strong>
+      Uncertainty shimmer viewer
+    </a>
+  </div>
+
+  <a class="viewer-card single-card" href="4DViz_thesis/4.1.5.V3_4D_jkt_UI_PRIMIT%20CHECKPOINT/viz1_dev_v3_batch9.3.6.1.html">
+    <strong>Jakarta</strong>
+    Fix occlusion problem, current progress
+  </a>
+
+  <h2>Old version Prototype1 viewers</h2>
+  <div class="old-list">
+    <a href="Proto1_RUM_jakarta/viewer_4d.html">1. Jakarta 4D RUM Viewer</a>
+    <a href="Proto1_RUM_groningen/viewer_4d.html">2. Groningen 4D RUM Viewer</a>
+    <a href="Proto1_RUM_groningen/viewer_4d_tuned.html">3. Groningen tuned 4D RUM Viewer</a>
+
+    <a href="Proto1_RUM_Synth_Bowl_Test1/viewer_4d.html">4. Synthetic Bowl Test (No blank RUM)</a>
+    <a href="Proto1_RUM_Synth_Bowl_Test2withBlanks/viewer_4d.html">5. Synthetic Bowl Test (With Blank RUM)</a>
+
+    <a href="synthetic_test_toggle_announcement.JPG">info : new toggle available for Synthetic Bowl Test</a>
+  </div>
 
   <h2>Repository</h2>
   <a href="https://github.com/bramantys/InSAR_4Dviz_MScthesis" target="_blank">
@@ -57,8 +144,11 @@
 
   <h2>Template package</h2>
   <p>
-    The <code>Proto1_RUM_TEMPLATE/</code> folder contains the reusable package structure and pipeline notes.
+    The <code>Proto1_RUM_TEMPLATE/</code> folder contains the original reusable package structure and pipeline notes.
     It is not meant to be opened as a finished viewer.
+  </p>
+  <p>
+    The <code>4DViz_thesis/P1_4.1.5.V4_4D_MC_template/</code> folder contains the new version for Prototype1.
   </p>
 
   <h2>Local use</h2>

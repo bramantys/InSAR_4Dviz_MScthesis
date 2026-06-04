@@ -1,0 +1,10 @@
+{
+    "project_name": "jakarta_3d_displ",
+    "jakarta_3d_filename": "jakarta_enu_estimates.csv",
+    "metadata_filename": "jakarta_enu_estimates.json",
+    "asc_track": "t098",
+    "dsc_track": "t047",
+    "insar_start_date": "2014-10-12",
+    "insar_end_date": "2025-06-04",
+    "RUM size": "450x450m"
+}

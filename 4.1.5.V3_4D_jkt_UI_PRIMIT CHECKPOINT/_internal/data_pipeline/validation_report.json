@@ -1,0 +1,75 @@
+{
+  "schema": "validation_report_v2_measurement_model",
+  "status": "OK",
+  "warnings": [],
+  "errors": [],
+  "inputs": {
+    "points_geojson": "_internal/data_pipeline/points_wgs84_with_rumid.geojson",
+    "vertical_epoch_json": "_internal/data_pipeline/vertical_epochs.json",
+    "rum_footprints": "_internal/data_pipeline/rum_footprints.json"
+  },
+  "summary": {
+    "rum_count": 4779,
+    "epoch_count": 288,
+    "first_epoch": "2014-01-01",
+    "last_epoch": "2025-01-01",
+    "point_bbox_wgs84": {
+      "west": 106.6646,
+      "south": -6.3484,
+      "east": 107.0385,
+      "north": -6.077
+    },
+    "point_bbox_source": {
+      "min_x": 1556242.1812,
+      "min_y": 781489.2521,
+      "max_x": 1598542.1812,
+      "max_y": 812539.2521
+    },
+    "footprint_bbox_wgs84": {
+      "west": 106.66252853,
+      "south": -6.35042028,
+      "east": 107.04049131,
+      "north": -6.074919
+    },
+    "footprint_bbox_source": {
+      "min_x": 1556017.1812,
+      "min_y": 781264.2521,
+      "max_x": 1598767.1812,
+      "max_y": 812764.2521
+    },
+    "grid": {
+      "origin_x": 1556242.1812,
+      "origin_y": 781489.2521,
+      "spacing_m": 450.0,
+      "min_i": 0,
+      "max_i": 94,
+      "min_j": 0,
+      "max_j": 69,
+      "n_cols": 95,
+      "n_rows": 70,
+      "max_snap_residual_x_m": 0.0,
+      "max_snap_residual_y_m": 0.0,
+      "snap_residual_warning_threshold_m": 67.5,
+      "has_large_snap_residual": false
+    },
+    "measurement_min_mm": -898.0278,
+    "measurement_p02_mm": -220.8242,
+    "measurement_p50_mm": -45.4903,
+    "measurement_p98_mm": 8.797,
+    "measurement_max_mm": 100.8775,
+    "model_min_mm": -895.9829,
+    "model_p02_mm": -223.7474,
+    "model_p50_mm": -48.7966,
+    "model_p98_mm": -0.0,
+    "model_max_mm": 89.4983,
+    "sigma_min_mm": 0.1073,
+    "sigma_p02_mm": 0.1328,
+    "sigma_p50_mm": 0.184,
+    "sigma_p98_mm": 1.8575,
+    "sigma_max_mm": 5.356,
+    "up_min_mm_yr": -81.4479,
+    "up_max_mm_yr": 8.1357,
+    "warnings_count": 0,
+    "errors_count": 0
+  }
+}

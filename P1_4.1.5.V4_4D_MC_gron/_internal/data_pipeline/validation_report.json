@@ -1,0 +1,77 @@
+{
+  "schema": "validation_report_v2_measurement_model",
+  "status": "WARN",
+  "warnings": [
+    "No expected_rum_count provided; count mismatch check skipped"
+  ],
+  "errors": [],
+  "inputs": {
+    "points_geojson": "_internal/data_pipeline/points_wgs84_with_rumid.geojson",
+    "vertical_epoch_json": "_internal/data_pipeline/vertical_epochs.json",
+    "rum_footprints": "_internal/data_pipeline/rum_footprints.json"
+  },
+  "summary": {
+    "rum_count": 3400,
+    "epoch_count": 304,
+    "first_epoch": "2014-06-01",
+    "last_epoch": "2025-12-31",
+    "point_bbox_wgs84": {
+      "west": 6.4676,
+      "south": 53.1477,
+      "east": 7.0895,
+      "north": 53.4665
+    },
+    "point_bbox_source": {
+      "min_x": 227250.0,
+      "min_y": 574250.0,
+      "max_x": 268750.0,
+      "max_y": 609750.0
+    },
+    "footprint_bbox_wgs84": {
+      "west": 6.46380918,
+      "south": 53.14541998,
+      "east": 7.09337787,
+      "north": 53.4688215
+    },
+    "footprint_bbox_source": {
+      "min_x": 227000.0,
+      "min_y": 574000.0,
+      "max_x": 269000.0,
+      "max_y": 610000.0
+    },
+    "grid": {
+      "origin_x": 227250.0,
+      "origin_y": 574250.0,
+      "spacing_m": 500.0,
+      "min_i": 0,
+      "max_i": 83,
+      "min_j": 0,
+      "max_j": 71,
+      "n_cols": 84,
+      "n_rows": 72,
+      "max_snap_residual_x_m": 0.0,
+      "max_snap_residual_y_m": 0.0,
+      "snap_residual_warning_threshold_m": 75.0,
+      "has_large_snap_residual": false
+    },
+    "measurement_min_mm": -91.7348,
+    "measurement_p02_mm": -53.0289,
+    "measurement_p50_mm": -14.141,
+    "measurement_p98_mm": 9.3849,
+    "measurement_max_mm": 25.6308,
+    "model_min_mm": -84.8928,
+    "model_p02_mm": -55.0028,
+    "model_p50_mm": -17.2362,
+    "model_p98_mm": -0.471,
+    "model_max_mm": 2.1134,
+    "sigma_min_mm": 0.1087,
+    "sigma_p02_mm": 0.1333,
+    "sigma_p50_mm": 0.1933,
+    "sigma_p98_mm": 3.4851,
+    "sigma_max_mm": 5.5201,
+    "up_min_mm_yr": -7.3285,
+    "up_max_mm_yr": 0.1824,
+    "warnings_count": 1,
+    "errors_count": 0
+  }
+}
