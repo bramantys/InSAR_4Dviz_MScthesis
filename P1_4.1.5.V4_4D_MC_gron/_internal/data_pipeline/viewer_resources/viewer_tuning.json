@@ -102,12 +102,12 @@
     "horizontal_arrows_tileset": {
       "path": "_internal/data_pipeline/horizontal_dev/arrows/tileset.json",
       "exists": true,
-      "size_bytes": 45691
+      "size_bytes": 45840
     },
     "horizontal_ellipses_tileset": {
       "path": "_internal/data_pipeline/horizontal_dev/ellipses/tileset.json",
       "exists": true,
-      "size_bytes": 45787
+      "size_bytes": 45936
     },
     "validation_report": {
       "path": "_internal/data_pipeline/validation_report.json",
@@ -663,7 +663,7 @@
         "ellipse_reference_percentile": 99.5,
         "ellipse_max_diameter_m": 375.05976793448474,
         "ellipse_max_diameter_rum_fraction": 0.75,
-        "ellipse_scale_m_per_mm_yr": 118.13864432243035,
+        "ellipse_scale_m_per_mm_yr": 192.14622540416846,
         "ellipse_scale_mode": "same_as_arrow",
         "rule_summary": "show arrows/ellipses when speed ≥ 1σ major uncertainty; draw ellipse axes as 2σ; place ellipse at arrowhead; RUM centre at configured arrow anchor fraction"
       },

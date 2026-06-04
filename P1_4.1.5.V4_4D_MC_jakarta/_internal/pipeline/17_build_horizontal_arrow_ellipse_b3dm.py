@@ -115,6 +115,14 @@ DEFAULT_ARROWHEAD_MAX_RUM_FRACTION = 0.250
 DEFAULT_ELLIPSE_LINE_WIDTH_RUM_FRACTION = 0.010
 DEFAULT_ELLIPSE_AXIS_MIN_RUM_FRACTION = 0.004
 
+# Arrow / ellipse placement contract.
+# 0.75 means: tail=0%, RUM centre=75%, arrowhead=100%.
+# Therefore the arrowhead sits slightly downstream of the RUM centre, and
+# the uncertainty ellipse is centred at the arrowhead.
+DEFAULT_ARROW_ANCHOR_FRACTION_AT_RUM_CENTER = 0.75
+DEFAULT_ELLIPSE_CENTER_PLACEMENT = "arrowhead"
+DEFAULT_ELLIPSE_SCALE_MODE = "same_as_arrow"
+
 # Ellipse clipping policy.
 #   none               : default; preserve raw scaled axes, even if the ellipse protrudes outside the RUM.
 #   uniform            : cap the semi-major axis and scale both axes by the same factor, preserving aspect ratio.
@@ -214,6 +222,28 @@ def normalize_ellipse_clip_mode(value: Any) -> str:
         "legacy_independent": "legacy_independent",
     }
     return aliases.get(mode, DEFAULT_ELLIPSE_CLIP_MODE)
+
+
+def normalize_ellipse_scale_mode(value: Any) -> str:
+    """Return a safe ellipse display-scale mode.
+
+    same_as_arrow keeps the same metres-per-(mm/yr) scale as the arrows.
+    independent keeps the older behaviour where ellipse scale is derived from
+    its own reference percentile and RUM fraction.
+    """
+    mode = str(value if value is not None else DEFAULT_ELLIPSE_SCALE_MODE).strip().lower()
+    aliases = {
+        "same": "same_as_arrow",
+        "same_as_arrow": "same_as_arrow",
+        "arrow": "same_as_arrow",
+        "arrow_scale": "same_as_arrow",
+        "same_scale": "same_as_arrow",
+        "independent": "independent",
+        "ellipse": "independent",
+        "ellipse_auto": "independent",
+        "separate": "independent",
+    }
+    return aliases.get(mode, DEFAULT_ELLIPSE_SCALE_MODE)
 
 
 def scale_ellipse_axes_for_display(
@@ -535,13 +565,22 @@ def derive_horizontal_visual_scaling(
     ))
     ellipse_axis_max_m = ellipse_max_diameter_m / 2.0
 
+    ellipse_scale_mode = normalize_ellipse_scale_mode(hdev.get("ellipse_scale_mode", DEFAULT_ELLIPSE_SCALE_MODE))
+
     if auto_scale:
         arrow_scale = arrow_max_length_m / arrow_speed_ref
-        ellipse_scale = ellipse_axis_max_m / ellipse_major_ref
-        scale_mode = "auto_percentile_by_rum_size"
+        if ellipse_scale_mode == "same_as_arrow":
+            ellipse_scale = arrow_scale
+            scale_mode = "auto_percentile_by_rum_size_same_as_arrow"
+        else:
+            ellipse_scale = ellipse_axis_max_m / ellipse_major_ref
+            scale_mode = "auto_percentile_by_rum_size_independent_ellipse"
     else:
         arrow_scale = float(hdev.get("arrow_scale_m_per_mm_yr", DEFAULT_ARROW_SCALE_M_PER_MM_YR))
-        ellipse_scale = float(hdev.get("ellipse_scale_m_per_mm_yr", arrow_scale if arrow_scale else DEFAULT_ELLIPSE_SCALE_M_PER_MM_YR))
+        if ellipse_scale_mode == "same_as_arrow":
+            ellipse_scale = arrow_scale
+        else:
+            ellipse_scale = float(hdev.get("ellipse_scale_m_per_mm_yr", arrow_scale if arrow_scale else DEFAULT_ELLIPSE_SCALE_M_PER_MM_YR))
         scale_mode = "manual_config"
 
     arrowhead_frac = float(hdev.get("arrowhead_frac", DEFAULT_ARROWHEAD_FRACTION))
@@ -581,6 +620,15 @@ def derive_horizontal_visual_scaling(
     arrow_significance_filter = bool_from_config(hdev.get("arrow_significance_filter"), True)
     ellipse_match_arrow_filter = bool_from_config(hdev.get("ellipse_match_arrow_filter"), True)
     ellipse_clip_mode = normalize_ellipse_clip_mode(hdev.get("ellipse_clip_mode", DEFAULT_ELLIPSE_CLIP_MODE))
+    arrow_anchor_fraction_at_rum_center = clamp(
+        safe_float(hdev.get("arrow_anchor_fraction_at_rum_center"), DEFAULT_ARROW_ANCHOR_FRACTION_AT_RUM_CENTER)
+        or DEFAULT_ARROW_ANCHOR_FRACTION_AT_RUM_CENTER,
+        0.0,
+        1.0,
+    )
+    ellipse_center_placement = str(hdev.get("ellipse_center_placement", DEFAULT_ELLIPSE_CENTER_PLACEMENT)).strip().lower()
+    if ellipse_center_placement not in {"arrowhead", "rum_center"}:
+        ellipse_center_placement = DEFAULT_ELLIPSE_CENTER_PLACEMENT
 
     return {
         "mode": scale_mode,
@@ -593,6 +641,9 @@ def derive_horizontal_visual_scaling(
         "arrow_significance_sigma": arrow_significance_sigma,
         "ellipse_match_arrow_filter": ellipse_match_arrow_filter,
         "ellipse_clip_mode": ellipse_clip_mode,
+        "ellipse_scale_mode": ellipse_scale_mode,
+        "ellipse_center_placement": ellipse_center_placement,
+        "arrow_anchor_fraction_at_rum_center": arrow_anchor_fraction_at_rum_center,
         "arrow_reference_percentile": arrow_ref_percentile,
         "arrow_speed_ref_mm_yr": arrow_speed_ref,
         "arrow_max_length_m": arrow_max_length_m,
@@ -611,10 +662,10 @@ def derive_horizontal_visual_scaling(
         "ellipse_scale_m_per_mm_yr": ellipse_scale,
         "ellipse_line_width_m": ellipse_line_width_m,
         "note": (
-            "Arrow scale maps a robust high-percentile horizontal speed to about 90% of RUM width. "
-            "Ellipse scale maps a robust high-percentile confidence semi-major axis to a readable display size. "
+            "Arrow scale maps a robust high-percentile horizontal speed to the configured RUM-size fraction. "
+            "Ellipse scale mode can follow the arrow scale or use an independent ellipse percentile scale. "
             "Default ellipse_clip_mode=none preserves covariance aspect ratio and allows large uncertainty to protrude. "
-            "Default visibility uses a light 1-sigma significance filter so dev glyphs remain readable without showing pure noise."
+            "Default placement uses the configured arrow anchor fraction and centres the ellipse at the arrowhead."
         ),
     }
 
@@ -932,6 +983,7 @@ def add_arrow(
     arrowhead_min_m: float,
     arrowhead_max_m: float,
     arrow_max_length_m: float,
+    arrow_anchor_fraction_at_rum_center: float,
     shaft_width_fraction: float,
     shaft_width_min_m: float,
     shaft_width_max_m: float,
@@ -973,10 +1025,11 @@ def add_arrow(
     ux, uy = ue, un
     px, py = -uy, ux
 
-    # Centre the whole arrow on the RUM centre.
-    # Previous versions started the arrow tail at the RUM centre, which made
-    # fast arrows visually shifted downstream.
-    arrow_origin_shift = -0.5 * length
+    # Place the RUM centre at a configurable fraction along the arrow.
+    # anchor=0.75 means tail=0%, RUM centre=75%, arrowhead=100%, so the
+    # arrow is backed up and the arrowhead sits slightly downstream.
+    anchor = clamp(arrow_anchor_fraction_at_rum_center, 0.0, 1.0)
+    arrow_origin_shift = -anchor * length
 
     def xy(a: float, b: float) -> Tuple[float, float]:
         aa = a + arrow_origin_shift
@@ -1023,6 +1076,10 @@ def add_ellipse_ring(
     ellipse_axis_min_m: float,
     ellipse_axis_max_m: float,
     ellipse_clip_mode: str,
+    ellipse_center_placement: str,
+    arrow_scale_m_per_mm_yr: float,
+    arrow_max_length_m: float,
+    arrow_anchor_fraction_at_rum_center: float,
     positions: List[float],
     normals: List[float],
     texcoords: List[float],
@@ -1054,6 +1111,24 @@ def add_ellipse_ring(
     east, north, up = enu_basis(center_lon, center_lat)
     base_local = local_from_lonlat(lon, lat, datum_height_m + clearance_m, center_lon, center_lat, center_ecef, east, north, up)
 
+    # Optional placement: centre the ellipse at the velocity arrowhead rather
+    # than at the RUM centre. This uses the exact same scaled/capped arrow
+    # length and configured anchor rule as add_arrow().
+    ellipse_offset_x = 0.0
+    ellipse_offset_y = 0.0
+    placement = str(ellipse_center_placement or DEFAULT_ELLIPSE_CENTER_PLACEMENT).strip().lower()
+    if placement == "arrowhead":
+        speed = safe_float(rec.get("speed_mm_yr"), 0.0) or 0.0
+        ue = safe_float(rec.get("unit_east"), 0.0) or 0.0
+        un = safe_float(rec.get("unit_north"), 0.0) or 0.0
+        if speed > 0.0 and math.hypot(ue, un) > 0.0:
+            length_raw = speed * float(arrow_scale_m_per_mm_yr)
+            length = min(length_raw, float(arrow_max_length_m)) if float(arrow_max_length_m) > 0.0 else length_raw
+            anchor = clamp(arrow_anchor_fraction_at_rum_center, 0.0, 1.0)
+            head_offset = (1.0 - anchor) * max(0.0, length)
+            ellipse_offset_x = ue * head_offset
+            ellipse_offset_y = un * head_offset
+
     phi = math.radians(angle_deg)
     c = math.cos(phi)
     s = math.sin(phi)
@@ -1084,8 +1159,8 @@ def add_ellipse_ring(
         xri = xi * c - yi * s
         yri = xi * s + yi * c
 
-        outer_indices.append(add_vertex((xro, yro), base_local, row_v, positions, normals, texcoords))
-        inner_indices.append(add_vertex((xri, yri), base_local, row_v, positions, normals, texcoords))
+        outer_indices.append(add_vertex((xro + ellipse_offset_x, yro + ellipse_offset_y), base_local, row_v, positions, normals, texcoords))
+        inner_indices.append(add_vertex((xri + ellipse_offset_x, yri + ellipse_offset_y), base_local, row_v, positions, normals, texcoords))
 
     for k in range(n):
         ko = outer_indices[k]
@@ -1218,6 +1293,7 @@ def build_layer_tileset(
                     arrowhead_min_m=float(scaling["arrowhead_min_m"]),
                     arrowhead_max_m=float(scaling["arrowhead_max_m"]),
                     arrow_max_length_m=float(scaling["arrow_max_length_m"]),
+                    arrow_anchor_fraction_at_rum_center=float(scaling["arrow_anchor_fraction_at_rum_center"]),
                     shaft_width_fraction=float(scaling["arrow_shaft_width_fraction"]),
                     shaft_width_min_m=float(scaling["arrow_shaft_width_min_m"]),
                     shaft_width_max_m=float(scaling["arrow_shaft_width_max_m"]),
@@ -1248,6 +1324,9 @@ def build_layer_tileset(
                 merged = dict(urec)
                 merged["lon_center"] = hrec["lon_center"]
                 merged["lat_center"] = hrec["lat_center"]
+                merged["speed_mm_yr"] = hrec.get("speed_mm_yr", 0.0)
+                merged["unit_east"] = hrec.get("unit_east", 0.0)
+                merged["unit_north"] = hrec.get("unit_north", 0.0)
 
                 built = add_ellipse_ring(
                     rec=merged,
@@ -1262,6 +1341,10 @@ def build_layer_tileset(
                     ellipse_axis_min_m=float(scaling["ellipse_axis_min_m"]),
                     ellipse_axis_max_m=float(scaling["ellipse_axis_max_m"]),
                     ellipse_clip_mode=str(scaling.get("ellipse_clip_mode", DEFAULT_ELLIPSE_CLIP_MODE)),
+                    ellipse_center_placement=str(scaling.get("ellipse_center_placement", DEFAULT_ELLIPSE_CENTER_PLACEMENT)),
+                    arrow_scale_m_per_mm_yr=float(scaling["arrow_scale_m_per_mm_yr"]),
+                    arrow_max_length_m=float(scaling["arrow_max_length_m"]),
+                    arrow_anchor_fraction_at_rum_center=float(scaling["arrow_anchor_fraction_at_rum_center"]),
                     positions=positions,
                     normals=normals,
                     texcoords=texcoords,
@@ -1443,11 +1526,14 @@ def main() -> None:
     print(f"  Arrow reference           : P{scaling['arrow_reference_percentile']} speed = {scaling['arrow_speed_ref_mm_yr']:.6f} mm/yr")
     print(f"  Arrow max length          : {scaling['arrow_max_length_m']:.3f} m")
     print(f"  Arrow scale               : {scaling['arrow_scale_m_per_mm_yr']:.6f} m per mm/yr")
+    print(f"  Arrow anchor fraction     : {scaling['arrow_anchor_fraction_at_rum_center']:.3f} (tail=0, head=1)")
     print(f"  Arrow visibility          : speed >= {scaling['minimum_speed_mm_yr']:.6f} mm/yr" + (
         f" and speed >= {scaling['arrow_significance_sigma']:.2f} × 1σ_major" if scaling['arrow_significance_filter'] else ""
     ))
     print(f"  Ellipse reference         : P{scaling['ellipse_reference_percentile']} major axis = {scaling['ellipse_major_ref_mm_yr']:.6f} mm/yr")
     print(f"  Ellipse max diameter      : {scaling['ellipse_max_diameter_m']:.3f} m")
+    print(f"  Ellipse scale mode        : {scaling['ellipse_scale_mode']}")
+    print(f"  Ellipse centre placement  : {scaling['ellipse_center_placement']}")
     print(f"  Ellipse clip mode         : {scaling['ellipse_clip_mode']}")
     print(f"  Ellipse scale             : {scaling['ellipse_scale_m_per_mm_yr']:.6f} m per mm/yr")
 
