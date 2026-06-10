@@ -36,7 +36,7 @@
     }
     .viewer-grid {
       display: grid;
-      grid-template-columns: repeat(2, minmax(260px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
       gap: 12px 16px;
       margin: 16px 0 24px;
     }
@@ -60,6 +60,17 @@
       color: #202124;
       font-size: 15px;
       margin-bottom: 3px;
+    }
+    .viewer-card.progress-card {
+      background: #fff4d6;
+    }
+    .viewer-card.experiment-card {
+      background: #ebe4f6;
+    }
+    .viewer-card.progress-card:hover,
+    .viewer-card.experiment-card:hover {
+      background: #f1f6ff;
+      border-color: #b7d0ff;
     }
     .single-card {
       margin: 12px 0 28px;
@@ -86,44 +97,41 @@
     Recommended use: desktop or laptop browser with WebGL enabled.
   </p>
 
-  <h2>Prototype1 viewers · new UI</h2>
+  <h2>Prototype1 viewers · dual-mode UI</h2>
   <p class="section-note">
-    New Prototype1 UI with horizontal uncertainty comparison: Monte Carlo realizations and uncertainty shimmer.
+    New Prototype1 UI with one merged horizontal-particle mode switch: Monte Carlo realizations and uncertainty shimmer now live in the same viewer.
   </p>
 
   <div class="viewer-grid">
-    <a class="viewer-card" href="P1_4.1.5.V4_4D_MC_jakarta/viz1_dev_v4_montecarlo.html">
+    <a class="viewer-card" href="P1_4.1.5.V4_4D_MC_jakarta/viz1_dev_v4_dualmode.html">
       <strong>Jakarta</strong>
-      Monte Carlo viewer
+      Dual-mode viewer
     </a>
-    <a class="viewer-card" href="P1_4.1.5.V4_4D_MC_jakarta/viz1_dev_v4_shimmer.html">
-      <strong>Jakarta</strong>
-      Uncertainty shimmer viewer
-    </a>
-
-    <a class="viewer-card" href="P1_4.1.5.V4_4D_MC_gron/viz1_dev_v4_montecarlo.html">
+    <a class="viewer-card" href="P1_4.1.5.V4_4D_MC_gron/viz1_dev_v4_dualmode.html">
       <strong>Groningen</strong>
-      Monte Carlo viewer
+      Dual-mode viewer
     </a>
-    <a class="viewer-card" href="P1_4.1.5.V4_4D_MC_gron/viz1_dev_v4_shimmer.html">
-      <strong>Groningen</strong>
-      Uncertainty shimmer viewer
-    </a>
-
-    <a class="viewer-card" href="P1_4.1.5.V4_4D_MC_synthbowl/viz1_dev_v4_montecarlo.html">
+    <a class="viewer-card" href="P1_4.1.5.V4_4D_MC_synthbowl/viz1_dev_v4_dualmode.html">
       <strong>Synthbowl</strong>
-      Monte Carlo viewer
-    </a>
-    <a class="viewer-card" href="P1_4.1.5.V4_4D_MC_synthbowl/viz1_dev_v4_shimmer.html">
-      <strong>Synthbowl</strong>
-      Uncertainty shimmer viewer
+      Dual-mode viewer
     </a>
   </div>
 
-  <a class="viewer-card single-card" href="P1_4.1.5.V3_4D_jkt_UI_PRIMIT%20CHECKPOINT/viz1_dev_v3_batch9.3.6.1.html">
-    <strong>Jakarta</strong>
-    Fix occlusion problem, current progress
-  </a>
+  <h2>Prototype1 progress & experiments</h2>
+  <p class="section-note">
+    Current development checkpoints and standalone sandboxes for testing visual encodings before they are merged into the main viewer.
+  </p>
+
+  <div class="viewer-grid">
+    <a class="viewer-card progress-card" href="P1_4.1.5.V3_4D_jkt_UI_PRIMIT%20CHECKPOINT/viz1_dev_v3_batch9.3.6.1.html">
+      <strong>Jakarta</strong>
+      Fix occlusion problem, current progress
+    </a>
+    <a class="viewer-card experiment-card" href="P1_4.1.5.V4_4D_MC_jakarta/dimple_sandbox_proto1_clean_v8.html">
+      <strong>Vertical uncertainty encoding sandbox</strong>
+      Dimple / radial / half-step relief test
+    </a>
+  </div>
 
   <h2>Old version Prototype1 viewers</h2>
   <div class="old-list">
