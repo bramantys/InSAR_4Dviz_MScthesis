@@ -1,0 +1,237 @@
+--- a/config/project_config.json
++++ b/config/project_config.json
+@@ -175,7 +175,7 @@
+   },
+   "vertical_uncertainty_encoding": {
+     "type": "lowpoly_checkerboard_spikes",
+-    "checkerboard_frequency": 6,
++    "checkerboard_frequency": 4,
+     "pyramid_half_base_ratio": 0.28,
+     "sigma_multiplier": 1.0,
+     "relief_gain": 1.0,
+@@ -187,10 +187,12 @@
+     "lod_on_maximum_screen_space_error": 12.0,
+     "lod_force_lowpoly_maximum_screen_space_error": 0.1,
+     "lod_refine": "REPLACE",
+-    "lod_strategy": "semantic_relief_2x2_to_6x6",
+-    "checkerboard_frequency_near": 6,
++    "lod_strategy": "semantic_relief_2x2_to_4x4_fixed_6x6_footprint",
++    "checkerboard_frequency_near": 4,
+     "checkerboard_frequency_far": 2,
+     "visibility_threshold_mode": "global_percentile",
+-    "visibility_threshold_percentile": 50.0
++    "visibility_threshold_percentile": 50.0,
++    "pyramid_footprint_reference_frequency_near": 6,
++    "pyramid_footprint_reference_frequency_far": 2
+   }
+ }
+--- a/_internal/pipeline/pipeline_config.py
++++ b/_internal/pipeline/pipeline_config.py
+@@ -84,10 +84,12 @@
+ 
+ DEFAULT_VERTICAL_UNCERTAINTY_ENCODING: Dict[str, Any] = {
+     "type": "lowpoly_checkerboard_spikes",
+-    "checkerboard_frequency": 6,
+-    "checkerboard_frequency_near": 6,
++    "checkerboard_frequency": 4,
++    "checkerboard_frequency_near": 4,
+     "checkerboard_frequency_far": 2,
+     "pyramid_half_base_ratio": 0.28,
++    "pyramid_footprint_reference_frequency_near": 6,
++    "pyramid_footprint_reference_frequency_far": 2,
+     "sigma_multiplier": 1.0,
+     "relief_gain": 1.0,
+     "cue_mode": "neutral_slope_shade",
+@@ -100,7 +102,7 @@
+     "lod_on_maximum_screen_space_error": 12.0,
+     "lod_force_lowpoly_maximum_screen_space_error": 0.1,
+     "lod_refine": "REPLACE",
+-    "lod_strategy": "semantic_relief_2x2_to_6x6",
++    "lod_strategy": "semantic_relief_2x2_to_4x4_fixed_6x6_footprint",
+ }
+ 
+ DEFAULT_CAPS_B3DM: Dict[str, Any] = {
+--- a/_internal/pipeline/10_build_height_texture.py
++++ b/_internal/pipeline/10_build_height_texture.py
+@@ -368,9 +368,15 @@
+     height_cfg = cfg["height_texture"]
+     vunc_cfg = cfg["vertical_uncertainty_encoding"]
+     rum_size_m = float(cfg.get("expected_counts", {}).get("grid_spacing_m_nominal", 450.0))
+-    checkerboard_frequency_near = int(vunc_cfg.get("checkerboard_frequency_near", vunc_cfg.get("checkerboard_frequency", 6)))
++    checkerboard_frequency_near = int(vunc_cfg.get("checkerboard_frequency_near", vunc_cfg.get("checkerboard_frequency", 4)))
+     checkerboard_frequency_far = int(vunc_cfg.get("checkerboard_frequency_far", 2))
+     pyramid_half_base_ratio = float(vunc_cfg.get("pyramid_half_base_ratio", 0.28))
++    pyramid_footprint_reference_frequency_near = int(
++        vunc_cfg.get("pyramid_footprint_reference_frequency_near", checkerboard_frequency_near)
++    )
++    pyramid_footprint_reference_frequency_far = int(
++        vunc_cfg.get("pyramid_footprint_reference_frequency_far", checkerboard_frequency_far)
++    )
+     visibility_threshold_mode = str(vunc_cfg.get("visibility_threshold_mode", "global_percentile")).strip().lower()
+     visibility_threshold_percentile = float(vunc_cfg.get("visibility_threshold_percentile", 50.0))
+ 
+@@ -546,9 +552,11 @@
+             "checkerboard_frequency": checkerboard_frequency_near,
+             "checkerboard_frequency_near": checkerboard_frequency_near,
+             "checkerboard_frequency_far": checkerboard_frequency_far,
+-            "pyramid_half_base_m": rum_size_m / checkerboard_frequency_near * pyramid_half_base_ratio,
+-            "pyramid_half_base_near_m": rum_size_m / checkerboard_frequency_near * pyramid_half_base_ratio,
+-            "pyramid_half_base_far_m": rum_size_m / checkerboard_frequency_far * pyramid_half_base_ratio,
++            "pyramid_half_base_m": rum_size_m / pyramid_footprint_reference_frequency_near * pyramid_half_base_ratio,
++            "pyramid_half_base_near_m": rum_size_m / pyramid_footprint_reference_frequency_near * pyramid_half_base_ratio,
++            "pyramid_half_base_far_m": rum_size_m / pyramid_footprint_reference_frequency_far * pyramid_half_base_ratio,
++            "pyramid_footprint_reference_frequency_near": pyramid_footprint_reference_frequency_near,
++            "pyramid_footprint_reference_frequency_far": pyramid_footprint_reference_frequency_far,
+             "visibility_threshold_mm": sigma_visibility_threshold,
+             "visibility_threshold_population": "real_rums_all_epochs",
+             "rum_size_m": rum_size_m,
+--- a/_internal/pipeline/11_build_real_caps_b3dm.py
++++ b/_internal/pipeline/11_build_real_caps_b3dm.py
+@@ -97,7 +97,7 @@
+ # A small optional lift to reduce z-fighting with wall/cap boundaries.
+ CAP_CLEARANCE_M = 0.0
+ 
+-# Selected vertical-uncertainty geometry. Each RUM receives a 6x6 checkerboard
++# Selected vertical-uncertainty geometry. Each RUM receives a configurable checkerboard
+ # of alternating up/down truncated-pyramid-capable cells. The viewer animates
+ # height and plateau size from the B-channel raw vertical sigma.
+ CHECKERBOARD_FREQUENCY = 6
+@@ -724,6 +724,7 @@
+     checkerboard_frequency: int,
+     pyramid_half_base_ratio: float,
+     role_code_offset: float = 0.0,
++    pyramid_footprint_reference_frequency: int | None = None,
+ ) -> None:
+     """Build one lowpoly checkerboard cap for a square RUM footprint."""
+     if len(ring_lonlat) < 4:
+@@ -747,7 +748,12 @@
+     # Step 03 emits SW, SE, NE, NW. Preserve that convention.
+     sw, se, ne, nw = local_corners
+     cells = max(1, int(checkerboard_frequency))
+-    half_ratio = max(0.01, min(0.49, float(pyramid_half_base_ratio)))
++    reference_cells = max(1, int(pyramid_footprint_reference_frequency or cells))
++    # Keep the physical pyramid footprint independent of checker spacing when
++    # requested. Example: a 4x4 near grid can retain the old 6x6 pyramid base
++    # width by using reference_cells=6.
++    half_ratio = float(pyramid_half_base_ratio) * cells / reference_cells
++    half_ratio = max(0.01, min(0.49, half_ratio))
+ 
+     for j in range(cells):
+         v0 = j / cells
+@@ -880,9 +886,15 @@
+     flat_tileset_path = resolve_path(project_root, generated["flat_real_caps_tileset"])
+ 
+     datum_height_m = float(viewer.get("display_datum_height_m", 1000.0))
+-    near_frequency = int(vunc_cfg.get("checkerboard_frequency_near", vunc_cfg.get("checkerboard_frequency", 6)))
++    near_frequency = int(vunc_cfg.get("checkerboard_frequency_near", vunc_cfg.get("checkerboard_frequency", 4)))
+     far_frequency = int(vunc_cfg.get("checkerboard_frequency_far", 2))
+     pyramid_half_base_ratio = float(vunc_cfg.get("pyramid_half_base_ratio", PYRAMID_HALF_BASE_RATIO))
++    near_footprint_reference_frequency = int(
++        vunc_cfg.get("pyramid_footprint_reference_frequency_near", near_frequency)
++    )
++    far_footprint_reference_frequency = int(
++        vunc_cfg.get("pyramid_footprint_reference_frequency_far", far_frequency)
++    )
+     bound_min_height_m = float(caps_cfg.get("bound_min_height_m", -1000.0))
+     bound_max_height_m = float(caps_cfg.get("bound_max_height_m", 10000.0))
+     parent_geometric_error = float(vunc_cfg.get("lod_parent_geometric_error_m", tiling.get("geometric_error_leaf", 100.0)))
+@@ -897,6 +909,8 @@
+     print(f"  Display datum      : {datum_height_m} m")
+     print(f"  Semantic LOD       : {far_frequency} × {far_frequency} -> {near_frequency} × {near_frequency}")
+     print(f"  Pyramid half ratio : {pyramid_half_base_ratio}")
++    print(f"  Near footprint ref : {near_footprint_reference_frequency} × {near_footprint_reference_frequency}")
++    print(f"  Far footprint ref  : {far_footprint_reference_frequency} × {far_footprint_reference_frequency}")
+ 
+     section("Loading inputs")
+     footprints = load_json(footprints_path)
+@@ -986,11 +1000,13 @@
+             b = buffers["far"]
+             add_polygon_to_buffers(ring, row_v, batch_id, center_lon, center_lat, datum_height_m,
+                                    b["positions"], b["normals"], b["texcoords"], b["batchids"], b["indices"],
+-                                   far_frequency, pyramid_half_base_ratio, COARSE_ROLE_CODE_OFFSET)
++                                   far_frequency, pyramid_half_base_ratio, COARSE_ROLE_CODE_OFFSET,
++                                   far_footprint_reference_frequency)
+             b = buffers["near"]
+             add_polygon_to_buffers(ring, row_v, batch_id, center_lon, center_lat, datum_height_m,
+                                    b["positions"], b["normals"], b["texcoords"], b["batchids"], b["indices"],
+-                                   near_frequency, pyramid_half_base_ratio, 0.0)
++                                   near_frequency, pyramid_half_base_ratio, 0.0,
++                                   near_footprint_reference_frequency)
+ 
+         batch_table = build_batch_table_for_rums(tile_batch_rum_ids, footprint_lookup, rum_index)
+         filenames = {
+@@ -1082,6 +1098,8 @@
+                 "checkerboard_frequency_far": far_frequency,
+                 "checkerboard_frequency_near": near_frequency,
+                 "pyramid_half_base_ratio": pyramid_half_base_ratio,
++                "pyramid_footprint_reference_frequency_near": near_footprint_reference_frequency,
++                "pyramid_footprint_reference_frequency_far": far_footprint_reference_frequency,
+                 "visibility_threshold_mm": sigma_threshold_mm,
+                 "visibility_threshold_rule": "current raw sigma >= fixed global percentile threshold",
+                 "dynamic_plateau": "viewer derives plateau ratio from raw sigma above global p98",
+--- a/_internal/pipeline/18_build_viewer_tuning.py
++++ b/_internal/pipeline/18_build_viewer_tuning.py
+@@ -1443,13 +1443,15 @@
+                 "interpretation": "raw vertical uncertainty in RGB B; display relief height clips at the fixed global p98",
+             },
+             "vertical_uncertainty_lod": {
+-                "strategy": vunc_cfg.get("lod_strategy", "semantic_relief_2x2_to_6x6"),
++                "strategy": vunc_cfg.get("lod_strategy", "semantic_relief_2x2_to_4x4_fixed_6x6_footprint"),
+                 "refine": vunc_cfg.get("lod_refine", "REPLACE"),
+                 "parent_geometric_error_m": float(vunc_cfg.get("lod_parent_geometric_error_m", 100.0)),
+                 "on_maximum_screen_space_error": float(vunc_cfg.get("lod_on_maximum_screen_space_error", 12.0)),
+                 "force_lowpoly_maximum_screen_space_error": float(vunc_cfg.get("lod_force_lowpoly_maximum_screen_space_error", 0.1)),
+                 "far_checkerboard_frequency": int(vunc_cfg.get("checkerboard_frequency_far", 2)),
+-                "near_checkerboard_frequency": int(vunc_cfg.get("checkerboard_frequency_near", vunc_cfg.get("checkerboard_frequency", 6))),
++                "near_checkerboard_frequency": int(vunc_cfg.get("checkerboard_frequency_near", vunc_cfg.get("checkerboard_frequency", 4))),
++                "near_pyramid_footprint_reference_frequency": int(vunc_cfg.get("pyramid_footprint_reference_frequency_near", 6)),
++                "far_pyramid_footprint_reference_frequency": int(vunc_cfg.get("pyramid_footprint_reference_frequency_far", 2)),
+                 "off_product": "flat_real_caps_tileset",
+                 "note": "Uncertainty ON keeps semantic relief at every distance (coarse far, detailed near); OFF switches to a separate true-flat cap tileset.",
+             },
+--- a/viz1_dev_v4_dualmode.html
++++ b/viz1_dev_v4_dualmode.html
+@@ -3407,11 +3407,11 @@
+ let VUNC_CUE_STRENGTH = 1.0;
+ let VUNC_PYRAMID_HALF_BASE_NEAR_M = 21.0;
+ let VUNC_PYRAMID_HALF_BASE_FAR_M = 63.0;
+-let VUNC_CHECKERBOARD_FREQUENCY = 6;
++let VUNC_CHECKERBOARD_FREQUENCY = 4;
+ let VUNC_CHECKERBOARD_FREQUENCY_FAR = 2;
+ 
+ // Performance Batch C distance LOD. The generated real-cap tileset uses an
+-// animated flat parent and the 6x6 lowpoly cap as its REPLACE child.
++// animated 2x2 relief parent and the 4x4 near relief as its REPLACE child.
+ let VUNC_LOD_ON_SSE = 12.0;
+ let VUNC_LOD_FORCE_LOWPOLY_SSE = 0.1;
+ let VUNC_LOD_DEBUG_MODE = "AUTO"; // AUTO | FLAT | LOWPOLY; FLAT switches products
+@@ -6163,7 +6163,7 @@
+     VUNC_CHECKERBOARD_FREQUENCY = Number(
+         verticalUncertaintyEncoding.checkerboard_frequency_near
+         ?? verticalUncertaintyEncoding.checkerboard_frequency
+-        ?? 6
++        ?? 4
+     );
+     VUNC_CHECKERBOARD_FREQUENCY_FAR = Number(verticalUncertaintyEncoding.checkerboard_frequency_far ?? 2);
+ 
+@@ -7187,7 +7187,7 @@
+         tileset.show = showRelief;
+         flatRealTileset.show = !showRelief;
+         viewer.scene.requestRender();
+-        console.log("[vunc C3] cap product applied", {
++        console.log("[vunc C4] cap product applied", {
+             mode: VUNC_LOD_DEBUG_MODE,
+             uncertaintyEnabled: uncertaintyHatchEnabled,
+             activeProduct: showRelief ? "semantic_relief" : "true_flat",
+@@ -7241,9 +7241,9 @@
+             return payload;
+         },
+         help() {
+-            console.log('  __vuncLod.setMode("AUTO")     // 2x2 far, 6x6 near');
++            console.log('  __vuncLod.setMode("AUTO")     // 2x2 far, 4x4 near');
+             console.log('  __vuncLod.setMode("FLAT")     // separate true-flat OFF product');
+-            console.log('  __vuncLod.setMode("LOWPOLY")  // force 6x6 relief children');
++            console.log('  __vuncLod.setMode("LOWPOLY")  // force 4x4 relief children');
+             console.log('  __vuncLod.setAutoSse(number)   // tune semantic LOD');
+             console.log('  __vuncLod.report()');
+         }

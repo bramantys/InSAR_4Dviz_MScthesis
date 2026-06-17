@@ -1,0 +1,213 @@
+--- /mnt/data/c4_orig_for_diff/viz1_dev_v4_dualmode.html	2026-06-13 13:13:54.571042926 +0000
++++ /mnt/data/d2a_diff_new/viz1_dev_v4_dualmode.html	2026-06-13 13:13:54.603587007 +0000
+@@ -3713,7 +3713,7 @@
+         console.log("  __vuncPerf.report()");
+     }
+ };
+-console.log("[vunc perf] same-viewer Batch B test ready; pass=", VUNC_PERF_FORCE_REAL_PASS, "shader=", VUNC_PERF_SHADER_MODE);
++console.log("[vunc perf] C4/D2A controls ready; pass=", VUNC_PERF_FORCE_REAL_PASS, "shader=", VUNC_PERF_SHADER_MODE);
+ console.log("[vunc perf] use __vuncPerf.help() for commands");
+ 
+ // ------------------------------------------------------------
+@@ -6435,7 +6435,7 @@
+         ? Cesium.LightingModel.UNLIT
+         : undefined;
+     console.log("[shader] requested lighting model", CUSTOM_SHADER_UNLIT, "UNLIT=", Cesium.LightingModel && Cesium.LightingModel.UNLIT);
+-    console.log("[vunc perfB] shaderMode=", VUNC_PERF_SHADER_MODE);
++    console.log("[vunc perfD2A] shaderMode=", VUNC_PERF_SHADER_MODE);
+     console.log("[vunc parity baseline] rolePresence=", VUNC_USE_ROLE_PRESENCE, "displaySpaceShade=", VUNC_USE_DISPLAY_SPACE_SHADE);
+     console.log("[vunc contrast] display target dark=0.68 bright=1.06; optimized linear endpoints=", VUNC_LINEAR_DARK_FACTOR, VUNC_LINEAR_BRIGHT_FACTOR);
+ 
+@@ -7941,8 +7941,12 @@
+         return Math.max(0, Math.min(N - 1, Math.round(secs / epochDuration)));
+     }
+ 
+-    function updateEpochUI() {
+-        const idx = currentEpochIndex();
++    let lastEpochUiIdx = -1;
++
++    function updateEpochUI(idx = currentEpochIndex(), force = false) {
++        idx = Math.max(0, Math.min(N - 1, Math.round(Number(idx) || 0)));
++        if (!force && idx === lastEpochUiIdx) return;
++        lastEpochUiIdx = idx;
+         epochSlider.value = idx;
+         epochLabel.textContent = `Epoch: ${epochs[idx]} (${idx + 1}/${N})`;
+         currentEpochIdx = idx;
+@@ -7955,12 +7959,47 @@
+     // ============================================================
+     // EPOCH → SHADER UPDATE
+     // One setUniform call per epoch change — the GPU does the rest.
++    // D2A also records lightweight timing so playback frame-pacing can be checked.
+     // ============================================================
+     let lastEpochIdx = -1;
++    const vuncEpochPerfSamples = [];
++
++    function recordVuncEpochPerf(sample) {
++        vuncEpochPerfSamples.push(sample);
++        if (vuncEpochPerfSamples.length > 240) vuncEpochPerfSamples.shift();
++    }
++
++    function summarizeVuncEpochPerf() {
++        const samples = vuncEpochPerfSamples.slice();
++        const sortedTotal = samples.map(s => s.totalMs).sort((a, b) => a - b);
++        const sortedParticle = samples.map(s => s.particleMs).sort((a, b) => a - b);
++        const pick = (arr, q) => arr.length ? arr[Math.min(arr.length - 1, Math.floor(q * (arr.length - 1)))] : NaN;
++        const sum = arr => arr.reduce((a, b) => a + b, 0);
++        const out = {
++            samples: samples.length,
++            currentEpoch: lastEpochIdx,
++            totalMeanMs: samples.length ? Number((sum(sortedTotal) / samples.length).toFixed(3)) : NaN,
++            totalP95Ms: Number(pick(sortedTotal, 0.95).toFixed(3)),
++            totalMaxMs: samples.length ? Number(sortedTotal[sortedTotal.length - 1].toFixed(3)) : NaN,
++            particleMeanMs: samples.length ? Number((sum(sortedParticle) / samples.length).toFixed(3)) : NaN,
++            particleP95Ms: Number(pick(sortedParticle, 0.95).toFixed(3)),
++            particleMaxMs: samples.length ? Number(sortedParticle[sortedParticle.length - 1].toFixed(3)) : NaN,
++            last: samples.length ? samples[samples.length - 1] : null,
++            hParticleSurfaceCache: (typeof window.__hParticleSurfaceCacheStats === "function") ? window.__hParticleSurfaceCacheStats() : null
++        };
++        console.table(out);
++        return out;
++    }
++
++    window.__vuncEpochPerf = {
++        reset() { vuncEpochPerfSamples.length = 0; console.log("[vunc epoch perf] reset"); },
++        report: summarizeVuncEpochPerf
++    };
+ 
+     viewer.scene.postRender.addEventListener(function() {
+         const idx = currentEpochIndex();
+         if (idx === lastEpochIdx) return;
++        const t0 = performance.now();
+         lastEpochIdx = idx;
+ 
+         // Single uniform update per layer → shaders re-sample texture on GPU.
+@@ -7973,7 +8012,15 @@
+         horizontalEllipseShader.setUniform("u_epochIndex", idx);
+ 
+         // CPU-side cache only for projecting horizontal particles at current cap height.
++        const tParticle0 = performance.now();
+         updateHParticleDisplacementForEpoch(idx);
++        const tParticle1 = performance.now();
++
++        recordVuncEpochPerf({
++            epoch: idx,
++            totalMs: Number((performance.now() - t0).toFixed(3)),
++            particleMs: Number((tParticle1 - tParticle0).toFixed(3))
++        });
+     });
+ 
+     // ---- epoch slider ----
+@@ -7990,7 +8037,7 @@
+             viewer.clock.shouldAnimate = false;
+             epochPlayBtn.textContent = "▶";
+         }
+-        updateEpochUI();
++        updateEpochUI(idx, true);
+         viewer.scene.requestRender();
+     }
+     setEpochIndexForMode = setEpochIndex;
+@@ -8027,7 +8074,8 @@
+     });
+ 
+     viewer.clock.onTick.addEventListener(function() {
+-        updateEpochUI();
++        const idx = currentEpochIndex();
++        updateEpochUI(idx, false);
+         if (viewer.clock.shouldAnimate &&
+             Cesium.JulianDate.greaterThan(
+                 viewer.clock.currentTime, viewer.clock.stopTime)) {
+--- /mnt/data/c4_orig_for_diff/horizontal_particles_engine.js	2026-06-13 13:13:54.582112718 +0000
++++ /mnt/data/d2a_diff_new/_internal/js/horizontal_particles_engine.js	2026-06-13 13:13:54.615251425 +0000
+@@ -50,6 +50,10 @@
+ let hCurrentSigmaByRow = null;
+ let hCurrentDispEpoch = -1;
+ let hHeightTextureReady = false;
++let hDispEpochCache = null;
++let hSigmaEpochCache = null;
++let hSurfaceCacheMode = "none";
++let hSurfaceCacheBuildMs = 0;
+ 
+ // Packed vertical series from Step 06.
+ // Clean contract:
+@@ -963,8 +967,6 @@
+ 
+ async function loadHParticleHeightTexture(meta) {
+     hHeightMeta = meta;
+-    hCurrentDispByRow = new Float32Array(NUM_RUMS);
+-    hCurrentSigmaByRow = new Float32Array(NUM_RUMS);
+     hHeightImageCanvas = document.createElement("canvas");
+     hHeightImageCanvas.width = NUM_EPOCHS;
+     hHeightImageCanvas.height = NUM_RUMS;
+@@ -981,32 +983,60 @@
+ 
+     hHeightImageCtx.drawImage(img, 0, 0);
+ 
++    const t0 = performance.now();
++    hDispEpochCache = new Float32Array(NUM_EPOCHS * NUM_RUMS);
++    hSigmaEpochCache = new Float32Array(NUM_EPOCHS * NUM_RUMS);
++
++    // D2A: decode the full height texture once at startup.
++    // Playback then selects a cached epoch row via subarray(), avoiding synchronous
++    // Canvas2D readback (`getImageData`) on every epoch change.
++    const pixels = hHeightImageCtx.getImageData(0, 0, NUM_EPOCHS, NUM_RUMS).data;
++    for (let row = 0; row < NUM_RUMS; row++) {
++        for (let epoch = 0; epoch < NUM_EPOCHS; epoch++) {
++            const src = (row * NUM_EPOCHS + epoch) * 4;
++            const dst = epoch * NUM_RUMS + row;
++            hDispEpochCache[dst] = decodeDispMmFromBytes(pixels[src], pixels[src + 1]);
++            hSigmaEpochCache[dst] = decodeSigmaMmFromByte(pixels[src + 2]);
++        }
++    }
++
++    hSurfaceCacheMode = "predecoded_epoch_major_texture";
++    hSurfaceCacheBuildMs = performance.now() - t0;
+     hHeightTextureReady = true;
+     updateHParticleDisplacementForEpoch(0);
+ 
++    window.__hParticleSurfaceCacheStats = function() {
++        return {
++            mode: hSurfaceCacheMode,
++            rows: NUM_RUMS,
++            epochs: NUM_EPOCHS,
++            dispCacheBytes: hDispEpochCache ? hDispEpochCache.byteLength : 0,
++            sigmaCacheBytes: hSigmaEpochCache ? hSigmaEpochCache.byteLength : 0,
++            buildMs: Number(hSurfaceCacheBuildMs.toFixed(2)),
++            currentEpoch: hCurrentDispEpoch
++        };
++    };
++
+     console.log("[H particles] Dynamic surface height enabled", {
+         rows: NUM_RUMS,
+         epochs: NUM_EPOCHS,
+         surfaceOffsetM: H_PARTICLE_SURFACE_OFFSET_M,
+-        note: "Canvas particles project at datum + MODEL displacement_mm * vertical scale_m_per_mm + offset"
++        cacheMode: hSurfaceCacheMode,
++        cacheBuildMs: Number(hSurfaceCacheBuildMs.toFixed(2)),
++        note: "Canvas particles project at datum + MODEL displacement_mm * vertical scale_m_per_mm + offset; surface heights are predecoded once for smooth playback"
+     });
+ }
+ 
+ function updateHParticleDisplacementForEpoch(epochIdx) {
+-    if (!hHeightTextureReady || !hHeightImageCtx || !hCurrentDispByRow) return;
+-    if (epochIdx === hCurrentDispEpoch) return;
++    if (!hHeightTextureReady || !hDispEpochCache) return;
+ 
+     const idx = Math.max(0, Math.min(NUM_EPOCHS - 1, Math.floor(epochIdx)));
+-    const col = hHeightImageCtx.getImageData(idx, 0, 1, NUM_RUMS).data;
+-
+-    for (let row = 0; row < NUM_RUMS; row++) {
+-        const k = row * 4;
+-        hCurrentDispByRow[row] = decodeDispMmFromBytes(col[k], col[k + 1]);
+-        if (hCurrentSigmaByRow) {
+-            hCurrentSigmaByRow[row] = decodeSigmaMmFromByte(col[k + 2]);
+-        }
+-    }
++    if (idx === hCurrentDispEpoch) return;
+ 
++    const start = idx * NUM_RUMS;
++    const end = start + NUM_RUMS;
++    hCurrentDispByRow = hDispEpochCache.subarray(start, end);
++    hCurrentSigmaByRow = hSigmaEpochCache ? hSigmaEpochCache.subarray(start, end) : null;
+     hCurrentDispEpoch = idx;
+ }
+ 

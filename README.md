@@ -20,8 +20,11 @@ Prototype 1 visualizes Region of Uniform Motion (RUM) products as animated 4D de
 
 The current viewers use one merged horizontal-particle mode switch. Monte Carlo realizations and uncertainty shimmer are available in the same viewer.
 
+**New:** the Jakarta **Vertical Uncertainty V2** viewer adds low-poly RUM spikes as the updated vertical-uncertainty encoding while retaining the same dual-mode horizontal-particle interface.
+
 | Dataset | Viewer |
 |---|---|
+| **Jakarta — Vertical Uncertainty V2 (new)** | [`Open viewer`](P1_4.1.5.V6_4D_JKT/viz1_dev_v4_dualmode.html) |
 | Jakarta | [`Dual-mode viewer`](P1_4.1.5.V4_4D_MC_jakarta/viz1_dev_v4_dualmode.html) |
 | Groningen | [`Dual-mode viewer`](P1_4.1.5.V4_4D_MC_gron/viz1_dev_v4_dualmode.html) |
 | Synthbowl | [`Dual-mode viewer`](P1_4.1.5.V4_4D_MC_synthbowl/viz1_dev_v4_dualmode.html) |
@@ -47,7 +50,7 @@ The core visual concept is **breathing while drowning**: parcels move seasonally
 
 | Dataset | Viewer |
 |---|---|
-| Krimpenerwaard | [`Parcel viewer`](P2_4.2.1.V3.1_Krimpen/viz2_dev_v11.html) |
+| **Krimpenerwaard (new)** | [`Parcel viewer`](P2_4.2.1.V3.1_Krimpen/viz2_dev_v11.html) |
 
 Prototype 2 V3.1 was released on **17 June 2026**.
 

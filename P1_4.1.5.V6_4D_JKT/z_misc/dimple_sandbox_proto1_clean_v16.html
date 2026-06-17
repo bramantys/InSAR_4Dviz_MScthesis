@@ -1,0 +1,1348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Prototype1 Vertical Uncertainty Encoding Sandbox v13 fixed</title>
+<link rel="stylesheet" href="_internal/cesium/Widgets/widgets.css" />
+<script>window.CESIUM_BASE_URL = "_internal/cesium/";</script>
+<script src="_internal/cesium/Cesium.js"></script>
+<style>
+/* ====================================================================
+ * Prototype1 Dimple Sandbox
+ * Clean primitive test rig for vertical-uncertainty relief on RUM caps.
+ * v13: single-source geometry + real-normal custom relief shading.
+ *
+ * Intent:
+ *   - mimic the real Prototype1 viewer contract, not Claude's generic demo;
+ *   - use local ENU cap geometry, stable sidewalls, manual OSM imagery;
+ *   - keep vertical displacement and uncertainty relief separate in code;
+ *   - compare 2 conventional baselines + 5 surface encodings across 10 sigma columns.
+ *
+ * Drop this file in the same folder as viz1_dev_v4_dualmode.html.
+ * It expects _internal/cesium/... and _internal/assets/... to exist.
+ * ==================================================================== */
+:root{
+  --ui-font: Arial, sans-serif;
+  --ui-bg-main-top: rgba(31,36,40,0.98);
+  --ui-bg-main-bottom: rgba(24,29,33,0.98);
+  --ui-bg-panel: rgba(34,36,38,0.86);
+  --ui-bg-panel-strong: rgba(34,36,38,0.94);
+  --ui-bg-capsule: rgba(40,45,49,0.84);
+  --ui-bg-soft: rgba(255,255,255,0.08);
+  --ui-bg-soft-strong: rgba(255,255,255,0.16);
+  --ui-bg-card: rgba(0,0,0,0.20);
+  --ui-bg-hover: rgba(255,255,255,0.16);
+  --ui-search-bg: rgba(250,250,250,0.96);
+  --ui-border: rgba(255,255,255,0.14);
+  --ui-border-soft: rgba(255,255,255,0.09);
+  --ui-border-strong: rgba(255,255,255,0.22);
+  --ui-text: rgba(255,255,255,0.94);
+  --ui-text-strong: #ffffff;
+  --ui-text-muted: rgba(255,255,255,0.66);
+  --ui-text-faint: rgba(255,255,255,0.48);
+  --ui-text-dark: #202124;
+  --ui-accent: #7ef5ff;
+  --ui-accent-2: #b9d7ff;
+  --ui-accent-soft: rgba(185,215,255,0.18);
+  --ui-warning: #ffd54f;
+  --ui-disabled-opacity: 0.42;
+  --ui-radius-pill: 999px;
+  --ui-radius-card: 10px;
+  --ui-shadow-bubble: 0 2px 10px rgba(0,0,0,0.24);
+  --ui-shadow-panel: 0 4px 16px rgba(0,0,0,0.28);
+  --left-rail-width: 64px;
+  --left-drawer-width: 372px;
+}
+html,body,#cesiumContainer{width:100%;height:100%;margin:0;padding:0;overflow:hidden;}
+body{background:#000;font-family:var(--ui-font);}
+.cesium-viewer-toolbar,.cesium-viewer-animationContainer,.cesium-viewer-timelineContainer,
+.cesium-viewer-bottom,.cesium-viewer-fullscreenContainer{display:none!important;}
+
+#leftPanel{
+  position:absolute;top:0;left:0;bottom:30px;z-index:10090;width:var(--left-drawer-width);
+  background:linear-gradient(180deg,var(--ui-bg-main-top),var(--ui-bg-main-bottom));
+  color:var(--ui-text);border-right:1px solid var(--ui-border);box-shadow:4px 0 18px rgba(0,0,0,0.28);
+  box-sizing:border-box;padding:18px 18px 20px 76px;overflow-y:auto;backdrop-filter:blur(7px);
+}
+#rail{
+  position:absolute;left:14px;top:18px;z-index:10100;display:flex;flex-direction:column;gap:10px;
+}
+.railBtn{
+  width:44px;height:44px;border-radius:999px;border:1px solid transparent;background:var(--ui-bg-soft);
+  color:var(--ui-text);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;
+  box-shadow:none;cursor:pointer;
+}
+.railBtn:hover{background:var(--ui-bg-soft-strong);border-color:var(--ui-border);}
+#drawerHeader{display:flex;align-items:center;gap:10px;min-height:56px;border-bottom:1px solid var(--ui-border);margin-bottom:12px;}
+#drawerLogo{height:46px;width:auto;flex:none;}
+#drawerTitle{font-size:13px;font-weight:700;line-height:1.12;color:var(--ui-text);}
+.section{border-top:1px solid var(--ui-border);padding:12px 0 10px;}
+.section:first-of-type{border-top:0;}
+.sectionTitle{font-size:13px;font-weight:750;color:var(--ui-text-strong);margin-bottom:8px;}
+.ctrlCard{background:var(--ui-bg-card);border:1px solid var(--ui-border-soft);border-radius:var(--ui-radius-card);padding:8px 9px;margin-bottom:8px;}
+.ctrlCard label{display:flex;justify-content:space-between;align-items:center;color:var(--ui-text-muted);font-size:10.6px;margin:0 0 4px;}
+.ctrlVal{color:var(--ui-accent);font-variant-numeric:tabular-nums;font-weight:700;}
+input[type=range]{width:100%;accent-color:var(--ui-accent-2);height:16px;margin:0;}
+.segGroup{display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px;}
+.segGroup.two{grid-template-columns:1fr 1fr;}
+.segGroup.four{grid-template-columns:1fr 1fr;}
+.segGroup.five{grid-template-columns:1fr;}
+.seg{border:1px solid var(--ui-border-soft);border-radius:8px;background:var(--ui-bg-soft);color:var(--ui-text-muted);font-size:9.8px;min-height:25px;cursor:pointer;font-weight:650;}
+.seg:hover{background:var(--ui-bg-hover);}
+.seg.active{background:var(--ui-accent-soft);border-color:var(--ui-accent);color:var(--ui-text-strong);}
+.hint{color:var(--ui-text-faint);font-size:9.4px;line-height:1.2;margin-top:4px;}
+
+#displayQuickPanel{
+  position:absolute;right:16px;top:14px;z-index:10055;width:min(320px,calc(100vw - 32px));
+  background:var(--ui-bg-panel);color:var(--ui-text);border:1px solid var(--ui-border);border-radius:18px;
+  box-shadow:var(--ui-shadow-panel);font-family:var(--ui-font);backdrop-filter:blur(5px);overflow:hidden;
+}
+#displayQuickHeader{height:34px;width:100%;border:0;background:transparent;color:var(--ui-text);display:flex;align-items:center;justify-content:space-between;padding:0 12px 0 14px;box-sizing:border-box;cursor:pointer;}
+#displayQuickTitle{font-size:12px;font-weight:760;color:var(--ui-text-strong);}
+#displayQuickBody{display:flex;flex-direction:column;gap:8px;padding:0 12px 12px;}
+#displayQuickPanel.collapsed #displayQuickBody{display:none;}
+.displayQuickControlCard{background:var(--ui-bg-card);border:1px solid var(--ui-border-soft);border-radius:var(--ui-radius-card);padding:6px 9px 7px;}
+.displayQuickControlCard label{display:flex;justify-content:space-between;align-items:center;color:var(--ui-text-muted);font-size:10.5px;margin:0 0 3px;}
+
+#titleChip{
+  position:absolute;top:16px;left:50%;transform:translateX(-50%);z-index:9998;
+  background:var(--ui-bg-panel-strong);color:var(--ui-text);padding:8px 16px;border-radius:999px;
+  border:1px solid var(--ui-border);font-size:13px;letter-spacing:.2px;box-shadow:var(--ui-shadow-panel);white-space:nowrap;
+}
+#titleChip b{color:var(--ui-accent);}
+#camChips{position:absolute;top:64px;right:16px;z-index:9999;display:flex;gap:8px;}
+.camChip{background:var(--ui-bg-capsule);color:var(--ui-text);border:1px solid var(--ui-border);border-radius:999px;padding:8px 14px;font-size:12px;cursor:pointer;box-shadow:var(--ui-shadow-bubble);}
+.camChip:hover{background:var(--ui-bg-hover);}
+
+#legendStack{position:absolute;right:16px;bottom:42px;z-index:10020;width:min(320px,calc(100vw - 32px));display:flex;flex-direction:column;gap:10px;pointer-events:none;}
+.legendBox{background:rgba(34,36,38,0.88);border:1px solid var(--ui-border);border-radius:14px;box-shadow:var(--ui-shadow-panel);color:var(--ui-text);font-size:11px;padding:12px 13px;pointer-events:auto;backdrop-filter:blur(4px);}
+.legendBox h3{margin:0 0 9px;font-size:10.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--ui-text-muted);}
+.legRow{display:grid;grid-template-columns:16px 1fr auto;align-items:center;gap:8px;margin:6px 0;}
+.swatch{width:14px;height:14px;border-radius:4px;border:1px solid var(--ui-border-strong);}
+.legMain{font-weight:700;color:var(--ui-text);}
+.legSub{font-size:9.5px;color:var(--ui-text-faint);line-height:1.1;}
+.legNum{font-size:10px;color:var(--ui-accent);font-variant-numeric:tabular-nums;}
+#colorbar{height:28px;border-radius:999px;overflow:hidden;padding:0;position:relative;}
+#colorbarScale{position:absolute;inset:0;border-radius:999px;border:1px solid var(--ui-border);box-sizing:border-box;}
+#colorbarLabels{position:absolute;inset:0;color:white;font-size:10px;font-weight:700;text-shadow:0 1px 3px rgba(0,0,0,.9);pointer-events:none;}
+#colorbarLabels span{position:absolute;top:50%;transform:translate(-50%,-50%);white-space:nowrap;}
+
+#bottomStatusBar{
+  position:absolute;left:0;right:0;bottom:0;height:30px;z-index:10020;display:flex;align-items:center;justify-content:space-between;
+  gap:18px;padding:0 12px 0 10px;box-sizing:border-box;background:rgba(245,245,245,0.94);color:#303030;
+  font-family:var(--ui-font);font-size:11px;border-top:1px solid rgba(0,0,0,0.18);user-select:none;
+}
+#bottomLeftGroup,#bottomRightReadouts{display:flex;align-items:center;gap:12px;min-width:0;height:100%;}
+#bottomBrand{height:100%;display:flex;align-items:center;gap:9px;flex:0 0 auto;margin-left:178px;}
+#tuDelftLogo{height:35px;width:auto;display:block;}
+#bottomCreditSeparator{font-size:16px;color:rgba(48,48,48,.42);}
+#bottomDistanceScaleWrap{display:flex;align-items:center;gap:8px;min-width:170px;}
+#bottomDistanceScaleBarOuter{width:132px;height:18px;position:relative;flex:0 0 132px;}
+#bottomDistanceScaleBar{position:absolute;left:0;bottom:4px;height:8px;min-width:24px;max-width:132px;border-left:2px solid rgba(40,40,40,.9);border-right:2px solid rgba(40,40,40,.9);border-bottom:2px solid rgba(40,40,40,.9);box-sizing:border-box;}
+#bottomCameraLabel,#bottomCoordLabel,#fpsCounter,#bottomDistanceScaleLabel{white-space:nowrap;line-height:1;color:#303030;}
+#bottomCreditHost{height:100%;max-width:42vw;overflow:hidden;display:flex;align-items:center;color:#444;font-size:10.5px;}
+.cesium-widget-credits{bottom:7px!important;left:12px!important;right:auto!important;color:#444!important;text-shadow:none!important;font-size:10.5px!important;}
+
+#loadMsg{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:99999;color:var(--ui-text);font-size:14px;background:var(--ui-bg-panel-strong);padding:14px 22px;border-radius:10px;border:1px solid var(--ui-border);}
+@media (max-width:1100px){#leftPanel{width:330px;padding-left:70px}.legendBox{font-size:10px}#titleChip{left:54%;}}
+</style>
+</head>
+<body>
+<div id="cesiumContainer"></div>
+
+<div id="rail">
+  <button class="railBtn" id="btnHome" title="Reset view">⌂</button>
+  <button class="railBtn" title="Prototype1 vertical uncertainty sandbox">↕</button>
+  <button class="railBtn" title="Vertical uncertainty relief test">≈</button>
+</div>
+
+<aside id="leftPanel">
+  <div id="drawerHeader">
+    <img id="drawerLogo" src="_internal/assets/tu_delft_logo_white.png" alt="TU Delft" />
+    <div id="drawerTitle">InSAR 4D Viz<br/>Vertical uncertainty sandbox</div>
+  </div>
+
+  <div class="section">
+    <div class="sectionTitle">Vertical components</div>
+    <div class="ctrlCard">
+      <label><span>Fixed base MODEL displacement</span><span class="ctrlVal">20.0 mm</span></label>
+      <div class="hint">Locked for this sandbox. All test RUM caps share one normal height; only the uncertainty relief is interactively exaggerated.</div>
+    </div>
+    <div class="ctrlCard">
+      <label><span>Vertical exaggeration</span><span class="ctrlVal" id="gainVal">2.00×</span></label>
+      <input id="gain" type="range" min="0" max="10" step="0.05" value="2.00" />
+      <div class="hint">Display lens for σ relief only. The base MODEL height stays fixed at 20.0 mm.</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="sectionTitle">Uncertainty encoding</div>
+    <div class="ctrlCard">
+      <label><span>σ display range</span><span class="ctrlVal" id="sigmaModeVal">1σ</span></label>
+      <div class="segGroup two" id="sigmaSeg">
+        <button class="seg active" data-sigma="1">1σ</button>
+        <button class="seg" data-sigma="2">2σ</button>
+      </div>
+      <div class="hint">The input σ values are current Prototype1 vertical σ in mm; 2σ doubles the relief amplitude.</div>
+    </div>
+    <div class="ctrlCard">
+      <label><span>σ → amplitude mapping</span><span class="ctrlVal" id="mapModeVal">linear</span></label>
+      <div class="segGroup" id="mapSeg">
+        <button class="seg active" data-map="linear">linear</button>
+        <button class="seg" data-map="sqrt">sqrt</button>
+        <button class="seg" data-map="log">log</button>
+      </div>
+      <div class="hint">Changes only the three wavy relief alternatives while preserving their physical peak height. The 3-layer RUM and classic error bar stay linear.</div>
+    </div>
+    <div class="ctrlCard">
+      <label><span>Spatial frequency</span><span class="ctrlVal" id="freqVal">3</span></label>
+      <input id="freq" type="range" min="1" max="10" step="1" value="3" />
+      <div class="hint">Bumps/rings per wavy RUM cap. The conventional 3-layer and single-error-bar baselines are intentionally unaffected.</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="sectionTitle">Rendering rehearsal</div>
+    <div class="ctrlCard">
+      <label><span>Surface color mode</span><span class="ctrlVal" id="colorModeVal">encoding</span></label>
+      <div class="segGroup two" id="colorSeg">
+        <button class="seg active" data-color="encoding">encoding</button>
+        <button class="seg" data-color="velocity">velocity</button>
+      </div>
+      <div class="hint">Encoding colors are easier for comparison. Velocity mode tests the surface alternatives against real color semantics; the two conventional baseline rows keep fixed neutral colors.</div>
+    </div>
+    <div class="ctrlCard">
+      <label><span>Relief cue mode</span><span class="ctrlVal" id="cueModeVal">slope</span></label>
+      <div class="segGroup five" id="cueSeg">
+        <button class="seg" data-cue="off">off / unlit</button>
+        <button class="seg" data-cue="old">old shaded baseline</button>
+        <button class="seg active" data-cue="slope">neutral slope shade</button>
+        <button class="seg" data-cue="curvature">curvature shade</button>
+        <button class="seg" data-cue="directional">directional inspection</button>
+      </div>
+      <div class="hint">Old shaded is intentionally kept as the ugly comparison. Relief cue modes affect only wavy surfaces; the conventional baseline rows remain unshaded.</div>
+    </div>
+    <div class="ctrlCard">
+      <label><span>Relief cue strength</span><span class="ctrlVal" id="cueStrengthVal">60%</span></label>
+      <input id="cueStrength" type="range" min="0" max="100" step="1" value="60" />
+      <div class="hint">Controls the visibility of the shader relief cue. It does not change the dimple geometry or the real σ amplitude.</div>
+    </div>
+    <div class="ctrlCard">
+      <label><span>Tessellation</span><span class="ctrlVal" id="tessVal">96×96</span></label>
+      <div class="segGroup four" id="tessSeg">
+        <button class="seg" data-tess="16">16</button>
+        <button class="seg" data-tess="64">64</button>
+        <button class="seg active" data-tess="96">96</button>
+        <button class="seg" data-tess="128">128</button>
+      </div>
+      <div class="hint">This pipeline-style stress test affects only the wavy surface alternatives. The conventional baselines use simple geometry.</div>
+    </div>
+  </div>
+</aside>
+
+<div id="displayQuickPanel" aria-expanded="true">
+  <button id="displayQuickHeader" type="button" title="Collapse display controls">
+    <span id="displayQuickTitle">Display control</span><span id="displayQuickChevron">⌄</span>
+  </button>
+  <div id="displayQuickBody">
+    <div class="displayQuickControlCard">
+      <label><span>Global opacity</span><span class="ctrlVal" id="globalOpacityVal">1.00</span></label>
+      <input id="globalOpacity" type="range" min="0.1" max="1" step="0.05" value="1" />
+    </div>
+    <div class="displayQuickControlCard">
+      <label><span>Cap sidewall thickness</span><span class="ctrlVal" id="thicknessVal">8 m</span></label>
+      <input id="thickness" type="range" min="0" max="60" step="1" value="8" />
+    </div>
+  </div>
+</div>
+
+<div id="titleChip">Prototype1 Sandbox · <b>vertical uncertainty encoding</b> · conventional vs surface alternatives · v16</div>
+<div id="camChips">
+  <button class="camChip" id="camOblique">Oblique</button>
+  <button class="camChip" id="camGrazing">Grazing</button>
+  <button class="camChip" id="camTop">Top-down</button>
+</div>
+
+<div id="legendStack">
+  <div class="legendBox">
+    <h3>Rows · baselines and alternatives</h3>
+    <div class="legRow"><div class="swatch" style="background:#9fc9cc"></div><div><div class="legMain">3-layer RUM</div><div class="legSub">upper / estimate / lower surfaces; lower layer is easily hidden</div></div><div class="legNum">baseline</div></div>
+    <div class="legRow"><div class="swatch" style="background:#202124"></div><div><div class="legMain">Classic error bar</div><div class="legSub">one central ±σ bar per RUM; lower whisker is occluded</div></div><div class="legNum">baseline</div></div>
+    <div class="legRow"><div class="swatch" style="background:#d8dde0"></div><div><div class="legMain">Hatch baseline</div><div class="legSub">flat cap, three stripe densities</div></div><div class="legNum">flat</div></div>
+    <div class="legRow"><div class="swatch" style="background:#8fc6d6"></div><div><div class="legMain">Egg-carton</div><div class="legSub">2D bump grid; symmetric relief</div></div><div class="legNum">true mesh</div></div>
+    <div class="legRow"><div class="swatch" style="background:#b6a6da"></div><div><div class="legMain">Radial rings</div><div class="legSub">concentric uncertainty relief</div></div><div class="legNum">true mesh</div></div>
+    <div class="legRow"><div class="swatch" style="background:#d6bd8f"></div><div><div class="legMain">Half-step</div><div class="legSub">split-surface step around the RUM datum</div></div><div class="legNum">true mesh</div></div>
+    <div class="legRow"><div class="swatch" style="background:#c7b4a3"></div><div><div class="legMain">CB cones</div><div class="legSub">CB = checkerboard; rounded up/down cones with neutral gaps</div></div><div class="legNum">true mesh</div></div>
+    <div class="legRow"><div class="swatch" style="background:#baa18f"></div><div><div class="legMain">Lowpoly CB spikes</div><div class="legSub">CB = checkerboard; 4-sided pyramids, synthetic and far-view readable</div></div><div class="legNum">lowpoly</div></div>
+  </div>
+  <div class="legendBox">
+    <h3>Column σ values</h3>
+    <div id="sigmaLegend" class="legSub"></div>
+  </div>
+  <div id="colorbar" class="legendBox"><div id="colorbarScale"></div><div id="colorbarLabels"></div></div>
+</div>
+
+<div id="bottomStatusBar">
+  <div id="bottomLeftGroup"><div id="bottomCreditHost"></div><div id="bottomBrand"><span id="bottomCreditSeparator">|</span><img id="tuDelftLogo" src="_internal/assets/tu_delft_logo_color.png" alt="TU Delft" /></div></div>
+  <div id="bottomRightReadouts"><div id="bottomDistanceScaleWrap"><div id="bottomDistanceScaleBarOuter"><div id="bottomDistanceScaleBar"></div></div><div id="bottomDistanceScaleLabel">—</div></div><div id="bottomCameraLabel">Camera: —</div><div id="bottomCoordLabel">Lat: —, Lon: —</div><div id="fpsCounter">FPS: —</div></div>
+</div>
+
+<div id="loadMsg">Building Prototype1 vertical-uncertainty comparison sandbox…</div>
+
+<script>
+"use strict";
+
+if (!window.Cesium) {
+  const m = document.getElementById("loadMsg");
+  if (m) m.textContent = "Cesium failed to load. Put this file beside _internal/cesium/ or run from the Prototype1 folder.";
+  throw new Error("Cesium failed to load from _internal/cesium/");
+}
+
+const CONFIG = {
+  // From uploaded viewer_tuning.json / height_meta.json snapshot.
+  CENTER_LON: 106.85150992,
+  CENTER_LAT: -6.21266964,
+  DATUM_HEIGHT_M: 1000.0,
+  RUM_SIZE_M: 450.0,
+  GAP_M: 300.0,
+
+  // Current Prototype1 vertical sigma is displacement sigma in mm, not velocity mm/yr.
+  // Anchors: min 0.1112, p02 0.1323, p50 0.1898, p98 2.1972, max 6.6821.
+  SIGMA_UNIT: "mm",
+  SIGMAS_1SIGMA_MM: [0.00, 0.11, 0.13, 0.19, 0.34, 0.75, 1.25, 2.20, 3.50, 6.68],
+  SIGMA_REF_MM: 2.20,
+  SIGMA_MAX_MM: 6.68,
+
+  BASE_MODEL_MM: 20.0,
+  MODEL_DISPLAY_M_PER_MM: 10.0,
+  UNCERTAINTY_GAIN: 2.00,
+  CAP_THICKNESS_M: 8.0,
+  TESS: 96,
+  FREQ: 3,
+
+  ROWS: [
+    { name:"3-layer RUM", type:"stack", color:"#9fc9cc", gain:1.00 },
+    { name:"Classic error bar", type:"errorbar", color:"#d9dde0", gain:1.00 },
+    { name:"Hatch", type:"hatch", color:"#d8dde0", gain:1.00 },
+    { name:"Egg-carton", type:"egg", color:"#8fc6d6", gain:1.00 },
+    { name:"Radial", type:"radial", color:"#b6a6da", gain:0.90 },
+    { name:"Half-step", type:"half", color:"#d6bd8f", gain:0.75 },
+    { name:"CB cones", type:"cbcones", color:"#c7b4a3", gain:0.92 },
+    { name:"Lowpoly CB spikes", type:"lowpoly_cb_spikes", color:"#baa18f", gain:0.98 },
+  ],
+  CONVENTIONAL: {
+    stackLayerThicknessM: 3.0,
+    stackTopAlpha: 0.32,
+    stackBottomAlpha: 0.20,
+    errorBarColor: "#161819",
+    errorBarAlpha: 0.94,
+    errorBarPostWidthM: 24.0,
+    errorBarWhiskerLengthM: 125.0,
+    errorBarWhiskerDepthM: 18.0,
+    errorBarWhiskerThicknessM: 8.0,
+  },
+  HATCH: { base:"#f2f4f5", stripe:"#9da4a8", cutLow:0.19, cutHigh:2.20, repeat:10.0, thinWidth:0.020, midWidth:0.045, thickWidth:0.085 },
+  TEST_VELOCITY_BY_COLUMN: [-50, -35, -18, -10, -3, -1, 0, 1, 4.5, 8],
+  VELOCITY_STOPS: [
+    [-50,"#67001f"],[-35,"#b2182b"],[-18,"#ef8a62"],[-3,"#fddbc7"],[-1,"#f7f7f7"],
+    [0,"#f7f7f7"],[1,"#f7f7f7"],[2,"#d1e5f0"],[4.5,"#67a9cf"],[8,"#2166ac"],[10,"#053061"]
+  ]
+};
+
+const STATE = {
+  baseModelMm: CONFIG.BASE_MODEL_MM,
+  gain: CONFIG.UNCERTAINTY_GAIN,
+  sigmaMultiplier: 1,
+  mapMode: "linear",
+  freq: CONFIG.FREQ,
+  colorMode: "encoding",
+  cueMode: "slope",
+  cueStrength: 0.60,
+  tess: CONFIG.TESS,
+  opacity: 1.0,
+  capThickness: CONFIG.CAP_THICKNESS_M,
+};
+
+const viewer = new Cesium.Viewer("cesiumContainer", {
+  terrainProvider: new Cesium.EllipsoidTerrainProvider(),
+  creditContainer: document.getElementById("bottomCreditHost"),
+  baseLayer: false,
+  baseLayerPicker:false,
+  geocoder:false,
+  homeButton:false,
+  sceneModePicker:false,
+  navigationHelpButton:false,
+  timeline:false,
+  animation:false,
+  infoBox:false,
+  selectionIndicator:false,
+  fullscreenButton:false,
+  scene3DOnly:true,
+});
+try {
+  viewer.imageryLayers.removeAll();
+  viewer.imageryLayers.addImageryProvider(new Cesium.OpenStreetMapImageryProvider({ url:"https://tile.openstreetmap.org/" }));
+} catch (e) { console.warn("OSM imagery unavailable", e); }
+viewer.scene.globe.enableLighting = false;
+viewer.scene.globe.depthTestAgainstTerrain = true;
+if (viewer.scene.shadowMap) viewer.scene.shadowMap.enabled = false;
+viewer.shadows = false;
+viewer.scene.light = new Cesium.DirectionalLight({
+  direction: Cesium.Cartesian3.normalize(new Cesium.Cartesian3(0.35,0.45,0.82), new Cesium.Cartesian3()),
+  intensity: 2.15,
+});
+viewer.scene.morphTo3D(0);
+
+const scene = viewer.scene;
+const gridCenter = Cesium.Cartesian3.fromDegrees(CONFIG.CENTER_LON, CONFIG.CENTER_LAT, CONFIG.DATUM_HEIGHT_M);
+const gridFrame = Cesium.Transforms.eastNorthUpToFixedFrame(gridCenter);
+
+function updateInspectionLight(){
+  // Camera-raking inspection light: not a physical sun, but a diagnostic light
+  // that makes relief readable from oblique, grazing, and rotated views.
+  if (!viewer || !viewer.camera || STATE.cueMode !== "old") return;
+  const d = new Cesium.Cartesian3();
+  Cesium.Cartesian3.multiplyByScalar(viewer.camera.directionWC, 0.78, d);
+  Cesium.Cartesian3.add(d, Cesium.Cartesian3.multiplyByScalar(viewer.camera.rightWC, 0.38, new Cesium.Cartesian3()), d);
+  Cesium.Cartesian3.add(d, Cesium.Cartesian3.multiplyByScalar(viewer.camera.upWC, 0.22, new Cesium.Cartesian3()), d);
+  Cesium.Cartesian3.normalize(d, d);
+  viewer.scene.light.direction = d;
+}
+const caps = [];
+let labelCollection = scene.primitives.add(new Cesium.LabelCollection());
+let framePrimitive = null;
+let lastFpsTime = performance.now();
+let fpsFrames = 0;
+
+function $(id){ return document.getElementById(id); }
+function clamp(x,a,b){ return Math.max(a, Math.min(b, x)); }
+function cssColor(hex, alpha=1){ return Cesium.Color.fromCssColorString(hex).withAlpha(alpha); }
+function hexToRgb01(hex){ const v=parseInt(hex.replace("#",""),16); return [((v>>16)&255)/255,((v>>8)&255)/255,(v&255)/255]; }
+function lerp(a,b,t){ return a+(b-a)*t; }
+function colorLerp(c0,c1,t){ return new Cesium.Color(lerp(c0.red,c1.red,t), lerp(c0.green,c1.green,t), lerp(c0.blue,c1.blue,t), lerp(c0.alpha,c1.alpha,t)); }
+
+const velocityStops = CONFIG.VELOCITY_STOPS.map(([value,hex]) => ({ value, color: cssColor(hex,1), hex }));
+function velocityColor(value){
+  if (!Number.isFinite(value)) return cssColor("#9e9e9e",1);
+  if (value <= velocityStops[0].value) return velocityStops[0].color.clone();
+  for (let i=0;i<velocityStops.length-1;i++){
+    const a=velocityStops[i], b=velocityStops[i+1];
+    if (value <= b.value){
+      const t = (value - a.value) / Math.max(1e-9, b.value - a.value);
+      return colorLerp(a.color,b.color,clamp(t,0,1));
+    }
+  }
+  return velocityStops[velocityStops.length-1].color.clone();
+}
+function gradientCss(){ return `linear-gradient(to right, ${CONFIG.VELOCITY_STOPS.map(([v,h]) => `${h}`).join(",")})`; }
+
+function shapeGamma(){
+  // The mapping mode is now visually useful without breaking the physical peak height.
+  // A cap with σ = 1 mm still has ±1 mm data relief before the display lens,
+  // regardless of linear/sqrt/log. The mapping only changes how broad/sharp the relief reads.
+  switch(STATE.mapMode){
+    case "sqrt": return 0.72;
+    case "log": return 0.48;
+    default: return 1.0;
+  }
+}
+function remapShape(raw){
+  const g = shapeGamma();
+  const a = Math.abs(raw);
+  if (a <= 1e-9) return 0;
+  return Math.sign(raw) * Math.pow(Math.min(1, a), g);
+}
+// Radial mode: datum-locked, signed, continuous multi-band rings.
+// Contract for this sandbox:
+//   1) the true RUM reference height is z = capBaseZ();
+//   2) radial relief oscillates continuously around that height;
+//   3) the square rim is forced back to zero relief so the sidewall top stays locked;
+//   4) freq 1–10 means many radial cycles, without flat plateaus between bands.
+//
+// v5 used thresholded annular bands. It fixed the datum drift, but created
+// unwanted flat terraces between rings. v6 removes that threshold and uses a
+// continuous signed sinusoidal ring field, then relies on separate +/-
+// normalization below to keep crest = +1 and trough = -1.
+function radialRaw(u, v, freq){
+  const r = Math.hypot(u, v);
+
+  // Clamp outside/near the square boundary to the true cap height.
+  // This keeps the sidewall rim from showing moving edge heights.
+  const rimStart = 0.90;
+  const rimEnd = 0.995;
+  if (r >= rimEnd) return 0.0;
+
+  const ringCycles = Math.max(1, Math.min(10, Math.round(freq)));
+
+  // Continuous radial oscillator. The small phase offset prevents the exact
+  // centre from becoming a permanent maximum/minimum spike.
+  const phase = 2.0 * Math.PI * ringCycles * r + 0.15 * Math.PI;
+  const wave = Math.sin(phase);
+
+  // Fade smoothly to zero near the square cap boundary. Because the wave is
+  // signed around zero, this keeps the sidewall datum locked without lifting
+  // or depressing the whole cap.
+  const rimT = clamp((r - rimStart) / Math.max(1e-9, rimEnd - rimStart), 0.0, 1.0);
+  const rimFade = 1.0 - (rimT * rimT * (3.0 - 2.0 * rimT));
+
+  // Tiny centre fade avoids needle-like central artifacts at high frequency,
+  // but does not create flat terraces across the rings.
+  const centreT = clamp(r / 0.035, 0.0, 1.0);
+  const centreFade = centreT * centreT * (3.0 - 2.0 * centreT);
+
+  return wave * rimFade * centreFade;
+}
+
+// Normalise positive and negative radial relief separately. This is the part
+// that fixes the v4 one-sided behaviour: after remapping, the radial mode has
+// a balanced +1 crest and -1 trough around the locked RUM datum.
+const radialScaleCache = new Map();
+function radialScale(freq){
+  const key = `${freq}|${STATE.mapMode}`;
+  const cached = radialScaleCache.get(key);
+  if (cached) return cached;
+
+  const S = 192;
+  let maxPos = 0.0;
+  let maxNeg = 0.0;
+  for (let j=0; j<S; j++){
+    const v = -1 + 2 * (j + 0.5) / S;
+    for (let i=0; i<S; i++){
+      const u = -1 + 2 * (i + 0.5) / S;
+      const val = remapShape(radialRaw(u, v, freq));
+      if (val > 0) maxPos = Math.max(maxPos, val);
+      if (val < 0) maxNeg = Math.max(maxNeg, -val);
+    }
+  }
+  const scale = {
+    pos: Math.max(maxPos, 1e-9),
+    neg: Math.max(maxNeg, 1e-9),
+  };
+  radialScaleCache.set(key, scale);
+  return scale;
+}
+
+function radialReliefShape(u, v, freq){
+  const val = remapShape(radialRaw(u, v, freq));
+  const scale = radialScale(freq);
+  return val >= 0 ? val / scale.pos : val / scale.neg;
+}
+
+// CB cones mode: checkerboard of isolated up/down traffic-cone-like spikes.
+// Contract:
+//   1) each cell contains one sign-pure spike (either up or down);
+//   2) adjacent cells alternate sign in a checkerboard layout;
+//   3) spikes do not fill the whole cell, leaving neutral gaps between them;
+//   4) spatial frequency follows the egg-carton intuition: freq ~= number of spikes across.
+function cbConesRaw(u, v, freq){
+  const cells = Math.max(1, Math.min(10, Math.round(freq)));
+  const fu = clamp((u + 1.0) * 0.5 * cells, 0.0, cells - 1e-9);
+  const fv = clamp((v + 1.0) * 0.5 * cells, 0.0, cells - 1e-9);
+  const iu = Math.floor(fu);
+  const iv = Math.floor(fv);
+  const cu = ((iu + 0.5) / cells) * 2.0 - 1.0;
+  const cv = ((iv + 0.5) / cells) * 2.0 - 1.0;
+
+  const halfCell = 1.0 / cells;
+  const lu = (u - cu) / halfCell;
+  const lv = (v - cv) / halfCell;
+  const r = Math.hypot(lu, lv);
+
+  // Still separated, but slightly broader than v10 so the slope is not
+  // concentrated into a dark ring at the cone foot.
+  const support = 0.64;
+  if (r >= support) return 0.0;
+
+  // Rounded traffic-cone profile with zero slope at both tip and footprint edge.
+  // The broad smooth body catches light more evenly than the old narrow cosine.
+  const t = clamp(r / support, 0.0, 1.0);
+  const smooth = t*t*(3.0 - 2.0*t);
+  const profile = Math.pow(1.0 - smooth, 0.72);
+
+  // Top-left starts as an upward spike, then alternates checkerboard-style.
+  const sign = ((iu + iv) % 2 === 0) ? 1.0 : -1.0;
+  return sign * profile;
+}
+
+function reliefShape(type, u, v, freq){
+  let raw = 0;
+  switch(type){
+    case "egg":
+      raw = Math.cos(Math.PI*freq*u) * Math.cos(Math.PI*freq*v);
+      return remapShape(raw);
+    case "radial":
+      return radialReliefShape(u, v, freq);
+    case "half":
+      raw = Math.tanh(u * (freq*2.2));
+      return remapShape(raw);
+    case "cbcones":
+      return remapShape(cbConesRaw(u, v, freq));
+    default:
+      return 0;
+  }
+}
+function capBaseZ(){ return STATE.baseModelMm * CONFIG.MODEL_DISPLAY_M_PER_MM; }
+function reliefAmpM(row, sigmaMm){
+  const displaySigma = sigmaMm * STATE.sigmaMultiplier;
+  // Physically honest amplitude: peak/trough equals ±σ in data space,
+  // then Prototype1 display scaling and the user relief lens are applied.
+  return displaySigma * CONFIG.MODEL_DISPLAY_M_PER_MM * STATE.gain * row.gain;
+}
+function capHeightAt(row, sigmaMm, u, v){
+  return capBaseZ() + reliefAmpM(row, sigmaMm) * reliefShape(row.type, u, v, STATE.freq);
+}
+
+function finalizeReliefGeometry(positions, normals, sts, slopes, curvatures, reliefValues, surfaceMasks, indices){
+  return new Cesium.Geometry({
+    attributes:{
+      position:new Cesium.GeometryAttribute({ componentDatatype:Cesium.ComponentDatatype.DOUBLE, componentsPerAttribute:3, values:new Float64Array(positions) }),
+      normal:new Cesium.GeometryAttribute({ componentDatatype:Cesium.ComponentDatatype.FLOAT, componentsPerAttribute:3, values:new Float32Array(normals) }),
+      st:new Cesium.GeometryAttribute({ componentDatatype:Cesium.ComponentDatatype.FLOAT, componentsPerAttribute:2, values:new Float32Array(sts) }),
+      slope:new Cesium.GeometryAttribute({ componentDatatype:Cesium.ComponentDatatype.FLOAT, componentsPerAttribute:1, values:new Float32Array(slopes) }),
+      curvature:new Cesium.GeometryAttribute({ componentDatatype:Cesium.ComponentDatatype.FLOAT, componentsPerAttribute:1, values:new Float32Array(curvatures) }),
+      reliefValue:new Cesium.GeometryAttribute({ componentDatatype:Cesium.ComponentDatatype.FLOAT, componentsPerAttribute:1, values:new Float32Array(reliefValues) }),
+      surfaceMask:new Cesium.GeometryAttribute({ componentDatatype:Cesium.ComponentDatatype.FLOAT, componentsPerAttribute:1, values:new Float32Array(surfaceMasks) }),
+    },
+    indices:(positions.length/3>65000)?new Uint32Array(indices):new Uint16Array(indices),
+    primitiveType:Cesium.PrimitiveType.TRIANGLES,
+    boundingSphere:Cesium.BoundingSphere.fromVertices(new Float64Array(positions)),
+  });
+}
+
+function buildLowpolyCbSpikesGeometry(row, sigmaMm){
+  const half = CONFIG.RUM_SIZE_M * 0.5;
+  const baseZ = capBaseZ();
+  const bottomZ = baseZ - STATE.capThickness;
+  const ampM = reliefAmpM(row, sigmaMm);
+  const cells = Math.max(1, Math.min(10, Math.round(STATE.freq)));
+  const cell = CONFIG.RUM_SIZE_M / cells;
+  const inset = cell * 0.28; // keep clear space between neighboring spikes
+
+  const positions=[]; const normals=[]; const sts=[]; const slopes=[]; const curvatures=[]; const reliefValues=[]; const surfaceMasks=[]; const indices=[];
+
+  function pushVertex(x,y,z,nx,ny,nz,stx,sty,slope,curv,relief,mask){
+    positions.push(x,y,z); normals.push(nx,ny,nz); sts.push(stx,sty);
+    slopes.push(slope); curvatures.push(curv); reliefValues.push(relief); surfaceMasks.push(mask);
+    return positions.length/3 - 1;
+  }
+  function triNormal(a,b,c){
+    const ux=b[0]-a[0], uy=b[1]-a[1], uz=b[2]-a[2];
+    const vx=c[0]-a[0], vy=c[1]-a[1], vz=c[2]-a[2];
+    let nx=uy*vz-uz*vy, ny=uz*vx-ux*vz, nz=ux*vy-uy*vx;
+    const len=Math.hypot(nx,ny,nz)||1; nx/=len; ny/=len; nz/=len;
+    if (nz < 0){ nx=-nx; ny=-ny; nz=-nz; }
+    return [nx,ny,nz];
+  }
+  function uv(x,y){ return [(x + half)/(2*half), (y + half)/(2*half)]; }
+  function addTri(a,b,c, normal, curvVals, reliefVals){
+    const slopeVal = clamp(1.0 - normal[2], 0.0, 1.0);
+    const [staX,staY]=uv(a[0],a[1]), [stbX,stbY]=uv(b[0],b[1]), [stcX,stcY]=uv(c[0],c[1]);
+    const ia=pushVertex(a[0],a[1],a[2],normal[0],normal[1],normal[2],staX,staY,slopeVal,curvVals[0],reliefVals[0],1);
+    const ib=pushVertex(b[0],b[1],b[2],normal[0],normal[1],normal[2],stbX,stbY,slopeVal,curvVals[1],reliefVals[1],1);
+    const ic=pushVertex(c[0],c[1],c[2],normal[0],normal[1],normal[2],stcX,stcY,slopeVal,curvVals[2],reliefVals[2],1);
+    indices.push(ia,ib,ic);
+  }
+  function addFlatQuad(x0,y0,x1,y1){
+    const n=[0,0,1];
+    const a=[x0,y0,baseZ], b=[x1,y0,baseZ], c=[x1,y1,baseZ], d=[x0,y1,baseZ];
+    addTri(a,b,c,n,[0,0,0],[0,0,0]);
+    addTri(a,c,d,n,[0,0,0],[0,0,0]);
+  }
+
+  for(let j=0;j<cells;j++) {
+    for(let i=0;i<cells;i++) {
+      const x0=-half + i*cell, x1=x0 + cell;
+      const y0=-half + j*cell, y1=y0 + cell;
+      const cx=(x0+x1)*0.5, cy=(y0+y1)*0.5;
+      const ix0=cx - inset, ix1=cx + inset, iy0=cy - inset, iy1=cy + inset;
+      // flat ring around the central pyramid footprint
+      addFlatQuad(x0,y0,x1,iy0);
+      addFlatQuad(x0,iy1,x1,y1);
+      addFlatQuad(x0,iy0,ix0,iy1);
+      addFlatQuad(ix1,iy0,x1,iy1);
+
+      const signValue = ((i + j) % 2 === 0) ? 1.0 : -1.0;
+      const apex=[cx,cy,baseZ + signValue * ampM];
+      const sw=[ix0,iy0,baseZ], se=[ix1,iy0,baseZ], ne=[ix1,iy1,baseZ], nw=[ix0,iy1,baseZ];
+      const active = Math.abs(ampM) > 1e-9 ? 1.0 : 0.0;
+      const curvApex = (signValue > 0 ? -1.0 : 1.0) * active;
+      const apexRelief = signValue * active;
+      // Four faceted sides, keeping a crisp lowpoly appearance.
+      let nrm = triNormal(sw,se,apex); addTri(sw,se,apex,nrm,[0,0,curvApex],[0,0,apexRelief]);
+      nrm = triNormal(se,ne,apex); addTri(se,ne,apex,nrm,[0,0,curvApex],[0,0,apexRelief]);
+      nrm = triNormal(ne,nw,apex); addTri(ne,nw,apex,nrm,[0,0,curvApex],[0,0,apexRelief]);
+      nrm = triNormal(nw,sw,apex); addTri(nw,sw,apex,nrm,[0,0,curvApex],[0,0,apexRelief]);
+    }
+  }
+
+  // Outer stable sidewalls, same thin RUM block as the other surface alternatives.
+  function addWall(edge, normal){
+    for(let k=0;k<edge.length-1;k++){
+      const p0=edge[k], p1=edge[k+1];
+      const a=pushVertex(p0[0],p0[1],baseZ,normal[0],normal[1],normal[2],0,1,0,0,0,0);
+      const b=pushVertex(p0[0],p0[1],bottomZ,normal[0],normal[1],normal[2],0,0,0,0,0,0);
+      const c=pushVertex(p1[0],p1[1],baseZ,normal[0],normal[1],normal[2],0,1,0,0,0,0);
+      const d=pushVertex(p1[0],p1[1],bottomZ,normal[0],normal[1],normal[2],0,0,0,0,0,0);
+      indices.push(a,b,c, c,b,d);
+    }
+  }
+  const south=[], north=[], west=[], east=[];
+  for(let i=0;i<=cells;i++){ const x=-half + i*cell; south.push([x,-half]); north.push([x,half]); }
+  for(let j=0;j<=cells;j++){ const y=-half + j*cell; west.push([-half,y]); east.push([half,y]); }
+  addWall(south,[0,-1,0]); addWall(north,[0,1,0]); addWall(west,[-1,0,0]); addWall(east,[1,0,0]);
+
+  return finalizeReliefGeometry(positions, normals, sts, slopes, curvatures, reliefValues, surfaceMasks, indices);
+}
+
+function buildCapGeometry(row, sigmaMm){
+  if (row.type === "lowpoly_cb_spikes") return buildLowpolyCbSpikesGeometry(row, sigmaMm);
+  const N = STATE.tess;
+  const half = CONFIG.RUM_SIZE_M * 0.5;
+  const step = CONFIG.RUM_SIZE_M / N;
+  const positions=[];
+  const normals=[];
+  const sts=[];
+  const slopes=[];
+  const curvatures=[];
+  const reliefValues=[];
+  const surfaceMasks=[];
+  const indices=[];
+  const du = 1/N;
+  const baseZ = capBaseZ();
+  const ampM = reliefAmpM(row, sigmaMm);
+
+  function shape(u,v){ return reliefShape(row.type, u, v, STATE.freq); }
+  function h(u,v){ return baseZ + ampM * shape(u,v); }
+
+  // Top surface. Geometry, normals, slope, curvature, and signed relief are all
+  // derived from the same CPU height field. This is the single source of truth
+  // for both the silhouette and every relief-cue mode.
+  const rawCurvature=[];
+  let maxAbsCurvature = 0.0;
+  for(let j=0;j<=N;j++){
+    for(let i=0;i<=N;i++){
+      const e=-half+i*step, n=-half+j*step;
+      const u=e/half, v=n/half;
+      const shapeValue=shape(u,v);
+      const z=baseZ + ampM * shapeValue;
+      positions.push(e,n,z);
+
+      const hu1=h(clamp(u+du,-1,1),v), hu0=h(clamp(u-du,-1,1),v);
+      const hv1=h(u,clamp(v+du,-1,1)), hv0=h(u,clamp(v-du,-1,1));
+      const dzde=(hu1-hu0)/(2*du*half);
+      const dzdn=(hv1-hv0)/(2*du*half);
+      const nx=-dzde, ny=-dzdn, nz=1, len=Math.hypot(nx,ny,nz);
+      const nnx=nx/len, nny=ny/len, nnz=nz/len;
+      normals.push(nnx,nny,nnz);
+      sts.push(i/N,j/N);
+
+      // Slope is encoded directly by the true normal. 0 = flat, 1 = vertical.
+      slopes.push(clamp(1.0 - nnz, 0.0, 1.0));
+
+      // Signed Laplacian in physical model units. Positive = local concavity
+      // (valley), negative = local convexity (ridge/peak).
+      const lap=(hu1+hu0+hv1+hv0-4.0*z)/Math.max(step*step,1e-9);
+      rawCurvature.push(lap);
+      maxAbsCurvature=Math.max(maxAbsCurvature,Math.abs(lap));
+
+      reliefValues.push(clamp(shapeValue,-1.0,1.0));
+      surfaceMasks.push(1.0);
+    }
+  }
+
+  // Normalize curvature per cap to [-1,1]. The sign is preserved so the shader
+  // can darken concavities and optionally lift ridges without re-deriving shape.
+  const curvatureScale=Math.max(maxAbsCurvature,1e-12);
+  for(const value of rawCurvature){
+    curvatures.push(clamp(value/curvatureScale,-1.0,1.0));
+  }
+
+  const stride=N+1;
+  for(let j=0;j<N;j++){
+    for(let i=0;i<N;i++){
+      const a=j*stride+i, b=a+1, c=a+stride, d=c+1;
+      // CCW seen from local +Z. Wrong winding here gives hollow caps.
+      indices.push(a,b,c, b,d,c);
+    }
+  }
+
+  // Thin stable skirt/walls. Relief belongs to the top surface only. Wall
+  // vertices use surfaceMask=0 so cap-cue shading cannot leak onto the skirt.
+  const bottomZ = baseZ - STATE.capThickness;
+  function topAt(i,j){ return positions[(j*stride+i)*3+2]; }
+  function addWall(edge, normal){
+    const base=positions.length/3;
+    for(const p of edge){
+      positions.push(p.e,p.n,p.z);
+      normals.push(normal[0],normal[1],normal[2]);
+      sts.push(0,1);
+      slopes.push(0); curvatures.push(0); reliefValues.push(0); surfaceMasks.push(0);
+
+      positions.push(p.e,p.n,bottomZ);
+      normals.push(normal[0],normal[1],normal[2]);
+      sts.push(0,0);
+      slopes.push(0); curvatures.push(0); reliefValues.push(0); surfaceMasks.push(0);
+    }
+    for(let k=0;k<edge.length-1;k++){
+      const t0=base+k*2, b0=t0+1, t1=base+(k+1)*2, b1=t1+1;
+      indices.push(t0,b0,t1, t1,b0,b1);
+    }
+  }
+  const south=[], north=[], west=[], east=[];
+  for(let i=0;i<=N;i++){
+    const e=-half+i*step;
+    south.push({e,n:-half,z:topAt(i,0)});
+    north.push({e,n:half,z:topAt(i,N)});
+  }
+  for(let j=0;j<=N;j++){
+    const n=-half+j*step;
+    west.push({e:-half,n,z:topAt(0,j)});
+    east.push({e:half,n,z:topAt(N,j)});
+  }
+  addWall(south,[0,-1,0]);
+  addWall(north,[0,1,0]);
+  addWall(west,[-1,0,0]);
+  addWall(east,[1,0,0]);
+
+  return finalizeReliefGeometry(positions, normals, sts, slopes, curvatures, reliefValues, surfaceMasks, indices);
+}
+
+// --------------------------------------------------------------------
+// Conventional comparison baselines.
+// These intentionally ignore amplitude mapping, spatial frequency,
+// relief-cue mode/strength, surface-color mode, and tessellation.
+// Only σ display range and vertical exaggeration change their ±σ extent.
+// --------------------------------------------------------------------
+function boxGeometry(widthM, depthM, heightM){
+  return Cesium.BoxGeometry.fromDimensions({
+    dimensions:new Cesium.Cartesian3(widthM, depthM, Math.max(heightM, 0.01)),
+    vertexFormat:Cesium.PerInstanceColorAppearance.VERTEX_FORMAT,
+  });
+}
+function boxWorldMatrix(cap, centerEast, centerNorth, centerUp){
+  const local = Cesium.Matrix4.fromTranslation(new Cesium.Cartesian3(centerEast, centerNorth, centerUp));
+  return Cesium.Matrix4.multiply(cap.modelMatrix, local, new Cesium.Matrix4());
+}
+function coloredBoxPrimitive(cap, specs, color, translucent=true){
+  const instances = specs.map((spec, i)=>new Cesium.GeometryInstance({
+    id:`${cap.rowIndex}_${cap.colIndex}_${i}`,
+    geometry:boxGeometry(spec.width, spec.depth, spec.height),
+    modelMatrix:boxWorldMatrix(cap, spec.east||0, spec.north||0, spec.up),
+    attributes:{ color:Cesium.ColorGeometryInstanceAttribute.fromColor(color) },
+  }));
+  return new Cesium.Primitive({
+    geometryInstances:instances,
+    appearance:new Cesium.PerInstanceColorAppearance({ flat:true, translucent, closed:true }),
+    asynchronous:false,
+    allowPicking:false,
+  });
+}
+function conventionalAmplitudeM(row, sigmaMm){
+  // Literal ±σ range. No sqrt/log remapping, no spatial-frequency response.
+  return Math.abs(reliefAmpM(row, sigmaMm));
+}
+function makeStackPrimitives(cap, row, sigmaMm){
+  const amp = conventionalAmplitudeM(row, sigmaMm);
+  const baseZ = capBaseZ();
+  const mainThickness = Math.max(STATE.capThickness, 0.5);
+  const layerThickness = CONFIG.CONVENTIONAL.stackLayerThicknessM;
+  const middleColor = cssColor(row.color, STATE.opacity);
+  const topColor = cssColor(row.color, CONFIG.CONVENTIONAL.stackTopAlpha * STATE.opacity);
+  const bottomColor = cssColor(row.color, CONFIG.CONVENTIONAL.stackBottomAlpha * STATE.opacity);
+  const main = coloredBoxPrimitive(cap,[{
+    width:CONFIG.RUM_SIZE_M, depth:CONFIG.RUM_SIZE_M, height:mainThickness,
+    up:baseZ-mainThickness*0.5,
+  }],middleColor,STATE.opacity<0.999);
+  if (amp <= 1e-6) return [main];
+  const top = coloredBoxPrimitive(cap,[{
+    width:CONFIG.RUM_SIZE_M, depth:CONFIG.RUM_SIZE_M, height:layerThickness,
+    up:baseZ+amp-layerThickness*0.5,
+  }],topColor,true);
+  const bottom = coloredBoxPrimitive(cap,[{
+    width:CONFIG.RUM_SIZE_M, depth:CONFIG.RUM_SIZE_M, height:layerThickness,
+    up:baseZ-amp-layerThickness*0.5,
+  }],bottomColor,true);
+  return [bottom, main, top];
+}
+function makeErrorBarPrimitives(cap, row, sigmaMm){
+  const amp = conventionalAmplitudeM(row, sigmaMm);
+  const baseZ = capBaseZ();
+  const mainThickness = Math.max(STATE.capThickness, 0.5);
+  const capColor = cssColor(row.color, STATE.opacity);
+  const base = coloredBoxPrimitive(cap,[{
+    width:CONFIG.RUM_SIZE_M, depth:CONFIG.RUM_SIZE_M, height:mainThickness,
+    up:baseZ-mainThickness*0.5,
+  }],capColor,STATE.opacity<0.999);
+  if (amp <= 1e-6) return [base];
+  const c = CONFIG.CONVENTIONAL;
+  const barColor = cssColor(c.errorBarColor, c.errorBarAlpha);
+  const bar = coloredBoxPrimitive(cap,[
+    {
+      width:c.errorBarPostWidthM, depth:c.errorBarPostWidthM,
+      height:Math.max(2.0*amp,0.01), up:baseZ,
+    },
+    {
+      width:c.errorBarWhiskerLengthM, depth:c.errorBarWhiskerDepthM,
+      height:c.errorBarWhiskerThicknessM, up:baseZ+amp,
+    },
+    {
+      width:c.errorBarWhiskerLengthM, depth:c.errorBarWhiskerDepthM,
+      height:c.errorBarWhiskerThicknessM, up:baseZ-amp,
+    },
+  ],barColor,true);
+  return [base,bar];
+}
+
+function hatchWidth(sigmaMm){
+  if (sigmaMm <= 0) return 0.0;
+  if (sigmaMm <= CONFIG.HATCH.cutLow) return CONFIG.HATCH.thinWidth;
+  if (sigmaMm <= CONFIG.HATCH.cutHigh) return CONFIG.HATCH.midWidth;
+  return CONFIG.HATCH.thickWidth;
+}
+function materialForCap(row, sigmaMm){
+  if (row.type === "hatch"){
+    const width = hatchWidth(sigmaMm * STATE.sigmaMultiplier);
+    if (width <= 0) return Cesium.Material.fromType("Color", { color: cssColor(CONFIG.HATCH.base, STATE.opacity) });
+    return new Cesium.Material({
+      fabric:{
+        type:"DimpleDiagonalHatch",
+        uniforms:{
+          baseColor: cssColor(CONFIG.HATCH.base, STATE.opacity),
+          stripeColor: cssColor(CONFIG.HATCH.stripe, STATE.opacity),
+          repeat: CONFIG.HATCH.repeat,
+          stripeWidth: width,
+          feather: 0.010
+        },
+        source:`
+          czm_material czm_getMaterial(czm_materialInput materialInput)
+          {
+            czm_material material = czm_getDefaultMaterial(materialInput);
+            vec2 st = materialInput.st;
+            // 45-degree hatch in texture space: constant spacing, variable line width.
+            float phase = fract((st.s + st.t) * repeat);
+            float d = min(phase, 1.0 - phase);
+            float line = 1.0 - smoothstep(stripeWidth, stripeWidth + feather, d);
+            vec4 c = mix(baseColor, stripeColor, line * stripeColor.a);
+            material.diffuse = c.rgb;
+            material.alpha = c.a;
+            return material;
+          }`
+      }
+    });
+  }
+  return null;
+}
+function cueModeCode(){
+  switch(STATE.cueMode){
+    case "slope": return 1.0;
+    case "curvature": return 2.0;
+    case "directional": return 3.0;
+    default: return 0.0;
+  }
+}
+
+function makeReliefAppearance(row, baseColor){
+  const cueMode=cueModeCode();
+  const cueStrength=clamp(STATE.cueStrength,0,1);
+  const isCheckerPeaks=(row.type === "cbcones" || row.type === "lowpoly_cb_spikes") ? 1.0 : 0.0;
+  const isLowpolyChecker=(row.type === "lowpoly_cb_spikes") ? 1.0 : 0.0;
+  const translucent=STATE.opacity < 0.999;
+  const f=(x)=>Number(x).toFixed(8);
+
+  // A raw Appearance lets the primitive use the actual geometry normals and
+  // baked slope/curvature/relief attributes without Cesium adding Phong/PBR on
+  // top. Geometry and shading now share one source of truth.
+  const vertexShaderSource=`
+    in vec3 position3DHigh;
+    in vec3 position3DLow;
+    in vec3 normal;
+    in float batchId;
+    in float slope;
+    in float curvature;
+    in float reliefValue;
+    in float surfaceMask;
+
+    out vec3 v_positionEC;
+    out vec3 v_normalEC;
+    out vec3 v_normalMC;
+    out float v_slope;
+    out float v_curvature;
+    out float v_reliefValue;
+    out float v_surfaceMask;
+
+    void main()
+    {
+      vec4 p = czm_computePosition();
+      v_positionEC = (czm_modelViewRelativeToEye * p).xyz;
+      v_normalEC = czm_normal * normal;
+      v_normalMC = normal;
+      v_slope = slope;
+      v_curvature = curvature;
+      v_reliefValue = reliefValue;
+      v_surfaceMask = surfaceMask;
+      gl_Position = czm_modelViewProjectionRelativeToEye * p;
+    }
+  `;
+
+  const fragmentShaderSource=`
+    in vec3 v_positionEC;
+    in vec3 v_normalEC;
+    in vec3 v_normalMC;
+    in float v_slope;
+    in float v_curvature;
+    in float v_reliefValue;
+    in float v_surfaceMask;
+
+    void main()
+    {
+      vec4 baseColor = czm_gammaCorrect(vec4(
+        ${f(baseColor.red)},
+        ${f(baseColor.green)},
+        ${f(baseColor.blue)},
+        ${f(baseColor.alpha)}
+      ));
+
+      float cueMode = ${f(cueMode)};
+      float cueStrength = ${f(cueStrength)};
+      float isCheckerPeaks = ${f(isCheckerPeaks)};
+      float isLowpolyChecker = ${f(isLowpolyChecker)};
+      float topMask = step(0.5, v_surfaceMask);
+      vec3 normalMC = normalize(v_normalMC);
+      float factor = 1.0;
+
+      if (topMask > 0.5 && cueMode > 0.5 && cueStrength > 0.0001)
+      {
+        // Mode 1: view-independent slope cue from the real baked normal.
+        if (cueMode < 1.5)
+        {
+          if (isLowpolyChecker > 0.5)
+          {
+            // Lowpoly checkerboard spikes need a faceted cue, not a uniform
+            // steepness patch. Use real face orientation for 3D readability,
+            // but gate it by actual spike presence so flat caps stay unshaded.
+            vec3 neutralLightMC = normalize(vec3(-0.36, 0.28, 0.89));
+            float presence = smoothstep(0.035, 0.90, abs(v_reliefValue));
+            float shapeGate = smoothstep(0.003, 0.065, clamp(v_slope, 0.0, 1.0));
+            float ndl = clamp(dot(normalMC, neutralLightMC) * 0.5 + 0.5, 0.0, 1.0);
+            float facetedFactor = mix(0.87, 1.06, ndl);
+            factor = mix(1.0, facetedFactor, cueStrength * presence * shapeGate);
+          }
+          else
+          {
+            float slopeCue = smoothstep(0.012, 0.68, clamp(v_slope, 0.0, 1.0));
+            factor = mix(1.0, 0.82, slopeCue * cueStrength);
+          }
+        }
+        // Mode 2: signed curvature / concavity cue. Valleys darken; ridges get
+        // only a very small lift so the cue reads like soft self-occlusion.
+        else if (cueMode < 2.5)
+        {
+          if (isLowpolyChecker > 0.5)
+          {
+            // For lowpoly spikes, use a soft signed body cue plus a tiny fixed
+            // directional sculpting term. This preserves the "no spike = no shade"
+            // rule and avoids a permanently painted checkerboard.
+            float presence = smoothstep(0.035, 0.92, abs(v_reliefValue));
+            float shapeGate = smoothstep(0.003, 0.065, clamp(v_slope, 0.0, 1.0));
+            float peak = smoothstep(0.05, 0.95, max(v_reliefValue, 0.0));
+            float cavity = smoothstep(0.05, 0.95, max(-v_reliefValue, 0.0));
+            float peakTip = smoothstep(0.62, 0.98, max(v_reliefValue, 0.0));
+            float peakFoot = 1.0 - smoothstep(0.12, 0.72, max(v_reliefValue, 0.0));
+            float cavityCore = smoothstep(0.55, 0.98, max(-v_reliefValue, 0.0));
+            float bodyFactor = 1.0 + 0.11 * peakTip - 0.06 * peakFoot - 0.22 * cavityCore - 0.05 * cavity;
+            vec3 sculptLightMC = normalize(vec3(-0.24, 0.18, 0.95));
+            float sculpt = clamp(dot(normalMC, sculptLightMC) * 0.5 + 0.5, 0.0, 1.0);
+            float sculptFactor = mix(0.92, 1.05, sculpt);
+            float curvatureFactor = clamp(bodyFactor * sculptFactor, 0.82, 1.12);
+            factor = mix(1.0, curvatureFactor, cueStrength * presence * shapeGate);
+          }
+          else
+          {
+            float concavity = smoothstep(0.05, 0.95, max(v_curvature, 0.0));
+            float convexity = smoothstep(0.08, 1.00, max(-v_curvature, 0.0));
+            float curvatureFactor = 1.0 - 0.23 * concavity + 0.045 * convexity;
+            factor = mix(1.0, curvatureFactor, cueStrength);
+          }
+        }
+        // Mode 3: fixed-ENU half-Lambert inspection light on the real normal.
+        else
+        {
+          vec3 lightMC = normalize(vec3(-0.44, 0.36, 0.82));
+          float ndl = clamp(dot(normalMC, lightMC) * 0.5 + 0.5, 0.0, 1.0);
+          float directionalFactor = mix(0.84, 1.07, ndl);
+          factor = mix(1.0, directionalFactor, cueStrength);
+
+          // Checkerboard peaks benefit from a weak signed body cue. This prevents the
+          // footprint edge from dominating the up/down interpretation.
+          if (isCheckerPeaks > 0.5)
+          {
+            float body = smoothstep(0.04, 0.92, abs(v_reliefValue));
+            float bodyFactor = v_reliefValue >= 0.0
+              ? mix(1.0, 1.065, body)
+              : mix(1.0, 0.90, body);
+            factor *= mix(1.0, bodyFactor, cueStrength);
+          }
+        }
+      }
+      else if (topMask < 0.5 && cueMode > 0.5)
+      {
+        // Stable, bounded wall contrast. It is deliberately independent from
+        // cap curvature so the skirt cannot inherit dimple shading artifacts.
+        float wallFacing = abs(normalize(v_normalMC).y) * 0.35 + abs(normalize(v_normalMC).x) * 0.15;
+        factor = mix(0.88, 0.95, wallFacing);
+      }
+
+      factor = clamp(factor, 0.78, 1.10);
+      out_FragColor = vec4(clamp(baseColor.rgb * factor, vec3(0.0), vec3(1.0)), baseColor.a);
+    }
+  `;
+
+  const renderState=Cesium.Appearance.getDefaultRenderState(translucent,false,{
+    depthTest:{enabled:true},
+    cull:{enabled:false}
+  });
+
+  return new Cesium.Appearance({
+    translucent,
+    closed:false,
+    vertexShaderSource,
+    fragmentShaderSource,
+    renderState,
+  });
+}
+
+function colorForCap(rowIndex, colIndex){
+  const row = CONFIG.ROWS[rowIndex];
+  // Conventional comparison rows stay neutral so rendering-rehearsal knobs
+  // cannot accidentally make them look like competitive surface candidates.
+  if (row.type === "stack" || row.type === "errorbar") {
+    return cssColor(row.color, STATE.opacity);
+  }
+  if (STATE.colorMode === "velocity") {
+    const c = velocityColor(CONFIG.TEST_VELOCITY_BY_COLUMN[colIndex] ?? -10);
+    c.alpha = STATE.opacity;
+    return c;
+  }
+  return cssColor(row.color, STATE.opacity);
+}
+function capCenterOffset(rowIndex, colIndex){
+  const cols=CONFIG.SIGMAS_1SIGMA_MM.length, rows=CONFIG.ROWS.length;
+  const spacing=CONFIG.RUM_SIZE_M+CONFIG.GAP_M;
+  return {
+    east:(colIndex-(cols-1)/2)*spacing,
+    north:((rows-1)/2-rowIndex)*spacing,
+  };
+}
+function localToWorld(east,north,up=0){
+  return Cesium.Matrix4.multiplyByPoint(gridFrame, new Cesium.Cartesian3(east,north,up), new Cesium.Cartesian3());
+}
+function makeCellPrimitives(cap){
+  const row=CONFIG.ROWS[cap.rowIndex];
+  const sigma=CONFIG.SIGMAS_1SIGMA_MM[cap.colIndex];
+
+  // The two conventional rows are deliberately simple and standalone.
+  if (row.type === "stack") return makeStackPrimitives(cap,row,sigma);
+  if (row.type === "errorbar") return makeErrorBarPrimitives(cap,row,sigma);
+
+  const geom=buildCapGeometry(row,sigma);
+  let appearance, attrs={};
+  if (row.type === "hatch"){
+    // Hatch is the flat baseline. Experimental cap surfaces are rendered two-sided so steep relief cannot disappear through back-face culling.
+    appearance = new Cesium.MaterialAppearance({ material:materialForCap(row,sigma), flat:STATE.cueMode!=="old", faceForward:true, translucent:STATE.opacity<0.999, closed:false });
+  } else if (STATE.cueMode === "old") {
+    // Ugly baseline: the previous Cesium-lit shaded primitive. It is still two-sided here so the comparison is about lighting, not missing faces.
+    appearance = new Cesium.PerInstanceColorAppearance({ flat:false, translucent:STATE.opacity<0.999, closed:false });
+    attrs.color = Cesium.ColorGeometryInstanceAttribute.fromColor(colorForCap(cap.rowIndex, cap.colIndex));
+  } else {
+    // Single-source relief rendering: the custom Appearance consumes the real
+    // geometry normal plus baked slope/curvature/signed-relief attributes.
+    // No analytic shape is duplicated in GLSL.
+    const base = colorForCap(cap.rowIndex, cap.colIndex);
+    appearance = makeReliefAppearance(row,base);
+  }
+  return [new Cesium.Primitive({
+    geometryInstances:new Cesium.GeometryInstance({ geometry:geom, attributes:attrs }),
+    appearance,
+    asynchronous:false,
+    modelMatrix:cap.modelMatrix,
+    allowPicking:false,
+  })];
+}
+
+function buildGrid(){
+  clearGrid();
+  const cols=CONFIG.SIGMAS_1SIGMA_MM.length;
+  for(let r=0;r<CONFIG.ROWS.length;r++){
+    for(let c=0;c<cols;c++){
+      const off=capCenterOffset(r,c);
+      const center=localToWorld(off.east, off.north, 0);
+      const modelMatrix=Cesium.Transforms.eastNorthUpToFixedFrame(center);
+      const cap={ rowIndex:r, colIndex:c, east:off.east, north:off.north, modelMatrix, primitives:[] };
+      cap.primitives=makeCellPrimitives(cap);
+      for(const primitive of cap.primitives) scene.primitives.add(primitive);
+      caps.push(cap);
+    }
+  }
+  buildFrame();
+  refreshLabels();
+  updateLegend();
+}
+function clearGrid(){
+  for(const cap of caps){
+    for(const primitive of (cap.primitives||[])) scene.primitives.remove(primitive);
+  }
+  caps.length=0;
+  if(framePrimitive){ scene.primitives.remove(framePrimitive); framePrimitive=null; }
+  labelCollection.removeAll();
+}
+function rebuildGrid(){ buildGrid(); scene.requestRender(); }
+
+function refreshLabels(){
+  labelCollection.removeAll();
+  const sigmaScale = STATE.sigmaMultiplier === 2 ? "2σ" : "1σ";
+  for(const cap of caps){
+    const row=CONFIG.ROWS[cap.rowIndex];
+    const sigma=CONFIG.SIGMAS_1SIGMA_MM[cap.colIndex];
+    const ampAbs=Math.abs(reliefAmpM(row,sigma));
+    const labelZ=capBaseZ()+ampAbs+80;
+    const pos=Cesium.Matrix4.multiplyByPoint(cap.modelMatrix,new Cesium.Cartesian3(0,0,labelZ),new Cesium.Cartesian3());
+    labelCollection.add({
+      position:pos,
+      text:`${row.name}\n${sigmaScale} ${(sigma*STATE.sigmaMultiplier).toFixed(sigma*STATE.sigmaMultiplier<1?2:1)} ${CONFIG.SIGMA_UNIT}`,
+      font:"15px Arial",
+      fillColor:Cesium.Color.WHITE,
+      outlineColor:Cesium.Color.BLACK,
+      outlineWidth:3,
+      style:Cesium.LabelStyle.FILL_AND_OUTLINE,
+      horizontalOrigin:Cesium.HorizontalOrigin.CENTER,
+      verticalOrigin:Cesium.VerticalOrigin.BOTTOM,
+      disableDepthTestDistance:Number.POSITIVE_INFINITY,
+      scaleByDistance:new Cesium.NearFarScalar(3000,1.0, 55000,0.42),
+    });
+  }
+}
+function buildFrame(){
+  const cols=CONFIG.SIGMAS_1SIGMA_MM.length, rows=CONFIG.ROWS.length;
+  const spacing=CONFIG.RUM_SIZE_M+CONFIG.GAP_M;
+  const width=(cols-1)*spacing+CONFIG.RUM_SIZE_M;
+  const height=(rows-1)*spacing+CONFIG.RUM_SIZE_M;
+  const z=capBaseZ()-STATE.capThickness-1;
+  const pts=[[-width/2,-height/2,z],[width/2,-height/2,z],[width/2,height/2,z],[-width/2,height/2,z]];
+  const world=pts.map(p=>localToWorld(p[0],p[1],p[2]));
+  framePrimitive = scene.primitives.add(new Cesium.Primitive({
+    geometryInstances:new Cesium.GeometryInstance({
+      geometry:new Cesium.PolylineGeometry({ positions:[world[0],world[1],world[2],world[3],world[0]], width:2.0, vertexFormat:Cesium.PolylineColorAppearance.VERTEX_FORMAT }),
+      attributes:{ color:Cesium.ColorGeometryInstanceAttribute.fromColor(Cesium.Color.WHITE.withAlpha(0.50)) }
+    }),
+    appearance:new Cesium.PolylineColorAppearance({ translucent:true }), asynchronous:false,
+  }));
+}
+
+function updateLegend(){
+  $("sigmaLegend").innerHTML = CONFIG.SIGMAS_1SIGMA_MM.map((s,i)=>{
+    const shown=s*STATE.sigmaMultiplier;
+    const txt=shown<1?shown.toFixed(2):shown.toFixed(1);
+    return `<span style="display:inline-block;width:28px;color:${i>=7?'var(--ui-warning)':'var(--ui-text-muted)'}">${txt}</span>`;
+  }).join("") + `<div style="margin-top:5px">Values are vertical displacement uncertainty σ [mm] from Prototype1. Columns are synthetic anchors; not real cell samples. The first two rows use literal linear ±σ extents.</div>`;
+  $("colorbarScale").style.background = gradientCss();
+  const labels=[[-35,"≤−35",18.6],[-18,"−18",39.7],[-1,"−1",60.8],[0,"0",68.8],[1,"+1",76.8],[4.5,"+4.5",85.8],[8,"≥+8",94.9]];
+  $("colorbarLabels").innerHTML=labels.map(([v,l,p])=>`<span style="left:${p}%">${l}</span>`).join("");
+}
+
+function flyOblique(duration=1.0){
+  const center=localToWorld(0,0,capBaseZ());
+  viewer.camera.flyToBoundingSphere(new Cesium.BoundingSphere(center, 6200), {
+    offset:new Cesium.HeadingPitchRange(Cesium.Math.toRadians(35), Cesium.Math.toRadians(-38), 9000),
+    duration
+  });
+}
+function flyGrazing(duration=1.0){
+  const center=localToWorld(0,0,capBaseZ());
+  viewer.camera.flyToBoundingSphere(new Cesium.BoundingSphere(center, 6200), {
+    offset:new Cesium.HeadingPitchRange(Cesium.Math.toRadians(45), Cesium.Math.toRadians(-8), 10500),
+    duration
+  });
+}
+function flyTop(duration=1.0){
+  const center=localToWorld(0,0,capBaseZ());
+  viewer.camera.flyToBoundingSphere(new Cesium.BoundingSphere(center, 6200), {
+    offset:new Cesium.HeadingPitchRange(0, Cesium.Math.toRadians(-89.9), 12500),
+    duration
+  });
+}
+
+function formatDistanceLabel(m){ if(!Number.isFinite(m)||m<=0) return "—"; if(m>=1000) return `${(m/1000).toFixed(m>=10000?0:1).replace(/\.0$/,"")} km`; return `${Math.round(m)} m`; }
+function niceDistance(maxMeters){ if(!Number.isFinite(maxMeters)||maxMeters<=0) return 0; const exp=Math.floor(Math.log10(maxMeters)); const base=Math.pow(10,exp); let best=base; for(const c of [1,2,5,10]){ const v=c*base; if(v<=maxMeters) best=v; } return best; }
+function ellipsoidDistance(a,b){ const ell=viewer.scene.globe.ellipsoid; const ca=ell.cartesianToCartographic(a), cb=ell.cartesianToCartographic(b); if(!ca||!cb) return NaN; return new Cesium.EllipsoidGeodesic(ca,cb,ell).surfaceDistance; }
+let lastDistanceMs=0, mousePos=null;
+function updateBottomReadouts(force=false){
+  const now=performance.now(); if(!force && now-lastDistanceMs<250) return; lastDistanceMs=now;
+  const camH=viewer.camera.positionCartographic?.height;
+  $("bottomCameraLabel").textContent=`Camera: ${formatDistanceLabel(camH)}`;
+  const canvas=scene.canvas; const pos=mousePos || new Cesium.Cartesian2((canvas.clientWidth||innerWidth)*0.52,(canvas.clientHeight||innerHeight)*0.58);
+  const cart=viewer.camera.pickEllipsoid(pos, scene.globe.ellipsoid);
+  if(cart){ const cg=Cesium.Cartographic.fromCartesian(cart); $("bottomCoordLabel").textContent=`Lat: ${Cesium.Math.toDegrees(cg.latitude).toFixed(4)}°, Lon: ${Cesium.Math.toDegrees(cg.longitude).toFixed(4)}°`; }
+  else $("bottomCoordLabel").textContent="Lat: —, Lon: —";
+  const w=canvas.clientWidth||innerWidth, h=canvas.clientHeight||innerHeight, y=Math.round(h*0.78), x=Math.round(w*0.52), sample=120;
+  const p1=viewer.camera.pickEllipsoid(new Cesium.Cartesian2(x-sample/2,y), scene.globe.ellipsoid);
+  const p2=viewer.camera.pickEllipsoid(new Cesium.Cartesian2(x+sample/2,y), scene.globe.ellipsoid);
+  if(p1&&p2){ const mpp=ellipsoidDistance(p1,p2)/sample; const nice=niceDistance(mpp*132); const px=clamp(nice/mpp,24,132); $("bottomDistanceScaleBar").style.width=`${px.toFixed(0)}px`; $("bottomDistanceScaleLabel").textContent=formatDistanceLabel(nice); }
+}
+function updateFps(){
+  fpsFrames++; const now=performance.now();
+  if(now-lastFpsTime>1000){ $("fpsCounter").textContent=`FPS: ${Math.round(fpsFrames*1000/(now-lastFpsTime))}`; fpsFrames=0; lastFpsTime=now; }
+}
+function installMouseTracker(){
+  const canvas=scene.canvas;
+  canvas.addEventListener("mousemove", evt=>{ const r=canvas.getBoundingClientRect(); mousePos=new Cesium.Cartesian2(evt.clientX-r.left, evt.clientY-r.top); updateBottomReadouts(true); }, {passive:true});
+  canvas.addEventListener("mouseleave", ()=>{ mousePos=null; updateBottomReadouts(true); }, {passive:true});
+}
+function cueModeLabel(mode){
+  switch(mode){
+    case "off": return "off";
+    case "old": return "old shaded";
+    case "slope": return "slope";
+    case "curvature": return "curvature";
+    case "directional": return "directional";
+    default: return mode;
+  }
+}
+
+function setSegActive(groupId, attr, value){
+  document.querySelectorAll(`#${groupId} .seg`).forEach(b=>b.classList.toggle("active", b.dataset[attr]===String(value)));
+}
+function wireControls(){
+  $("displayQuickHeader").addEventListener("click",()=>$("displayQuickPanel").classList.toggle("collapsed"));
+  $("gain").addEventListener("input",e=>{ STATE.gain=Number(e.target.value); $("gainVal").textContent=`${STATE.gain.toFixed(2)}×`; rebuildGrid(); });
+  $("freq").addEventListener("input",e=>{ STATE.freq=Number(e.target.value); $("freqVal").textContent=String(STATE.freq); rebuildGrid(); });
+  $("globalOpacity").addEventListener("input",e=>{ STATE.opacity=Number(e.target.value); $("globalOpacityVal").textContent=STATE.opacity.toFixed(2); rebuildGrid(); });
+  $("thickness").addEventListener("input",e=>{ STATE.capThickness=Number(e.target.value); $("thicknessVal").textContent=`${STATE.capThickness.toFixed(0)} m`; rebuildGrid(); });
+  document.querySelectorAll("#sigmaSeg .seg").forEach(btn=>btn.addEventListener("click",()=>{ STATE.sigmaMultiplier=Number(btn.dataset.sigma); setSegActive("sigmaSeg","sigma",STATE.sigmaMultiplier); $("sigmaModeVal").textContent=STATE.sigmaMultiplier===2?"2σ":"1σ"; rebuildGrid(); }));
+  document.querySelectorAll("#mapSeg .seg").forEach(btn=>btn.addEventListener("click",()=>{ STATE.mapMode=btn.dataset.map; setSegActive("mapSeg","map",STATE.mapMode); $("mapModeVal").textContent=STATE.mapMode; rebuildGrid(); }));
+  document.querySelectorAll("#colorSeg .seg").forEach(btn=>btn.addEventListener("click",()=>{ STATE.colorMode=btn.dataset.color; setSegActive("colorSeg","color",STATE.colorMode); $("colorModeVal").textContent=STATE.colorMode; rebuildGrid(); }));
+  document.querySelectorAll("#cueSeg .seg").forEach(btn=>btn.addEventListener("click",()=>{ STATE.cueMode=btn.dataset.cue; setSegActive("cueSeg","cue",STATE.cueMode); $("cueModeVal").textContent=cueModeLabel(STATE.cueMode); rebuildGrid(); }));
+  $("cueStrength").addEventListener("input",e=>{ STATE.cueStrength=Number(e.target.value)/100; $("cueStrengthVal").textContent=`${Math.round(STATE.cueStrength*100)}%`; rebuildGrid(); });
+  document.querySelectorAll("#tessSeg .seg").forEach(btn=>btn.addEventListener("click",()=>{ STATE.tess=Number(btn.dataset.tess); setSegActive("tessSeg","tess",STATE.tess); $("tessVal").textContent=`${STATE.tess}×${STATE.tess}`; rebuildGrid(); }));
+  $("btnHome").addEventListener("click",()=>flyOblique());
+  $("camOblique").addEventListener("click",()=>flyOblique());
+  $("camGrazing").addEventListener("click",()=>flyGrazing());
+  $("camTop").addEventListener("click",()=>flyTop());
+}
+
+scene.preRender.addEventListener(()=>{ updateInspectionLight(); });
+scene.postRender.addEventListener(()=>{ updateBottomReadouts(false); updateFps(); });
+
+function boot(){
+  $("colorbarScale").style.background=gradientCss();
+  wireControls();
+  installMouseTracker();
+  buildGrid();
+  flyOblique(0);
+  updateBottomReadouts(true);
+  setTimeout(()=>{ const m=$("loadMsg"); if(m) m.remove(); }, 900);
+}
+boot();
+</script>
+</body>
+</html>

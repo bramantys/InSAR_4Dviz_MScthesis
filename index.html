@@ -86,9 +86,29 @@
     .viewer-card.prototype2-card {
       background: #e2eef8;
     }
+    .viewer-card.new-release {
+      position: relative;
+      border: 2px solid #1a73e8;
+      box-shadow: 0 4px 12px rgba(26, 115, 232, 0.18);
+      background: #eef5ff;
+    }
+    .viewer-card.new-release::after {
+      content: "NEW";
+      position: absolute;
+      top: 9px;
+      right: 10px;
+      padding: 2px 7px;
+      border-radius: 999px;
+      background: #1a73e8;
+      color: #fff;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
     .viewer-card.progress-card:hover,
     .viewer-card.experiment-card:hover,
-    .viewer-card.prototype2-card:hover {
+    .viewer-card.prototype2-card:hover,
+    .viewer-card.new-release:hover {
       background: #f1f6ff;
       border-color: #b7d0ff;
     }
@@ -128,6 +148,10 @@
       <strong>Jakarta</strong>
       Dual-mode viewer
     </a>
+    <a class="viewer-card new-release" href="P1_4.1.5.V6_4D_JKT/viz1_dev_v4_dualmode.html">
+      <strong>Jakarta</strong>
+      Vertical Uncertainty V2
+    </a>
     <a class="viewer-card" href="P1_4.1.5.V4_4D_MC_gron/viz1_dev_v4_dualmode.html">
       <strong>Groningen</strong>
       Dual-mode viewer
@@ -144,7 +168,7 @@
   </p>
 
   <div class="viewer-grid">
-    <a class="viewer-card prototype2-card" href="P2_4.2.1.V3.1_Krimpen/viz2_dev_v11.html">
+    <a class="viewer-card prototype2-card new-release" href="P2_4.2.1.V3.1_Krimpen/viz2_dev_v11.html">
       <strong>Krimpenerwaard</strong>
       Parcel viewer
     </a>
