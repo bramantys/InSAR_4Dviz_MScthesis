@@ -1,0 +1,161 @@
+{
+  "schema": "proto2_generic_runtime_publish_report_v1",
+  "status": "PASS",
+  "generated_utc": "2026-06-17T00:46:16.227295+00:00",
+  "published": true,
+  "checked_stage_files": {
+    "geometry/caps": {
+      "path": "_internal/data_pipeline/_stage/geometry/parcel_caps.glb",
+      "size_bytes": 8830084,
+      "sha256": "8632c4cd7dc6358c8467d1bd90ed0907cac3493b744f11951f2f6bdeac45d0e1"
+    },
+    "geometry/pistons": {
+      "path": "_internal/data_pipeline/_stage/geometry/parcel_pistons.glb",
+      "size_bytes": 48703884,
+      "sha256": "d73d65ac20db221a956030031ecd328c2eb173eeabad5fd479b9df5e669616a7"
+    },
+    "geometry/walls": {
+      "path": "_internal/data_pipeline/_stage/geometry/parcel_walls.glb",
+      "size_bytes": 37881400,
+      "sha256": "d166afbb3f0a73f3c06a6390cf127446a733da8c0397563b9173c771c6393ca1"
+    },
+    "geometry/opaque_datum_caps": {
+      "path": "_internal/data_pipeline/_stage/geometry/parcel_datum_caps_opaque.glb",
+      "size_bytes": 8830084,
+      "sha256": "742d3b5671ea574a675504d6fc8d69697a3bdcc91f43ea2966ad88774c32c51e"
+    },
+    "animation/reversible": {
+      "path": "_internal/data_pipeline/_stage/animation/reversible_f32.bin",
+      "size_bytes": 5727580,
+      "sha256": "3053e1c4a0ce1adbb70c8ad7e08dfa045abbcd14ea9a1d70672312670179e931"
+    },
+    "animation/irreversible": {
+      "path": "_internal/data_pipeline/_stage/animation/irreversible_f32.bin",
+      "size_bytes": 5727580,
+      "sha256": "0ec98dcf3b8e6299819e5e0505f7023cf62bc10fb208a4dfbaa095d68019387a"
+    },
+    "animation/total": {
+      "path": "_internal/data_pipeline/_stage/animation/total_f32.bin",
+      "size_bytes": 5727580,
+      "sha256": "8e00a73d44dfbeb92fd3961ff6999b7798573b94ad43525df98ad2ff1888405c"
+    },
+    "animation/vi": {
+      "path": "_internal/data_pipeline/_stage/animation/vi_f32.bin",
+      "size_bytes": 15692,
+      "sha256": "25d8c191a1caa8196f7ef72d5c40c5c40dcbfb7daf30468ddc9845cd0834a7fb"
+    },
+    "lookup/pick": {
+      "path": "_internal/data_pipeline/_stage/lookup/parcel_pick_index.json",
+      "size_bytes": 6467441,
+      "sha256": "28de5c225972897385ab4b970b2de8550ff0c488b0e61f7f5542885d8be365a9"
+    },
+    "lookup/search": {
+      "path": "_internal/data_pipeline/_stage/lookup/parcel_search_index.json",
+      "size_bytes": 2596205,
+      "sha256": "d58aca63fb002b01174aafa5f8f134214a0b2e2b51e42ac20f827a24666d1bc9"
+    },
+    "lookup/trendline": {
+      "path": "_internal/data_pipeline/_stage/lookup/parcel_trendline_manifest.json",
+      "size_bytes": 254987,
+      "sha256": "906e7b86af5b2097f3da66e64d6862704f6ff53b6c1f732b4768545fa095a277"
+    },
+    "style/color_scales": {
+      "path": "_internal/data_pipeline/_stage/style/parcel_color_scales.json",
+      "size_bytes": 18511,
+      "sha256": "b43048dae3a3734739a479ea44ea233f6b15465cd187d857eaba0228eaebac89"
+    },
+    "style/viewer_tuning": {
+      "path": "_internal/data_pipeline/_stage/style/viewer_tuning.json",
+      "size_bytes": 2100,
+      "sha256": "101bb8f5ee5e4fda63342ebec4632ef0e792793ea079cdbdd4d7e9a82762c8f5"
+    },
+    "runtime_manifest": {
+      "path": "_internal/data_pipeline/_stage/runtime_manifest.json",
+      "size_bytes": 1320,
+      "sha256": "b82a5c9136f7a39bee12cc2930e809db07ab33e2d8df3f5837ab72cb968fbe66"
+    },
+    "viewer_metadata": {
+      "path": "_internal/data_pipeline/_stage/viewer_metadata.json",
+      "size_bytes": 8026,
+      "sha256": "94aaa3432a34e8eef9659c1d769971138b2cc744870b17516061a696cefb3e3a"
+    }
+  },
+  "published_files": {
+    "_internal/data_pipeline/geometry/parcel_caps.glb": {
+      "path": "_internal/data_pipeline/geometry/parcel_caps.glb",
+      "size_bytes": 8830084,
+      "sha256": "8632c4cd7dc6358c8467d1bd90ed0907cac3493b744f11951f2f6bdeac45d0e1"
+    },
+    "_internal/data_pipeline/geometry/parcel_pistons.glb": {
+      "path": "_internal/data_pipeline/geometry/parcel_pistons.glb",
+      "size_bytes": 48703884,
+      "sha256": "d73d65ac20db221a956030031ecd328c2eb173eeabad5fd479b9df5e669616a7"
+    },
+    "_internal/data_pipeline/geometry/parcel_walls.glb": {
+      "path": "_internal/data_pipeline/geometry/parcel_walls.glb",
+      "size_bytes": 37881400,
+      "sha256": "d166afbb3f0a73f3c06a6390cf127446a733da8c0397563b9173c771c6393ca1"
+    },
+    "_internal/data_pipeline/geometry/parcel_datum_caps_opaque.glb": {
+      "path": "_internal/data_pipeline/geometry/parcel_datum_caps_opaque.glb",
+      "size_bytes": 8830084,
+      "sha256": "742d3b5671ea574a675504d6fc8d69697a3bdcc91f43ea2966ad88774c32c51e"
+    },
+    "_internal/data_pipeline/animation/reversible_f32.bin": {
+      "path": "_internal/data_pipeline/animation/reversible_f32.bin",
+      "size_bytes": 5727580,
+      "sha256": "3053e1c4a0ce1adbb70c8ad7e08dfa045abbcd14ea9a1d70672312670179e931"
+    },
+    "_internal/data_pipeline/animation/irreversible_f32.bin": {
+      "path": "_internal/data_pipeline/animation/irreversible_f32.bin",
+      "size_bytes": 5727580,
+      "sha256": "0ec98dcf3b8e6299819e5e0505f7023cf62bc10fb208a4dfbaa095d68019387a"
+    },
+    "_internal/data_pipeline/animation/total_f32.bin": {
+      "path": "_internal/data_pipeline/animation/total_f32.bin",
+      "size_bytes": 5727580,
+      "sha256": "8e00a73d44dfbeb92fd3961ff6999b7798573b94ad43525df98ad2ff1888405c"
+    },
+    "_internal/data_pipeline/animation/vi_f32.bin": {
+      "path": "_internal/data_pipeline/animation/vi_f32.bin",
+      "size_bytes": 15692,
+      "sha256": "25d8c191a1caa8196f7ef72d5c40c5c40dcbfb7daf30468ddc9845cd0834a7fb"
+    },
+    "_internal/data_pipeline/lookup/parcel_pick_index.json": {
+      "path": "_internal/data_pipeline/lookup/parcel_pick_index.json",
+      "size_bytes": 6467441,
+      "sha256": "28de5c225972897385ab4b970b2de8550ff0c488b0e61f7f5542885d8be365a9"
+    },
+    "_internal/data_pipeline/lookup/parcel_search_index.json": {
+      "path": "_internal/data_pipeline/lookup/parcel_search_index.json",
+      "size_bytes": 2596205,
+      "sha256": "d58aca63fb002b01174aafa5f8f134214a0b2e2b51e42ac20f827a24666d1bc9"
+    },
+    "_internal/data_pipeline/lookup/parcel_trendline_manifest.json": {
+      "path": "_internal/data_pipeline/lookup/parcel_trendline_manifest.json",
+      "size_bytes": 254987,
+      "sha256": "906e7b86af5b2097f3da66e64d6862704f6ff53b6c1f732b4768545fa095a277"
+    },
+    "_internal/data_pipeline/style/parcel_color_scales.json": {
+      "path": "_internal/data_pipeline/style/parcel_color_scales.json",
+      "size_bytes": 18511,
+      "sha256": "b43048dae3a3734739a479ea44ea233f6b15465cd187d857eaba0228eaebac89"
+    },
+    "_internal/data_pipeline/style/viewer_tuning.json": {
+      "path": "_internal/data_pipeline/style/viewer_tuning.json",
+      "size_bytes": 2100,
+      "sha256": "101bb8f5ee5e4fda63342ebec4632ef0e792793ea079cdbdd4d7e9a82762c8f5"
+    },
+    "_internal/data_pipeline/runtime_manifest.json": {
+      "path": "_internal/data_pipeline/runtime_manifest.json",
+      "size_bytes": 1320,
+      "sha256": "b82a5c9136f7a39bee12cc2930e809db07ab33e2d8df3f5837ab72cb968fbe66"
+    },
+    "_internal/data_pipeline/viewer_metadata.json": {
+      "path": "_internal/data_pipeline/viewer_metadata.json",
+      "size_bytes": 8026,
+      "sha256": "94aaa3432a34e8eef9659c1d769971138b2cc744870b17516061a696cefb3e3a"
+    }
+  },
+  "note": "Schema publish validates runtime completeness and internal manifest shape. It does not compare against the accepted Krimpenerwaard fixture."
+}

@@ -1,0 +1,49 @@
+{
+  "product": "proto2_phase14a_parcel_color_scales",
+  "moving_parcels": 3923,
+  "epochs": 365,
+  "parcel_vi_bin": "D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\2_PARCELS\\P2_4.2.1.V3.1_Krimpen\\_internal\\data_pipeline\\_work\\data\\parcel_vi_f32.bin",
+  "parcel_color_scales_json": "D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\2_PARCELS\\P2_4.2.1.V3.1_Krimpen\\_internal\\data_pipeline\\_work\\data\\parcel_color_scales.json",
+  "ranges": {
+    "vI_mm_yr": [
+      -10.49420166015625,
+      -5.14084529876709
+    ],
+    "std_vI_mm_yr": [
+      0.09401719272136688,
+      0.6652539968490601
+    ],
+    "reversible_mm": [
+      -72.22831726074219,
+      29.513286590576172
+    ],
+    "irreversible_mm": [
+      -10.487018585205078,
+      -0.0
+    ],
+    "total_mm": [
+      -75.87300109863281,
+      29.513286590576172
+    ]
+  },
+  "scale_limits": {
+    "irreversible_velocity": {
+      "recommended_min": -10.0,
+      "recommended_max": 3.0,
+      "tau": 0.5,
+      "unit": "mm/yr"
+    },
+    "reversible_displacement": {
+      "recommended_min": -65.0,
+      "recommended_max": 25.0,
+      "tau": 1.0,
+      "unit": "mm"
+    },
+    "total_displacement": {
+      "recommended_min": -70.0,
+      "recommended_max": 30.0,
+      "tau": 1.0,
+      "unit": "mm"
+    }
+  }
+}

@@ -1,0 +1,24 @@
+PROTO2 PHASE 02 PARCEL INGEST REPORT
+
+source shapefile: D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\2_PARCELS\P2_4.2.1.V3.1_Krimpen\data\shapefile\krimpenerwaard_attributes_wgs84.shp
+source geometry join key: parcel_id
+template join key: parcel_id
+crs: EPSG:4326
+
+total parcels: 5,562
+moving parcels: 3,923
+blank parcels: 1,639
+
+geometry types: {'Polygon': 5169, 'MultiPolygon': 393}
+multipart parcels: 393
+total exterior vertices: 255,092
+total interior rings: 25
+
+bounds WGS84:
+west=4.59635743, south=51.89240651, east=4.87622700, north=52.02190915
+
+outputs:
+- D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\2_PARCELS\P2_4.2.1.V3.1_Krimpen\_internal\data_pipeline\_work\data\parcel_inventory.parquet
+- D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\2_PARCELS\P2_4.2.1.V3.1_Krimpen\_internal\data_pipeline\_work\data\parcel_inventory.geojson
+- D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\2_PARCELS\P2_4.2.1.V3.1_Krimpen\_internal\data_pipeline\_work\data\parcel_inventory_metadata.csv
+- D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\2_PARCELS\P2_4.2.1.V3.1_Krimpen\_internal\data_pipeline\_work\data\parcel_inventory_summary.json

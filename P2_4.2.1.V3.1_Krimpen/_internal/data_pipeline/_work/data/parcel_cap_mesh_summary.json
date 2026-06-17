@@ -1,0 +1,29 @@
+{
+  "source_footprint_parts": "D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\2_PARCELS\\P2_4.2.1.V3.1_Krimpen\\_internal\\data_pipeline\\_work\\data\\parcel_footprints_parts.parquet",
+  "metric_crs_epsg": 28992,
+  "footprint_parts": 5955,
+  "moving_footprint_parts": 4189,
+  "blank_footprint_parts": 1766,
+  "mesh_vertices": 249212,
+  "mesh_triangles": 237299,
+  "moving_vertices": 181208,
+  "blank_vertices": 68004,
+  "moving_triangles": 172828,
+  "blank_triangles": 64471,
+  "zero_area_triangles": 3,
+  "area_check": {
+    "bad_area_parts_rel_gt_1e_minus_6": 0,
+    "max_abs_area_diff_m2": 2.473825588822365e-10,
+    "max_rel_area_diff": 1.3115877421524355e-14
+  },
+  "outputs": {
+    "vertices": "D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\2_PARCELS\\P2_4.2.1.V3.1_Krimpen\\_internal\\data_pipeline\\_work\\data\\parcel_cap_mesh_vertices.parquet",
+    "triangles": "D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\2_PARCELS\\P2_4.2.1.V3.1_Krimpen\\_internal\\data_pipeline\\_work\\data\\parcel_cap_mesh_triangles.parquet",
+    "summary": "D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\2_PARCELS\\P2_4.2.1.V3.1_Krimpen\\_internal\\data_pipeline\\_work\\data\\parcel_cap_mesh_summary.json"
+  },
+  "notes": {
+    "mesh_stage": "2D cap triangulation only; no height/extrusion yet",
+    "z_rule_later": "z/height will be assigned downstream from irreversible/reversible/total displacement arrays",
+    "template_status": "generic parcel cap mesh product, not source-specific"
+  }
+}

@@ -1,0 +1,85 @@
+{
+  "schema": "proto2_project_config_v3",
+  "project": {
+    "project_id": "krimpenerwaard_2025",
+    "display_name": "Krimpenerwaard Seasonal Parcel Deformation",
+    "short_label": "Krimpenerwaard · Parcels",
+    "page_title": "Krimpenerwaard Seasonal Parcel Deformation Viewer",
+    "output_viewer": "viz2_dev_v11.html",
+    "export_filename_prefix": "krimpenerwaard_parcel_deformation"
+  },
+  "user_inputs": {
+    "displacement_csv": "data/displacement/example_spams_model_2025.csv",
+    "displacement_crs": "EPSG:4326",
+    "parcel_shapefile": "data/shapefile/krimpenerwaard_attributes_wgs84.shp",
+    "parcel_crs": "EPSG:4326",
+    "model_parameters_parquet": "data/model_params/nl_krimpenerwaard_spams10.parquet",
+    "model_metadata_json": "data/model_params/nl_krimpenerwaard_spams10.json",
+    "pyspams_directory": "data/pyspams"
+  },
+  "pipeline_source": {
+    "deformation_source": "displacement_csv",
+    "pyspams_automated": false,
+    "note": "This version reads the precomputed displacement CSV. The PySPAMS inputs are declared and preflight-checked for a future automated source stage."
+  },
+  "input_contract": {
+    "displacement_parcel_id_field": "pnt_id",
+    "parcel_id_field": "parcel_id",
+    "alternate_parcel_id_field": "int_id",
+    "require_all_declared_inputs": true,
+    "required_shapefile_sidecars": [
+      ".shp",
+      ".dbf",
+      ".shx",
+      ".prj"
+    ],
+    "required_pyspams_files": [
+      "utils.py",
+      "spams_main.py"
+    ],
+    "required_displacement_columns": [
+      "pnt_id",
+      "pnt_gid",
+      "epoch",
+      "reversible",
+      "irreversible",
+      "h_spams_final",
+      "pnt_lat",
+      "pnt_lon",
+      "vI",
+      "std_vI",
+      "var_vI"
+    ]
+  },
+  "paths": {
+    "template": "_internal/templates/viz2_template.html",
+    "runtime_root": "_internal/data_pipeline",
+    "work_data": "_internal/data_pipeline/_work/data",
+    "work_cesium": "_internal/data_pipeline/_work/cesium",
+    "stage_records": "_internal/data_pipeline/_work/stage_records",
+    "runtime_manifest": "_internal/data_pipeline/runtime_manifest.json",
+    "viewer_metadata": "_internal/data_pipeline/viewer_metadata.json",
+    "viewer_tuning": "_internal/data_pipeline/style/viewer_tuning.json",
+    "output_viewer": "viz2_dev_v11.html",
+    "run_records": "run_records"
+  },
+  "runtime_libraries": {
+    "cesium_base_url": "_internal/cesium/",
+    "cesium_js": "_internal/cesium/Cesium.js",
+    "cesium_widgets_css": "_internal/cesium/Widgets/widgets.css",
+    "three_js": "_internal/three/three.min.js"
+  },
+  "viewer": {
+    "default_deformation_mode": "irreversible",
+    "default_view_mode": "3D",
+    "default_map_layer": "map",
+    "playback_step_ms": 80,
+    "language": "en"
+  },
+  "pipeline_behavior": {
+    "overwrite_existing_outputs": true,
+    "stop_on_first_error": true,
+    "write_human_log": true,
+    "write_manifest_json": true
+  }
+}

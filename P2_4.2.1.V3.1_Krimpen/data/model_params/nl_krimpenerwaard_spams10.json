@@ -1,0 +1,12 @@
+{
+  "project_name": "krimpenerwaard",
+  "spams10_filename": "nl_krimpenerwaard_spams10.parquet",
+  "metadata_filename": "nl_krimpenerwaard_meta.json",
+  "meteo_data_source": "KNMI",
+  "meteo_id": [
+    344,
+    348
+  ],
+  "insar_start_date": 20160101,
+  "insar_end_date": 20221231
+}

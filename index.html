@@ -21,9 +21,24 @@
       padding: 2px 5px;
       border-radius: 4px;
     }
+    .page-title {
+      font-size: 27px;
+      margin-bottom: 6px;
+    }
+    .thesis-title {
+      margin: 0 0 14px;
+      color: #444;
+      font-size: 14px;
+      font-weight: 600;
+    }
+    .intro {
+      font-size: 14px;
+      color: #444;
+    }
     .meta {
       color: #555;
-      margin-top: -8px;
+      margin-top: -4px;
+      font-size: 13px;
     }
     .meta a {
       display: inline;
@@ -33,6 +48,7 @@
     .section-note {
       color: #555;
       margin-top: -6px;
+      font-size: 13px;
     }
     .viewer-grid {
       display: grid;
@@ -67,8 +83,12 @@
     .viewer-card.experiment-card {
       background: #ebe4f6;
     }
+    .viewer-card.prototype2-card {
+      background: #e2eef8;
+    }
     .viewer-card.progress-card:hover,
-    .viewer-card.experiment-card:hover {
+    .viewer-card.experiment-card:hover,
+    .viewer-card.prototype2-card:hover {
       background: #f1f6ff;
       border-color: #b7d0ff;
     }
@@ -85,19 +105,20 @@
   </style>
 </head>
 <body>
-  <h1>MSc Thesis Project: InSAR 4D Viewer Prototypes</h1>
+  <h1 class="page-title">MSc Thesis Project: InSAR 4D Viewer Prototypes</h1>
+  <p class="thesis-title">Spatiotemporal Visualization of InSAR Ground Deformation</p>
 
   <p class="meta">
     Ridan Bramantya | 6188575<br>
     <a href="mailto:rridanbramanty@tudelft.nl">rridanbramanty@tudelft.nl</a>
   </p>
 
-  <p>
-    Interactive CesiumJS prototypes for RUM-based InSAR deformation visualization.
+  <p class="intro">
+    Interactive CesiumJS webportal prototypes for InSAR data visualization.
     Recommended use: desktop or laptop browser with WebGL enabled.
   </p>
 
-  <h2>Prototype1 viewers · dual-mode UI</h2>
+  <h2>Prototype1 - RUM based</h2>
   <p class="section-note">
     New Prototype1 UI with one merged horizontal-particle mode switch: Monte Carlo realizations and uncertainty shimmer now live in the same viewer.
   </p>
@@ -114,6 +135,18 @@
     <a class="viewer-card" href="P1_4.1.5.V4_4D_MC_synthbowl/viz1_dev_v4_dualmode.html">
       <strong>Synthbowl</strong>
       Dual-mode viewer
+    </a>
+  </div>
+
+  <h2>Prototype2 - Parcel Based</h2>
+  <p class="section-note">
+    Parcel-based 4D visualization of seasonal soft-soil deformation in Krimpenerwaard. The viewer separates reversible seasonal movement from irreversible long-term subsidence, showing parcels as animated vertical surfaces through time.
+  </p>
+
+  <div class="viewer-grid">
+    <a class="viewer-card prototype2-card" href="P2_4.2.1.V3.1_Krimpen/viz2_dev_v11.html">
+      <strong>Krimpenerwaard</strong>
+      Parcel viewer
     </a>
   </div>
 
@@ -157,6 +190,9 @@
   </p>
   <p>
     The <code>4DViz_thesis/P1_4.1.5.V4_4D_MC_template/</code> folder contains the new version for Prototype1.
+  </p>
+  <p>
+    <a href="https://github.com/bramantys/InSAR_4Dviz_MScthesis/tree/main/P2_4.2.1.V3.1_template" target="_blank">Open the Prototype2 V3.1 template package</a>
   </p>
 
   <h2>Local use</h2>

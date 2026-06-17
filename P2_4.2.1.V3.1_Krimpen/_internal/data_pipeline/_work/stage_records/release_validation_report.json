@@ -1,0 +1,217 @@
+{
+  "schema": "proto2_release_validation_v2",
+  "status": "PASS",
+  "generated_utc": "2026-06-17T00:46:16.900787+00:00",
+  "failures": [],
+  "checks": {
+    "config.project_config": {
+      "status": "PASS",
+      "detail": "config/project_config.json"
+    },
+    "runtime_manifest": {
+      "status": "PASS",
+      "detail": "_internal/data_pipeline/runtime_manifest.json"
+    },
+    "viewer_metadata": {
+      "status": "PASS",
+      "detail": "_internal/data_pipeline/viewer_metadata.json"
+    },
+    "viewer_tuning": {
+      "status": "PASS",
+      "detail": "_internal/data_pipeline/style/viewer_tuning.json"
+    },
+    "viewer_template": {
+      "status": "PASS",
+      "detail": "_internal/templates/viz2_template.html"
+    },
+    "viewer_html": {
+      "status": "PASS",
+      "detail": "viz2_dev_v11.html"
+    },
+    "local_cesium": {
+      "status": "PASS",
+      "detail": "_internal/cesium/Cesium.js"
+    },
+    "local_cesium_css": {
+      "status": "PASS",
+      "detail": "_internal/cesium/Widgets/widgets.css"
+    },
+    "local_three": {
+      "status": "PASS",
+      "detail": "_internal/three/three.min.js"
+    },
+    "runtime_publish_report": {
+      "status": "PASS",
+      "detail": "_internal/data_pipeline/_work/stage_records/runtime_publish_report.json"
+    },
+    "runtime.geometry.object": {
+      "status": "PASS",
+      "detail": ""
+    },
+    "runtime.geometry.caps": {
+      "status": "PASS",
+      "detail": "_internal/data_pipeline/geometry/parcel_caps.glb"
+    },
+    "runtime.geometry.pistons": {
+      "status": "PASS",
+      "detail": "_internal/data_pipeline/geometry/parcel_pistons.glb"
+    },
+    "runtime.geometry.walls": {
+      "status": "PASS",
+      "detail": "_internal/data_pipeline/geometry/parcel_walls.glb"
+    },
+    "runtime.geometry.opaque_datum_caps": {
+      "status": "PASS",
+      "detail": "_internal/data_pipeline/geometry/parcel_datum_caps_opaque.glb"
+    },
+    "runtime.animation.object": {
+      "status": "PASS",
+      "detail": ""
+    },
+    "runtime.animation.reversible": {
+      "status": "PASS",
+      "detail": "_internal/data_pipeline/animation/reversible_f32.bin"
+    },
+    "runtime.animation.irreversible": {
+      "status": "PASS",
+      "detail": "_internal/data_pipeline/animation/irreversible_f32.bin"
+    },
+    "runtime.animation.total": {
+      "status": "PASS",
+      "detail": "_internal/data_pipeline/animation/total_f32.bin"
+    },
+    "runtime.animation.vi": {
+      "status": "PASS",
+      "detail": "_internal/data_pipeline/animation/vi_f32.bin"
+    },
+    "runtime.lookup.object": {
+      "status": "PASS",
+      "detail": ""
+    },
+    "runtime.lookup.pick": {
+      "status": "PASS",
+      "detail": "_internal/data_pipeline/lookup/parcel_pick_index.json"
+    },
+    "runtime.lookup.search": {
+      "status": "PASS",
+      "detail": "_internal/data_pipeline/lookup/parcel_search_index.json"
+    },
+    "runtime.lookup.trendline": {
+      "status": "PASS",
+      "detail": "_internal/data_pipeline/lookup/parcel_trendline_manifest.json"
+    },
+    "runtime.style.object": {
+      "status": "PASS",
+      "detail": ""
+    },
+    "runtime.style.color_scales": {
+      "status": "PASS",
+      "detail": "_internal/data_pipeline/style/parcel_color_scales.json"
+    },
+    "runtime.style.viewer_tuning": {
+      "status": "PASS",
+      "detail": "_internal/data_pipeline/style/viewer_tuning.json"
+    },
+    "metadata.required_keys": {
+      "status": "PASS",
+      "detail": "[]"
+    },
+    "metadata.epoch_labels": {
+      "status": "PASS",
+      "detail": "epochs=365 labels=365"
+    },
+    "metadata.parcel_counts": {
+      "status": "PASS",
+      "detail": ""
+    },
+    "viewer.no_template_markers": {
+      "status": "PASS",
+      "detail": ""
+    },
+    "viewer.no_historical_paths": {
+      "status": "PASS",
+      "detail": "[]"
+    },
+    "viewer.local_cesium_reference": {
+      "status": "PASS",
+      "detail": ""
+    },
+    "viewer.local_three_reference": {
+      "status": "PASS",
+      "detail": ""
+    },
+    "runtime_publish_report.status": {
+      "status": "PASS",
+      "detail": "PASS"
+    },
+    "runtime_publish_report.published": {
+      "status": "PASS",
+      "detail": ""
+    },
+    "published._internal/data_pipeline/geometry/parcel_caps.glb": {
+      "status": "PASS",
+      "detail": "_internal/data_pipeline/geometry/parcel_caps.glb"
+    },
+    "published._internal/data_pipeline/geometry/parcel_pistons.glb": {
+      "status": "PASS",
+      "detail": "_internal/data_pipeline/geometry/parcel_pistons.glb"
+    },
+    "published._internal/data_pipeline/geometry/parcel_walls.glb": {
+      "status": "PASS",
+      "detail": "_internal/data_pipeline/geometry/parcel_walls.glb"
+    },
+    "published._internal/data_pipeline/geometry/parcel_datum_caps_opaque.glb": {
+      "status": "PASS",
+      "detail": "_internal/data_pipeline/geometry/parcel_datum_caps_opaque.glb"
+    },
+    "published._internal/data_pipeline/animation/reversible_f32.bin": {
+      "status": "PASS",
+      "detail": "_internal/data_pipeline/animation/reversible_f32.bin"
+    },
+    "published._internal/data_pipeline/animation/irreversible_f32.bin": {
+      "status": "PASS",
+      "detail": "_internal/data_pipeline/animation/irreversible_f32.bin"
+    },
+    "published._internal/data_pipeline/animation/total_f32.bin": {
+      "status": "PASS",
+      "detail": "_internal/data_pipeline/animation/total_f32.bin"
+    },
+    "published._internal/data_pipeline/animation/vi_f32.bin": {
+      "status": "PASS",
+      "detail": "_internal/data_pipeline/animation/vi_f32.bin"
+    },
+    "published._internal/data_pipeline/lookup/parcel_pick_index.json": {
+      "status": "PASS",
+      "detail": "_internal/data_pipeline/lookup/parcel_pick_index.json"
+    },
+    "published._internal/data_pipeline/lookup/parcel_search_index.json": {
+      "status": "PASS",
+      "detail": "_internal/data_pipeline/lookup/parcel_search_index.json"
+    },
+    "published._internal/data_pipeline/lookup/parcel_trendline_manifest.json": {
+      "status": "PASS",
+      "detail": "_internal/data_pipeline/lookup/parcel_trendline_manifest.json"
+    },
+    "published._internal/data_pipeline/style/parcel_color_scales.json": {
+      "status": "PASS",
+      "detail": "_internal/data_pipeline/style/parcel_color_scales.json"
+    },
+    "published._internal/data_pipeline/style/viewer_tuning.json": {
+      "status": "PASS",
+      "detail": "_internal/data_pipeline/style/viewer_tuning.json"
+    },
+    "published._internal/data_pipeline/runtime_manifest.json": {
+      "status": "PASS",
+      "detail": "_internal/data_pipeline/runtime_manifest.json"
+    },
+    "published._internal/data_pipeline/viewer_metadata.json": {
+      "status": "PASS",
+      "detail": "_internal/data_pipeline/viewer_metadata.json"
+    }
+  },
+  "viewer": {
+    "path": "viz2_dev_v11.html",
+    "size_bytes": 262649,
+    "sha256": "51309cb17d1d6ffb6cb41b41275aa5ad648d9b2b6b004021d6d2726d2e9466ce"
+  }
+}

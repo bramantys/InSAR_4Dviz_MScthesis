@@ -1,0 +1,25 @@
+{
+  "schema": "proto2_phase0_sanity_report_v3",
+  "status": "PASS",
+  "generated_utc": "2026-06-17T00:45:38.299297+00:00",
+  "config_schema": "proto2_project_config_v3",
+  "active_deformation_source": "displacement_csv",
+  "inputs": {
+    "displacement_csv": "data\\displacement\\example_spams_model_2025.csv",
+    "parcel_shapefile": "data\\shapefile\\krimpenerwaard_attributes_wgs84.shp",
+    "model_parameters_parquet": "data\\model_params\\nl_krimpenerwaard_spams10.parquet",
+    "model_metadata_json": "data\\model_params\\nl_krimpenerwaard_spams10.json",
+    "pyspams_directory": "data\\pyspams"
+  },
+  "summary": {
+    "total_parcels": 5562,
+    "moving_parcels": 3923,
+    "blank_parcels": 1639,
+    "epochs": 365,
+    "rows": 1431895,
+    "epoch_start": "2025-01-01",
+    "epoch_end": "2025-12-31",
+    "geometry_join_key": "parcel_id",
+    "epoch_parser": "%Y-%m-%d"
+  }
+}

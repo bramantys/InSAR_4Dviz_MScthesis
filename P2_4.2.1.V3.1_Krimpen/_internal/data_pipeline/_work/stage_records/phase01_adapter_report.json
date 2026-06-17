@@ -1,0 +1,76 @@
+{
+  "project_root": "D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\2_PARCELS\\P2_4.2.1.V3.1_Krimpen",
+  "outputs": {
+    "long_csv": "D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\2_PARCELS\\P2_4.2.1.V3.1_Krimpen\\_internal\\data_pipeline\\_work\\data\\parcel_displacement_long.csv",
+    "long_csv_status": "skipped (Parquet is canonical; set PROTO2_WRITE_LEGACY_LONG_CSV=1 to request it)",
+    "long_parquet": "D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\2_PARCELS\\P2_4.2.1.V3.1_Krimpen\\_internal\\data_pipeline\\_work\\data\\parcel_displacement_long.parquet",
+    "epoch_axis": "D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\2_PARCELS\\P2_4.2.1.V3.1_Krimpen\\_internal\\data_pipeline\\_work\\data\\epoch_axis.json",
+    "summary": "D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\2_PARCELS\\P2_4.2.1.V3.1_Krimpen\\_internal\\data_pipeline\\_work\\data\\parcel_displacement_summary.json",
+    "parquet_status": "written"
+  },
+  "summary": {
+    "source_displacement_csv": "D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\2_PARCELS\\P2_4.2.1.V3.1_Krimpen\\data\\displacement\\example_spams_model_2025.csv",
+    "runtime_contract": "parcel_displacement_long",
+    "rows": 1431895,
+    "moving_parcels": 3923,
+    "epoch_count": 365,
+    "epoch_start": "2025-01-01",
+    "epoch_end": "2025-12-31",
+    "epoch_parser": "%Y-%m-%d",
+    "columns": [
+      "pnt_id",
+      "pnt_gid",
+      "epoch",
+      "epoch_index",
+      "reversible",
+      "irreversible",
+      "total",
+      "sigma_h",
+      "pnt_lat",
+      "pnt_lon",
+      "vI",
+      "std_vI",
+      "var_vI"
+    ],
+    "reserved_columns": {
+      "sigma_h": {
+        "meaning": "per-epoch uncertainty of total displacement",
+        "current_status": "unavailable",
+        "null_rule": "null means unknown/unavailable, not zero uncertainty"
+      }
+    },
+    "ranges": {
+      "reversible": {
+        "min": -72.22832062406589,
+        "max": 29.51328699390481
+      },
+      "irreversible": {
+        "min": -10.48701891900804,
+        "max": -0.0
+      },
+      "total": {
+        "min": -75.87299767251189,
+        "max": 29.51328699390481
+      },
+      "vI": {
+        "min": -10.494201808678593,
+        "max": -5.140845200003344
+      },
+      "std_vI": {
+        "min": 0.0940171904930577,
+        "max": 0.66525397645717
+      },
+      "var_vI": {
+        "min": 0.0088392321082079,
+        "max": 0.4425628531920769
+      }
+    },
+    "checks": {
+      "bad_total_rows": 0,
+      "max_abs_total_component_diff": 2.1316282072803006e-14,
+      "duplicate_pnt_id_epoch_rows": 0,
+      "source_not_in_params": 0,
+      "params_not_in_source": 0
+    }
+  }
+}

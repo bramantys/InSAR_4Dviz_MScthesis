@@ -1,0 +1,332 @@
+PROTO2 PIPELINE RUN RECORD
+
+run id: 20260617_013629
+status: PASS
+started UTC: 2026-06-16T23:36:29.353507+00:00
+finished UTC: 2026-06-16T23:37:13.231929+00:00
+failed stage: -
+error: -
+viewer: viz2_dev_v11.html
+
+DATA SUMMARY
+total parcels: 5562
+moving parcels: 3923
+blank parcels: 1639
+epochs: 365
+epoch range: 2025-01-01 to 2025-12-31
+
+FULL PIPELINE LOG
+================================================================================
+
+=== PROTO2 USER PIPELINE ===
+Project root : D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\2_PARCELS\P2_4.2.1.V3_Krimpen
+Run ID       : 20260617_013629
+Resume from  : 00
+Source mode  : displacement_csv
+
+>>> C:\Users\DELL\miniconda3\python.exe D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\2_PARCELS\P2_4.2.1.V3_Krimpen\_internal\pipeline\00_phase0_sanity_check.py
+
+=== PROTO2 PHASE 0: SOURCE CONTRACT CHECK ===
+Project root: D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\2_PARCELS\P2_4.2.1.V3_Krimpen
+[OK ] active deformation source: displacement_csv
+[OK ] PySPAMS automation is disabled; precomputed displacement CSV will be used
+[OK ] all configured user input files are present
+[OK ] configured PySPAMS directory and required files are present
+[OK ] model metadata JSON is a JSON object
+[OK ] configured parcel CRS is supported: EPSG:4326
+[OK ] configured displacement CRS is supported: EPSG:4326
+[OK ] parcel shapefile opens: 5,562 features
+[OK ] shapefile CRS matches configured EPSG:4326: EPSG:4326
+[OK ] parcel ID field found: parcel_id
+[OK ] parcel IDs parse as numeric
+[OK ] parcel IDs are unique
+[OK ] parcel geometry valid: invalid=0, empty=0, null=0
+[OK ] model parameter parquet opens: 3,923 parcel IDs
+[OK ] displacement CSV columns valid: 11 required columns
+[OK ] epoch values parse successfully using %Y-%m-%d
+[OK ] every displacement parcel has matching geometry
+[OK ] every displacement parcel exists in model parameter parquet
+[OK ] daily epoch sequence is continuous: 2025-01-01 to 2025-12-31
+[OK ] no duplicate parcel-date rows
+[OK ] h_spams_final equals reversible + irreversible
+
+=== PHASE 0 RESULT ===
+Status : PASS
+Parcels: 5,562 total / 3,923 moving / 1,639 blank
+Epochs : 365 (2025-01-01 to 2025-12-31)
+
+>>> C:\Users\DELL\miniconda3\python.exe D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\2_PARCELS\P2_4.2.1.V3_Krimpen\_internal\pipeline\01_adapt_parcel_displacement.py
+
+=== PROTO2 PHASE 01: ADAPT PARCEL DISPLACEMENT ===
+Project root: D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\2_PARCELS\P2_4.2.1.V3_Krimpen
+
+Reading source displacement:
+  D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\2_PARCELS\P2_4.2.1.V3_Krimpen\data\displacement\example_spams_model_2025.csv
+[OK] source columns present: 11 required columns
+[OK] epoch parser selected: %Y-%m-%d
+[OK] total = reversible + irreversible for all rows; max abs diff=2.13162820728e-14
+[OK] row count: 1,431,895
+[OK] moving parcel count: 3,923
+[OK] epoch count: 365
+[OK] no duplicate pnt_id/epoch rows
+[OK] source displacement pnt_id set matches model parameter pnt_id set
+
+Writing canonical outputs...
+[OK] wrote D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\2_PARCELS\P2_4.2.1.V3_Krimpen\_internal\data_pipeline\_work\data\parcel_displacement_long.parquet
+[OK] skipped duplicate 1.4M-row legacy CSV; downstream phases use Parquet
+[OK] wrote D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\2_PARCELS\P2_4.2.1.V3_Krimpen\_internal\data_pipeline\_work\data\epoch_axis.json
+[OK] wrote D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\2_PARCELS\P2_4.2.1.V3_Krimpen\_internal\data_pipeline\_work\data\parcel_displacement_summary.json
+[OK] wrote D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\2_PARCELS\P2_4.2.1.V3_Krimpen\_internal\data_pipeline\_work\stage_records\phase01_adapter_report.json
+[OK] wrote D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\2_PARCELS\P2_4.2.1.V3_Krimpen\_internal\data_pipeline\_work\stage_records\phase01_adapter_report.txt
+
+=== SUMMARY ===
+Canonical rows: 1,431,895
+Moving parcels: 3,923
+Epochs: 365
+Epoch range: 2025-01-01 to 2025-12-31
+Total displacement range: -75.872998 to 29.513287
+
+PHASE 01 RESULT: PASS. Canonical parcel displacement product written.
+
+>>> C:\Users\DELL\miniconda3\python.exe D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\2_PARCELS\P2_4.2.1.V3_Krimpen\_internal\pipeline\02_ingest_parcels.py
+
+=== PROTO2 PHASE 02: INGEST PARCELS ===
+Project root: D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\2_PARCELS\P2_4.2.1.V3_Krimpen
+
+Reading parcel geometry:
+  D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\2_PARCELS\P2_4.2.1.V3_Krimpen\data\shapefile\krimpenerwaard_attributes_wgs84.shp
+[OK] parcel geometry loaded: 5,562 features
+[OK] CRS is EPSG:4326
+[OK] source geometry join key: parcel_id
+
+Reading canonical displacement product:
+  D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\2_PARCELS\P2_4.2.1.V3_Krimpen\_internal\data_pipeline\_work\data\parcel_displacement_long.parquet
+[OK] moving parcel IDs loaded: 3,923
+
+Reading model parameter metadata:
+  D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\2_PARCELS\P2_4.2.1.V3_Krimpen\data\model_params\nl_krimpenerwaard_spams10.parquet
+[OK] real/blank parcel counts: real=3,923, blank=1,639
+[OK] model parameters join correctly to moving parcels only
+[OK] geometry valid after ingest
+
+Writing parcel inventory outputs...
+[OK] wrote D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\2_PARCELS\P2_4.2.1.V3_Krimpen\_internal\data_pipeline\_work\data\parcel_inventory.parquet
+[OK] wrote D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\2_PARCELS\P2_4.2.1.V3_Krimpen\_internal\data_pipeline\_work\data\parcel_inventory.geojson
+[OK] wrote D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\2_PARCELS\P2_4.2.1.V3_Krimpen\_internal\data_pipeline\_work\data\parcel_inventory_metadata.csv
+[OK] wrote D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\2_PARCELS\P2_4.2.1.V3_Krimpen\_internal\data_pipeline\_work\data\parcel_inventory_summary.json
+[OK] wrote D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\2_PARCELS\P2_4.2.1.V3_Krimpen\_internal\data_pipeline\_work\stage_records\phase02_parcel_ingest_report.json
+[OK] wrote D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\2_PARCELS\P2_4.2.1.V3_Krimpen\_internal\data_pipeline\_work\stage_records\phase02_parcel_ingest_report.txt
+
+=== SUMMARY ===
+Total parcels: 5,562
+Moving parcels: 3,923
+Blank parcels: 1,639
+Geometry types: {'Polygon': 5169, 'MultiPolygon': 393}
+Multipart parcels: 393
+Exterior vertices: 255,092
+
+PHASE 02 RESULT: PASS. Canonical parcel inventory written.
+
+>>> C:\Users\DELL\miniconda3\python.exe D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\2_PARCELS\P2_4.2.1.V3_Krimpen\_internal\pipeline\03_prepare_parcel_footprints.py
+
+=== PROTO2 PHASE 03: PREPARE PARCEL FOOTPRINTS ===
+Project root: D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\2_PARCELS\P2_4.2.1.V3_Krimpen
+
+Reading parcel inventory:
+  D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\2_PARCELS\P2_4.2.1.V3_Krimpen\_internal\data_pipeline\_work\data\parcel_inventory.parquet
+[OK] parcel inventory loaded: 5,562 parcels
+[OK] inventory CRS is EPSG:4326
+[OK] moving/blank counts confirmed: moving=3,923, blank=1,639
+[OK] multipart parcel count confirmed: 393
+[OK] all inventory geometries valid/non-empty
+
+Projecting geometry to metric CRS EPSG:28992 for diagnostics/vertices...
+[OK] projected to EPSG:28992
+
+Exploding multipart parcels into polygon footprint parts...
+[OK] footprint parts created: 5,955
+[OK] moving footprint parts: 4,189
+[OK] blank footprint parts: 1,766
+[OK] vertex rows created: 255,192
+[OK] all parcels represented by at least one footprint part
+
+Writing footprint outputs...
+[OK] wrote D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\2_PARCELS\P2_4.2.1.V3_Krimpen\_internal\data_pipeline\_work\data\parcel_footprints_parts.parquet
+[OK] wrote D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\2_PARCELS\P2_4.2.1.V3_Krimpen\_internal\data_pipeline\_work\data\parcel_footprints_parts.geojson
+[OK] wrote D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\2_PARCELS\P2_4.2.1.V3_Krimpen\_internal\data_pipeline\_work\data\parcel_footprint_vertices.csv
+[OK] wrote D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\2_PARCELS\P2_4.2.1.V3_Krimpen\_internal\data_pipeline\_work\data\parcel_footprint_summary.json
+[OK] wrote D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\2_PARCELS\P2_4.2.1.V3_Krimpen\_internal\data_pipeline\_work\stage_records\phase03_footprint_report.json
+[OK] wrote D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\2_PARCELS\P2_4.2.1.V3_Krimpen\_internal\data_pipeline\_work\stage_records\phase03_footprint_report.txt
+
+=== SUMMARY ===
+Parcels: 5,562
+Footprint parts: 5,955
+Multipart parcels: 393
+Vertex rows: 255,192
+Area total: 87044239.111 m²
+
+PHASE 03 RESULT: PASS. Parcel footprints prepared for triangulation/extrusion.
+
+>>> C:\Users\DELL\miniconda3\python.exe D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\2_PARCELS\P2_4.2.1.V3_Krimpen\_internal\pipeline\04_triangulate_parcel_caps.py
+
+=== PROTO2 PHASE 04: TRIANGULATE PARCEL CAPS ===
+Project root: D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\2_PARCELS\P2_4.2.1.V3_Krimpen
+
+Reading footprint parts:
+  D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\2_PARCELS\P2_4.2.1.V3_Krimpen\_internal\data_pipeline\_work\data\parcel_footprints_parts.parquet
+[OK] footprint parts loaded: 5,955
+[OK] moving/blank footprint parts confirmed: moving=4,189, blank=1,766
+
+Projecting to metric CRS EPSG:28992 for triangulation...
+[OK] projected to EPSG:28992
+
+Triangulating footprint parts...
+[OK] mesh vertices created: 249,212
+[OK] mesh triangles created: 237,302
+[OK] triangle vertex references are in range
+[WARN] found 3 near-zero-area triangles; dropping them before writing mesh outputs
+[WARN] near-zero examples: [{'parcel_id': 20191, 'footprint_id': '20191_0', 'part_index': 0, 'triangle_area_m2': 9.16770597899296e-13}, {'parcel_id': 42946, 'footprint_id': '42946_0', 'part_index': 0, 'triangle_area_m2': 2.4010648138239783e-13}, {'parcel_id': 44768, 'footprint_id': '44768_0', 'part_index': 0, 'triangle_area_m2': 4.2200551253891543e-13}]
+[OK] remaining mesh triangles after cleanup: 237,299
+[OK] all footprint parts represented in triangle table
+[OK] triangle areas match footprint polygon areas (max_abs_diff=0.000000000 m2, max_rel_diff=1.31158774e-14)
+
+Writing mesh outputs...
+[OK] wrote D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\2_PARCELS\P2_4.2.1.V3_Krimpen\_internal\data_pipeline\_work\data\parcel_cap_mesh_vertices.parquet
+[OK] wrote D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\2_PARCELS\P2_4.2.1.V3_Krimpen\_internal\data_pipeline\_work\data\parcel_cap_mesh_triangles.parquet
+[OK] wrote D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\2_PARCELS\P2_4.2.1.V3_Krimpen\_internal\data_pipeline\_work\data\parcel_cap_mesh_summary.json
+[OK] wrote D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\2_PARCELS\P2_4.2.1.V3_Krimpen\_internal\data_pipeline\_work\stage_records\phase04_triangulation_report.json
+[OK] wrote D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\2_PARCELS\P2_4.2.1.V3_Krimpen\_internal\data_pipeline\_work\stage_records\phase04_triangulation_report.txt
+
+=== SUMMARY ===
+Mesh vertices: 249,212
+Mesh triangles: 237,299
+Moving triangles: 172,828
+Blank triangles: 64,471
+Max area relative diff: 1.31158774e-14
+
+PHASE 04 RESULT: PASS. Parcel cap mesh triangulated.
+
+>>> C:\Users\DELL\miniconda3\python.exe D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\2_PARCELS\P2_4.2.1.V3_Krimpen\_internal\pipeline\05_package_animation_arrays.py
+
+=== PROTO2 PHASE 05: PACKAGE ANIMATION ARRAYS ===
+Project root: D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\2_PARCELS\P2_4.2.1.V3_Krimpen
+
+Reading canonical displacement product:
+  D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\2_PARCELS\P2_4.2.1.V3_Krimpen\_internal\data_pipeline\_work\data\parcel_displacement_long.parquet
+[OK] displacement rows loaded: 1,431,895
+[OK] moving parcels: 3,923
+[OK] epochs: 365
+[OK] epoch range: 2025-01-01 to 2025-12-31
+
+Reading parcel inventory:
+  D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\2_PARCELS\P2_4.2.1.V3_Krimpen\_internal\data_pipeline\_work\data\parcel_inventory.parquet
+[OK] parcel inventory loaded: 5,562
+[OK] inventory moving/blank confirmed: moving=3,923, blank=1,639
+[OK] parcel render index built: moving parcels have displacement rows; blanks have -1
+
+Building parcel × epoch float32 matrices...
+[OK] reversible matrix complete: 1,431,895 cells
+[OK] irreversible matrix complete: 1,431,895 cells
+[OK] total matrix complete: 1,431,895 cells
+[OK] sigma_h matrix contains no finite values; uncertainty unavailable as intended
+[OK] total matrix check passed; max abs diff=7.62939453e-06
+
+Indexing mesh tables for renderer use...
+Reading mesh vertices:
+  D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\2_PARCELS\P2_4.2.1.V3_Krimpen\_internal\data_pipeline\_work\data\parcel_cap_mesh_vertices.parquet
+Reading mesh triangles:
+  D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\2_PARCELS\P2_4.2.1.V3_Krimpen\_internal\data_pipeline\_work\data\parcel_cap_mesh_triangles.parquet
+[OK] mesh vertices indexed: moving=181,208, blank=68,004
+[OK] mesh triangles indexed: moving=172,828, blank=64,471
+
+Writing animation/index outputs...
+[OK] wrote D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\2_PARCELS\P2_4.2.1.V3_Krimpen\_internal\data_pipeline\_work\data\moving_parcel_index.parquet
+[OK] wrote D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\2_PARCELS\P2_4.2.1.V3_Krimpen\_internal\data_pipeline\_work\data\parcel_render_index.parquet
+[OK] wrote D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\2_PARCELS\P2_4.2.1.V3_Krimpen\_internal\data_pipeline\_work\data\parcel_cap_mesh_vertices_indexed.parquet
+[OK] wrote D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\2_PARCELS\P2_4.2.1.V3_Krimpen\_internal\data_pipeline\_work\data\parcel_cap_mesh_triangles_indexed.parquet
+[OK] wrote D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\2_PARCELS\P2_4.2.1.V3_Krimpen\_internal\data_pipeline\_work\data\parcel_displacement_matrices_float32.npz
+[OK] wrote D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\2_PARCELS\P2_4.2.1.V3_Krimpen\_internal\data_pipeline\_work\data\parcel_displacement_reversible_f32.bin
+[OK] wrote D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\2_PARCELS\P2_4.2.1.V3_Krimpen\_internal\data_pipeline\_work\data\parcel_displacement_irreversible_f32.bin
+[OK] wrote D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\2_PARCELS\P2_4.2.1.V3_Krimpen\_internal\data_pipeline\_work\data\parcel_displacement_total_f32.bin
+[OK] wrote D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\2_PARCELS\P2_4.2.1.V3_Krimpen\_internal\data_pipeline\_work\data\parcel_displacement_sigma_h_f32.bin
+[OK] wrote D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\2_PARCELS\P2_4.2.1.V3_Krimpen\_internal\data_pipeline\_work\data\parcel_animation_manifest.json
+[OK] wrote D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\2_PARCELS\P2_4.2.1.V3_Krimpen\_internal\data_pipeline\_work\data\parcel_animation_summary.json
+[OK] wrote D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\2_PARCELS\P2_4.2.1.V3_Krimpen\_internal\data_pipeline\_work\stage_records\phase05_animation_arrays_report.json
+[OK] wrote D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\2_PARCELS\P2_4.2.1.V3_Krimpen\_internal\data_pipeline\_work\stage_records\phase05_animation_arrays_report.txt
+
+=== SUMMARY ===
+Animation matrix shape: 3,923 parcels x 365 epochs
+Cells per component: 1,431,895
+Reversible range: -72.228317 to 29.513287
+Irreversible range: -10.487019 to -0.000000
+Total range: -75.873001 to 29.513287
+Sigma_h finite count: 0
+
+PHASE 05 RESULT: PASS. Animation arrays and render indices packaged.
+
+>>> C:\Users\DELL\miniconda3\python.exe D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\2_PARCELS\P2_4.2.1.V3_Krimpen\_internal\pipeline\06_build_runtime_geometry.py
+
+=== PROTO2 PASS 3 / STAGE 06: BUILD RUNTIME GEOMETRY ===
+
+=== STAGE 06 RESULT ===
+Status : PASS
+Output : D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\2_PARCELS\P2_4.2.1.V3_Krimpen\_internal\data_pipeline\_stage\geometry_build_summary.json
+
+>>> C:\Users\DELL\miniconda3\python.exe D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\2_PARCELS\P2_4.2.1.V3_Krimpen\_internal\pipeline\07_build_lookup_assets.py
+
+=== PROTO2 PASS 3 / STAGE 07: BUILD LOOKUP ASSETS ===
+
+=== STAGE 07 RESULT ===
+Status : PASS
+Output : D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\2_PARCELS\P2_4.2.1.V3_Krimpen\_internal\data_pipeline\_stage\lookup_build_summary.json
+
+>>> C:\Users\DELL\miniconda3\python.exe D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\2_PARCELS\P2_4.2.1.V3_Krimpen\_internal\pipeline\08_build_viewer_products.py
+
+=== PROTO2 PASS 3 / STAGE 08: BUILD VIEWER PRODUCTS ===
+
+=== PROTO2 PHASE 14A: PARCEL COLOR SCALES ===
+Project root: D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\2_PARCELS\P2_4.2.1.V3_Krimpen
+[OK] moving parcel index loaded: 3,923 rows
+[OK] animation matrices loaded: reversible=(3923, 365), irreversible=(3923, 365), total=(3923, 365)
+[OK] vI loaded from moving_parcel_index: range -10.494202 to -5.140845 mm/yr
+[OK] wrote D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\2_PARCELS\P2_4.2.1.V3_Krimpen\_internal\data_pipeline\_work\data\parcel_vi_f32.bin
+[OK] wrote D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\2_PARCELS\P2_4.2.1.V3_Krimpen\_internal\data_pipeline\_work\data\parcel_color_scales.json
+[OK] wrote D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\2_PARCELS\P2_4.2.1.V3_Krimpen\_internal\data_pipeline\_work\data\parcel_color_summary.json
+[OK] wrote D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\2_PARCELS\P2_4.2.1.V3_Krimpen\_internal\data_pipeline\_work\stage_records\phase14a_parcel_color_scales_report.json
+[OK] wrote D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\2_PARCELS\P2_4.2.1.V3_Krimpen\_internal\data_pipeline\_work\stage_records\phase14a_parcel_color_scales_report.txt
+
+=== SUMMARY ===
+irreversible_velocity     :    -10.0 to 3.0      mm/yr  tau=0.5
+reversible_displacement   :    -65.0 to 25.0     mm  tau=1.0
+total_displacement        :    -70.0 to 30.0     mm  tau=1.0
+
+PHASE 14A RESULT: PASS. Parcel color-scale products written.
+
+=== STAGE 08 RESULT ===
+Status : PASS
+Output : D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\2_PARCELS\P2_4.2.1.V3_Krimpen\_internal\data_pipeline\_stage\viewer_products_summary.json
+
+>>> C:\Users\DELL\miniconda3\python.exe D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\2_PARCELS\P2_4.2.1.V3_Krimpen\_internal\pipeline\91_publish_runtime_products.py --publish
+
+=== PROTO2 GENERIC RUNTIME PUBLISH ===
+Project root: D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\2_PARCELS\P2_4.2.1.V3_Krimpen
+Stage root  : D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\2_PARCELS\P2_4.2.1.V3_Krimpen\_internal\data_pipeline\_stage
+[OK] staged assets published atomically
+
+=== PROTO2 GENERIC RUNTIME PUBLISH RESULT ===
+Status : PASS
+Output : D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\2_PARCELS\P2_4.2.1.V3_Krimpen\_internal\data_pipeline\_work\stage_records\runtime_publish_report.json
+
+>>> C:\Users\DELL\miniconda3\python.exe D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\2_PARCELS\P2_4.2.1.V3_Krimpen\_internal\pipeline\09_assemble_viewer.py --validate-files
+
+=== PROTO2 VIEWER ASSEMBLY ===
+Status : PASS
+Output : viz2_dev_v11.html
+Size   : 262256 bytes
+SHA256 : 4af90868d83f3ce877eaece367c89664a6b87e5efb09e9d896624afb1a9d1479
+
+>>> C:\Users\DELL\miniconda3\python.exe D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\2_PARCELS\P2_4.2.1.V3_Krimpen\_internal\pipeline\99_validate_release.py
+
+=== PROTO2 RELEASE VALIDATION ===
+Status : PASS
+Output : D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\2_PARCELS\P2_4.2.1.V3_Krimpen\_internal\data_pipeline\_work\stage_records\release_validation_report.json

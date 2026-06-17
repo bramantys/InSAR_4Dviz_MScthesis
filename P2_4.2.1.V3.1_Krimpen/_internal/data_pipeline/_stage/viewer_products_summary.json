@@ -1,0 +1,52 @@
+{
+  "schema": "proto2_pass3_viewer_products_v1",
+  "algorithm_source": [
+    "05_package_animation_arrays.py outputs",
+    "14_build_parcel_color_scales.py",
+    "15_build_irreversible_piston_assets.py tuning logic"
+  ],
+  "outputs": {
+    "animation": {
+      "reversible": {
+        "path": "_internal/data_pipeline/_stage/animation/reversible_f32.bin",
+        "size_bytes": 5727580,
+        "sha256": "3053e1c4a0ce1adbb70c8ad7e08dfa045abbcd14ea9a1d70672312670179e931"
+      },
+      "irreversible": {
+        "path": "_internal/data_pipeline/_stage/animation/irreversible_f32.bin",
+        "size_bytes": 5727580,
+        "sha256": "0ec98dcf3b8e6299819e5e0505f7023cf62bc10fb208a4dfbaa095d68019387a"
+      },
+      "total": {
+        "path": "_internal/data_pipeline/_stage/animation/total_f32.bin",
+        "size_bytes": 5727580,
+        "sha256": "8e00a73d44dfbeb92fd3961ff6999b7798573b94ad43525df98ad2ff1888405c"
+      },
+      "vi": {
+        "path": "_internal/data_pipeline/_stage/animation/vi_f32.bin",
+        "size_bytes": 15692,
+        "sha256": "25d8c191a1caa8196f7ef72d5c40c5c40dcbfb7daf30468ddc9845cd0834a7fb"
+      }
+    },
+    "color_scales": {
+      "path": "_internal/data_pipeline/_stage/style/parcel_color_scales.json",
+      "size_bytes": 18511,
+      "sha256": "b43048dae3a3734739a479ea44ea233f6b15465cd187d857eaba0228eaebac89"
+    },
+    "viewer_tuning": {
+      "path": "_internal/data_pipeline/_stage/style/viewer_tuning.json",
+      "size_bytes": 2100,
+      "sha256": "101bb8f5ee5e4fda63342ebec4632ef0e792793ea079cdbdd4d7e9a82762c8f5"
+    },
+    "viewer_metadata": {
+      "path": "_internal/data_pipeline/_stage/viewer_metadata.json",
+      "size_bytes": 8026,
+      "sha256": "94aaa3432a34e8eef9659c1d769971138b2cc744870b17516061a696cefb3e3a"
+    },
+    "runtime_manifest": {
+      "path": "_internal/data_pipeline/_stage/runtime_manifest.json",
+      "size_bytes": 1320,
+      "sha256": "b82a5c9136f7a39bee12cc2930e809db07ab33e2d8df3f5837ab72cb968fbe66"
+    }
+  }
+}

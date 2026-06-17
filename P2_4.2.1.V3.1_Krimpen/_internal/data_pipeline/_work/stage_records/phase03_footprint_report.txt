@@ -1,0 +1,33 @@
+PROTO2 PHASE 03 FOOTPRINT REPORT
+
+source inventory: D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\2_PARCELS\P2_4.2.1.V3.1_Krimpen\_internal\data_pipeline\_work\data\parcel_inventory.parquet
+metric CRS EPSG: 28992
+
+total parcels: 5,562
+moving parcels: 3,923
+blank parcels: 1,639
+multipart parcels: 393
+
+footprint parts: 5,955
+moving footprint parts: 4,189
+blank footprint parts: 1,766
+vertex rows: 255,192
+exterior vertex rows: 255,092
+interior vertex rows: 100
+footprint parts with holes: 25
+
+area_m2_calc:
+min=0.000
+median=13265.750
+mean=14617.001
+max=188423.338
+sum=87044239.111
+
+bounds WGS84:
+west=4.59635743, south=51.89240651, east=4.87622700, north=52.02190915
+
+outputs:
+- D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\2_PARCELS\P2_4.2.1.V3.1_Krimpen\_internal\data_pipeline\_work\data\parcel_footprints_parts.parquet
+- D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\2_PARCELS\P2_4.2.1.V3.1_Krimpen\_internal\data_pipeline\_work\data\parcel_footprints_parts.geojson
+- D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\2_PARCELS\P2_4.2.1.V3.1_Krimpen\_internal\data_pipeline\_work\data\parcel_footprint_vertices.csv
+- D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\2_PARCELS\P2_4.2.1.V3.1_Krimpen\_internal\data_pipeline\_work\data\parcel_footprint_summary.json

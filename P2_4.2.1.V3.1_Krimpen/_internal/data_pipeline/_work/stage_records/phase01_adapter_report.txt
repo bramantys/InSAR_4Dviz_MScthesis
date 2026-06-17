@@ -1,0 +1,22 @@
+PROTO2 PHASE 01 ADAPTER REPORT
+
+source displacement: D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\2_PARCELS\P2_4.2.1.V3.1_Krimpen\data\displacement\example_spams_model_2025.csv
+epoch parser: %Y-%m-%d
+rows: 1,431,895
+moving parcels: 3,923
+epochs: 365
+epoch range: 2025-01-01 to 2025-12-31
+
+outputs:
+- D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\2_PARCELS\P2_4.2.1.V3.1_Krimpen\_internal\data_pipeline\_work\data\parcel_displacement_long.csv (skipped (Parquet is canonical; set PROTO2_WRITE_LEGACY_LONG_CSV=1 to request it))
+- D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\2_PARCELS\P2_4.2.1.V3.1_Krimpen\_internal\data_pipeline\_work\data\parcel_displacement_long.parquet (written; canonical)
+- D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\2_PARCELS\P2_4.2.1.V3.1_Krimpen\_internal\data_pipeline\_work\data\epoch_axis.json
+- D:\Kuliah\Q7\Thesis\260413_Gameplan1\4.Web\4.1.CesiumApp\2_PARCELS\P2_4.2.1.V3.1_Krimpen\_internal\data_pipeline\_work\data\parcel_displacement_summary.json
+
+ranges:
+- reversible:   -72.228321 to 29.513287
+- irreversible: -10.487019 to -0.000000
+- total:        -75.872998 to 29.513287
+
+sigma_h rule:
+null sigma_h means uncertainty unavailable, not zero uncertainty.

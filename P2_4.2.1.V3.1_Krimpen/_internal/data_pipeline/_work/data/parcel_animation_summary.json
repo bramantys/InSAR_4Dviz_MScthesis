@@ -1,0 +1,64 @@
+{
+  "source_displacement": "D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\2_PARCELS\\P2_4.2.1.V3.1_Krimpen\\_internal\\data_pipeline\\_work\\data\\parcel_displacement_long.parquet",
+  "total_parcels": 5562,
+  "moving_parcels": 3923,
+  "blank_parcels": 1639,
+  "epochs": 365,
+  "matrix_shape": [
+    3923,
+    365
+  ],
+  "matrix_cells_per_component": 1431895,
+  "epoch_start": "2025-01-01",
+  "epoch_end": "2025-12-31",
+  "max_total_diff_after_matrix_build": 7.62939453125e-06,
+  "component_stats": {
+    "reversible": {
+      "finite_count": 1431895,
+      "nan_count": 0,
+      "min": -72.22831726074219,
+      "max": 29.513286590576172,
+      "mean": -11.238687515258789
+    },
+    "irreversible": {
+      "finite_count": 1431895,
+      "nan_count": 0,
+      "min": -10.487018585205078,
+      "max": -0.0,
+      "mean": -3.228583335876465
+    },
+    "total": {
+      "finite_count": 1431895,
+      "nan_count": 0,
+      "min": -75.87300109863281,
+      "max": 29.513286590576172,
+      "mean": -14.46727180480957
+    },
+    "sigma_h": {
+      "finite_count": 0,
+      "nan_count": 1431895,
+      "min": null,
+      "max": null,
+      "mean": null
+    }
+  },
+  "mesh_vertices_indexed": 249212,
+  "mesh_triangles_indexed": 237299,
+  "mesh_vertex_moving_count": 181208,
+  "mesh_vertex_blank_count": 68004,
+  "mesh_triangle_moving_count": 172828,
+  "mesh_triangle_blank_count": 64471,
+  "outputs": {
+    "moving_parcel_index": "D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\2_PARCELS\\P2_4.2.1.V3.1_Krimpen\\_internal\\data_pipeline\\_work\\data\\moving_parcel_index.parquet",
+    "parcel_render_index": "D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\2_PARCELS\\P2_4.2.1.V3.1_Krimpen\\_internal\\data_pipeline\\_work\\data\\parcel_render_index.parquet",
+    "mesh_vertices_indexed": "D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\2_PARCELS\\P2_4.2.1.V3.1_Krimpen\\_internal\\data_pipeline\\_work\\data\\parcel_cap_mesh_vertices_indexed.parquet",
+    "mesh_triangles_indexed": "D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\2_PARCELS\\P2_4.2.1.V3.1_Krimpen\\_internal\\data_pipeline\\_work\\data\\parcel_cap_mesh_triangles_indexed.parquet",
+    "animation_npz": "D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\2_PARCELS\\P2_4.2.1.V3.1_Krimpen\\_internal\\data_pipeline\\_work\\data\\parcel_displacement_matrices_float32.npz",
+    "reversible_bin": "D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\2_PARCELS\\P2_4.2.1.V3.1_Krimpen\\_internal\\data_pipeline\\_work\\data\\parcel_displacement_reversible_f32.bin",
+    "irreversible_bin": "D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\2_PARCELS\\P2_4.2.1.V3.1_Krimpen\\_internal\\data_pipeline\\_work\\data\\parcel_displacement_irreversible_f32.bin",
+    "total_bin": "D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\2_PARCELS\\P2_4.2.1.V3.1_Krimpen\\_internal\\data_pipeline\\_work\\data\\parcel_displacement_total_f32.bin",
+    "sigma_h_bin": "D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\2_PARCELS\\P2_4.2.1.V3.1_Krimpen\\_internal\\data_pipeline\\_work\\data\\parcel_displacement_sigma_h_f32.bin",
+    "manifest": "D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\2_PARCELS\\P2_4.2.1.V3.1_Krimpen\\_internal\\data_pipeline\\_work\\data\\parcel_animation_manifest.json",
+    "summary": "D:\\Kuliah\\Q7\\Thesis\\260413_Gameplan1\\4.Web\\4.1.CesiumApp\\2_PARCELS\\P2_4.2.1.V3.1_Krimpen\\_internal\\data_pipeline\\_work\\data\\parcel_animation_summary.json"
+  }
+}
