@@ -1,0 +1,19 @@
+P2_4.2.1.V5.3_Krimpen_Template/
+├── config/
+│   ├── project_config.json            # only configuration a user normally edits
+│   └── run_baby_run.bat               # full automatic preflight + build launcher
+├── data/                              # user-provided source inputs
+├── run_records/                       # latest receipt and small run history
+├── viz2_parcel_viewer.html            # generated after a successful build
+└── _internal/
+    ├── cesium/                        # user copies existing complete Cesium runtime here
+    ├── data_pipeline/
+    │   └── runtime/                   # generated; final viewer runtime only
+    ├── pipeline/                      # numbered internal build stages + support modules
+    ├── templates/
+    ├── assets/
+    ├── studio_mode/
+    └── three/
+
+Temporary output is created under _internal/data_pipeline/work/ only during a build.
+It is removed automatically after a successful release validation.

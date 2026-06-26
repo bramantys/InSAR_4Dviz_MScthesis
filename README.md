@@ -50,23 +50,10 @@ The core visual concept is **breathing while drowning**: parcels move seasonally
 
 | Dataset | Viewer |
 |---|---|
-| **Krimpenerwaard (new)** | [`Parcel viewer`](P2_4.2.1.V3.1_Krimpen/viz2_dev_v11.html) |
+| Krimpenerwaard | [`Parcel viewer`](P2_4.2.1.V3.1_Krimpen/viz2_dev_v11.html) |
+| **Krimpenerwaard - MC (new)** | [`Parcel viewer`](P2_4.2.1.V5.3_Krimpen_MC_Github/viz2_parcel_viewer.html) |
 
-Prototype 2 V3.1 was released on **17 June 2026**.
-
-## Old version Prototype1 viewers
-
-Earlier Prototype 1 viewers are retained for comparison and project history:
-
-1. [`Jakarta 4D RUM Viewer`](Proto1_RUM_jakarta/viewer_4d.html)
-2. [`Groningen 4D RUM Viewer`](Proto1_RUM_groningen/viewer_4d.html)
-3. [`Groningen tuned 4D RUM Viewer`](Proto1_RUM_groningen/viewer_4d_tuned.html)
-4. [`Synthetic Bowl Test — no blank RUM`](Proto1_RUM_Synth_Bowl_Test1/viewer_4d.html)
-5. [`Synthetic Bowl Test — with blank RUM`](Proto1_RUM_Synth_Bowl_Test2withBlanks/viewer_4d.html)
-
-Additional note:
-
-- [`New toggle available for Synthetic Bowl Test`](synthetic_test_toggle_announcement.JPG)
+The current highlighted Prototype2 release is **Krimpenerwaard - MC**.
 
 ## Template packages
 
@@ -74,9 +61,9 @@ The template folders contain reusable project structures, pipeline scripts, conf
 
 - [`Proto1_RUM_TEMPLATE/`](Proto1_RUM_TEMPLATE/) — earlier Prototype 1 template package.
 - [`P1_4.1.5.V4_4D_MC_template/`](P1_4.1.5.V4_4D_MC_template/) — current Prototype 1 template package.
-- [`P2_4.2.1.V3.1_template/`](P2_4.2.1.V3.1_template/) — Prototype 2 V3.1 parcel-pipeline template package.
+- [`P2_4.2.1.V5.3_Krimpen_MC_Template/`](P2_4.2.1.V5.3_Krimpen_MC_Template/) — current Prototype 2 Krimpenerwaard Monte Carlo template package.
 
-For Prototype 2 setup, input requirements, configuration, pipeline execution, run receipts, and viewer controls, read the documentation included inside the V3.1 template package.
+For Prototype 2 setup, input requirements, configuration, pipeline execution, run receipts, and viewer controls, read the documentation included inside the Krimpenerwaard MC template package.
 
 ## Repository
 

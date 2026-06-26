@@ -1,0 +1,141 @@
+{
+  "schema": "proto2_project_config_v5_3_clean_runtime_template",
+  "project": {
+    "project_id": "krimpenerwaard_spams_parcel_viewer_template",
+    "display_name": "Krimpenerwaard Seasonal Parcel Deformation",
+    "short_label": "Krimpenerwaard \u00b7 Parcels",
+    "page_title": "Krimpenerwaard Seasonal Parcel Deformation Viewer",
+    "output_viewer": "viz2_parcel_viewer.html",
+    "export_filename_prefix": "krimpenerwaard_parcel_deformation_v5_3"
+  },
+  "user_inputs": {
+    "monte_carlo_npz": "data/monte_carlo/area_mc_results_full_20150101_20251231_1000_42.npz",
+    "displacement_crs": "EPSG:4326",
+    "parcel_shapefile": "data/shapefile/krimpenerwaard_attributes_wgs84.shp",
+    "parcel_crs": "EPSG:4326",
+    "model_parameters_parquet": "data/model_params/nl_krimpenerwaard_spams10.parquet",
+    "model_metadata_json": "data/model_params/nl_krimpenerwaard_spams10.json",
+    "pyspams_directory": "data/pyspams",
+    "knmi_daily_files": {
+      "344": "data/KNMI/etmgeg_344.txt",
+      "348": "data/KNMI/etmgeg_348.txt"
+    }
+  },
+  "pipeline_source": {
+    "deformation_source": "spams_parquet_knmi",
+    "pyspams_automated": true,
+    "note": "Deterministic reversible and irreversible components are calculated directly from the SPAMS parameter Parquet, supplied utils.py, and local KNMI daily files. the Monte Carlo NPZ supplies Total mean_t and sigma_t."
+  },
+  "time_settings": {
+    "viewer_period": {
+      "start_date": "2020-01-01",
+      "end_date": "2025-12-31",
+      "default_reference_date": "2020-01-01",
+      "allow_reference_date_change_in_viewer": true,
+      "reference_date_choices": "loaded_epochs_only"
+    },
+    "note": "The pipeline calculates deterministic components over exactly this viewer period, using each parcel's tau-length weather lead-in. The viewer may use any loaded epoch as its displayed zero/reference date."
+  },
+  "monte_carlo_total": {
+    "enabled": true,
+    "npz_input": "monte_carlo_npz",
+    "parcel_order_source": "model_parameters_parquet",
+    "mean_key": "mean_t",
+    "sigma_key": "sigma_t",
+    "source_reconstruction_period": {
+      "start_date": "2015-01-01",
+      "end_date": "2025-12-31",
+      "reference_date": "2015-01-01"
+    },
+    "uncertainty": {
+      "kind": "per_epoch_standard_deviation",
+      "applies_to": "monte_carlo_total_mean",
+      "rebase_with_viewer_reference_date": false,
+      "note": "sigma_t is trimmed to the selected viewer period unchanged. It must not be subtracted or otherwise rebased when the displayed mean uses a different reference date."
+    },
+    "note": "the supplied existing mean_t is the Monte Carlo mean of total SPAMS displacement. sigma_t is its matching per-epoch standard deviation. Do not apply sigma_t to deterministic reversible or irreversible components."
+  },
+  "input_contract": {
+    "displacement_parcel_id_field": "pnt_id",
+    "parcel_id_field": "parcel_id",
+    "alternate_parcel_id_field": "int_id",
+    "require_all_declared_inputs": true,
+    "required_shapefile_sidecars": [
+      ".shp",
+      ".dbf",
+      ".shx",
+      ".prj"
+    ],
+    "required_pyspams_files": [
+      "utils.py"
+    ],
+    "required_monte_carlo_keys": [
+      "mean_t",
+      "sigma_t"
+    ],
+    "required_spams_parameter_columns": [
+      "pnt_id",
+      "pnt_gid",
+      "pnt_lat",
+      "pnt_lon",
+      "xP",
+      "xE",
+      "xI",
+      "tau",
+      "meteo_id",
+      "vI",
+      "var_vI"
+    ],
+    "required_knmi_station_ids": [
+      344,
+      348
+    ]
+  },
+  "paths": {
+    "template": "_internal/templates/viz2_template.html",
+    "data_pipeline_root": "_internal/data_pipeline",
+    "runtime_root": "_internal/data_pipeline/runtime",
+    "work_data": "_internal/data_pipeline/work/data",
+    "work_cesium": "_internal/data_pipeline/work/geometry_support",
+    "stage_records": "_internal/data_pipeline/work/reports",
+    "runtime_manifest": "_internal/data_pipeline/runtime/runtime_manifest.json",
+    "viewer_metadata": "_internal/data_pipeline/runtime/viewer_metadata.json",
+    "viewer_tuning": "_internal/data_pipeline/runtime/style/viewer_tuning.json",
+    "output_viewer": "viz2_parcel_viewer.html",
+    "run_records": "run_records"
+  },
+  "runtime_libraries": {
+    "cesium_base_url": "_internal/cesium/",
+    "cesium_js": "_internal/cesium/Cesium.js",
+    "cesium_widgets_css": "_internal/cesium/Widgets/widgets.css",
+    "three_js": "_internal/three/three.min.js"
+  },
+  "viewer": {
+    "default_deformation_mode": "total",
+    "default_view_mode": "3D",
+    "default_map_layer": "map",
+    "playback_step_ms": 80,
+    "language": "en"
+  },
+  "pipeline_behavior": {
+    "overwrite_existing_outputs": true,
+    "stop_on_first_error": true,
+    "write_human_log": true,
+    "write_manifest_json": true,
+    "keep_build_work": false,
+    "keep_last_run_history": 10
+  },
+  "uncertainty_lod": {
+    "enabled": true,
+    "detail_spacing_m": 20.0,
+    "overview_spacing_m": 40.0,
+    "readable_min_feature_base_m": 2.5,
+    "tile_grid": {
+      "columns": 4,
+      "rows": 4
+    },
+    "switching": "exclusive_camera_height_hysteresis",
+    "detail_enter_height_m": 10000.0,
+    "overview_enter_height_m": 13000.0
+  }
+}
