@@ -1,0 +1,144 @@
+{
+  "schema": "deckgl_proto1_horizontal_gpu_particle_field_v6_long_history_safety",
+  "purpose": "GPU transform-feedback particle field for directly observed Jakarta RUM horizontal velocity and E/N covariance. Blankies are excluded from the field and spawn domain; emitter cells require observed 8-neighbour support. The runtime renders fixed-cadence RGBA32F world-space history ribbons using V7-style exponential brush persistence and speed-modulated rounded caps. History supports user-selected 0.40–3.20 s durations without reseeding particles; high-speed motion uses support-checked metric substeps and a V7-style screen-jump guard.",
+  "units": {
+    "horizontalVelocity": "mm/year",
+    "covariance": "(mm/year)^2",
+    "localParticleCoordinates": "metres east/north relative to coordinateOriginLonLat"
+  },
+  "sampling": {
+    "mode": "conservative_v1",
+    "rule": "conservative_v1: bilinear only when all four adjacent observed RUMs are available; otherwise nearest observed grid cell. Motion never interpolates blankies. Lifecycle stall checks use the nearest observed RUM speed, not a bilinear blend."
+  },
+  "grid": {
+    "width": 95,
+    "height": 70,
+    "maxI": 94,
+    "maxJ": 69,
+    "rumSizeM": 450,
+    "coordinateOriginLonLat": [
+      106.84714577023418,
+      -6.219253204348299
+    ],
+    "gridOriginLocalM": [
+      -19763.295213891517,
+      -14835.332249483545
+    ],
+    "gridAxisIM": [
+      439.55139116062855,
+      10.499376828211155
+    ],
+    "gridAxisJM": [
+      -10.428826116580536,
+      442.4767937937895
+    ]
+  },
+  "spawnDomain": {
+    "rule": "live RUM + speed above stall threshold + all eight direct neighbours observed",
+    "supportNeighbourCount": 8,
+    "fallback": "all above-stall live RUMs only when no supported emitter cells exist",
+    "fallbackUsed": false
+  },
+  "render": {
+    "enabled": true,
+    "showByDefault": true,
+    "defaultMode": "mean",
+    "particleCapacity": 12000,
+    "defaultParticleCount": 5000,
+    "baseMps": 1800,
+    "speedMultiplier": 1.5,
+    "surfaceOffsetM": 20,
+    "stallSpeedMmYr": 0.05,
+    "samplerMode": "conservative_v1",
+    "particleSizePixels": 2.2,
+    "particleSizeMultiplier": 1,
+    "particleSizeMultiplierMin": 0.5,
+    "particleSizeMultiplierMax": 3,
+    "particleSizeMultiplierStep": 0.1,
+    "particleOpacity": 1,
+    "trailWidthPixels": 1.15,
+    "trailOpacity": 1,
+    "historySampleIntervalS": 0.05,
+    "historySamplesMin": 9,
+    "historySamplesMax": 65,
+    "historySamples": 32,
+    "trailDurationStepS": 0.05,
+    "trailPersistence": 0.98,
+    "trailPersistenceMin": 0.8,
+    "trailPersistenceMax": 0.999,
+    "trailPersistenceStep": 0.001,
+    "maxTrailScreenJumpPx": 120,
+    "integrationMaxCellFraction": 0.25,
+    "integrationMaxSubsteps": 24,
+    "tailFadeMode": "canvas_persistence",
+    "birthFadeSeconds": 0.3,
+    "spawnSupportRule": "eight_live_neighbours",
+    "uncertaintyStrength": 0.5,
+    "shimmerStrength": 0.5,
+    "monteCarloStrength": 0.5,
+    "mcModel": "directional",
+    "mcMaxSigma": 1.5,
+    "mcOffsetCapMmYr": 1,
+    "mcOffsetCapRatioToSpeed": 1,
+    "shimmerPixelAmplitude": 5,
+    "spawnJitterCells": 0.9,
+    "colorRgba": [
+      100,
+      100,
+      100,
+      255
+    ],
+    "rumSizeM": 450
+  },
+  "legend": {
+    "statistic": "P75",
+    "speedP75MmYr": 0.9337063610372077,
+    "directionalUncertainty": {
+      "sigmaThetaP75Deg": 15.542454151770112,
+      "sigmaMultiplier": 1,
+      "capDeg": 90,
+      "visibleCellCount": 1949,
+      "visibilityFilter": {
+        "minimumSpeedMmYr": 0.02,
+        "significanceSigmaMultiplier": 1,
+        "rule": "speed >= minimumSpeed AND speed >= significanceSigmaMultiplier * stdMajor1Sigma"
+      },
+      "rule": "P75 sigma_theta across cells passing the horizontal glyph visibility filter; sigma_theta = sigma_perp / |v|; values capped at 90 degrees."
+    }
+  },
+  "history": {
+    "storage": "RGBA32F texture: local_x_m, local_y_m, particle_age_s, speed_ratio_to_p95 (uncapped; visual alpha/width outputs clamp)",
+    "samples": 32,
+    "samplesMin": 9,
+    "samplesMax": 65,
+    "sampleIntervalS": 0.05,
+    "trailDurationMinS": 0.4,
+    "trailDurationMaxS": 3.2,
+    "trailDurationStepS": 0.05,
+    "tailFadeMode": "canvas_persistence",
+    "trailPersistence": 0.98,
+    "durationS": 1.55,
+    "maxTrailScreenJumpPx": 120,
+    "integrationMaxCellFraction": 0.25,
+    "integrationMaxSubsteps": 24,
+    "rationale": "Fixed simulation-time cadence makes visible trail duration independent of display frame rate. Trail alpha uses V7-style exponential canvas persistence; age resets mark respawn discontinuities; Z is recomputed from current vertical model at draw time. Requested duration reallocates only the sentinel-filled history target and never reseeds particle simulation state. At high visual speed, metric substeps validate support across the path and the 120 px screen-jump guard suppresses any remaining misleading cross-map connector.",
+    "atlas": {
+      "layout": "runtime_tiled_particle_row_atlas",
+      "preferredWidth": 4096,
+      "rationale": "Runtime tiles particle columns into multiple rows before multiplying by history samples, avoiding a 12K-wide RGBA32F render target while keeping texelFetch history reads exact."
+    }
+  },
+  "summary": {
+    "liveRumCount": 4779,
+    "spawnCellCount": 3716,
+    "speedP95MmYr": 1.9980088899941029,
+    "excludedStalledRums": 201,
+    "excludedForMissingEightNeighbourSupport": 862,
+    "spawnFallbackUsed": false
+  },
+  "assets": {
+    "fieldF32": "horizontal_particle_field_rgba_f32.bin",
+    "covarianceF32": "horizontal_particle_covariance_rgba_f32.bin",
+    "spawnGridF32": "horizontal_particle_spawns_rg_f32.bin"
+  }
+}

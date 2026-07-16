@@ -1,226 +1,448 @@
 <!doctype html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <title>MSc Thesis Project: InSAR 4D Viewer Prototypes</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 40px;
-      line-height: 1.5;
-      max-width: 980px;
-      color: #202124;
-    }
-    a {
-      display: block;
-      margin: 12px 0;
-      font-size: 14px;
-    }
-    code {
-      background: #eee;
-      padding: 2px 5px;
-      border-radius: 4px;
-    }
-    .page-title {
-      font-size: 27px;
-      margin-bottom: 6px;
-    }
-    .thesis-title {
-      margin: 0 0 14px;
-      color: #444;
-      font-size: 14px;
-      font-weight: 600;
-    }
-    .intro {
-      font-size: 14px;
-      color: #444;
-    }
-    .meta {
-      color: #555;
-      margin-top: -4px;
-      font-size: 13px;
-    }
-    .meta a {
-      display: inline;
-      margin: 0;
-      font-size: inherit;
-    }
-    .section-note {
-      color: #555;
-      margin-top: -6px;
-      font-size: 13px;
-    }
-    .viewer-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 12px 16px;
-      margin: 16px 0 24px;
-    }
-    .viewer-card {
-      display: block;
-      margin: 0;
-      padding: 14px 16px;
-      border: 1px solid #ddd;
-      border-radius: 10px;
-      text-decoration: none;
-      color: #1a73e8;
-      background: #dae4dd;
-      font-size: 17px;
-    }
-    .viewer-card:hover {
-      background: #f1f6ff;
-      border-color: #b7d0ff;
-    }
-    .viewer-card strong {
-      display: block;
-      color: #202124;
-      font-size: 15px;
-      margin-bottom: 3px;
-    }
-    .viewer-card.progress-card {
-      background: #fff4d6;
-    }
-    .viewer-card.experiment-card {
-      background: #ebe4f6;
-    }
-    .viewer-card.prototype2-card {
-      background: #e2eef8;
-    }
-    .viewer-card.new-release {
-      position: relative;
-      border: 2px solid #1a73e8;
-      box-shadow: 0 4px 12px rgba(26, 115, 232, 0.18);
-      background: #eef5ff;
-    }
-    .viewer-card.new-release::after {
-      content: "NEW";
-      position: absolute;
-      top: 9px;
-      right: 10px;
-      padding: 2px 7px;
-      border-radius: 999px;
-      background: #1a73e8;
-      color: #fff;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.5px;
-    }
-    .viewer-card.progress-card:hover,
-    .viewer-card.experiment-card:hover,
-    .viewer-card.prototype2-card:hover,
-    .viewer-card.new-release:hover {
-      background: #f1f6ff;
-      border-color: #b7d0ff;
-    }
-    .single-card {
-      margin: 12px 0 28px;
-    }
-    @media (max-width: 700px) {
-      body { margin: 24px; }
-      .viewer-grid { grid-template-columns: 1fr; }
-    }
-  </style>
-</head>
-<body>
-  <h1 class="page-title">MSc Thesis Project: InSAR 4D Viewer Prototypes</h1>
-  <p class="thesis-title">Spatiotemporal Visualization of InSAR Ground Deformation</p>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Proto1 DeckGL — Jakarta 4D InSAR Viewer</title>
+    <script type="module" crossorigin src="./assets/index-UUOoOyVg.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-COsfDeLs.css">
+  </head>
+  <body class="scene-3d">
+    <main id="viewerShell" aria-label="Jakarta InSAR 4D viewer">
+      <div id="map"></div>
+      <div id="studioViewfinderOverlay" aria-hidden="true">
+        <div id="studioViewfinderFrame">
+          <span class="studioViewfinderCorner studioViewfinderCornerTl"></span>
+          <span class="studioViewfinderCorner studioViewfinderCornerTr"></span>
+          <span class="studioViewfinderCorner studioViewfinderCornerBl"></span>
+          <span class="studioViewfinderCorner studioViewfinderCornerBr"></span>
+          <span id="studioViewfinderLabel">16:9 capture frame</span>
+        </div>
+      </div>
 
-  <p class="meta">
-    Ridan Bramantya | 6188575<br>
-    <a href="mailto:rridanbramanty@tudelft.nl">rridanbramanty@tudelft.nl</a>
-  </p>
+      <aside id="rightControlRoot" class="drawerOpen" aria-label="Viewer controls">
 
-  <p class="intro">
-    Interactive DeckGL and CesiumJS webportal prototypes for InSAR data visualization.
-    Recommended use: desktop or laptop browser with WebGL enabled.
-  </p>
 
-  <h2>Prototype1 - RUM based</h2>
-  <p class="section-note">
-    Current highlighted release: Jakarta DeckGL RUM viewer with 2D/3D deformation, horizontal particles and glyphs, uncertainty encodings, trendline inspection, mini viewer, and Studio Mode tools.
-  </p>
+        <section id="rightDrawerPanel" aria-hidden="false">
+          <header id="drawerDisplay" aria-label="Display control">
+            <div id="drawerDisplayHeader">
+              <span id="drawerDisplayTitle">Display control</span>
+              <div id="drawerHeaderActions" aria-label="Drawer actions">
+                <button id="drawerDefaultsButton" class="drawerDefaultButton" type="button" title="Back to default visual settings" aria-label="Back to default visual settings">↺ Default</button>
+                <button id="rightDrawerBurger" type="button" title="Collapse controls" aria-label="Collapse controls">☰</button>
+              </div>
+            </div>
+            <div id="drawerDisplayBody">
+              <div class="drawerDisplayControl" data-scene-3d-only>
+                <div class="control-header">
+                  <label for="verticalExagSlider">Vertical exaggeration</label>
+                  <output id="verticalExagValue" class="control-value">10×</output>
+                </div>
+                <input id="verticalExagSlider" type="range" min="0" max="20" value="10" step="0.25" />
+              </div>
+              <div class="drawerDisplayControl" data-scene-2d-only>
+                <div class="control-header">
+                  <label for="twoDRumOpacitySlider">Global opacity</label>
+                  <output id="twoDRumOpacityValue" class="control-value">66%</output>
+                </div>
+                <input id="twoDRumOpacitySlider" type="range" min="0.30" max="0.90" value="0.66" step="0.02" />
+                <div id="twoDAnalysisLegend" class="srOnly"></div>
+              </div>
+            </div>
+          </header>
+          <div id="rightDrawerScroll">
+            <section id="drawerScene" class="drawerSection">
+              <button class="drawerSectionTitle" type="button" aria-expanded="true">
+                <span class="drawerBinder" aria-hidden="true">▱</span>
+                <span class="drawerSectionName">Background and Scene</span>
+              </button>
+              <div class="drawerSectionBody">
+                <div class="drawerSceneControlRow" id="basemapControl" aria-label="Background map and scene overlays">
+                  <div class="drawerCompactSelectRow drawerSceneBgSelect">
+                    <label for="basemapModeSelect">BG map</label>
+                    <select id="basemapModeSelect" data-basemap-select aria-label="Background map">
+                      <option value="off">Off</option>
+                      <option value="bw">B/W</option>
+                      <option value="map" selected>Map</option>
+                      <option value="satellite">Satellite</option>
+                    </select>
+                  </div>
+                  <button id="scenePolygonToggle" type="button" class="drawerFutureToggle drawerSceneMiniButton drawerPolygonButton active" aria-pressed="true" title="Show/hide saved studio polygon markers">Polygon</button>
+                  <select id="sceneGridModeSelect" class="drawerSceneMiniSelect drawerGridModeSelect" aria-label="Reference grid mode">
+                    <option value="off" selected>Grid: off</option>
+                    <option value="plan">Grid: plan</option>
+                    <option value="frame">Grid: frame</option>
+                  </select>
+                </div>
+                <div id="readingNote" hidden aria-hidden="true"></div>
+              </div>
+            </section>
 
-  <div class="viewer-grid">
-    <a class="viewer-card new-release" href="P1_4.2.5_JKT/">
-      <strong>Jakarta — DeckGL RUM Viewer</strong>
-      4D deformation, horizontal motion, uncertainty, trendline, mini viewer, and Studio Mode
-    </a>
-    <a class="viewer-card" href="P1_4.1.5.V4_4D_MC_jakarta/viz1_dev_v4_dualmode.html">
-      <strong>Jakarta — CesiumJS</strong>
-      Dual-mode viewer
-    </a>
-    <a class="viewer-card progress-card" href="P1_4.1.5.V6_4D_JKT/viz1_dev_v4_dualmode.html">
-      <strong>Jakarta — CesiumJS</strong>
-      Vertical Uncertainty V2
-    </a>
-    <a class="viewer-card" href="P1_4.1.5.V4_4D_MC_gron/viz1_dev_v4_dualmode.html">
-      <strong>Groningen</strong>
-      Dual-mode viewer
-    </a>
-    <a class="viewer-card" href="P1_4.1.5.V4_4D_MC_synthbowl/viz1_dev_v4_dualmode.html">
-      <strong>Synthbowl</strong>
-      Dual-mode viewer
-    </a>
-  </div>
+            <section id="drawerPistons" class="drawerSection collapsed">
+              <button class="drawerSectionTitle" type="button" aria-expanded="false">
+                <span class="drawerBinder" aria-hidden="true">↕</span>
+                <span class="drawerSectionName">Vertical Components - Piston</span>
+              </button>
+              <div class="drawerSectionBody">
+                <div class="drawerPistonControlRow" data-scene-3d-control aria-label="Vertical piston component controls">
+                  <div class="drawerPistonCapsControl" id="capAppearanceControl" aria-label="3D caps appearance">
+                    <label class="drawerPistonCapsLabel" for="capAppearanceSelect">3D caps</label>
+                    <select id="capAppearanceSelect" class="drawerPistonCapsSelect" aria-label="3D caps mode">
+                      <option value="scientific">Velocity color</option>
+                      <option value="context-map">Context map</option>
+                    </select>
+                  </div>
+                  <button id="pistonWallsToggle" type="button" class="drawerPistonToggle active" aria-pressed="true">Piston walls</button>
+                  <button id="blankieCapsToggle" type="button" class="drawerPistonToggle active" aria-pressed="true">Blankie cap</button>
+                </div>
+                <label class="drawerCompactToggle drawerReliefToggle drawerReliefToggleNoDot" for="uncertaintyReliefToggle" data-scene-3d-control>
+                  <input id="uncertaintyReliefToggle" type="checkbox" checked />
+                  <span>Uncertainty relief</span>
+                </label>
+                <div id="reliefDiagnostic" class="srOnly"></div>
+                <div id="contextCapDiagnostic" class="srOnly"></div>
+                <div id="apronModeControl" class="srOnly" aria-hidden="true">
+                  <button type="button" class="seg" data-mode="solid">Solid</button>
+                  <button type="button" class="seg active" data-mode="see-through">See-through</button>
+                  <button type="button" class="seg" data-mode="off">Off</button>
+                </div>
+                <label class="srOnly" for="datumLineToggle"><input id="datumLineToggle" type="checkbox" />Datum outline</label>
+                <label class="srOnly" for="depthOccluderToggle"><input id="depthOccluderToggle" type="checkbox" checked />Depth occluders</label>
+                <div id="cameraDiagnostic" class="srOnly"></div>
+              </div>
+            </section>
 
-  <h2>Prototype2 - Parcel Based</h2>
-  <p class="section-note">
-    Parcel-based 4D visualization of seasonal soft-soil deformation in Krimpenerwaard. The viewer separates reversible seasonal movement from irreversible long-term subsidence, showing parcels as animated vertical surfaces through time.
-  </p>
+            <section id="drawerHStatic" class="drawerSection collapsed">
+              <button class="drawerSectionTitle" type="button" aria-expanded="false">
+                <span class="drawerBinder" aria-hidden="true">↔</span>
+                <span class="drawerSectionName">Horizontal Components - Glyph</span>
+              </button>
+              <div class="drawerSectionBody">
+                <div class="drawerSliderGrid drawerGlyphControlGrid">
+                  <div class="drawerCompactSlider">
+                    <div class="control-header">
+                      <label for="horizontalGlyphOpacitySlider">Opacity</label>
+                      <output id="horizontalGlyphOpacityValue" class="control-value">92%</output>
+                    </div>
+                    <input id="horizontalGlyphOpacitySlider" type="range" min="0" max="1" value="0.92" step="0.02" />
+                  </div>
+                  <div class="drawerCompactSlider">
+                    <div class="control-header">
+                      <label for="horizontalGlyphScaleSlider">Glyph scale</label>
+                      <output id="horizontalGlyphScaleValue" class="control-value">1.00×</output>
+                    </div>
+                    <input id="horizontalGlyphScaleSlider" type="range" min="0.5" max="2.5" value="1" step="0.05" />
+                  </div>
+                </div>
+                <div id="horizontalGlyphDiagnostic" class="srOnly"></div>
+                <div id="horizontalGlyphLegend" class="srOnly"></div>
+              </div>
+            </section>
 
-  <div class="viewer-grid">
-    <a class="viewer-card prototype2-card" href="P2_4.2.1.V3.1_Krimpen/viz2_dev_v11.html">
-      <strong>Krimpenerwaard</strong>
-      Parcel viewer
-    </a>
-    <a class="viewer-card prototype2-card new-release" href="P2_4.2.1.V5.3_Krimpen_MC_Github/viz2_parcel_viewer.html">
-      <strong>Krimpenerwaard - MC</strong>
-      Parcel viewer
-    </a>
-  </div>
+            <section id="drawerParticles" class="drawerSection collapsed">
+              <button class="drawerSectionTitle" type="button" aria-expanded="false">
+                <span class="drawerBinder" aria-hidden="true">≈</span>
+                <span class="drawerSectionName">Horizontal Components - Particles</span>
+              </button>
+              <div class="drawerSectionBody">
+                <div id="horizontalParticleFieldModeBlock" class="drawerCompactSelectRow" hidden>
+                  <label for="horizontalParticleFieldModeControl">Hor. field mode</label>
+                  <select id="horizontalParticleFieldModeControl">
+                    <option value="raw">Raw</option>
+                    <option value="lsc">LSC</option>
+                  </select>
+                  <div id="horizontalParticleFieldNote" class="srOnly"></div>
+                  <div id="horizontalParticleMcCaveat" class="srOnly" hidden></div>
+                  <output id="horizontalParticleSamplerValue" class="srOnly">Motion field</output>
+                </div>
+                <div class="drawerSliderGrid drawerParticleSliderGrid">
+                  <div class="drawerCompactSlider">
+                    <div class="control-header"><label for="horizontalParticleOpacitySlider">Opacity</label><output id="horizontalParticleOpacityValue" class="control-value">100%</output></div>
+                    <input id="horizontalParticleOpacitySlider" type="range" min="0" max="1" value="1" step="0.02" />
+                  </div>
+                  <div class="drawerCompactSlider">
+                    <div class="control-header"><label for="horizontalParticleCountSlider">Count</label><output id="horizontalParticleCountValue" class="control-value">5,000</output></div>
+                    <input id="horizontalParticleCountSlider" type="range" min="250" max="12000" value="5000" step="250" />
+                  </div>
+                  <div class="drawerCompactSlider">
+                    <div class="control-header"><label for="horizontalParticleSizeSlider">Size</label><output id="horizontalParticleSizeValue" class="control-value">1.00×</output></div>
+                    <input id="horizontalParticleSizeSlider" type="range" min="0.5" max="3" value="1" step="0.1" />
+                  </div>
+                  <div class="drawerCompactSlider">
+                    <div class="control-header"><label for="horizontalParticleSpeedSlider">Visual speed</label><output id="horizontalParticleSpeedValue" class="control-value">1.50×</output></div>
+                    <input id="horizontalParticleSpeedSlider" type="range" min="0.1" max="6" value="1.5" step="0.05" />
+                  </div>
+                  <div class="drawerCompactSlider">
+                    <div class="control-header"><label for="horizontalParticleTrailDurationSlider">Trail duration</label><output id="horizontalParticleTrailDurationValue" class="control-value">1.6 s</output></div>
+                    <input id="horizontalParticleTrailDurationSlider" type="range" min="0.40" max="3.20" value="1.55" step="0.05" />
+                  </div>
+                  <div class="drawerCompactSlider">
+                    <div class="control-header"><label for="horizontalParticleTrailPersistenceSlider">Trail persistence</label><output id="horizontalParticleTrailPersistenceValue" class="control-value">0.98</output></div>
+                    <input id="horizontalParticleTrailPersistenceSlider" type="range" min="0.80" max="0.999" value="0.98" step="0.001" />
+                  </div>
+                </div>
+                <div class="drawerParticleUncertaintyGrid">
+                  <div class="drawerCompactSelectRow drawerUncertaintyModeRow drawerParticleModeCard">
+                    <label for="horizontalParticleModeControl">Unc. mode</label>
+                    <select id="horizontalParticleModeControl">
+                      <option value="mean">off</option>
+                      <option value="shimmer">Shimmer</option>
+                      <option value="montecarlo">MC</option>
+                    </select>
+                  </div>
+                  <div class="drawerCompactSlider drawerParticleUncertaintySliderCard">
+                    <div class="control-header"><label id="horizontalParticleUncertaintyLabel" for="horizontalParticleUncertaintySlider">Uncertainty strength</label><output id="horizontalParticleUncertaintyValue" class="control-value">off</output></div>
+                    <input id="horizontalParticleUncertaintySlider" type="range" min="0" max="2" value="0.5" step="0.05" />
+                  </div>
+                </div>
+                <div id="horizontalParticleDiagnostic" class="srOnly"></div>
+                <div id="horizontalParticleLegend" class="srOnly"></div>
+              </div>
+            </section>
 
-  <h2>Prototype1 progress & experiments</h2>
-  <p class="section-note">
-    Current development checkpoints and standalone sandboxes for testing visual encodings before they are merged into the main viewer.
-  </p>
+            <section id="drawerStudio" class="drawerSection drawerStudioSection">
+              <button class="drawerSectionTitle" type="button" aria-expanded="true">
+                <span class="drawerBinder" aria-hidden="true">◱</span>
+                <span class="drawerSectionName">Studio Mode</span>
+              </button>
+              <div class="drawerSectionBody">
+                <details id="studioPolygonAccordion" class="studioSubAccordion studioPolygonAccordion" open>
+                  <summary class="studioSubAccordionHeader">
+                    <span class="studioSubAccordionTitle">Polygon markers</span>
+                    <span id="studioPolygonStatus" class="studioSubAccordionMeta studioPolygonStatus">No saved polygons</span>
+                  </summary>
+                  <div class="studioSubAccordionBody">
+                    <div id="studioPolygonPanel" aria-label="Studio polygon markers">
+                      <div class="studioPolygonTopline">
+                        <div>
+                          <span class="studioPolygonTitle">Studio annotation</span>
+                          <span class="studioPolygonStatusNote">Free polygon · saved locally</span>
+                        </div>
+                        <button id="studioPolygonAddButton" type="button" class="studioPolygonAddButton">Add polygon</button>
+                      </div>
 
-  <div class="viewer-grid">
-    <a class="viewer-card progress-card" href="P1_4.1.5.V3_4D_jkt_UI_PRIMIT%20CHECKPOINT/viz1_dev_v3_batch9.3.6.1.html">
-      <strong>Jakarta</strong>
-      Fix occlusion problem, current progress
-    </a>
-    <a class="viewer-card experiment-card" href="P1_4.1.5.V4_4D_MC_jakarta/dimple_sandbox_proto1_clean_v8.html">
-      <strong>Vertical uncertainty encoding sandbox</strong>
-      Dimple / radial / half-step relief test
-    </a>
-  </div>
+                      <div id="studioPolygonDrawBar" class="studioPolygonDrawBar" hidden>
+                        <span id="studioPolygonDrawStatus">Click map points · min 3</span>
+                        <div class="studioPolygonDrawActions">
+                          <button id="studioPolygonUndoButton" type="button">Undo</button>
+                          <button id="studioPolygonFinishButton" type="button" disabled>Finish</button>
+                          <button id="studioPolygonCancelButton" type="button">Cancel</button>
+                        </div>
+                      </div>
 
-  <h2>Repository</h2>
-  <a href="https://github.com/bramantys/InSAR_4Dviz_MScthesis" target="_blank">
-    Open GitHub repository
-  </a>
+                      <form id="studioPolygonSaveForm" class="studioPolygonSaveForm" hidden>
+                        <label>
+                          <span>Name</span>
+                          <input id="studioPolygonNameInput" type="text" maxlength="42" placeholder="Subsidence bowl" autocomplete="off" />
+                        </label>
+                        <label>
+                          <span>Info</span>
+                          <textarea id="studioPolygonInfoInput" rows="2" maxlength="180" placeholder="Optional annotation note"></textarea>
+                        </label>
+                        <div class="studioPolygonFormActions">
+                          <button id="studioPolygonSaveButton" type="submit">Save</button>
+                          <button id="studioPolygonFormCancelButton" type="button">Cancel</button>
+                        </div>
+                      </form>
 
-  <h2>Template package</h2>
-  <p>
-    The <code>Proto1_RUM_TEMPLATE/</code> folder contains the original reusable package structure and pipeline notes.
-    It is not meant to be opened as a finished viewer.
-  </p>
-  <p>
-    The <code>4DViz_thesis/P1_4.1.5.V4_4D_MC_template/</code> folder contains the new version for Prototype1.
-  </p>
-  <p>
-    <a href="https://github.com/bramantys/InSAR_4Dviz_MScthesis/tree/main/P2_4.2.1.V5.3_Krimpen_MC_Template" target="_blank">Open the Prototype2 Krimpenerwaard MC template package</a>
-  </p>
+                      <div id="studioPolygonList" class="studioPolygonList" aria-live="polite"></div>
+                    </div>
+                  </div>
+                </details>
 
-  <h2>Local use</h2>
-  <p>
-    Online use requires no installation. For local use, download the repository and run a simple local server:
-  </p>
+                <details id="studioCaptureAccordion" class="studioSubAccordion studioCaptureAccordion" open>
+                  <summary class="studioSubAccordionHeader">
+                    <span class="studioSubAccordionTitle">Capture video</span>
+                    <span id="studioCaptureStatus" class="studioSubAccordionMeta studioCaptureStatus">No views</span>
+                  </summary>
+                  <div class="studioSubAccordionBody">
+                    <div id="studioCapturePanel" aria-label="Studio video capture storyboard">
+                      <div class="studioCaptureTopline">
+                        <div>
+                          <span class="studioCaptureTitle">Storyboard</span>
+                          <span class="studioCaptureStatusNote">Camera · epoch · visual state</span>
+                        </div>
+                        <button id="studioCaptureViewfinderToggle" type="button" class="studioCaptureMiniButton" aria-pressed="false">16:9 frame</button>
+                      </div>
+                      <div class="studioCaptureActions" aria-label="Storyboard actions">
+                        <button id="studioCaptureCurrentViewButton" type="button">Capture view</button>
+                        <button id="studioCaptureIntroButton" type="button">Add intro</button>
+                        <button id="studioCapturePreviewButton" type="button">Preview</button>
+                        <button id="studioCaptureClearButton" type="button">Clear</button>
+                      </div>
+                      <div id="studioCaptureList" class="studioCaptureList" aria-live="polite"></div>
+                    </div>
+                  </div>
+                </details>
+              </div>
+            </section>
 
-  <pre><code>python -m http.server 8000</code></pre>
+            <section id="drawerMiniViewer" class="drawerSection drawerMiniViewerSection">
+              <button class="drawerSectionTitle" type="button" aria-expanded="true">
+                <span class="drawerBinder" aria-hidden="true">⌖</span>
+                <span class="drawerSectionName">Mini Viewer</span>
+              </button>
+              <div class="drawerSectionBody">
+                <div id="studioMiniViewerWell" aria-label="Mini viewer overview map">
+                  <canvas id="miniViewerCanvas" aria-label="Full RUM field mini viewer"></canvas>
+                  <div id="miniViewerHeader">
+                    <span>Full field</span>
+                    <span id="miniViewerStatus">Loading…</span>
+                  </div>
+                  <div id="miniViewerHint">Full RUM field · click to pan</div>
+                </div>
+              </div>
+            </section>
 
-  <p>
-    Then open <code>http://localhost:8000/</code>.
-  </p>
-</body>
+            <div id="focusLabel" class="srOnly">Preparing structural surface…</div>
+            <div id="helpText" class="srOnly">Loading viewer guidance…</div>
+          </div>
+        </section>
+      </aside>
+
+      <section id="epochPanel" aria-label="Time controls" title="Time controls">
+        <section id="rumTrendlinePanel" aria-label="Selected RUM trendline" hidden>
+          <div id="rumTrendlineResizeHandle" title="Drag to resize trendline" aria-hidden="true"></div>
+          <header id="rumTrendlineHeader">
+            <div id="rumTrendlineTitleBlock">
+              <div id="rumTrendlineTitle">RUM trendline</div>
+              <div id="rumTrendlineSubtitle">Select an observed RUM and open trendline</div>
+            </div>
+            <div id="rumTrendlineControls" aria-label="Trendline controls">
+              <div id="rumTrendlineAxisGrid" aria-label="Trendline Y-axis controls">
+                <label class="trendlineControl trendlineAxisMode">
+                  <span>Y mode</span>
+                  <select id="rumTrendlineAxisModeSelect" aria-label="Trendline Y-axis mode">
+                    <option value="auto" selected>Auto</option>
+                    <option value="project">Project</option>
+                    <option value="custom">Custom</option>
+                  </select>
+                </label>
+                <label class="trendlineControl trendlineCustomInput trendlineMinInput">
+                  <span>Min</span>
+                  <input id="rumTrendlineMinInput" type="number" step="1" inputmode="decimal" aria-label="Custom trendline Y minimum" disabled />
+                </label>
+                <label class="trendlineControl trendlineCustomInput trendlineMaxInput">
+                  <span>Max</span>
+                  <input id="rumTrendlineMaxInput" type="number" step="1" inputmode="decimal" aria-label="Custom trendline Y maximum" disabled />
+                </label>
+              </div>
+              <button id="rumTrendlinePngButton" class="trendlineTinyButton" type="button" title="Export trendline as PNG">PNG</button>
+              <button id="rumTrendlineCloseButton" class="trendlineTinyButton trendlineCloseButton" type="button" title="Close trendline" aria-label="Close trendline">×</button>
+            </div>
+          </header>
+          <canvas id="rumTrendlineCanvas"></canvas>
+        </section>
+        <input id="epochSlider" type="range" min="0" max="1" value="0" step="1" />
+        <div id="epochBottomRow">
+          <div id="epochControls" aria-label="Epoch navigation">
+            <button id="epochFirstButton" class="epochBtn" type="button" title="First epoch">⏮</button>
+            <button id="epochPrevButton" class="epochBtn" type="button" title="Previous epoch">‹</button>
+            <button id="playButton" class="epochBtn epochPlay" type="button" title="Play or pause">▶ Play</button>
+            <button id="epochNextButton" class="epochBtn" type="button" title="Next epoch">›</button>
+            <button id="epochLastButton" class="epochBtn" type="button" title="Last epoch">⏭</button>
+          </div>
+          <div class="epochSpeedControl">
+            <label for="playbackSpeedSlider">Playback</label>
+            <input id="playbackSpeedSlider" type="range" min="0.25" max="4" value="1" step="0.25" />
+            <output id="playbackSpeedValue" class="control-value">1×</output>
+          </div>
+          <div id="epochTextGroup"><span id="epochLabel">Loading…</span></div>
+        </div>
+      </section>
+
+      <aside id="legendStack" aria-label="Navigation and legends">
+        <div id="navBubblePanel" class="legendBar navLegendBar" aria-label="Navigation controls">
+          <div id="zoomCapsule" class="navZoomCapsule" role="group" aria-label="Zoom controls">
+            <button id="zoomInButton" class="navBarButton navZoomButton zoomCapsuleButton" type="button" title="Zoom in" aria-label="Zoom in">+</button>
+            <span class="zoomDivider" aria-hidden="true"></span>
+            <button id="zoomOutButton" class="navBarButton navZoomButton zoomCapsuleButton" type="button" title="Zoom out" aria-label="Zoom out">−</button>
+          </div>
+          <button id="viewModeToggleButton" class="navBarButton navViewModeBtn" type="button" title="Switch 2D / 3D">2D</button>
+          <button id="compassBubbleButton" class="navBarButton navCompassButton" type="button" title="Compass orientation · navigation tuning follows later" aria-label="Compass orientation">
+            <span id="compassNeedle" aria-hidden="true"></span>
+          </button>
+          <button id="navInfoButton" class="navBarButton" type="button" title="Project information" aria-label="Project information">ⓘ</button>
+          <button id="screenshotButton" class="navBarButton" type="button" title="Save map and particles screenshot">▣</button>
+          <button id="fullscreenButton" class="navBarButton" type="button" title="Fullscreen">⛶</button>
+          <!-- Kept in the DOM for the later navigation-contract pass, but not part
+               of the permanent V7-style navigation row. -->
+          <button id="resetViewButton" class="navBarButton navDeferredButton" type="button" title="Reset current scene view">⌂</button>
+          <button id="flyToRumsButton" class="navBarButton navDeferredButton" type="button" title="Fly to live RUMs">⌖</button>
+        </div>
+
+        <div id="horizontalGlyphLegendBar" class="legendBar horizontalReferenceLegend hGlyphLegendBar" title="Horizontal glyph reference · P75 visible velocity and P75 95% major confidence">
+          <canvas id="horizontalGlyphLegendCanvas" class="horizontalLegendCanvas" aria-hidden="true"></canvas>
+          <span class="horizontalLegendDivider" aria-hidden="true"></span>
+          <span id="horizontalGlyphLegendBarArrowText" class="horizontalLegendText horizontalLegendTextLeft">— mm/yr (P75)</span>
+          <span id="horizontalGlyphLegendBarEllipseText" class="horizontalLegendText horizontalLegendTextRight">— mm/yr (95% major)</span>
+        </div>
+
+        <div id="horizontalParticleLegendBar" class="legendBar horizontalReferenceLegend hParticleLegendBar" title="Horizontal flow reference · P75 speed at left and directional 1σ uncertainty at right">
+          <canvas id="horizontalParticleLegendCanvas" class="horizontalLegendCanvas" aria-hidden="true"></canvas>
+          <span class="horizontalLegendDivider" aria-hidden="true"></span>
+          <span id="horizontalParticleLegendBarSpeedText" class="horizontalLegendText horizontalLegendTextLeft">— mm/yr (P75)</span>
+          <span id="horizontalParticleLegendBarUncertaintyText" class="horizontalLegendText horizontalLegendTextRight">σθ —</span>
+        </div>
+
+        <div id="verticalUncertaintyLegendBar" class="legendBar verticalUncertaintyLegend" title="Vertical uncertainty relief">
+          <svg id="verticalUncertaintyLegendSvg" class="verticalUncertaintyLegendSvg" viewBox="0 0 320 28" preserveAspectRatio="none" aria-hidden="true">
+            <defs>
+              <linearGradient id="verticalUncertaintyLegendMidlineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="rgb(255, 216, 143)" stop-opacity="0.14" />
+                <stop offset="100%" stop-color="rgb(255, 216, 143)" stop-opacity="0.32" />
+              </linearGradient>
+              <linearGradient id="verticalUncertaintyLegendProfileGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="rgb(255, 216, 143)" stop-opacity="0.12" />
+                <stop offset="28%" stop-color="rgb(255, 216, 143)" stop-opacity="0.35" />
+                <stop offset="100%" stop-color="rgb(255, 216, 143)" stop-opacity="0.96" />
+              </linearGradient>
+            </defs>
+            <line id="verticalUncertaintyLegendMidline" x1="20" y1="14" x2="300" y2="14"></line>
+            <path id="verticalUncertaintyLegendProfile" d="M 20 14 L 300 14"></path>
+          </svg>
+          <span id="verticalUncertaintyLegendZeroLabel" class="verticalUncertaintyLegendLabel verticalUncertaintyLegendLabelLeft">0</span>
+          <span id="verticalUncertaintyLegendRightLabel" class="verticalUncertaintyLegendLabel verticalUncertaintyLegendLabelRight">P75 0.00 mm</span>
+          <span id="verticalUncertaintyLegendTitle" class="verticalUncertaintyLegendTitle">σz (1σ) · mm</span>
+          <span id="verticalUncertaintyLegendProvenanceTag" class="verticalUncertaintyLegendProvenanceTag" hidden>demo σ</span>
+          <span id="verticalUncertaintyLegendBarText" class="srOnly">Vertical uncertainty relief · σz (1σ) · mm · 0 to P75</span>
+        </div>
+
+        <div id="verticalVelocityLegend" class="vertical-velocity-legend legendBar" title="Adaptive vertical velocity colour scale">
+          <div id="verticalVelocityLegendTitle" class="vertical-velocity-legend-title">Vertical velocity · mm/yr</div>
+          <div id="verticalVelocityLegendScale" class="vertical-velocity-legend-scale"></div>
+          <div id="verticalVelocityLegendLabels" class="vertical-velocity-legend-labels"></div>
+          <div id="verticalVelocityLegendNote" class="vertical-velocity-legend-note">Preparing adaptive vertical-velocity scale…</div>
+        </div>
+      </aside>
+
+      <aside id="viewerInfoPanel" aria-hidden="true">
+        <div class="infoPanelHeader"><span>Prototype1 · RUM based</span><button id="viewerInfoCloseButton" type="button" title="Close information">×</button></div>
+        <p><strong>2D Analysis</strong> is a flat vertical-rate map plus horizontal deformation field.</p>
+        <p><strong>3D Time Scene</strong> shows animated vertical displacement, datum, relief, and contextual caps.</p>
+        <p>The adaptive colour limits control contrast only; they are not hazard thresholds.</p>
+      </aside>
+
+      <div id="screenshotStatus" class="screenshot-status" aria-live="polite"></div>
+      <div id="tooltip" class="tooltip"></div>
+
+      <footer id="bottomStatusBar" aria-label="Map status and data credits">
+        <div id="bottomLeftGroup">
+          <img id="tuDelftLogo" alt="TU Delft" />
+          <span class="bottomCreditSeparator" aria-hidden="true">|</span>
+          <span id="bottomBrand">Proto1 RUM</span>
+        </div>
+        <div id="bottomRightReadouts">
+          <div id="bottomDistanceScaleWrap" aria-label="Map scale">
+            <div id="bottomDistanceScaleBarOuter"><div id="bottomDistanceScaleBar"></div></div>
+            <div id="bottomDistanceScaleLabel">—</div>
+          </div>
+          <div id="bottomCameraLabel">3D Camera z: —</div>
+          <div id="bottomCoordLabel">Lat: —, Lon: —</div>
+          <div id="fpsCounter" aria-live="polite">— ms / — FPS</div>
+        </div>
+      </footer>
+    </main>
+
+  </body>
 </html>
