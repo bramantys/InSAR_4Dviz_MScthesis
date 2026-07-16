@@ -1,0 +1,6 @@
+node_modules/
+dist/
+data/jakarta_enu_estimates.csv
+public/data/jakarta/*.json
+public/data/jakarta/*.bin
+!public/data/jakarta/.gitkeep
