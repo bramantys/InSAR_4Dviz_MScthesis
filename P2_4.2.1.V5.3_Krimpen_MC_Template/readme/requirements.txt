@@ -1,7 +1,0 @@
-numpy
-pandas
-pyarrow
-geopandas
-shapely
-pyproj
-mapbox-earcut

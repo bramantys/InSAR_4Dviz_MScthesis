@@ -1,0 +1,76 @@
+{
+  "schema": "proto2_parcel_preflight_summary_d3_v1",
+  "created_utc": "2026-08-24T13:15:56.082Z",
+  "ok": true,
+  "project": {
+    "key": "0824-delf",
+    "name": "260824_delfland_github",
+    "label": "260824_delfland_github",
+    "product_type": "parcel"
+  },
+  "geometry": {
+    "feature_count": 2300,
+    "polygon_count": 2081,
+    "multipolygon_count": 219,
+    "hole_count": 9,
+    "ring_count": 2528,
+    "point_count": 67365,
+    "invalid_record_count": 0,
+    "bbox": {
+      "min_x": 4.237546851,
+      "min_y": 51.91904988162314,
+      "max_x": 4.466073254,
+      "max_y": 52.018917976
+    },
+    "dbf_field_count": 18,
+    "cpg": "UTF-8",
+    "crs": {
+      "declared_authority": "EPSG:4326",
+      "prj_text": "GEOGCS[\"GCS_WGS_1984\",DATUM[\"D_WGS_1984\",SPHEROID[\"WGS_1984\",6378137.0,298.257223563]],PRIMEM[\"Greenwich\",0.0],UNIT[\"Degree\",0.0174532925199433]]",
+      "recognized_wgs84": true,
+      "matches_declared": true
+    }
+  },
+  "displacement": {
+    "row_count": 4116931,
+    "moving_parcel_count": 1127,
+    "epoch_count": 3653,
+    "epoch_min": "2016-01-01",
+    "epoch_max": "2025-12-31",
+    "ranges": {
+      "reversible_mm": {
+        "min": -78.82854461669922,
+        "max": 50.346229553222656
+      },
+      "irreversible_mm": {
+        "min": -80.74402618408203,
+        "max": 0
+      },
+      "total_mm": {
+        "min": -148.1631851196289,
+        "max": 35.95012664794922
+      },
+      "irreversible_velocity_mm_yr": {
+        "min": -8.073297500610352,
+        "max": -2.7079665660858154
+      }
+    },
+    "duplicate_parcel_epoch_count": 0,
+    "missing_parcel_epoch_count": 0,
+    "total_mismatch_count": 0,
+    "max_total_absolute_error_mm": 0
+  },
+  "join": {
+    "geometry_parcel_count": 2300,
+    "moving_parcel_count": 1127,
+    "blank_parcel_count": 1173,
+    "moving_without_geometry_count": 0
+  },
+  "uncertainty": {
+    "configured": false,
+    "status": "not_configured"
+  },
+  "adapter_ready": true,
+  "renderer_connected": false,
+  "next_batch": "P2D6"
+}

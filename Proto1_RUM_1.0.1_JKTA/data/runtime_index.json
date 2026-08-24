@@ -1,0 +1,14 @@
+{
+  "schema": "proto1_rum_runtime_index_v1",
+  "active_project_key": "0824-jkta",
+  "manifest": "0824-jkta/manifest.json",
+  "project": {
+    "name": "260824_Jkta_git",
+    "label": "260824_Jkta_git",
+    "key": "0824-jkta"
+  },
+  "contract_schema": "proto1_rum_runtime_contract_v1",
+  "config_fingerprint_sha256": "480ea21034e4656dcc7e319fcad53b600f804f881e589663b0c41b463b64e911",
+  "source_sha256": "36e1d393a8663bda11f1ecc7df932c565b2b516003a2137646e9734777dbb1a5",
+  "build_fingerprint_sha256": "be28099fd4457d50756da8d3a83fbfa5f657596a4ba57db3b0556115cb8ec7fa"
+}

@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="dark" name="color-scheme"/>
+<title>Proto2 Parcel — 4D InSAR Viewer · P2D10-R7A</title>
+  <script type="module" crossorigin src="./assets/index-B-e1uSV1.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-Bwne63Lr.css">
+</head>
+<body class="scene-3d drawer-closed p2-proto1-ui" data-deformation-mode="combined" data-irreversible-reference="model_baseline" data-reference-frame="datum">
+<main aria-label="Proto2 Parcel 4D InSAR viewer" id="viewerShell">
+<div aria-label="Parcel deformation scene" id="map"></div>
+<div id="studioViewfinderOverlay" aria-hidden="true">
+<div id="studioViewfinderFrame">
+<span class="studioViewfinderCorner studioViewfinderCornerTl"></span>
+<span class="studioViewfinderCorner studioViewfinderCornerTr"></span>
+<span class="studioViewfinderCorner studioViewfinderCornerBl"></span>
+<span class="studioViewfinderCorner studioViewfinderCornerBr"></span>
+<span id="studioViewfinderLabel">16:9 video frame</span>
+</div>
+</div>
+<aside aria-label="Viewer controls" class="drawerClosed" id="rightControlRoot">
+<section aria-hidden="false" id="rightDrawerPanel">
+<header aria-label="Display control" id="drawerDisplay">
+<div id="drawerDisplayHeader">
+<span id="drawerDisplayTitle">Display control</span>
+<div id="drawerHeaderActions">
+<button id="drawerDefaultsButton" title="Back to default visual settings" type="button">↺ Default</button>
+<button aria-expanded="false" aria-label="Open controls" id="rightDrawerBurger" title="Open controls" type="button">☰</button>
+</div>
+</div>
+<div id="drawerDisplayBody">
+<div class="displayControl" data-scene-3d-only="">
+<div class="controlHeader"><label for="verticalExagSlider">Vertical exaggeration</label><output id="verticalExagValue">1000×</output></div>
+<input id="verticalExagSlider" max="5000" min="100" step="100" type="range" value="1000"/>
+</div>
+<div class="displayControl" data-scene-2d-only="" hidden="">
+<div class="controlHeader"><label for="twoDOpacitySlider">Global opacity</label><output id="twoDOpacityValue">82%</output></div>
+<input id="twoDOpacitySlider" max="1" min="0.35" step="0.02" type="range" value="0.82"/>
+</div>
+</div>
+</header>
+<div aria-hidden="true" id="rightDrawerScroll" inert="">
+<section class="drawerSection collapsed" data-master-enabled="true" data-section="scene" id="drawerScene">
+<button aria-expanded="false" class="drawerSectionTitle" type="button"><span aria-checked="true" aria-label="Background and Scene on" class="drawerBinder" role="switch"></span><span class="drawerSectionName">Background and Scene</span></button>
+<div class="drawerSectionBody drawerSceneBody">
+<div aria-label="Background map and scene controls" class="drawerSceneControlGrid">
+<div class="drawerSceneSelect drawerSceneWideSelect">
+<label for="basemapModeSelect">Background map</label>
+<select id="basemapModeSelect">
+<option value="off">Off</option>
+<option selected="" value="bw">Soft B/W</option>
+<option value="map">Map</option>
+<option value="satellite">Satellite</option>
+</select>
+</div>
+<select aria-label="Reference grid mode" class="drawerSceneGridSelect" id="sceneGridModeSelect" title="Reference grid at the fixed Z=0 datum plane.">
+<option selected="" value="off">Grid: off</option>
+<option value="parcel">Grid: parcel</option>
+<option value="metric">Grid: 1 km</option>
+<option value="both">Grid: both</option>
+</select>
+<div class="drawerSceneSelect drawerSceneWideSelect">
+<label for="referenceFrameSelect">Reference frame</label>
+<select id="referenceFrameSelect">
+<option selected="" value="datum">Datum plane</option>
+<option value="surface">Cut block</option>
+</select>
+</div>
+<button aria-pressed="true" class="drawerScenePolygonButton active" id="scenePolygonToggle" title="Show/hide saved polygon annotations" type="button">Polygon</button>
+</div>
+</div>
+</section>
+<section class="drawerSection collapsed" data-master-enabled="true" data-section="parcel" id="drawerParcelComponents">
+<button aria-expanded="false" class="drawerSectionTitle" type="button"><span aria-checked="true" aria-label="Vertical Components — Parcel on" class="drawerBinder" role="switch"></span><span class="drawerSectionName">Vertical Components — Parcel</span></button>
+<div class="drawerSectionBody parcelComponentBody">
+<div class="parcelControlGroup parcelDeformationGroup">
+<div class="parcelControlGroupTitle">Deformation Mode</div>
+<div class="parcelModeCard">
+<label for="deformationModeSelect">Mode</label>
+<select id="deformationModeSelect">
+<option value="irreversible">Irreversible</option>
+<option value="reversible">Reversible</option>
+<option value="total">Total</option>
+<option selected="" value="combined">Combined</option>
+</select>
+</div>
+<div aria-label="Parcel colour encodings" class="parcelColorGrid">
+<div class="parcelColorCard">
+<label for="parcelCapColorModeSelect">Cap colour</label>
+<select id="parcelCapColorModeSelect"></select>
+</div>
+<div class="parcelColorCard">
+<label for="parcelWallColorModeSelect">Wall colour</label>
+<select id="parcelWallColorModeSelect"></select>
+</div>
+</div>
+<div aria-label="Parcel visual elements" class="parcelToggleGrid">
+<button aria-pressed="true" class="parcelVisualToggle active" id="showBlankButton" type="button">Blankie parcel</button>
+<button aria-pressed="true" class="parcelVisualToggle active" id="showWallsButton" type="button">Walls</button>
+<button aria-disabled="true" class="parcelVisualToggle" disabled="" id="uncertaintyReliefButton" title="Reserved for the uncertainty-relief implementation." type="button">Uncertainty relief</button>
+</div>
+</div>
+<div class="parcelControlGroup parcelBaselineGroup">
+<div class="parcelControlGroupTitle">Irreversible Deformation Baseline</div>
+<div class="parcelReferenceBlock">
+<div class="parcelReferenceTopGrid">
+<div class="parcelReferenceSelectCard">
+<label for="irreversibleReferenceSelect">Baseline</label>
+<select id="irreversibleReferenceSelect">
+<option selected="" value="model_baseline">Model baseline</option>
+<option value="selected_epoch">Selected date</option>
+</select>
+</div>
+<div class="parcelReferenceDateCard">
+<label for="irreversibleReferenceDateInput">Reference date</label>
+<input aria-label="Irreversible reference date" disabled="" id="irreversibleReferenceDateInput" type="date"/>
+</div>
+</div>
+<div aria-label="Selected irreversible reference date controls" class="referenceDateControls parcelReferenceDateControls" id="irreversibleReferenceDateControls">
+<div class="referenceDateSliderBlock parcelReferenceDateSliderBlock">
+<input aria-label="Available irreversible reference epochs" disabled="" id="irreversibleReferenceEpochSlider" max="0" min="0" step="1" type="range" value="0"/>
+<div class="referenceDateScale"><span id="irreversibleReferenceRangeStart">—</span><strong id="irreversibleReferenceSelectedLabel">—</strong><span id="irreversibleReferenceRangeEnd">—</span></div>
+</div>
+<div class="parcelReferenceActionRow">
+<button class="referenceDateAction" disabled="" id="useCurrentEpochReferenceButton" type="button">Use current epoch</button>
+</div>
+<div aria-live="polite" class="referenceDateValidation" hidden="" id="irreversibleReferenceValidation" role="status"></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="drawerSection collapsed" data-section="inspection" id="parcelInspectionSection">
+<button aria-expanded="false" class="drawerSectionTitle" type="button"><span aria-hidden="true" class="drawerBinder"></span><span class="drawerSectionName">Parcel Inspection</span></button>
+<div class="drawerSectionBody parcelInspectionBody">
+<form class="parcelSearchForm" id="parcelSearchForm" role="search">
+<label class="parcelSearchLabel" for="parcelSearchInput">Parcel ID</label>
+<div class="parcelSearchRow">
+<input aria-label="Search parcel ID" autocomplete="off" id="parcelSearchInput" inputmode="numeric" placeholder="Parcel ID" type="search"/>
+<button id="parcelSearchButton" type="submit">Find</button>
+</div>
+<div aria-live="polite" class="parcelSearchFeedback" id="parcelSearchFeedback" role="status">Search all parcel geometries in the active project by ID.</div>
+</form>
+<div class="parcelInspectionActions" id="parcelInspectionActions">
+<button disabled="" id="focusSelectedParcelButton" type="button">Focus selected</button>
+<button disabled="" id="clearSelectedParcelButton" type="button">Clear</button>
+</div>
+<div class="inspectionCard inspectionSubsection" id="parcelMetadataCard">
+<button aria-expanded="true" class="inspectionSubsectionHeader" data-inspection-toggle="parcelMetadataBody" type="button"><strong id="parcelMetadataTitle">No parcel selected</strong><span aria-hidden="true" class="inspectionSubsectionChevron">⌄</span></button>
+<div class="inspectionSubsectionBody" id="parcelMetadataBody">
+<div class="parcelMetadataGrid" id="parcelMetadataGrid"><span class="inspectionPlaceholder">Click a parcel or search by ID.</span></div>
+</div>
+</div>
+<div class="inspectionCard miniViewerCard inspectionSubsection" id="parcelMiniViewerCard">
+<button aria-expanded="true" class="inspectionSubsectionHeader" data-inspection-toggle="parcelMiniViewerBody" type="button"><strong>Selected parcel</strong><span aria-hidden="true" class="inspectionSubsectionChevron">⌄</span></button>
+<div class="inspectionSubsectionBody selectedParcelBody" id="parcelMiniViewerBody">
+<div class="miniViewerToolbar"><div class="miniViewerToolbarButtons"><button id="miniViewerTopButton" type="button">Top</button><button id="miniViewerResetButton" type="button">Reset view</button><button disabled="" id="miniViewerSavePngButton" type="button">Save PNG</button></div></div>
+<canvas aria-label="Interactive isolated selected parcel viewer" id="parcelMiniViewerCanvas"></canvas>
+</div>
+</div>
+</div>
+</section>
+<section class="drawerSection drawerMiniViewerSection" data-master-enabled="true" data-section="mini-viewer" id="drawerMiniViewer">
+<button aria-expanded="true" class="drawerSectionTitle" type="button"><span aria-checked="true" aria-label="Mini Viewer on" class="drawerBinder" role="switch"></span><span class="drawerSectionName">Mini Viewer</span></button>
+<div class="drawerSectionBody">
+<div aria-label="Full parcel field mini viewer" id="studioMiniViewerWell">
+<canvas aria-label="Full parcel field locator mini viewer" id="miniViewerCanvas"></canvas>
+<div id="miniViewerHeader"><span>Full field</span><span id="miniViewerStatus">Loading…</span></div>
+<div id="miniViewerHint">Full parcel field · click to pan</div>
+</div>
+</div>
+</section>
+<section class="drawerSection drawerStudioSection collapsed" data-section="studio" id="drawerStudio">
+<button aria-expanded="false" class="drawerSectionTitle" type="button"><span aria-hidden="true" class="drawerBinder"></span><span class="drawerSectionName">Studio Mode</span></button>
+<div class="drawerSectionBody">
+<details class="studioSubAccordion studioPolygonAccordion" id="studioPolygonAccordion">
+<summary class="studioSubAccordionHeader">
+<span class="studioSubAccordionTitle">Polygon markers</span>
+<span class="studioSubAccordionMeta studioPolygonStatus" id="studioPolygonStatus">No saved polygons</span>
+</summary>
+<div class="studioSubAccordionBody">
+<div aria-label="Studio polygon markers" id="studioPolygonPanel">
+<div class="studioPolygonTopline">
+<div><span class="studioPolygonTitle">Polygon annotations</span><span class="studioPolygonStatusNote">Saved locally · 3D follows local parcel top</span></div>
+<div class="studioPolygonTopActions">
+<button aria-pressed="true" class="studioPolygonVisibilityButton active" id="studioPolygonVisibilityButton" type="button">Hide all</button>
+<button class="studioPolygonAddButton" id="studioPolygonAddButton" type="button">Add polygon</button>
+</div>
+</div>
+<div class="studioPolygonDrawBar" hidden id="studioPolygonDrawBar">
+<span id="studioPolygonDrawStatus">Click map points · min 3</span>
+<div class="studioPolygonDrawActions"><button id="studioPolygonUndoButton" type="button">Undo</button><button disabled id="studioPolygonFinishButton" type="button">Finish</button><button id="studioPolygonCancelButton" type="button">Cancel</button></div>
+</div>
+<form class="studioPolygonSaveForm" hidden id="studioPolygonSaveForm">
+<label><span>Name</span><input autocomplete="off" id="studioPolygonNameInput" maxlength="42" placeholder="Parcel annotation" type="text"/></label>
+<label><span>Info</span><textarea id="studioPolygonInfoInput" maxlength="180" placeholder="Optional annotation note" rows="2"></textarea></label>
+<div aria-live="polite" class="studioPolygonFootprintMeta" id="studioPolygonFootprintMeta">0 parcels · 0 points</div>
+<div class="studioPolygonFormActions"><button id="studioPolygonSaveButton" type="submit">Save</button><button id="studioPolygonFormCancelButton" type="button">Back</button></div>
+</form>
+<div aria-live="polite" class="studioPolygonList" id="studioPolygonList"></div>
+</div>
+</div>
+</details>
+<details class="studioSubAccordion studioCaptureAccordion studioVideoModeOff" id="studioCaptureAccordion">
+<summary class="studioSubAccordionHeader studioVideoModeHeader">
+<span aria-hidden="true" class="studioVideoModeLamp"></span>
+<span class="studioSubAccordionTitle">Video mode</span>
+<span class="studioSubAccordionMeta studioCaptureStatus" id="studioCaptureStatus">Off</span>
+</summary>
+<div class="studioSubAccordionBody">
+<div aria-label="Studio video mode storyboard" id="studioCapturePanel">
+<div aria-label="Video setup" class="studioVideoSetupGrid">
+<label class="studioVideoSetupField" for="studioVideoAspectSelect"><span>Aspect ratio</span><select aria-label="Video aspect ratio" id="studioVideoAspectSelect"><option selected value="16:9">16:9 landscape</option><option value="9:16">9:16 portrait</option><option value="1:1">1:1 square</option></select></label>
+<label class="studioVideoSetupField" for="studioVideoLengthSelect"><span>Video length</span><select aria-label="Video length" id="studioVideoLengthSelect"><option selected value="60">1 min</option><option value="180">3 min</option><option value="300">5 min</option></select></label>
+</div>
+<div aria-label="Segment actions" class="studioCaptureActions studioSegmentPrimaryActions"><button id="studioCaptureCurrentViewButton" type="button">+ Add segment</button><button id="studioCaptureIntroButton" type="button">+ Intro</button><button id="studioCaptureClearButton" type="button">Clear</button></div>
+<div class="studioCaptureTopline"><div><span class="studioCaptureTitle">Selected editor</span><span class="studioCaptureStatusNote">Capture parcel scenes, edit them from the timeline</span></div></div>
+<div aria-live="polite" class="studioCaptureList studioSegmentList" id="studioCaptureList"></div>
+</div>
+</div>
+</details>
+</div>
+</section>
+</div>
+</section>
+</aside>
+<section aria-label="Epoch controls" id="epochPanel">
+<section aria-label="Selected parcel trendline" hidden="" id="parcelTrendlineCard">
+<div aria-hidden="true" id="parcelTrendlineResizeHandle" title="Drag to resize trendline"></div>
+<header id="parcelTrendlineHeader">
+<div id="parcelTrendlineTitleBlock">
+<div id="parcelTrendlineTitle">Parcel trendline</div>
+<div id="parcelTrendlineSubtitle">Select a moving parcel to inspect its time series.</div>
+</div>
+<div aria-label="Trendline controls" id="parcelTrendlineControls">
+<div aria-label="Trendline Y-axis controls" id="parcelTrendlineAxisGrid">
+<label class="trendlineControl trendlineAxisMode"><span>Y mode</span><select aria-label="Trendline Y-axis mode" id="parcelTrendlineAxisModeSelect"><option selected="" value="auto">Auto</option><option value="project">Project</option><option value="custom">Custom</option></select></label>
+<label class="trendlineControl trendlineCustomInput trendlineMinInput"><span>Min</span><input aria-label="Custom trendline Y minimum" disabled="" id="parcelTrendlineMinInput" inputmode="decimal" step="1" type="number"/></label>
+<label class="trendlineControl trendlineCustomInput trendlineMaxInput"><span>Max</span><input aria-label="Custom trendline Y maximum" disabled="" id="parcelTrendlineMaxInput" inputmode="decimal" step="1" type="number"/></label>
+</div>
+<label class="trendlineControl trendlineWeatherControl"><span>Weather</span><select aria-label="Trendline KNMI weather overlay" id="parcelTrendlineWeatherSelect"><option selected="" value="off">Off</option><option value="pe">P + E</option></select></label>
+<button class="trendlineTinyButton" id="parcelTrendlinePngButton" title="Export trendline as PNG" type="button">PNG</button>
+<button aria-label="Close trendline" class="trendlineTinyButton trendlineCloseButton" id="parcelTrendlineCloseButton" title="Close trendline" type="button">×</button>
+</div>
+</header>
+<div class="parcelTrendlineWrap" id="parcelTrendlineWrap">
+<svg aria-label="Selected parcel displacement trendline" id="parcelTrendlineSvg" preserveaspectratio="none"></svg>
+<div class="inspectionPlaceholder" id="parcelTrendlinePlaceholder">Select a moving parcel to inspect its time series.</div>
+</div>
+</section>
+<input id="epochSlider" max="364" min="0" step="1" type="range" value="0"/>
+<div id="epochBottomRow">
+<div id="epochControls">
+<button class="epochBtn" id="epochFirstButton" title="First epoch" type="button">⏮</button>
+<button class="epochBtn" id="epochPrevButton" title="Previous epoch" type="button">‹</button>
+<button class="epochBtn epochPlay" id="playButton" title="Play or pause" type="button">▶ Play</button>
+<button class="epochBtn" id="epochNextButton" title="Next epoch" type="button">›</button>
+<button class="epochBtn" id="epochLastButton" title="Last epoch" type="button">⏭</button>
+</div>
+<div class="epochSpeedControl"><label for="playbackSpeedSlider">Playback</label><input id="playbackSpeedSlider" max="8" min="0.25" step="0.25" type="range" value="1"/><output id="playbackSpeedValue">1×</output></div>
+<div id="epochTextGroup"><span id="epochLabel">Loading…</span></div>
+</div>
+</section>
+<section aria-label="Capture Timeline" hidden id="studioCaptureTimeline">
+<div class="studioTimelineTopRow"><div class="studioTimelineTitleBlock"><span class="studioTimelineTitle">Video Timeline</span><span id="studioTimelineHint">Add views from Video Mode in the drawer</span></div><div class="studioTimelineControls"><button aria-label="Play video preview" id="studioTimelinePlayButton" type="button">▶</button><span id="studioTimelineTimeLabel">00:00 / 01:00</span></div></div>
+<div aria-label="Storyboard order and preview time" class="studioTimelineTrack" id="studioTimelineTrack"><div class="studioTimelineSegments" id="studioTimelineSegments"></div><div aria-hidden="true" class="studioTimelineNeedle" id="studioTimelineNeedle"></div></div>
+</section>
+<aside aria-label="Navigation and legends" id="legendStack">
+<div aria-label="Navigation controls" class="legendBar navLegendBar" id="navBubblePanel">
+<div aria-label="Zoom controls" class="navZoomCapsule" id="zoomCapsule" role="group"><button aria-label="Zoom in" class="navBarButton navZoomButton zoomCapsuleButton" id="zoomInButton" title="Zoom in" type="button">+</button><span class="zoomDivider"></span><button aria-label="Zoom out" class="navBarButton navZoomButton zoomCapsuleButton" id="zoomOutButton" title="Zoom out" type="button">−</button></div>
+<button class="navBarButton navViewModeBtn" id="viewModeToggleButton" title="Switch 2D / 3D" type="button">2D</button>
+<button aria-label="Reset north" class="navBarButton navCompassButton" id="compassBubbleButton" title="Reset north" type="button"><span aria-hidden="true" id="compassNeedle"></span></button>
+<button aria-label="Project information" class="navBarButton" id="navInfoButton" title="Project information" type="button">ⓘ</button>
+<button aria-label="Save screenshot" class="navBarButton" id="screenshotButton" title="Save screenshot" type="button">▣</button>
+<button aria-label="Fullscreen" class="navBarButton" id="fullscreenButton" title="Fullscreen" type="button">⛶</button>
+</div>
+<div class="legendBar parcelLegend" id="parcelLegend">
+<div class="legendChannel" id="primaryLegend">
+<div class="legendTitle" id="legendTitle">Combined · reversible band colour (mm)</div>
+<div class="legendRamp" id="legendRamp"></div>
+<div class="legendLabels"><span id="legendMin">—</span><span id="legendCenter">0</span><span id="legendMax">—</span></div>
+<div class="legendNote" id="legendNote">Upper band colour follows reversible displacement.</div>
+</div>
+<div class="legendChannel secondaryLegend" hidden="" id="secondaryLegend">
+<div class="legendTitle" id="secondaryLegendTitle">Irreversible body colour</div>
+<div class="legendRamp" id="secondaryLegendRamp"></div>
+<div class="legendLabels"><span id="secondaryLegendMin">—</span><span id="secondaryLegendCenter"></span><span id="secondaryLegendMax">—</span></div>
+<div class="legendNote" id="secondaryLegendNote"></div>
+</div>
+</div>
+</aside>
+<aside aria-hidden="true" id="viewerInfoPanel">
+<div class="infoPanelHeader"><span>Prototype2 · Parcel based · P2D10-R7A</span><button id="viewerInfoCloseButton" type="button">×</button></div>
+<p><strong>Reference frame:</strong> Datum plane keeps the accepted apron and collar at Z=0. Cut block leaves every cap at the same data position inside a recessed excavation with a 50 m widened rim, a fixed visual floor, and an exterior Z=0 depth occluder; the floor and margin are not scientific data.</p>
+<p><strong>Irreversible reference:</strong> Model baseline preserves the source irreversible values. Selected date subtracts each parcel’s irreversible value at that date; it does not follow the current Studio segment.</p>
+<p><strong>Irreversible:</strong> permanent subsidence relative to the selected irreversible reference. Colour can show current displacement or long-term velocity.</p>
+<p><strong>Reversible:</strong> always shows the original date-specific R(t). It is not changed by the irreversible reference.</p>
+<p><strong>Total:</strong> referenced irreversible + original reversible R(t).</p>
+<p><strong>Combined:</strong> lower cap = referenced irreversible; upper cap = referenced irreversible + R(t). The gap between them always equals R(t).</p>
+<p><strong>Colour encoding:</strong> Cap and wall colours can be chosen independently where the active mode supports it. Irreversible and the lower Combined body use irreversible velocity or displacement; Reversible stays fixed to its zero-centred reversible scale; Total offers reversible, Total-displacement, or irreversible-velocity colour without changing height geometry.</p>
+<p><strong>Parcel inspection:</strong> D10B places the selected-parcel trendline with the epoch controls, keeps the isolated parcel mini viewer in the right drawer, and preserves the D8/D9 scientific interaction foundation. Trendline graph seeking remains scheduled for the post-layout correction.</p>
+<p><strong>Persistence:</strong> deformation mode, reference frame, irreversible reference date, per-mode exaggeration, and colour selections are stored locally in this browser. “Default” restores the controlled comparison baseline.</p>
+<p>The reference ground is Z=0. It is clipped exactly around all parcel footprints in EPSG:28992. Town holes remain basemap windows, and the 0.12 m Combined render bias is only a depth-separation device.</p>
+</aside>
+<div aria-live="polite" id="screenshotStatus"></div>
+<footer aria-label="Map status and data credits" id="bottomStatusBar"><div id="bottomLeftGroup"><img alt="TU Delft" id="tuDelftLogo" src="data:image/png;base64,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"/><span aria-hidden="true" class="bottomCreditSeparator">|</span><span id="bottomBrand">Proto2 Parcel</span></div><div id="bottomRightReadouts"><div aria-label="Map scale" id="bottomDistanceScaleWrap"><div id="bottomDistanceScaleBarOuter"><div id="bottomDistanceScaleBar"></div></div><span id="bottomDistanceScaleLabel">—</span></div><span id="bottomCameraLabel">3D camera z: —</span><span id="bottomCoordLabel">Lat —, Lon —</span><span id="frameMsCounter">— ms</span><span id="fpsCounter">— FPS</span></div></footer>
+</main>
+</body>
+</html>

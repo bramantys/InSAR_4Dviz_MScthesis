@@ -1,0 +1,234 @@
+{
+  "schema": "proto2_parcel_canonical_inventory_v1",
+  "created_utc": "2026-08-24T13:05:49.607Z",
+  "project": {
+    "key": "0824-krim",
+    "name": "260824_krimpen_github",
+    "label": "260824_krimpen_github",
+    "product_type": "parcel"
+  },
+  "canonical_channels": [
+    "reversible",
+    "irreversible"
+  ],
+  "total_definition": "reversible_plus_irreversible",
+  "unit": "mm",
+  "geometry": {
+    "feature_count": 5562,
+    "polygon_count": 5169,
+    "multipolygon_count": 393,
+    "hole_count": 25,
+    "ring_count": 5980,
+    "point_count": 255192,
+    "invalid_record_count": 0,
+    "bbox": {
+      "min_x": 4.596357433804644,
+      "min_y": 51.892406506036146,
+      "max_x": 4.876226998953211,
+      "max_y": 52.02190914944085
+    },
+    "dbf_field_count": 22,
+    "cpg": "UTF-8",
+    "crs": {
+      "declared_authority": "EPSG:4326",
+      "prj_text": "GEOGCS[\"GCS_WGS_1984\",DATUM[\"D_WGS_1984\",SPHEROID[\"WGS_1984\",6378137.0,298.257223563]],PRIMEM[\"Greenwich\",0.0],UNIT[\"Degree\",0.0174532925199433]]",
+      "recognized_wgs84": true,
+      "matches_declared": true
+    }
+  },
+  "displacement": {
+    "row_count": 14330719,
+    "moving_parcel_count": 3923,
+    "epoch_count": 3653,
+    "epoch_min": "2016-01-01",
+    "epoch_max": "2025-12-31",
+    "ranges": {
+      "reversible_mm": {
+        "min": -80.6067123413086,
+        "max": 48.51183319091797
+      },
+      "irreversible_mm": {
+        "min": -101.3281478881836,
+        "max": 0
+      },
+      "total_mm": {
+        "min": -164.0601577758789,
+        "max": 34.65277862548828
+      },
+      "irreversible_velocity_mm_yr": {
+        "min": -10.131427764892578,
+        "max": -2.9451074600219727
+      }
+    },
+    "duplicate_parcel_epoch_count": 0,
+    "missing_parcel_epoch_count": 0,
+    "total_mismatch_count": 0,
+    "max_total_absolute_error_mm": 0
+  },
+  "join": {
+    "geometry_parcel_count": 5562,
+    "moving_parcel_count": 3923,
+    "blank_parcel_count": 1639,
+    "moving_without_geometry_count": 0
+  },
+  "source_fingerprints": {
+    "project_config_sha256": "f4360121ee7703f3dae38eccb23063d5e49c0965fcf95f1e41e38369f506e8ea",
+    "geometry_shp_sha256": "a2c99255baaf518dc5260262e5033986b4d9a407f81a339dbfdfbf0f5c39e719",
+    "deformation_source_sha256": "e51bd1ed746d438ca36add754504cc83bc49c784a0d582f3ab8205bfe9525a47",
+    "displacement_csv_sha256": null,
+    "spams_generation_sources": {
+      "model_parameters": {
+        "file": "D:/Kuliah/Q7/Thesis/260627_Gameplan2/4.Web/4.3 Real use/Proto2_Parcel_1.0.0/data/krim1/model_params/nl_krimpenerwaard_spams10.parquet",
+        "sha256": "e51bd1ed746d438ca36add754504cc83bc49c784a0d582f3ab8205bfe9525a47"
+      },
+      "model_metadata": {
+        "file": "D:/Kuliah/Q7/Thesis/260627_Gameplan2/4.Web/4.3 Real use/Proto2_Parcel_1.0.0/data/krim1/model_params/nl_krimpenerwaard_spams10.json",
+        "sha256": "86c22ddd32e5bcbe09c989f2df36eca7548e7f75c464c4a44721f24a8b404664"
+      },
+      "pyspams_utils": {
+        "file": "D:/Kuliah/Q7/Thesis/260627_Gameplan2/4.Web/4.3 Real use/Proto2_Parcel_1.0.0/data/krim1/pyspams/utils.py",
+        "sha256": "4c3620c93a0f56f60a89e70d8dc8aa8895b1ef5064ba320aaf67f5ed648216e1"
+      },
+      "knmi": {
+        "344": {
+          "file": "D:/Kuliah/Q7/Thesis/260627_Gameplan2/4.Web/4.3 Real use/Proto2_Parcel_1.0.0/data/krim1/KNMI/etmgeg_344.txt",
+          "sha256": "52fe6f52b1dc433e4a3feb47e5c6c3258aa305056eb99fc7473e2b8aca903597"
+        },
+        "348": {
+          "file": "D:/Kuliah/Q7/Thesis/260627_Gameplan2/4.Web/4.3 Real use/Proto2_Parcel_1.0.0/data/krim1/KNMI/etmgeg_348.txt",
+          "sha256": "a88a1cc4f258b703d017b45c7103d6922a994dc991a0c419162650386f9650bd"
+        }
+      }
+    },
+    "project_inputs": {
+      "schema": "proto2_project_input_fingerprint_r8c_v1",
+      "file_count": 10,
+      "required_file_count": 10,
+      "missing_required": [],
+      "package_file_count": 0,
+      "external_file_count": 10,
+      "files": [
+        {
+          "role": "geometry.shp",
+          "reference": "D:/Kuliah/Q7/Thesis/260627_Gameplan2/4.Web/4.3 Real use/Proto2_Parcel_1.0.0/data/krim1/geometry/krimpenerwaard_attributes_wgs84.shp",
+          "required": true,
+          "owner": "scientific_input",
+          "present": true,
+          "size_bytes": 4396316,
+          "sha256": "a2c99255baaf518dc5260262e5033986b4d9a407f81a339dbfdfbf0f5c39e719",
+          "storage": "external"
+        },
+        {
+          "role": "geometry.shx",
+          "reference": "D:/Kuliah/Q7/Thesis/260627_Gameplan2/4.Web/4.3 Real use/Proto2_Parcel_1.0.0/data/krim1/geometry/krimpenerwaard_attributes_wgs84.shx",
+          "required": true,
+          "owner": "scientific_input",
+          "present": true,
+          "size_bytes": 44596,
+          "sha256": "e7bf76c2004be63fc8bd0c7629e22a5c49dc2282220b4c4db37e8cad53fa6c1a",
+          "storage": "external"
+        },
+        {
+          "role": "geometry.dbf",
+          "reference": "D:/Kuliah/Q7/Thesis/260627_Gameplan2/4.Web/4.3 Real use/Proto2_Parcel_1.0.0/data/krim1/geometry/krimpenerwaard_attributes_wgs84.dbf",
+          "required": true,
+          "owner": "scientific_input",
+          "present": true,
+          "size_bytes": 11797740,
+          "sha256": "a84e26d182fc461a7813410098c7fde950666cccc9111eefb7895aa3a2affa48",
+          "storage": "external"
+        },
+        {
+          "role": "geometry.prj",
+          "reference": "D:/Kuliah/Q7/Thesis/260627_Gameplan2/4.Web/4.3 Real use/Proto2_Parcel_1.0.0/data/krim1/geometry/krimpenerwaard_attributes_wgs84.prj",
+          "required": true,
+          "owner": "scientific_input",
+          "present": true,
+          "size_bytes": 145,
+          "sha256": "a02a27b1d1982c8516d83398e85a3c8b1aef1713c13ef4d84d7bde17430c07c4",
+          "storage": "external"
+        },
+        {
+          "role": "geometry.cpg",
+          "reference": "D:/Kuliah/Q7/Thesis/260627_Gameplan2/4.Web/4.3 Real use/Proto2_Parcel_1.0.0/data/krim1/geometry/krimpenerwaard_attributes_wgs84.cpg",
+          "required": true,
+          "owner": "scientific_input",
+          "present": true,
+          "size_bytes": 5,
+          "sha256": "3ad3031f5503a4404af825262ee8232cc04d4ea6683d42c5dd0a2f2a27ac9824",
+          "storage": "external"
+        },
+        {
+          "role": "spams.model_parameters",
+          "reference": "D:/Kuliah/Q7/Thesis/260627_Gameplan2/4.Web/4.3 Real use/Proto2_Parcel_1.0.0/data/krim1/model_params/nl_krimpenerwaard_spams10.parquet",
+          "required": true,
+          "owner": "scientific_input",
+          "present": true,
+          "size_bytes": 543734,
+          "sha256": "e51bd1ed746d438ca36add754504cc83bc49c784a0d582f3ab8205bfe9525a47",
+          "storage": "external"
+        },
+        {
+          "role": "spams.model_metadata",
+          "reference": "D:/Kuliah/Q7/Thesis/260627_Gameplan2/4.Web/4.3 Real use/Proto2_Parcel_1.0.0/data/krim1/model_params/nl_krimpenerwaard_spams10.json",
+          "required": true,
+          "owner": "scientific_input",
+          "present": true,
+          "size_bytes": 282,
+          "sha256": "86c22ddd32e5bcbe09c989f2df36eca7548e7f75c464c4a44721f24a8b404664",
+          "storage": "external"
+        },
+        {
+          "role": "spams.utils",
+          "reference": "D:/Kuliah/Q7/Thesis/260627_Gameplan2/4.Web/4.3 Real use/Proto2_Parcel_1.0.0/data/krim1/pyspams/utils.py",
+          "required": true,
+          "owner": "scientific_input",
+          "present": true,
+          "size_bytes": 5455,
+          "sha256": "4c3620c93a0f56f60a89e70d8dc8aa8895b1ef5064ba320aaf67f5ed648216e1",
+          "storage": "external"
+        },
+        {
+          "role": "knmi.344",
+          "reference": "D:/Kuliah/Q7/Thesis/260627_Gameplan2/4.Web/4.3 Real use/Proto2_Parcel_1.0.0/data/krim1/KNMI/etmgeg_344.txt",
+          "required": true,
+          "owner": "scientific_input",
+          "present": true,
+          "size_bytes": 6373272,
+          "sha256": "52fe6f52b1dc433e4a3feb47e5c6c3258aa305056eb99fc7473e2b8aca903597",
+          "storage": "external"
+        },
+        {
+          "role": "knmi.348",
+          "reference": "D:/Kuliah/Q7/Thesis/260627_Gameplan2/4.Web/4.3 Real use/Proto2_Parcel_1.0.0/data/krim1/KNMI/etmgeg_348.txt",
+          "required": true,
+          "owner": "scientific_input",
+          "present": true,
+          "size_bytes": 3679772,
+          "sha256": "a88a1cc4f258b703d017b45c7103d6922a994dc991a0c419162650386f9650bd",
+          "storage": "external"
+        },
+        {
+          "role": "presentation.ground_envelope_seed",
+          "reference": "_internal/projects/0824-krim/ground_envelope_seed.geojson",
+          "required": false,
+          "owner": "project_presentation_input",
+          "present": false,
+          "size_bytes": null,
+          "sha256": null,
+          "storage": "package"
+        }
+      ],
+      "set_sha256": "20744f4276e649dcef4714d3fe05d47ab43b886229298894174e79b064a51ef8"
+    },
+    "project_input_set_sha256": "20744f4276e649dcef4714d3fe05d47ab43b886229298894174e79b064a51ef8"
+  },
+  "canonical_files": {
+    "parcel_index": "parcel_index.json",
+    "epoch_axis": "epoch_axis.json",
+    "moving_parcel_ids": "moving_parcel_ids.json",
+    "preflight_report": "preflight_report.json"
+  },
+  "renderer_connected": false,
+  "next_batch": "P2D6"
+}

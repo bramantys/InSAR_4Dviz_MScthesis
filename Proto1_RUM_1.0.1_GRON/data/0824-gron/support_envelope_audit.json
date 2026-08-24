@@ -1,0 +1,116 @@
+{
+  "schema": "proto1_rum_support_envelope_audit_v1",
+  "project": {
+    "name": "260824_groninen_gitub",
+    "label": "260824_groninen_gitub",
+    "key": "0824-gron",
+    "description": "tried on github",
+    "prototype": "proto1-rum",
+    "product_type": "rum",
+    "instance_id": "b1342528-9260-4c9c-8c93-13f3f666f8ce"
+  },
+  "meaning": "Audit record for the completed Proto1 RUM study-area support opening. Every observed RUM must remain inside the support field; blankies only complete bounded gaps and are interpolated from observed neighbours.",
+  "counts": {
+    "observedRumCount": 3400,
+    "interpolatedBlankieCount": 1485,
+    "structuralCellCount": 4885,
+    "openNoDataCellCount": 1163,
+    "gridCellCount": 6048
+  },
+  "supportBounds": {
+    "iMin": 0,
+    "iMax": 83,
+    "jMin": 0,
+    "jMax": 71
+  },
+  "selection": {
+    "mode": "completed_support_envelope_v2_bounded_spans_component_bridging_v1",
+    "selectionBasis": "live_measurements_only",
+    "rule": "live_union_diamond_closing_then_bounded_orthogonal_span_fill_then_bounded_component_bridging_then_4_neighbour_hole_fill",
+    "closingKernel": "manhattan_diamond_4_neighbour",
+    "closingRadiusCells": 3,
+    "fillEnclosedHoles": true,
+    "selectedCellCount": 1485,
+    "closingSelectedCellCount": 1252,
+    "initialHoleFillSelectedCellCount": 22,
+    "boundedSpanFill": {
+      "enabled": true,
+      "maximumGapCells": 12,
+      "passesExecuted": 1,
+      "perPassAddedCellCounts": [
+        211
+      ],
+      "addedCellCount": 211,
+      "rowAddedCellCount": 103,
+      "columnAddedCellCount": 131
+    },
+    "componentBridging": {
+      "enabled": true,
+      "maximumComponentsToAbsorb": 12,
+      "bridgeCount": 0,
+      "totalBridgeCellCount": 0,
+      "bridges": []
+    },
+    "postBridgeHoleFillSelectedCellCount": 0,
+    "rejectedNoObservationSupportCellCount": 0,
+    "diagonalRule": "corner_touch_does_not_connect",
+    "liveComponents": {
+      "componentCount": 55,
+      "largestComponentCellCount": 3243
+    },
+    "supportComponents": {
+      "componentCount": 1,
+      "largestComponentCellCount": 4885
+    },
+    "studyAreaBoundary": {
+      "connectivityPolicy": "prefer_single_component",
+      "allObservedCellsRetained": true,
+      "uncontainedObservedCellCount": 0,
+      "observedComponentCountBeforeCompletion": 55,
+      "detachedObservedComponentCountBeforeCompletion": 54,
+      "completedSupportComponentCount": 1,
+      "singleConnectedSupport": true,
+      "semantic": "Every observed RUM is part of the support opening. Bounded completion attempts to form one study-area ground boundary without extrapolating beyond the configured live-neighbour support rule.",
+      "warnings": []
+    },
+    "outsideFill": false
+  },
+  "interpolation": {
+    "blankieCount": 1485,
+    "runtimeRowStartIndex": 3400,
+    "runtimeRowEndIndex": 4884,
+    "interpolationMethod": "idw_grid_neighbours",
+    "selectedRadiusHistogram": {
+      "1": 1277,
+      "2": 191,
+      "3": 17
+    },
+    "neighbourCountHistogram": {
+      "2": 173,
+      "3": 243,
+      "4": 285,
+      "5": 301,
+      "6": 202,
+      "7": 139,
+      "8": 80,
+      "9": 23,
+      "10": 13,
+      "11": 12,
+      "12": 14
+    },
+    "interpolatedVerticalVelocityMmYr": {
+      "min": -7.014079627090402,
+      "max": -0.004543431713626561
+    },
+    "sourceRows": "observed live RUMs only",
+    "weightsComputedOnce": true
+  },
+  "invariants": {
+    "everyObservedRumRetained": true,
+    "uncontainedObservedCellCount": 0,
+    "completedSupportComponentCount": 1,
+    "singleConnectedSupport": true,
+    "blankiesNeverControlDatasetTuning": true,
+    "horizontalMotionNeverInterpolatedToBlankies": true
+  }
+}

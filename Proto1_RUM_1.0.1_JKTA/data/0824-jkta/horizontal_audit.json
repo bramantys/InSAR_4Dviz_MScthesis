@@ -1,0 +1,716 @@
+{
+  "schema": "proto1_rum_horizontal_audit_v1",
+  "project": {
+    "name": "260824_Jkta_git",
+    "label": "260824_Jkta_git",
+    "key": "0824-jkta",
+    "description": "upload in github_jkta",
+    "prototype": "proto1-rum",
+    "product_type": "rum",
+    "instance_id": "fa6e359c-da4f-4391-af9d-502fa3df9fc5"
+  },
+  "provenance": {
+    "statistics_basis": "observed_live_rums_only",
+    "blankies_included": false,
+    "horizontal_covariance_basis": "east_north_2x2",
+    "note": "Maximum values are retained for diagnostics. P75 is the visible legend reference; high-percentile values are used only for geometry scaling where configured."
+  },
+  "input": {
+    "schema": "proto1_rum_horizontal_input_audit_v1",
+    "observedRumCount": 4779,
+    "activeFeatureContract": {
+      "requiredFields": [
+        "east",
+        "north",
+        "var_east",
+        "var_north",
+        "covar_en"
+      ],
+      "requiredCovarianceSubmatrix": "east_north_2x2",
+      "consumers": [
+        "horizontal_arrow_significance",
+        "horizontal_1sigma_ellipse",
+        "raw_gpu_particles",
+        "optional_lsc_field"
+      ],
+      "blankiesExcluded": true
+    },
+    "validation": {
+      "covarianceToleranceRelative": 0.000001,
+      "invalidFiniteCount": 0,
+      "negativeHorizontalVarianceCount": 0,
+      "covarEnBoundViolationCount": 0,
+      "unusedCrossCovarianceWarnings": {
+        "covarEuBoundViolationCount": 0,
+        "covarNuBoundViolationCount": 0,
+        "total": 0,
+        "policy": "warning_until_a_feature_consumes_eu_or_nu"
+      },
+      "zeroSpeedCount": 0,
+      "status": "passed"
+    },
+    "observedStatistics": {
+      "speedMmYr": {
+        "count": 4779,
+        "min": 0.00013578808826989985,
+        "max": 16.8629524179521,
+        "p50": 0.5301939306476109,
+        "p75": 0.9337063610372077,
+        "p95": 1.9980088899941029,
+        "p98": 2.9573332438768207
+      },
+      "stdMajor1SigmaMmYr": {
+        "count": 4779,
+        "min": 0.017306535817729878,
+        "max": 2.2991698401982807,
+        "p50": 0.6894197827460503,
+        "p75": 0.9119905496938523,
+        "p95": 1.0150879455948756,
+        "p98": 1.0411023410961124
+      },
+      "stdMinor1SigmaMmYr": {
+        "count": 4779,
+        "min": 0.0061032184145264285,
+        "max": 0.8108113521162533,
+        "p50": 0.24312661746459374,
+        "p75": 0.32161708012434054,
+        "p95": 0.3579747852006059,
+        "p98": 0.36714886482798387
+      },
+      "directionalSigmaTheta1SigmaDeg": {
+        "count": 4779,
+        "min": 0.21446955288894418,
+        "max": 90,
+        "p50": 25.217891960747416,
+        "p75": 50.40270294072262,
+        "p95": 90,
+        "p98": 90
+      }
+    },
+    "warnings": []
+  },
+  "glyphs": {
+    "visibility": {
+      "minimumSpeedMmYr": 0.5,
+      "significanceSigmaMultiplier": 1,
+      "rule": "speed >= minimumSpeed AND speed >= significanceSigmaMultiplier * stdMajor1Sigma"
+    },
+    "ellipse": {
+      "confidenceProbability": 0.3934693402873666,
+      "confidenceScale": 1,
+      "sigmaMultiplier": 1,
+      "label": "1σ East-North uncertainty ellipse",
+      "centerPlacement": "arrow_tip"
+    },
+    "scaling": {
+      "rumSizeM": 450,
+      "mode": "auto_percentile_by_rum_size_same_as_arrow",
+      "arrowReferencePercentile": 99.5,
+      "arrowSpeedReferenceMmYr": 4.459920078807498,
+      "arrowMaxLengthM": 360,
+      "arrowScaleMPerMmYr": 80.71893523622457,
+      "ellipseReferencePercentile": 99.5,
+      "ellipseMajorReferenceMmYr": 1.1018752441847102,
+      "ellipseScaleMPerMmYr": 80.71893523622457,
+      "ellipseMaxDiameterM": 337.5,
+      "ellipseClipMode": "none",
+      "clearanceAboveCapM": 6
+    },
+    "legend": {
+      "statistic": "P75",
+      "percentile": 75,
+      "speedP75MmYr": 1.5737831770852024,
+      "ellipseMajorP75MmYr": 0.8134411087350761,
+      "ellipseMinorP75MmYr": 0.28686322937480424,
+      "arrowReferenceMmYr": 4.459920078807498,
+      "ellipseMajorReferenceMmYr": 1.1018752441847102,
+      "confidenceProbability": 0.3934693402873666,
+      "sigmaMultiplier": 1,
+      "label": "1σ major",
+      "visibleGlyphPairCount": 1782,
+      "directionalUncertainty": {
+        "sigmaThetaP75Deg": 15.21430855898904,
+        "percentile": 75,
+        "sigmaMultiplier": 1,
+        "capDeg": 90,
+        "visibleCellCount": 1782,
+        "rule": "sigma_theta = sigma_perp / |v|; values capped at 90 degrees; computed only for glyph-visible observed RUMs."
+      }
+    },
+    "summary": {
+      "liveRumCount": 4779,
+      "visibleGlyphPairCount": 1782,
+      "skippedLowSpeed": 2268,
+      "skippedInsignificantVsUncertainty": 729,
+      "skippedMissingUncertainty": 0
+    },
+    "visibleStatistics": {
+      "speedMmYr": {
+        "count": 1782,
+        "min": 0.5003109474239564,
+        "max": 16.8629524179521,
+        "p50": 1.1186755127418895,
+        "p75": 1.5737831770852024,
+        "p95": 3.0268700962253794,
+        "p98": 3.798255315646581
+      },
+      "stdMajor1SigmaMmYr": {
+        "count": 1782,
+        "min": 0.017306535817729878,
+        "max": 2.2991698401982807,
+        "p50": 0.6270257088646667,
+        "p75": 0.8134411087350761,
+        "p95": 1.033239246546231,
+        "p98": 1.0648380221832967
+      },
+      "directionalSigmaTheta1SigmaDeg": {
+        "count": 1782,
+        "min": 0.21446955288894418,
+        "max": 20.19138890013288,
+        "p50": 11.17589259456862,
+        "p75": 15.21430855898904,
+        "p95": 19.14840508667995,
+        "p98": 19.699149870287066
+      }
+    }
+  },
+  "particlesRaw": {
+    "sampling": {
+      "mode": "conservative_v1",
+      "rule": "conservative_v1: bilinear only when all four adjacent observed RUMs are available; otherwise nearest observed grid cell. Motion never interpolates blankies. Lifecycle stall checks use the nearest observed RUM speed, not a bilinear blend."
+    },
+    "spawnDomain": {
+      "rule": "live RUM + speed above stall threshold + all eight direct neighbours observed",
+      "supportNeighbourCount": 8,
+      "fallback": "all above-stall live RUMs only when no supported emitter cells exist",
+      "fallbackUsed": false
+    },
+    "legend": {
+      "statistic": "P75",
+      "percentile": 75,
+      "speedP75MmYr": 0.9337063610372077,
+      "directionalUncertainty": {
+        "sigmaThetaP75Deg": 15.21430855898904,
+        "percentile": 75,
+        "sigmaMultiplier": 1,
+        "capDeg": 90,
+        "visibleCellCount": 1782,
+        "visibilityFilter": {
+          "minimumSpeedMmYr": 0.5,
+          "significanceSigmaMultiplier": 1,
+          "rule": "speed >= minimumSpeed AND speed >= significanceSigmaMultiplier * stdMajor1Sigma"
+        },
+        "rule": "Reference sigma_theta across observed cells passing the horizontal glyph visibility filter; sigma_theta = sigma_perp / |v|; values capped at 90 degrees."
+      }
+    },
+    "summary": {
+      "liveRumCount": 4779,
+      "spawnCellCount": 3716,
+      "speedP95MmYr": 1.9980088899941029,
+      "excludedStalledRums": 201,
+      "excludedForMissingEightNeighbourSupport": 862,
+      "spawnFallbackUsed": false
+    }
+  },
+  "particlesLsc": {
+    "available": true,
+    "cached": true,
+    "schema": "deckgl_proto1_horizontal_lsc_signal_field_v1",
+    "legend": {
+      "statistic": "P75",
+      "percentile": 75,
+      "speedP75MmYr": 0.6262942830860122,
+      "directionalUncertainty": {
+        "sigmaThetaP75Deg": 35.91549146520509,
+        "percentile": 75,
+        "sigmaMultiplier": 1,
+        "capDeg": 90,
+        "visibleCellCount": 28512,
+        "validFineTexelCount": 76464,
+        "parentVisibilityFilter": {
+          "minimumSpeedMmYr": 0.5,
+          "significanceSigmaMultiplier": 1,
+          "rule": "speed >= minimumSpeed AND speed >= significanceSigmaMultiplier * stdMajor1Sigma"
+        },
+        "rule": "Reference sigma_theta across valid fine LSC texels whose parent observed RUM passes the horizontal glyph visibility filter; E/N covariance is zero because the LSC runtime models component prediction variances only."
+      }
+    },
+    "summary": {
+      "validFineTexelCount": 76464,
+      "sourceLiveRumCount": 4779,
+      "spawnCellCount": 3716,
+      "speedP95MmYr": 1.288079929351807,
+      "meanAbsPredMinusRawAtCoarseCentersMmYr": {
+        "east": 0.1846133054256119,
+        "north": 0.2578050700079917
+      },
+      "meanPredSigmaAtCoarseCentersMmYr": {
+        "east": 0.267149316847755,
+        "north": 0.2491867970429626
+      },
+      "meanPredSigmaMmYrBySupport": {
+        "interior": 0.2532059651024668,
+        "boundary": 0.27949624993304456
+      },
+      "fallbackCount": 0,
+      "factorizationFallbackCount": 0,
+      "fixedParentSystemCount": 4779
+    },
+    "lscModel": {
+      "algorithm": "ordinary_kriging_with_heteroscedastic_formal_noise",
+      "algorithmVersion": "ok_local_fixed_parent_k32_moore8_v1",
+      "subdivision": 4,
+      "variogramFitWeighting": "equal_binned_variogram_reference_locked",
+      "variogramFitWeightingMeaning": "Equal weight per populated empirical semivariogram bin. This is reference-locked because it reproduces the Jakarta validation parameters provided with the LSC handoff; pair counts remain recorded for audit.",
+      "neighborhood": "fixed_per_parent_cell_k32",
+      "neighborCount": 32,
+      "forcedImmediateNeighbourPolicy": "parent plus all available live Moore-8 neighbours are retained before distance ranking.",
+      "fixedNeighbourTradeoff": "Fixed parent-cell neighbour membership reuses two component LU factorizations across 16 fine texels. Weights remain exact for that fixed set; microscopic coarse-boundary membership seams are an explicit approximation.",
+      "domainRule": "fine texel valid iff the nearest coarse grid cell is a live observed RUM; no LSC value is generated into blankies or unfilled no-data.",
+      "sourceCoordinateGrid": {
+        "originX": 1556242.18123817,
+        "originY": 781489.2521008096,
+        "axisIM": [
+          450,
+          0
+        ],
+        "axisJM": [
+          0,
+          450
+        ]
+      },
+      "predictionRule": "nearest 32 live RUMs within min(3a, 4000 m), with fallback to nearest raw RUM when fewer than 4 neighbours are available.",
+      "predictionVarianceFloorMm2Yr2": 0.0001,
+      "east": {
+        "component": "east",
+        "c0": 0.10560949125112756,
+        "c1": 0.3512370548735827,
+        "a": 1276.6620572359595,
+        "effectiveRangeM": 3829.9861717078784,
+        "objective": 0.0024755183989636663,
+        "meanFormalVariance": 0.21137991267556844,
+        "signalToFormalNoise": 1.6616387547319633,
+        "fitWeighting": "equal_binned_variogram_reference_locked",
+        "variogram": {
+          "bins": [
+            {
+              "bin": 1,
+              "lagMinM": 450,
+              "lagMaxM": 900,
+              "lagCenterM": 675,
+              "pairCount": 18047,
+              "semivariance": 0.23197423481499796
+            },
+            {
+              "bin": 2,
+              "lagMinM": 900,
+              "lagMaxM": 1350,
+              "lagCenterM": 1125,
+              "pairCount": 35059,
+              "semivariance": 0.33018103424704087
+            },
+            {
+              "bin": 3,
+              "lagMinM": 1350,
+              "lagMaxM": 1800,
+              "lagCenterM": 1575,
+              "pairCount": 43023,
+              "semivariance": 0.3739109048559656
+            },
+            {
+              "bin": 4,
+              "lagMinM": 1800,
+              "lagMaxM": 2250,
+              "lagCenterM": 2025,
+              "pairCount": 50739,
+              "semivariance": 0.38563926291902456
+            },
+            {
+              "bin": 5,
+              "lagMinM": 2250,
+              "lagMaxM": 2700,
+              "lagCenterM": 2475,
+              "pairCount": 82785,
+              "semivariance": 0.40261354645807307
+            },
+            {
+              "bin": 6,
+              "lagMinM": 2700,
+              "lagMaxM": 3150,
+              "lagCenterM": 2925,
+              "pairCount": 73235,
+              "semivariance": 0.4169568099600067
+            },
+            {
+              "bin": 7,
+              "lagMinM": 3150,
+              "lagMaxM": 3600,
+              "lagCenterM": 3375,
+              "pairCount": 95695,
+              "semivariance": 0.42317275679447924
+            },
+            {
+              "bin": 8,
+              "lagMinM": 3600,
+              "lagMaxM": 4050,
+              "lagCenterM": 3825,
+              "pairCount": 109523,
+              "semivariance": 0.4261926830822434
+            },
+            {
+              "bin": 9,
+              "lagMinM": 4050,
+              "lagMaxM": 4500,
+              "lagCenterM": 4275,
+              "pairCount": 107468,
+              "semivariance": 0.43429570188010497
+            },
+            {
+              "bin": 10,
+              "lagMinM": 4500,
+              "lagMaxM": 4950,
+              "lagCenterM": 4725,
+              "pairCount": 127840,
+              "semivariance": 0.43859547522594255
+            },
+            {
+              "bin": 11,
+              "lagMinM": 4950,
+              "lagMaxM": 5400,
+              "lagCenterM": 5175,
+              "pairCount": 118271,
+              "semivariance": 0.4420008551266872
+            },
+            {
+              "bin": 12,
+              "lagMinM": 5400,
+              "lagMaxM": 5850,
+              "lagCenterM": 5625,
+              "pairCount": 144754,
+              "semivariance": 0.44550168898010345
+            },
+            {
+              "bin": 13,
+              "lagMinM": 5850,
+              "lagMaxM": 6300,
+              "lagCenterM": 6075,
+              "pairCount": 163170,
+              "semivariance": 0.44763115439805923
+            },
+            {
+              "bin": 14,
+              "lagMinM": 6300,
+              "lagMaxM": 6750,
+              "lagCenterM": 6525,
+              "pairCount": 152771,
+              "semivariance": 0.4524093532519424
+            },
+            {
+              "bin": 15,
+              "lagMinM": 6750,
+              "lagMaxM": 7200,
+              "lagCenterM": 6975,
+              "pairCount": 163289,
+              "semivariance": 0.45850738198032
+            },
+            {
+              "bin": 16,
+              "lagMinM": 7200,
+              "lagMaxM": 7650,
+              "lagCenterM": 7425,
+              "pairCount": 160115,
+              "semivariance": 0.46220545640805893
+            },
+            {
+              "bin": 17,
+              "lagMinM": 7650,
+              "lagMaxM": 8100,
+              "lagCenterM": 7875,
+              "pairCount": 189056,
+              "semivariance": 0.4642173702513979
+            },
+            {
+              "bin": 18,
+              "lagMinM": 8100,
+              "lagMaxM": 8550,
+              "lagCenterM": 8325,
+              "pairCount": 191463,
+              "semivariance": 0.46943749688932707
+            },
+            {
+              "bin": 19,
+              "lagMinM": 8550,
+              "lagMaxM": 9000,
+              "lagCenterM": 8775,
+              "pairCount": 186942,
+              "semivariance": 0.47865514716319124
+            }
+          ],
+          "maxOffset": 22
+        },
+        "detrend": {
+          "order": 2,
+          "basis": "[1, x, y, xy, x², y²]",
+          "normalizedCoordinates": true,
+          "coordinateCenterM": [
+            1576821.6539312021,
+            796088.4988051426
+          ],
+          "coordinateScaleM": [
+            11142.169034590777,
+            7427.112202334668
+          ],
+          "coefficients": [
+            -0.024129078119020153,
+            0.08006102825100828,
+            -0.03213444554591639,
+            -0.00035076755205589935,
+            0.06696253424581647,
+            -0.064133340024261
+          ],
+          "meaning": "Used only to estimate the semivariogram; not added back during prediction."
+        }
+      },
+      "north": {
+        "component": "north",
+        "c0": 0.2149735177066727,
+        "c1": 0.2771403633202128,
+        "a": 1333.5214321633246,
+        "effectiveRangeM": 4000.5642964899735,
+        "objective": 0.0039502211807085135,
+        "meanFormalVariance": 0.39216858641559327,
+        "signalToFormalNoise": 0.7066867998104227,
+        "fitWeighting": "equal_binned_variogram_reference_locked",
+        "variogram": {
+          "bins": [
+            {
+              "bin": 1,
+              "lagMinM": 450,
+              "lagMaxM": 900,
+              "lagCenterM": 675,
+              "pairCount": 18047,
+              "semivariance": 0.3003165152594434
+            },
+            {
+              "bin": 2,
+              "lagMinM": 900,
+              "lagMaxM": 1350,
+              "lagCenterM": 1125,
+              "pairCount": 35059,
+              "semivariance": 0.3966567759098897
+            },
+            {
+              "bin": 3,
+              "lagMinM": 1350,
+              "lagMaxM": 1800,
+              "lagCenterM": 1575,
+              "pairCount": 43023,
+              "semivariance": 0.43087513732798605
+            },
+            {
+              "bin": 4,
+              "lagMinM": 1800,
+              "lagMaxM": 2250,
+              "lagCenterM": 2025,
+              "pairCount": 50739,
+              "semivariance": 0.44512057181458614
+            },
+            {
+              "bin": 5,
+              "lagMinM": 2250,
+              "lagMaxM": 2700,
+              "lagCenterM": 2475,
+              "pairCount": 82785,
+              "semivariance": 0.4479286366169127
+            },
+            {
+              "bin": 6,
+              "lagMinM": 2700,
+              "lagMaxM": 3150,
+              "lagCenterM": 2925,
+              "pairCount": 73235,
+              "semivariance": 0.44435349210249014
+            },
+            {
+              "bin": 7,
+              "lagMinM": 3150,
+              "lagMaxM": 3600,
+              "lagCenterM": 3375,
+              "pairCount": 95695,
+              "semivariance": 0.44717164946498705
+            },
+            {
+              "bin": 8,
+              "lagMinM": 3600,
+              "lagMaxM": 4050,
+              "lagCenterM": 3825,
+              "pairCount": 109523,
+              "semivariance": 0.45834459199859184
+            },
+            {
+              "bin": 9,
+              "lagMinM": 4050,
+              "lagMaxM": 4500,
+              "lagCenterM": 4275,
+              "pairCount": 107468,
+              "semivariance": 0.46622185581529046
+            },
+            {
+              "bin": 10,
+              "lagMinM": 4500,
+              "lagMaxM": 4950,
+              "lagCenterM": 4725,
+              "pairCount": 127840,
+              "semivariance": 0.48058694639797417
+            },
+            {
+              "bin": 11,
+              "lagMinM": 4950,
+              "lagMaxM": 5400,
+              "lagCenterM": 5175,
+              "pairCount": 118271,
+              "semivariance": 0.48142630786819823
+            },
+            {
+              "bin": 12,
+              "lagMinM": 5400,
+              "lagMaxM": 5850,
+              "lagCenterM": 5625,
+              "pairCount": 144754,
+              "semivariance": 0.4815405684386139
+            },
+            {
+              "bin": 13,
+              "lagMinM": 5850,
+              "lagMaxM": 6300,
+              "lagCenterM": 6075,
+              "pairCount": 163170,
+              "semivariance": 0.48763380964726094
+            },
+            {
+              "bin": 14,
+              "lagMinM": 6300,
+              "lagMaxM": 6750,
+              "lagCenterM": 6525,
+              "pairCount": 152771,
+              "semivariance": 0.49217152562020144
+            },
+            {
+              "bin": 15,
+              "lagMinM": 6750,
+              "lagMaxM": 7200,
+              "lagCenterM": 6975,
+              "pairCount": 163289,
+              "semivariance": 0.4950721834594273
+            },
+            {
+              "bin": 16,
+              "lagMinM": 7200,
+              "lagMaxM": 7650,
+              "lagCenterM": 7425,
+              "pairCount": 160115,
+              "semivariance": 0.5010518531732335
+            },
+            {
+              "bin": 17,
+              "lagMinM": 7650,
+              "lagMaxM": 8100,
+              "lagCenterM": 7875,
+              "pairCount": 189056,
+              "semivariance": 0.5015189375967213
+            },
+            {
+              "bin": 18,
+              "lagMinM": 8100,
+              "lagMaxM": 8550,
+              "lagCenterM": 8325,
+              "pairCount": 191463,
+              "semivariance": 0.5028075919397998
+            },
+            {
+              "bin": 19,
+              "lagMinM": 8550,
+              "lagMaxM": 9000,
+              "lagCenterM": 8775,
+              "pairCount": 186942,
+              "semivariance": 0.5070457174182839
+            }
+          ],
+          "maxOffset": 22
+        },
+        "detrend": {
+          "order": 2,
+          "basis": "[1, x, y, xy, x², y²]",
+          "normalizedCoordinates": true,
+          "coordinateCenterM": [
+            1576821.6539312021,
+            796088.4988051426
+          ],
+          "coordinateScaleM": [
+            11142.169034590777,
+            7427.112202334668
+          ],
+          "coefficients": [
+            -0.12461569809180792,
+            -0.03113972292355485,
+            0.01076487181377763,
+            -0.04014886622607468,
+            0.03514641330413831,
+            0.1202784033378393
+          ],
+          "meaning": "Used only to estimate the semivariogram; not added back during prediction."
+        }
+      },
+      "meaning": {
+        "variogramTrendPolicy": "Variogram estimated on second-order residuals to avoid trend contamination of the covariance model; prediction uses ordinary kriging in local moving neighborhoods, whose locally-constant-mean assumption absorbs the regional trend. In pure interpolation with moving neighborhoods this is practically equivalent to trend-model kriging, while avoiding imprinting a global polynomial misfit into the predictions.",
+        "noiseModel": "Formal per-cell E/N variance is placed on the kriging diagonal. Fitted nugget is recorded only as a cross-check and is not substituted for the formal variances.",
+        "crossComponentCovariance": "Not modeled for the LSC prediction. Covariance texture stores 0.0 in the E/N cross-term; Monte Carlo axes are E/N aligned in LSC mode.",
+        "estimatedModels": {
+          "east": {
+            "component": "east",
+            "c0": 0.10560949125112756,
+            "c1": 0.3512370548735827,
+            "a": 1276.6620572359595,
+            "effectiveRangeM": 3829.9861717078784,
+            "objective": 0.0024755183989636663,
+            "meanFormalVariance": 0.21137991267556844,
+            "signalToFormalNoise": 1.6616387547319633,
+            "fitWeighting": "equal_binned_variogram_reference_locked"
+          },
+          "north": {
+            "component": "north",
+            "c0": 0.2149735177066727,
+            "c1": 0.2771403633202128,
+            "a": 1333.5214321633246,
+            "effectiveRangeM": 4000.5642964899735,
+            "objective": 0.0039502211807085135,
+            "meanFormalVariance": 0.39216858641559327,
+            "signalToFormalNoise": 0.7066867998104227,
+            "fitWeighting": "equal_binned_variogram_reference_locked"
+          }
+        }
+      },
+      "validation": {
+        "validFineTexelCount": 76464,
+        "sourceLiveRumCount": 4779,
+        "spawnCellCount": 3716,
+        "speedP95MmYr": 1.288079929351807,
+        "meanAbsPredMinusRawAtCoarseCentersMmYr": {
+          "east": 0.1846133054256119,
+          "north": 0.2578050700079917
+        },
+        "meanPredSigmaAtCoarseCentersMmYr": {
+          "east": 0.267149316847755,
+          "north": 0.2491867970429626
+        },
+        "meanPredSigmaMmYrBySupport": {
+          "interior": 0.2532059651024668,
+          "boundary": 0.27949624993304456
+        },
+        "fallbackCount": 0,
+        "factorizationFallbackCount": 0,
+        "fixedParentSystemCount": 4779
+      }
+    }
+  }
+}

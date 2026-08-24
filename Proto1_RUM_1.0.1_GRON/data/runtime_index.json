@@ -1,0 +1,14 @@
+{
+  "schema": "proto1_rum_runtime_index_v1",
+  "active_project_key": "0824-gron",
+  "manifest": "0824-gron/manifest.json",
+  "project": {
+    "name": "260824_groninen_gitub",
+    "label": "260824_groninen_gitub",
+    "key": "0824-gron"
+  },
+  "contract_schema": "proto1_rum_runtime_contract_v1",
+  "config_fingerprint_sha256": "bf0dc030a84aad91c2a56356a83bc17af1d0d988a7ea0d5b983c030ed7faef9e",
+  "source_sha256": "06e9cc71deb7e6a79ff4ae80375fbd0b45ddb82c53635d624b810b8ff800b8fe",
+  "build_fingerprint_sha256": "797714f49c793a1fff99c66b7789dd763006ab6a315d9550fae95da6a3ff80d4"
+}

@@ -1,0 +1,534 @@
+{
+  "schema": "proto2_parcel_runtime_contract_d7_3_v1",
+  "batch": "P2D7.3",
+  "semantic_revision": "P2D7.3_pyspams_knmi_source",
+  "created_utc": "2026-08-24T13:09:39.258Z",
+  "project": {
+    "key": "0824-krim",
+    "name": "260824_krimpen_github",
+    "label": "260824_krimpen_github",
+    "product_type": "parcel"
+  },
+  "canonical_channels": [
+    "reversible",
+    "irreversible"
+  ],
+  "total_definition": "reversible_plus_irreversible",
+  "unit": "mm",
+  "array_layout": {
+    "order": "parcel-major_epoch-minor",
+    "index_formula": "flatIndex = runtimeRow * epochCount + epochIndex",
+    "byte_order": "little-endian",
+    "scalar_type": "float32"
+  },
+  "counts": {
+    "geometry_parcel_count": 5562,
+    "moving_parcel_count": 3923,
+    "blank_parcel_count": 1639,
+    "epoch_count": 3653,
+    "parcel_epoch_value_count": 14330719,
+    "geometry_coordinate_count": 255192
+  },
+  "bounds_wgs84": {
+    "min_x": 4.596357433804644,
+    "min_y": 51.892406506036146,
+    "max_x": 4.876226998953211,
+    "max_y": 52.02190914944085
+  },
+  "time": {
+    "first_epoch": "2016-01-01",
+    "last_epoch": "2025-12-31",
+    "epoch_count": 3653,
+    "initial_epoch": "last",
+    "playback_epochs_per_second": 8,
+    "axis_policy": "shared_from_generated_spams",
+    "reference_policy": "preserve_source_reference"
+  },
+  "ranges": {
+    "reversible_mm": {
+      "min": -80.6067123413086,
+      "max": 48.51183319091797
+    },
+    "irreversible_mm": {
+      "min": -101.3281478881836,
+      "max": 0
+    },
+    "total_mm": {
+      "min": -164.0601577758789,
+      "max": 34.65277862548828
+    },
+    "irreversible_velocity_mm_yr": {
+      "min": -10.131427764892578,
+      "max": -2.9451074600219727
+    }
+  },
+  "default_selected_reference_ranges": {
+    "reversible_mm": {
+      "min": -80.6067123413086,
+      "max": 48.51183319091797
+    },
+    "irreversible_mm": {
+      "min": -101.3281478881836,
+      "max": 0
+    },
+    "total_mm": {
+      "min": -164.0601577758789,
+      "max": 34.65277862548828
+    },
+    "irreversible_velocity_mm_yr": {
+      "min": -10.131427764892578,
+      "max": -2.9451074600219727
+    }
+  },
+  "irreversible_reference_contract": {
+    "available": [
+      "model_baseline",
+      "selected_epoch"
+    ],
+    "default": "model_baseline",
+    "model_baseline_meaning": "Use source irreversible displacement, already referenced to the PySPAMS run start.",
+    "model_start_epoch": "2016-01-01",
+    "selected_epoch_meaning": "Subtract each parcel irreversible value at the selected project epoch from that parcel at every epoch.",
+    "selected_epoch_scope": "user_selected_project_epoch",
+    "selected_epoch_default": "2016-01-01",
+    "selected_epoch_changes_with_studio_segment": false,
+    "reversible_only_affected": false,
+    "reversible_definition": "source_reversible_R_t",
+    "irreversible_definition_after_reference": "source_irreversible_I_t_minus_I_reference",
+    "total_definition_after_reference": "referenced_irreversible_plus_source_reversible",
+    "combined_lower_cap": "referenced_irreversible",
+    "combined_upper_cap": "referenced_irreversible_plus_source_reversible",
+    "combined_gap": "source_reversible_R_t",
+    "default_reference_irreversible_zero_violation_count": 0
+  },
+  "surface_view_floor_mm": {
+    "model_baseline": {
+      "irreversible": -116.52737007141113,
+      "reversible": -92.69771919250488,
+      "total": -188.66918144226074,
+      "combined": -188.66918144226074
+    },
+    "selected_epoch_default": {
+      "irreversible": -116.52737007141113,
+      "reversible": -92.69771919250488,
+      "total": -188.66918144226074,
+      "combined": -188.66918144226074
+    }
+  },
+  "surface_view_floor_policy": {
+    "selected_epoch": "runtime_compute_from_active_display_ranges",
+    "formula": "floor = mode_min - max(abs(mode_min) * margin_fraction, minimum_clearance_mm)",
+    "reversible_range_reference": "source_reversible_range_is_unchanged",
+    "is_scientific_data": false
+  },
+  "surface_view_floor_margin_fraction": 0.15,
+  "surface_view_floor_minimum_clearance_mm": 1,
+  "surface_view_floor_is_scientific_data": false,
+  "blank_parcel_policy": {
+    "classification": "geometry_without_displacement",
+    "visual_semantic": "muted_grey_clickable_no_data",
+    "interpolate": false
+  },
+  "scene_contract": {
+    "semantic_target": "ground_sinking_while_breathing",
+    "context_ground_apron": true,
+    "rejected_single_cutout_apron": true,
+    "rejected_tiled_ground": true,
+    "reference_ground_clipped": true,
+    "depth_collar": true,
+    "reference_ground_strategy": "chunked_exact_vector_difference",
+    "reference_ground_processing_crs": "EPSG:28992",
+    "reference_ground_metrics": {
+      "schema": "proto2_parcel_ground_clip_audit_d7_2r_v1",
+      "status": "passed",
+      "strategy": "chunked_exact_vector_difference",
+      "source_crs": "EPSG:4326",
+      "processing_crs": "EPSG:28992",
+      "envelope_source": "morphological_closing",
+      "envelope_seed_file": null,
+      "output_crs": "EPSG:4326",
+      "source_feature_count": 5562,
+      "prepared_polygon_part_count": 5568,
+      "repaired_source_geometry_count": 0,
+      "chunk_m": 500,
+      "closing_m": 250,
+      "reopen_fraction": 0.85,
+      "envelope_simplify_m": 5,
+      "precision_m": 0.01,
+      "epsilon_overlap_m": 0.05,
+      "minimum_fragment_m2": 1,
+      "collar_margin_m": 20000,
+      "surface_margin_m": 50,
+      "fill_town_holes": false,
+      "town_holes_policy": "preserve_as_basemap_windows",
+      "chunk_columns": 39,
+      "chunk_rows": 29,
+      "candidate_chunk_count": 670,
+      "intersected_chunk_count": 655,
+      "output_polygon_count": 3238,
+      "vertex_total": 267951,
+      "vertex_max_per_feature": 924,
+      "max_rings_per_feature": 14,
+      "depth_collar_feature_count": 1,
+      "surface_floor_polygon_count": 3292,
+      "surface_depth_collar_feature_count": 1,
+      "surface_rim_feature_count": 2,
+      "surface_candidate_chunk_count": 691,
+      "surface_intersected_chunk_count": 656,
+      "surface_floor_parcel_overlap_m2": 25.6924,
+      "surface_floor_uncovered_nonparcel_m2": 245.7508,
+      "surface_floor_uncovered_nonparcel_pct": 0.00041119,
+      "surface_envelope_area_m2": 145051369.936,
+      "surface_floor_union_area_m2": 59766247.55,
+      "surface_seconds": 37.153,
+      "apron_parcel_overlap_m2": 22.849,
+      "uncovered_nonparcel_m2": 268.3678,
+      "uncovered_nonparcel_pct": 0.00048719,
+      "envelope_area_m2": 140369216.513,
+      "target_nonparcel_area_m2": 55084313.892,
+      "ground_union_area_m2": 55084054.285,
+      "envelope_seconds": 131.033,
+      "clip_seconds": 11.955,
+      "total_seconds": 228.065,
+      "seam_contract": {
+        "chunk_overlap_m": 0.05,
+        "required_depth_compare": "less",
+        "reason": "Overlapping fragments prevent cracks; strict less prevents double-blended dark seams."
+      },
+      "outputs": {
+        "reference_ground": "reference_ground_clipped.geojson",
+        "depth_collar": "depth_collar.geojson",
+        "surface_reference_floor": "surface_reference_floor.geojson",
+        "surface_depth_collar": "surface_depth_collar.geojson",
+        "surface_rim_envelope": "surface_rim_envelope.geojson",
+        "audit": "ground_clip_audit.json"
+      },
+      "execution_mode": "python_project_specific",
+      "python_runtime": {
+        "executable": "C:/Users/DELL/miniconda3/python.exe",
+        "version": "3.12.3",
+        "discovery_source": "common-conda:miniconda3:base",
+        "profile": "runtime"
+      },
+      "envelope_seed": null
+    },
+    "town_holes_policy": "preserve_as_basemap_windows",
+    "fill_town_holes": false,
+    "seam_contract": {
+      "chunk_overlap_m": 0.05,
+      "required_depth_compare": "less",
+      "reason": "Overlapping fragments prevent cracks; strict less prevents double-blended dark seams."
+    },
+    "layer_order": [
+      "depth_collar",
+      "reference_ground_clipped",
+      "blank_parcel_caps",
+      "displacement_bands"
+    ],
+    "surface_semantics": "dynamic_zero_reference_displacement_bands_with_exact_clipped_ground_and_depth_collar",
+    "permanent_extrusion_walls": false,
+    "dynamic_displacement_band_walls": true,
+    "reference_ground_z_m": 0,
+    "reference_ground_is_scientific_reference": true,
+    "visual_datum_lift_m": 0,
+    "visual_datum_is_scientific_data": false,
+    "overlay_mode": "non_interleaved_transparent_canvas",
+    "epoch_update_strategy": "static_geometry_accessor_elevation",
+    "coordinate_rewrite_per_epoch": false,
+    "polygon_retessellation_per_epoch": false,
+    "ground_depth_write_enabled": true,
+    "ground_depth_compare": "less",
+    "combined_render_bias_m": 0.12,
+    "combined_render_bias_is_scientific_data": false,
+    "deformation_modes": [
+      "irreversible",
+      "reversible",
+      "total",
+      "combined"
+    ],
+    "default_deformation_mode": "combined",
+    "irreversible_references": [
+      "model_baseline",
+      "selected_epoch"
+    ],
+    "default_irreversible_reference": "model_baseline",
+    "selected_reference_epoch_default": "2016-01-01",
+    "selected_reference_changes_cap_data_values": true,
+    "selected_reference_changes_geometry_tessellation": false,
+    "reversible_only_reference_affected": false,
+    "total_after_reference": "referenced_irreversible_plus_source_reversible",
+    "combined_gap_after_reference": "source_reversible_R_t",
+    "default_vertical_exaggeration": 1000,
+    "maximum_vertical_exaggeration": 5000
+  },
+  "deformation_source": {
+    "type": "pyspams_knmi",
+    "normal_runtime_source_uses_csv": false,
+    "model_parameters": "D:/Kuliah/Q7/Thesis/260627_Gameplan2/4.Web/4.3 Real use/Proto2_Parcel_1.0.0/data/krim1/model_params/nl_krimpenerwaard_spams10.parquet",
+    "output_period": {
+      "start_date": "2016-01-01",
+      "end_date": "2025-12-31",
+      "interval_days": 1
+    },
+    "model": {
+      "parameter_row_order": "parquet_row_order",
+      "irreversible_velocity_definition": "final_generated_irreversible_mm / (generated_epoch_count / 365.25)",
+      "irreversible_velocity_period": "runtime_output_period",
+      "tau_min_days": 58,
+      "tau_max_days": 75,
+      "meteo_ids": [
+        344,
+        348
+      ],
+      "insar_estimation_start_date": "20160101",
+      "insar_estimation_end_date": "20221231",
+      "output_extends_beyond_insar_estimation_period": true
+    },
+    "engine": {
+      "reference_function": "utils.spams_model",
+      "production_implementation": "bundled_pyspams_spams_model_direct_per_parcel",
+      "engine_parity": {
+        "sample_parcels": [
+          {
+            "parcel_id": 294,
+            "max_reversible_abs_error_mm": 1.4210854715202004e-14,
+            "max_irreversible_abs_error_mm": 0,
+            "dry_flag_mismatch_count": 0
+          },
+          {
+            "parcel_id": 65327,
+            "max_reversible_abs_error_mm": 1.4210854715202004e-14,
+            "max_irreversible_abs_error_mm": 0,
+            "dry_flag_mismatch_count": 0
+          },
+          {
+            "parcel_id": 125932,
+            "max_reversible_abs_error_mm": 1.4210854715202004e-14,
+            "max_irreversible_abs_error_mm": 0,
+            "dry_flag_mismatch_count": 0
+          }
+        ],
+        "max_reversible_abs_error_mm": 1.4210854715202004e-14,
+        "max_irreversible_abs_error_mm": 0,
+        "dry_flag_mismatch_count": 0,
+        "passed": true
+      }
+    },
+    "validation_reference": {
+      "enabled": false,
+      "passed": null
+    },
+    "sources": {
+      "model_parameters": {
+        "file": "D:/Kuliah/Q7/Thesis/260627_Gameplan2/4.Web/4.3 Real use/Proto2_Parcel_1.0.0/data/krim1/model_params/nl_krimpenerwaard_spams10.parquet",
+        "sha256": "e51bd1ed746d438ca36add754504cc83bc49c784a0d582f3ab8205bfe9525a47"
+      },
+      "model_metadata": {
+        "file": "D:/Kuliah/Q7/Thesis/260627_Gameplan2/4.Web/4.3 Real use/Proto2_Parcel_1.0.0/data/krim1/model_params/nl_krimpenerwaard_spams10.json",
+        "sha256": "86c22ddd32e5bcbe09c989f2df36eca7548e7f75c464c4a44721f24a8b404664"
+      },
+      "pyspams_utils": {
+        "file": "D:/Kuliah/Q7/Thesis/260627_Gameplan2/4.Web/4.3 Real use/Proto2_Parcel_1.0.0/data/krim1/pyspams/utils.py",
+        "sha256": "4c3620c93a0f56f60a89e70d8dc8aa8895b1ef5064ba320aaf67f5ed648216e1"
+      },
+      "knmi": {
+        "344": {
+          "file": "D:/Kuliah/Q7/Thesis/260627_Gameplan2/4.Web/4.3 Real use/Proto2_Parcel_1.0.0/data/krim1/KNMI/etmgeg_344.txt",
+          "sha256": "52fe6f52b1dc433e4a3feb47e5c6c3258aa305056eb99fc7473e2b8aca903597"
+        },
+        "348": {
+          "file": "D:/Kuliah/Q7/Thesis/260627_Gameplan2/4.Web/4.3 Real use/Proto2_Parcel_1.0.0/data/krim1/KNMI/etmgeg_348.txt",
+          "sha256": "a88a1cc4f258b703d017b45c7103d6922a994dc991a0c419162650386f9650bd"
+        }
+      }
+    },
+    "generation_report": "_internal/runtime/projects/0824-krim/spams_source/generation_report.json",
+    "knmi_weather_runtime_asset": "knmi_weather"
+  },
+  "source_fingerprints": {
+    "project_config_sha256": "f4360121ee7703f3dae38eccb23063d5e49c0965fcf95f1e41e38369f506e8ea",
+    "geometry_shp_sha256": "a2c99255baaf518dc5260262e5033986b4d9a407f81a339dbfdfbf0f5c39e719",
+    "deformation_source_sha256": "e51bd1ed746d438ca36add754504cc83bc49c784a0d582f3ab8205bfe9525a47",
+    "displacement_csv_sha256": null,
+    "spams_generation_sources": {
+      "model_parameters": {
+        "file": "D:/Kuliah/Q7/Thesis/260627_Gameplan2/4.Web/4.3 Real use/Proto2_Parcel_1.0.0/data/krim1/model_params/nl_krimpenerwaard_spams10.parquet",
+        "sha256": "e51bd1ed746d438ca36add754504cc83bc49c784a0d582f3ab8205bfe9525a47"
+      },
+      "model_metadata": {
+        "file": "D:/Kuliah/Q7/Thesis/260627_Gameplan2/4.Web/4.3 Real use/Proto2_Parcel_1.0.0/data/krim1/model_params/nl_krimpenerwaard_spams10.json",
+        "sha256": "86c22ddd32e5bcbe09c989f2df36eca7548e7f75c464c4a44721f24a8b404664"
+      },
+      "pyspams_utils": {
+        "file": "D:/Kuliah/Q7/Thesis/260627_Gameplan2/4.Web/4.3 Real use/Proto2_Parcel_1.0.0/data/krim1/pyspams/utils.py",
+        "sha256": "4c3620c93a0f56f60a89e70d8dc8aa8895b1ef5064ba320aaf67f5ed648216e1"
+      },
+      "knmi": {
+        "344": {
+          "file": "D:/Kuliah/Q7/Thesis/260627_Gameplan2/4.Web/4.3 Real use/Proto2_Parcel_1.0.0/data/krim1/KNMI/etmgeg_344.txt",
+          "sha256": "52fe6f52b1dc433e4a3feb47e5c6c3258aa305056eb99fc7473e2b8aca903597"
+        },
+        "348": {
+          "file": "D:/Kuliah/Q7/Thesis/260627_Gameplan2/4.Web/4.3 Real use/Proto2_Parcel_1.0.0/data/krim1/KNMI/etmgeg_348.txt",
+          "sha256": "a88a1cc4f258b703d017b45c7103d6922a994dc991a0c419162650386f9650bd"
+        }
+      }
+    },
+    "project_inputs": {
+      "schema": "proto2_project_input_fingerprint_r8c_v1",
+      "file_count": 10,
+      "required_file_count": 10,
+      "missing_required": [],
+      "package_file_count": 0,
+      "external_file_count": 10,
+      "files": [
+        {
+          "role": "geometry.shp",
+          "reference": "D:/Kuliah/Q7/Thesis/260627_Gameplan2/4.Web/4.3 Real use/Proto2_Parcel_1.0.0/data/krim1/geometry/krimpenerwaard_attributes_wgs84.shp",
+          "required": true,
+          "owner": "scientific_input",
+          "present": true,
+          "size_bytes": 4396316,
+          "sha256": "a2c99255baaf518dc5260262e5033986b4d9a407f81a339dbfdfbf0f5c39e719",
+          "storage": "external"
+        },
+        {
+          "role": "geometry.shx",
+          "reference": "D:/Kuliah/Q7/Thesis/260627_Gameplan2/4.Web/4.3 Real use/Proto2_Parcel_1.0.0/data/krim1/geometry/krimpenerwaard_attributes_wgs84.shx",
+          "required": true,
+          "owner": "scientific_input",
+          "present": true,
+          "size_bytes": 44596,
+          "sha256": "e7bf76c2004be63fc8bd0c7629e22a5c49dc2282220b4c4db37e8cad53fa6c1a",
+          "storage": "external"
+        },
+        {
+          "role": "geometry.dbf",
+          "reference": "D:/Kuliah/Q7/Thesis/260627_Gameplan2/4.Web/4.3 Real use/Proto2_Parcel_1.0.0/data/krim1/geometry/krimpenerwaard_attributes_wgs84.dbf",
+          "required": true,
+          "owner": "scientific_input",
+          "present": true,
+          "size_bytes": 11797740,
+          "sha256": "a84e26d182fc461a7813410098c7fde950666cccc9111eefb7895aa3a2affa48",
+          "storage": "external"
+        },
+        {
+          "role": "geometry.prj",
+          "reference": "D:/Kuliah/Q7/Thesis/260627_Gameplan2/4.Web/4.3 Real use/Proto2_Parcel_1.0.0/data/krim1/geometry/krimpenerwaard_attributes_wgs84.prj",
+          "required": true,
+          "owner": "scientific_input",
+          "present": true,
+          "size_bytes": 145,
+          "sha256": "a02a27b1d1982c8516d83398e85a3c8b1aef1713c13ef4d84d7bde17430c07c4",
+          "storage": "external"
+        },
+        {
+          "role": "geometry.cpg",
+          "reference": "D:/Kuliah/Q7/Thesis/260627_Gameplan2/4.Web/4.3 Real use/Proto2_Parcel_1.0.0/data/krim1/geometry/krimpenerwaard_attributes_wgs84.cpg",
+          "required": true,
+          "owner": "scientific_input",
+          "present": true,
+          "size_bytes": 5,
+          "sha256": "3ad3031f5503a4404af825262ee8232cc04d4ea6683d42c5dd0a2f2a27ac9824",
+          "storage": "external"
+        },
+        {
+          "role": "spams.model_parameters",
+          "reference": "D:/Kuliah/Q7/Thesis/260627_Gameplan2/4.Web/4.3 Real use/Proto2_Parcel_1.0.0/data/krim1/model_params/nl_krimpenerwaard_spams10.parquet",
+          "required": true,
+          "owner": "scientific_input",
+          "present": true,
+          "size_bytes": 543734,
+          "sha256": "e51bd1ed746d438ca36add754504cc83bc49c784a0d582f3ab8205bfe9525a47",
+          "storage": "external"
+        },
+        {
+          "role": "spams.model_metadata",
+          "reference": "D:/Kuliah/Q7/Thesis/260627_Gameplan2/4.Web/4.3 Real use/Proto2_Parcel_1.0.0/data/krim1/model_params/nl_krimpenerwaard_spams10.json",
+          "required": true,
+          "owner": "scientific_input",
+          "present": true,
+          "size_bytes": 282,
+          "sha256": "86c22ddd32e5bcbe09c989f2df36eca7548e7f75c464c4a44721f24a8b404664",
+          "storage": "external"
+        },
+        {
+          "role": "spams.utils",
+          "reference": "D:/Kuliah/Q7/Thesis/260627_Gameplan2/4.Web/4.3 Real use/Proto2_Parcel_1.0.0/data/krim1/pyspams/utils.py",
+          "required": true,
+          "owner": "scientific_input",
+          "present": true,
+          "size_bytes": 5455,
+          "sha256": "4c3620c93a0f56f60a89e70d8dc8aa8895b1ef5064ba320aaf67f5ed648216e1",
+          "storage": "external"
+        },
+        {
+          "role": "knmi.344",
+          "reference": "D:/Kuliah/Q7/Thesis/260627_Gameplan2/4.Web/4.3 Real use/Proto2_Parcel_1.0.0/data/krim1/KNMI/etmgeg_344.txt",
+          "required": true,
+          "owner": "scientific_input",
+          "present": true,
+          "size_bytes": 6373272,
+          "sha256": "52fe6f52b1dc433e4a3feb47e5c6c3258aa305056eb99fc7473e2b8aca903597",
+          "storage": "external"
+        },
+        {
+          "role": "knmi.348",
+          "reference": "D:/Kuliah/Q7/Thesis/260627_Gameplan2/4.Web/4.3 Real use/Proto2_Parcel_1.0.0/data/krim1/KNMI/etmgeg_348.txt",
+          "required": true,
+          "owner": "scientific_input",
+          "present": true,
+          "size_bytes": 3679772,
+          "sha256": "a88a1cc4f258b703d017b45c7103d6922a994dc991a0c419162650386f9650bd",
+          "storage": "external"
+        },
+        {
+          "role": "presentation.ground_envelope_seed",
+          "reference": "_internal/projects/0824-krim/ground_envelope_seed.geojson",
+          "required": false,
+          "owner": "project_presentation_input",
+          "present": false,
+          "size_bytes": null,
+          "sha256": null,
+          "storage": "package"
+        }
+      ],
+      "set_sha256": "20744f4276e649dcef4714d3fe05d47ab43b886229298894174e79b064a51ef8"
+    },
+    "project_input_set_sha256": "20744f4276e649dcef4714d3fe05d47ab43b886229298894174e79b064a51ef8"
+  },
+  "assets": {
+    "parcel_geometry": "runtime/parcel_geometry.geojson",
+    "parcel_metadata": "runtime/parcel_metadata.json",
+    "reference_ground_clipped": "runtime/reference_ground_clipped.geojson",
+    "depth_collar": "runtime/depth_collar.geojson",
+    "ground_clip_audit": "runtime/ground_clip_audit.json",
+    "surface_reference_floor": "runtime/surface_reference_floor.geojson",
+    "surface_depth_collar": "runtime/surface_depth_collar.geojson",
+    "surface_rim_envelope": "runtime/surface_rim_envelope.geojson",
+    "moving_parcel_ids": "runtime/moving_parcel_ids.json",
+    "blank_parcel_ids": "runtime/blank_parcel_ids.json",
+    "epoch_axis": "runtime/epoch_axis.json",
+    "reversible_displacement": "runtime/reversible.f32",
+    "irreversible_displacement": "runtime/irreversible.f32",
+    "irreversible_velocity": "runtime/irreversible_velocity.f32",
+    "knmi_weather": "runtime/knmi_weather.json",
+    "runtime_row_by_geometry": "runtime/runtime_row_by_geometry.i32",
+    "geometry_index_by_runtime_row": "runtime/geometry_index_by_runtime_row.u32"
+  },
+  "capabilities": {
+    "parcel_source_adapter": true,
+    "parcel_runtime_pack": true,
+    "parcel_renderer": true,
+    "total_uncertainty": false,
+    "exact_reference_ground": true,
+    "outer_depth_collar": true,
+    "irreversible_reference_toggle": true,
+    "selected_epoch_irreversible_reference": true,
+    "reversible_reference_unchanged": true,
+    "pyspams_knmi_source": true,
+    "knmi_weather_overlay": true,
+    "csv_runtime_source": false
+  },
+  "next_batch": "P2D8"
+}

@@ -1,0 +1,182 @@
+{
+  "schema": "proto2_parcel_runtime_asset_registry_d7_3_v1",
+  "project_key": "0824-delf",
+  "created_utc": "2026-08-24T13:16:40.457Z",
+  "asset_count": 18,
+  "total_bytes": 41461930,
+  "assets": [
+    {
+      "role": "parcel_geometry",
+      "file": "runtime/parcel_geometry.geojson",
+      "size_bytes": 2987955,
+      "sha256": "74c48fe414bbdff72a291bbd4cea2b4d8801baccfe5c978fc1378df28d93516f",
+      "format": "geojson",
+      "count": 2300
+    },
+    {
+      "role": "parcel_metadata",
+      "file": "runtime/parcel_metadata.json",
+      "size_bytes": 1531165,
+      "sha256": "1d155ecfbc124820fbe569b4416d8da2beda5b3bb658559d435348f3e731c707",
+      "format": "json",
+      "count": 2300
+    },
+    {
+      "role": "reference_ground_clipped",
+      "file": "runtime/reference_ground_clipped.geojson",
+      "size_bytes": 1822792,
+      "sha256": "f8d30ef0df84e7b5b85a354aef389ddfa9b9537881cfe5b15b838ee96faddfb2",
+      "format": "geojson",
+      "count": 1106,
+      "processing_crs": "EPSG:28992"
+    },
+    {
+      "role": "depth_collar",
+      "file": "runtime/depth_collar.geojson",
+      "size_bytes": 26199,
+      "sha256": "5dd7ba231cd1293e3c68c5ace6758535cbeae92c5c8c71a8f03dfeaab67a9ed5",
+      "format": "geojson",
+      "count": 1,
+      "margin_m": 20000
+    },
+    {
+      "role": "ground_clip_audit",
+      "file": "runtime/ground_clip_audit.json",
+      "size_bytes": 2576,
+      "sha256": "7a3f1229ae45a8330ab647ab9280a48bd2fbd94b0ed3241d080351681923aebf",
+      "format": "json",
+      "schema": "proto2_parcel_ground_clip_audit_d7_2r_v1",
+      "execution_mode": "python_project_specific"
+    },
+    {
+      "role": "surface_reference_floor",
+      "file": "runtime/surface_reference_floor.geojson",
+      "size_bytes": 1876637,
+      "sha256": "5a8eb430192f52f9e292e08be24135b840af883e858704a81f3571871f470682",
+      "format": "geojson",
+      "presentation_only": true,
+      "count": 1143,
+      "margin_m": 50
+    },
+    {
+      "role": "surface_depth_collar",
+      "file": "runtime/surface_depth_collar.geojson",
+      "size_bytes": 41717,
+      "sha256": "482e879c76b7fe81f59e75eb1b8fa18be0d1838f241be3c71030d199e83bc2fe",
+      "format": "geojson",
+      "presentation_only": true,
+      "count": 1,
+      "margin_m": 50
+    },
+    {
+      "role": "surface_rim_envelope",
+      "file": "runtime/surface_rim_envelope.geojson",
+      "size_bytes": 41935,
+      "sha256": "f8e12a67c82a051617c1bd9ad0ccbf773524ca9a9d0fe4bcbc0c9fd1fae8619f",
+      "format": "geojson",
+      "presentation_only": true,
+      "count": 6,
+      "margin_m": 50
+    },
+    {
+      "role": "moving_parcel_ids",
+      "file": "runtime/moving_parcel_ids.json",
+      "size_bytes": 14855,
+      "sha256": "fb8ab6aa398f081ac46fe8c3faa3a4726018a883cab9c927594636f72f95b4f0",
+      "format": "json",
+      "count": 1127
+    },
+    {
+      "role": "blank_parcel_ids",
+      "file": "runtime/blank_parcel_ids.json",
+      "size_bytes": 15482,
+      "sha256": "e96f179a4e2d20505b1c77c280d963d81c766ed1796bca6a1a40e739779dfbeb",
+      "format": "json",
+      "count": 1173
+    },
+    {
+      "role": "epoch_axis",
+      "file": "runtime/epoch_axis.json",
+      "size_bytes": 65884,
+      "sha256": "0754d00b364666505a30e7666389116392ce850a56a8c86a5e553c440f5cdb53",
+      "format": "json",
+      "count": 3653
+    },
+    {
+      "role": "reversible_displacement",
+      "file": "runtime/reversible.f32",
+      "size_bytes": 16467724,
+      "sha256": "fda8c6c22c7dac76012d3a9369097f40d51abbd2c3de71843c689d35128a2d35",
+      "format": "float32-le",
+      "shape": [
+        1127,
+        3653
+      ],
+      "unit": "mm"
+    },
+    {
+      "role": "irreversible_displacement",
+      "file": "runtime/irreversible.f32",
+      "size_bytes": 16467724,
+      "sha256": "2f39f641618104c629c954cdd24d9667121723b13ddfcc9c9011fac2d24c7866",
+      "format": "float32-le",
+      "shape": [
+        1127,
+        3653
+      ],
+      "unit": "mm"
+    },
+    {
+      "role": "irreversible_velocity",
+      "file": "runtime/irreversible_velocity.f32",
+      "size_bytes": 4508,
+      "sha256": "b87797a0b9641511e62c8f626bc9d297e2da81937a43c955fc4aae7fc829d2b8",
+      "format": "float32-le",
+      "shape": [
+        1127
+      ],
+      "unit": "mm/yr"
+    },
+    {
+      "role": "knmi_weather",
+      "file": "runtime/knmi_weather.json",
+      "size_bytes": 60020,
+      "sha256": "dc60d87505dfd649c79e3fc5a28f46b3e284d6ad492800db5ce0a9d56b3a72b1",
+      "format": "json",
+      "unit": "mm/day",
+      "channels": [
+        "precip_mm_day",
+        "evapo_mm_day"
+      ],
+      "alignment": "runtime_epoch_axis"
+    },
+    {
+      "role": "runtime_row_by_geometry",
+      "file": "runtime/runtime_row_by_geometry.i32",
+      "size_bytes": 9200,
+      "sha256": "ef80aa19100a8b7bd4864457a8a9204f0ca149b83165b3b9121ea52f7e54bacd",
+      "format": "int32-le",
+      "shape": [
+        2300
+      ],
+      "blank_sentinel": -1
+    },
+    {
+      "role": "geometry_index_by_runtime_row",
+      "file": "runtime/geometry_index_by_runtime_row.u32",
+      "size_bytes": 4508,
+      "sha256": "6234603b591dc76a0b77e65a6537e6eb7ef83ab9aa62088ff2895d3541802ec3",
+      "format": "uint32-le",
+      "shape": [
+        1127
+      ]
+    },
+    {
+      "role": "runtime_contract",
+      "file": "runtime/runtime_contract.json",
+      "size_bytes": 21049,
+      "sha256": "5b742de76c8457c9d5565cf9f75dba417259e1ea15b2caa6ea781d366dfbdbf4",
+      "format": "json"
+    }
+  ]
+}

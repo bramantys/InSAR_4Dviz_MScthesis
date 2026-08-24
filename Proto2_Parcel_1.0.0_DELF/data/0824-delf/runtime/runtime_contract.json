@@ -1,0 +1,534 @@
+{
+  "schema": "proto2_parcel_runtime_contract_d7_3_v1",
+  "batch": "P2D7.3",
+  "semantic_revision": "P2D7.3_pyspams_knmi_source",
+  "created_utc": "2026-08-24T13:16:40.457Z",
+  "project": {
+    "key": "0824-delf",
+    "name": "260824_delfland_github",
+    "label": "260824_delfland_github",
+    "product_type": "parcel"
+  },
+  "canonical_channels": [
+    "reversible",
+    "irreversible"
+  ],
+  "total_definition": "reversible_plus_irreversible",
+  "unit": "mm",
+  "array_layout": {
+    "order": "parcel-major_epoch-minor",
+    "index_formula": "flatIndex = runtimeRow * epochCount + epochIndex",
+    "byte_order": "little-endian",
+    "scalar_type": "float32"
+  },
+  "counts": {
+    "geometry_parcel_count": 2300,
+    "moving_parcel_count": 1127,
+    "blank_parcel_count": 1173,
+    "epoch_count": 3653,
+    "parcel_epoch_value_count": 4116931,
+    "geometry_coordinate_count": 67365
+  },
+  "bounds_wgs84": {
+    "min_x": 4.237546851,
+    "min_y": 51.91904988162314,
+    "max_x": 4.466073254,
+    "max_y": 52.018917976
+  },
+  "time": {
+    "first_epoch": "2016-01-01",
+    "last_epoch": "2025-12-31",
+    "epoch_count": 3653,
+    "initial_epoch": "last",
+    "playback_epochs_per_second": 8,
+    "axis_policy": "shared_from_generated_spams",
+    "reference_policy": "preserve_source_reference"
+  },
+  "ranges": {
+    "reversible_mm": {
+      "min": -78.82854461669922,
+      "max": 50.346229553222656
+    },
+    "irreversible_mm": {
+      "min": -80.74402618408203,
+      "max": 0
+    },
+    "total_mm": {
+      "min": -148.1631851196289,
+      "max": 35.95012664794922
+    },
+    "irreversible_velocity_mm_yr": {
+      "min": -8.073297500610352,
+      "max": -2.7079665660858154
+    }
+  },
+  "default_selected_reference_ranges": {
+    "reversible_mm": {
+      "min": -78.82854461669922,
+      "max": 50.346229553222656
+    },
+    "irreversible_mm": {
+      "min": -80.74402618408203,
+      "max": 0
+    },
+    "total_mm": {
+      "min": -148.1631851196289,
+      "max": 35.95012664794922
+    },
+    "irreversible_velocity_mm_yr": {
+      "min": -8.073297500610352,
+      "max": -2.7079665660858154
+    }
+  },
+  "irreversible_reference_contract": {
+    "available": [
+      "model_baseline",
+      "selected_epoch"
+    ],
+    "default": "model_baseline",
+    "model_baseline_meaning": "Use source irreversible displacement, already referenced to the PySPAMS run start.",
+    "model_start_epoch": "2016-01-01",
+    "selected_epoch_meaning": "Subtract each parcel irreversible value at the selected project epoch from that parcel at every epoch.",
+    "selected_epoch_scope": "user_selected_project_epoch",
+    "selected_epoch_default": "2016-01-01",
+    "selected_epoch_changes_with_studio_segment": false,
+    "reversible_only_affected": false,
+    "reversible_definition": "source_reversible_R_t",
+    "irreversible_definition_after_reference": "source_irreversible_I_t_minus_I_reference",
+    "total_definition_after_reference": "referenced_irreversible_plus_source_reversible",
+    "combined_lower_cap": "referenced_irreversible",
+    "combined_upper_cap": "referenced_irreversible_plus_source_reversible",
+    "combined_gap": "source_reversible_R_t",
+    "default_reference_irreversible_zero_violation_count": 0
+  },
+  "surface_view_floor_mm": {
+    "model_baseline": {
+      "irreversible": -92.85563011169434,
+      "reversible": -90.6528263092041,
+      "total": -170.38766288757324,
+      "combined": -170.38766288757324
+    },
+    "selected_epoch_default": {
+      "irreversible": -92.85563011169434,
+      "reversible": -90.6528263092041,
+      "total": -170.38766288757324,
+      "combined": -170.38766288757324
+    }
+  },
+  "surface_view_floor_policy": {
+    "selected_epoch": "runtime_compute_from_active_display_ranges",
+    "formula": "floor = mode_min - max(abs(mode_min) * margin_fraction, minimum_clearance_mm)",
+    "reversible_range_reference": "source_reversible_range_is_unchanged",
+    "is_scientific_data": false
+  },
+  "surface_view_floor_margin_fraction": 0.15,
+  "surface_view_floor_minimum_clearance_mm": 1,
+  "surface_view_floor_is_scientific_data": false,
+  "blank_parcel_policy": {
+    "classification": "geometry_without_displacement",
+    "visual_semantic": "muted_grey_clickable_no_data",
+    "interpolate": false
+  },
+  "scene_contract": {
+    "semantic_target": "ground_sinking_while_breathing",
+    "context_ground_apron": true,
+    "rejected_single_cutout_apron": true,
+    "rejected_tiled_ground": true,
+    "reference_ground_clipped": true,
+    "depth_collar": true,
+    "reference_ground_strategy": "chunked_exact_vector_difference",
+    "reference_ground_processing_crs": "EPSG:28992",
+    "reference_ground_metrics": {
+      "schema": "proto2_parcel_ground_clip_audit_d7_2r_v1",
+      "status": "passed",
+      "strategy": "chunked_exact_vector_difference",
+      "source_crs": "EPSG:4326",
+      "processing_crs": "EPSG:28992",
+      "envelope_source": "morphological_closing",
+      "envelope_seed_file": null,
+      "output_crs": "EPSG:4326",
+      "source_feature_count": 2300,
+      "prepared_polygon_part_count": 2302,
+      "repaired_source_geometry_count": 0,
+      "chunk_m": 500,
+      "closing_m": 250,
+      "reopen_fraction": 0.85,
+      "envelope_simplify_m": 5,
+      "precision_m": 0.01,
+      "epsilon_overlap_m": 0.05,
+      "minimum_fragment_m2": 1,
+      "collar_margin_m": 20000,
+      "surface_margin_m": 50,
+      "fill_town_holes": false,
+      "town_holes_policy": "preserve_as_basemap_windows",
+      "chunk_columns": 32,
+      "chunk_rows": 23,
+      "candidate_chunk_count": 387,
+      "intersected_chunk_count": 369,
+      "output_polygon_count": 1106,
+      "vertex_total": 74217,
+      "vertex_max_per_feature": 650,
+      "max_rings_per_feature": 12,
+      "depth_collar_feature_count": 1,
+      "surface_floor_polygon_count": 1143,
+      "surface_depth_collar_feature_count": 1,
+      "surface_rim_feature_count": 6,
+      "surface_candidate_chunk_count": 411,
+      "surface_intersected_chunk_count": 377,
+      "surface_floor_parcel_overlap_m2": 15.7451,
+      "surface_floor_uncovered_nonparcel_m2": 79.34075,
+      "surface_floor_uncovered_nonparcel_pct": 0.00027218,
+      "surface_envelope_area_m2": 70596757.609,
+      "surface_floor_union_area_m2": 29149476.283,
+      "surface_seconds": 8.507,
+      "apron_parcel_overlap_m2": 12.22425,
+      "uncovered_nonparcel_m2": 65.7889,
+      "uncovered_nonparcel_pct": 0.00027589,
+      "envelope_area_m2": 65293341.381,
+      "target_nonparcel_area_m2": 23846158.468,
+      "ground_union_area_m2": 23846059.535,
+      "envelope_seconds": 21.302,
+      "clip_seconds": 2.991,
+      "total_seconds": 43.638,
+      "seam_contract": {
+        "chunk_overlap_m": 0.05,
+        "required_depth_compare": "less",
+        "reason": "Overlapping fragments prevent cracks; strict less prevents double-blended dark seams."
+      },
+      "outputs": {
+        "reference_ground": "reference_ground_clipped.geojson",
+        "depth_collar": "depth_collar.geojson",
+        "surface_reference_floor": "surface_reference_floor.geojson",
+        "surface_depth_collar": "surface_depth_collar.geojson",
+        "surface_rim_envelope": "surface_rim_envelope.geojson",
+        "audit": "ground_clip_audit.json"
+      },
+      "execution_mode": "python_project_specific",
+      "python_runtime": {
+        "executable": "C:/Users/DELL/miniconda3/python.exe",
+        "version": "3.12.3",
+        "discovery_source": "common-conda:miniconda3:base",
+        "profile": "runtime"
+      },
+      "envelope_seed": null
+    },
+    "town_holes_policy": "preserve_as_basemap_windows",
+    "fill_town_holes": false,
+    "seam_contract": {
+      "chunk_overlap_m": 0.05,
+      "required_depth_compare": "less",
+      "reason": "Overlapping fragments prevent cracks; strict less prevents double-blended dark seams."
+    },
+    "layer_order": [
+      "depth_collar",
+      "reference_ground_clipped",
+      "blank_parcel_caps",
+      "displacement_bands"
+    ],
+    "surface_semantics": "dynamic_zero_reference_displacement_bands_with_exact_clipped_ground_and_depth_collar",
+    "permanent_extrusion_walls": false,
+    "dynamic_displacement_band_walls": true,
+    "reference_ground_z_m": 0,
+    "reference_ground_is_scientific_reference": true,
+    "visual_datum_lift_m": 0,
+    "visual_datum_is_scientific_data": false,
+    "overlay_mode": "non_interleaved_transparent_canvas",
+    "epoch_update_strategy": "static_geometry_accessor_elevation",
+    "coordinate_rewrite_per_epoch": false,
+    "polygon_retessellation_per_epoch": false,
+    "ground_depth_write_enabled": true,
+    "ground_depth_compare": "less",
+    "combined_render_bias_m": 0.12,
+    "combined_render_bias_is_scientific_data": false,
+    "deformation_modes": [
+      "irreversible",
+      "reversible",
+      "total",
+      "combined"
+    ],
+    "default_deformation_mode": "combined",
+    "irreversible_references": [
+      "model_baseline",
+      "selected_epoch"
+    ],
+    "default_irreversible_reference": "model_baseline",
+    "selected_reference_epoch_default": "2016-01-01",
+    "selected_reference_changes_cap_data_values": true,
+    "selected_reference_changes_geometry_tessellation": false,
+    "reversible_only_reference_affected": false,
+    "total_after_reference": "referenced_irreversible_plus_source_reversible",
+    "combined_gap_after_reference": "source_reversible_R_t",
+    "default_vertical_exaggeration": 1000,
+    "maximum_vertical_exaggeration": 5000
+  },
+  "deformation_source": {
+    "type": "pyspams_knmi",
+    "normal_runtime_source_uses_csv": false,
+    "model_parameters": "D:/Kuliah/Q7/Thesis/260627_Gameplan2/4.Web/4.2.DeckGLProto2/Delfland/model_params/nl_delfland_spams10.parquet",
+    "output_period": {
+      "start_date": "2016-01-01",
+      "end_date": "2025-12-31",
+      "interval_days": 1
+    },
+    "model": {
+      "parameter_row_order": "parquet_row_order",
+      "irreversible_velocity_definition": "final_generated_irreversible_mm / (generated_epoch_count / 365.25)",
+      "irreversible_velocity_period": "runtime_output_period",
+      "tau_min_days": 60,
+      "tau_max_days": 76,
+      "meteo_ids": [
+        330,
+        344
+      ],
+      "insar_estimation_start_date": "20160101",
+      "insar_estimation_end_date": "20241231",
+      "output_extends_beyond_insar_estimation_period": true
+    },
+    "engine": {
+      "reference_function": "utils.spams_model",
+      "production_implementation": "bundled_pyspams_spams_model_direct_per_parcel",
+      "engine_parity": {
+        "sample_parcels": [
+          {
+            "parcel_id": 307,
+            "max_reversible_abs_error_mm": 1.4210854715202004e-14,
+            "max_irreversible_abs_error_mm": 0,
+            "dry_flag_mismatch_count": 0
+          },
+          {
+            "parcel_id": 57471,
+            "max_reversible_abs_error_mm": 2.842170943040401e-14,
+            "max_irreversible_abs_error_mm": 0,
+            "dry_flag_mismatch_count": 0
+          },
+          {
+            "parcel_id": 125729,
+            "max_reversible_abs_error_mm": 1.0658141036401503e-14,
+            "max_irreversible_abs_error_mm": 0,
+            "dry_flag_mismatch_count": 0
+          }
+        ],
+        "max_reversible_abs_error_mm": 2.842170943040401e-14,
+        "max_irreversible_abs_error_mm": 0,
+        "dry_flag_mismatch_count": 0,
+        "passed": true
+      }
+    },
+    "validation_reference": {
+      "enabled": false,
+      "passed": null
+    },
+    "sources": {
+      "model_parameters": {
+        "file": "D:/Kuliah/Q7/Thesis/260627_Gameplan2/4.Web/4.2.DeckGLProto2/Delfland/model_params/nl_delfland_spams10.parquet",
+        "sha256": "c705670e10921ecd65c0f9b517716d1895a4459b552bd12deb44a14d7b137e08"
+      },
+      "model_metadata": {
+        "file": "D:/Kuliah/Q7/Thesis/260627_Gameplan2/4.Web/4.2.DeckGLProto2/Delfland/model_params/nl_delfland_spams10.json",
+        "sha256": "d2e5cf30b6b64b557e4a6bf70218474a70ac55adc61f9a001127901f9b910079"
+      },
+      "pyspams_utils": {
+        "file": "D:/Kuliah/Q7/Thesis/260627_Gameplan2/4.Web/4.2.DeckGLProto2/Delfland/pyspams/utils.py",
+        "sha256": "4c3620c93a0f56f60a89e70d8dc8aa8895b1ef5064ba320aaf67f5ed648216e1"
+      },
+      "knmi": {
+        "330": {
+          "file": "D:/Kuliah/Q7/Thesis/260627_Gameplan2/4.Web/4.2.DeckGLProto2/Delfland/KNMI/etmgeg_330.txt",
+          "sha256": "04fdcaf363f71749b0c0a1a3ff4589ba6ea745c087998dfb01d63cf17617a3ea"
+        },
+        "344": {
+          "file": "D:/Kuliah/Q7/Thesis/260627_Gameplan2/4.Web/4.2.DeckGLProto2/Delfland/KNMI/etmgeg_344.txt",
+          "sha256": "5d34377175c0dde212190e0047b2b6d9a8a8110571ef9bb24f2ce93e1d73bbb5"
+        }
+      }
+    },
+    "generation_report": "_internal/runtime/projects/0824-delf/spams_source/generation_report.json",
+    "knmi_weather_runtime_asset": "knmi_weather"
+  },
+  "source_fingerprints": {
+    "project_config_sha256": "54e34671b697675e49b4a48b204f9b9ae324a8aae995e20a0f3c1e223beeebb8",
+    "geometry_shp_sha256": "e8b41fb6c6e8af11c1a7e86f582a1d205cfc8fa1d0333168b56c6321f11494fd",
+    "deformation_source_sha256": "c705670e10921ecd65c0f9b517716d1895a4459b552bd12deb44a14d7b137e08",
+    "displacement_csv_sha256": null,
+    "spams_generation_sources": {
+      "model_parameters": {
+        "file": "D:/Kuliah/Q7/Thesis/260627_Gameplan2/4.Web/4.2.DeckGLProto2/Delfland/model_params/nl_delfland_spams10.parquet",
+        "sha256": "c705670e10921ecd65c0f9b517716d1895a4459b552bd12deb44a14d7b137e08"
+      },
+      "model_metadata": {
+        "file": "D:/Kuliah/Q7/Thesis/260627_Gameplan2/4.Web/4.2.DeckGLProto2/Delfland/model_params/nl_delfland_spams10.json",
+        "sha256": "d2e5cf30b6b64b557e4a6bf70218474a70ac55adc61f9a001127901f9b910079"
+      },
+      "pyspams_utils": {
+        "file": "D:/Kuliah/Q7/Thesis/260627_Gameplan2/4.Web/4.2.DeckGLProto2/Delfland/pyspams/utils.py",
+        "sha256": "4c3620c93a0f56f60a89e70d8dc8aa8895b1ef5064ba320aaf67f5ed648216e1"
+      },
+      "knmi": {
+        "330": {
+          "file": "D:/Kuliah/Q7/Thesis/260627_Gameplan2/4.Web/4.2.DeckGLProto2/Delfland/KNMI/etmgeg_330.txt",
+          "sha256": "04fdcaf363f71749b0c0a1a3ff4589ba6ea745c087998dfb01d63cf17617a3ea"
+        },
+        "344": {
+          "file": "D:/Kuliah/Q7/Thesis/260627_Gameplan2/4.Web/4.2.DeckGLProto2/Delfland/KNMI/etmgeg_344.txt",
+          "sha256": "5d34377175c0dde212190e0047b2b6d9a8a8110571ef9bb24f2ce93e1d73bbb5"
+        }
+      }
+    },
+    "project_inputs": {
+      "schema": "proto2_project_input_fingerprint_r8c_v1",
+      "file_count": 10,
+      "required_file_count": 10,
+      "missing_required": [],
+      "package_file_count": 0,
+      "external_file_count": 10,
+      "files": [
+        {
+          "role": "geometry.shp",
+          "reference": "D:/Kuliah/Q7/Thesis/260627_Gameplan2/4.Web/4.2.DeckGLProto2/Delfland/geometry/delfland_attributes_wgs84.shp",
+          "required": true,
+          "owner": "scientific_input",
+          "present": true,
+          "size_bytes": 1207652,
+          "sha256": "e8b41fb6c6e8af11c1a7e86f582a1d205cfc8fa1d0333168b56c6321f11494fd",
+          "storage": "external"
+        },
+        {
+          "role": "geometry.shx",
+          "reference": "D:/Kuliah/Q7/Thesis/260627_Gameplan2/4.Web/4.2.DeckGLProto2/Delfland/geometry/delfland_attributes_wgs84.shx",
+          "required": true,
+          "owner": "scientific_input",
+          "present": true,
+          "size_bytes": 18500,
+          "sha256": "359d03031ee86dde762cf9a52964f6c0e53de041d97e8668eba66a46e0f33970",
+          "storage": "external"
+        },
+        {
+          "role": "geometry.dbf",
+          "reference": "D:/Kuliah/Q7/Thesis/260627_Gameplan2/4.Web/4.2.DeckGLProto2/Delfland/geometry/delfland_attributes_wgs84.dbf",
+          "required": true,
+          "owner": "scientific_input",
+          "present": true,
+          "size_bytes": 4731710,
+          "sha256": "60275322bae9622744fd1901142dfe9048b799c55e60cbe417b29a434c13fa84",
+          "storage": "external"
+        },
+        {
+          "role": "geometry.prj",
+          "reference": "D:/Kuliah/Q7/Thesis/260627_Gameplan2/4.Web/4.2.DeckGLProto2/Delfland/geometry/delfland_attributes_wgs84.prj",
+          "required": true,
+          "owner": "scientific_input",
+          "present": true,
+          "size_bytes": 145,
+          "sha256": "a02a27b1d1982c8516d83398e85a3c8b1aef1713c13ef4d84d7bde17430c07c4",
+          "storage": "external"
+        },
+        {
+          "role": "geometry.cpg",
+          "reference": "D:/Kuliah/Q7/Thesis/260627_Gameplan2/4.Web/4.2.DeckGLProto2/Delfland/geometry/delfland_attributes_wgs84.cpg",
+          "required": true,
+          "owner": "scientific_input",
+          "present": true,
+          "size_bytes": 5,
+          "sha256": "3ad3031f5503a4404af825262ee8232cc04d4ea6683d42c5dd0a2f2a27ac9824",
+          "storage": "external"
+        },
+        {
+          "role": "spams.model_parameters",
+          "reference": "D:/Kuliah/Q7/Thesis/260627_Gameplan2/4.Web/4.2.DeckGLProto2/Delfland/model_params/nl_delfland_spams10.parquet",
+          "required": true,
+          "owner": "scientific_input",
+          "present": true,
+          "size_bytes": 149953,
+          "sha256": "c705670e10921ecd65c0f9b517716d1895a4459b552bd12deb44a14d7b137e08",
+          "storage": "external"
+        },
+        {
+          "role": "spams.model_metadata",
+          "reference": "D:/Kuliah/Q7/Thesis/260627_Gameplan2/4.Web/4.2.DeckGLProto2/Delfland/model_params/nl_delfland_spams10.json",
+          "required": true,
+          "owner": "scientific_input",
+          "present": true,
+          "size_bytes": 264,
+          "sha256": "d2e5cf30b6b64b557e4a6bf70218474a70ac55adc61f9a001127901f9b910079",
+          "storage": "external"
+        },
+        {
+          "role": "spams.utils",
+          "reference": "D:/Kuliah/Q7/Thesis/260627_Gameplan2/4.Web/4.2.DeckGLProto2/Delfland/pyspams/utils.py",
+          "required": true,
+          "owner": "scientific_input",
+          "present": true,
+          "size_bytes": 5455,
+          "sha256": "4c3620c93a0f56f60a89e70d8dc8aa8895b1ef5064ba320aaf67f5ed648216e1",
+          "storage": "external"
+        },
+        {
+          "role": "knmi.330",
+          "reference": "D:/Kuliah/Q7/Thesis/260627_Gameplan2/4.Web/4.2.DeckGLProto2/Delfland/KNMI/etmgeg_330.txt",
+          "required": true,
+          "owner": "scientific_input",
+          "present": true,
+          "size_bytes": 5083522,
+          "sha256": "04fdcaf363f71749b0c0a1a3ff4589ba6ea745c087998dfb01d63cf17617a3ea",
+          "storage": "external"
+        },
+        {
+          "role": "knmi.344",
+          "reference": "D:/Kuliah/Q7/Thesis/260627_Gameplan2/4.Web/4.2.DeckGLProto2/Delfland/KNMI/etmgeg_344.txt",
+          "required": true,
+          "owner": "scientific_input",
+          "present": true,
+          "size_bytes": 6384772,
+          "sha256": "5d34377175c0dde212190e0047b2b6d9a8a8110571ef9bb24f2ce93e1d73bbb5",
+          "storage": "external"
+        },
+        {
+          "role": "presentation.ground_envelope_seed",
+          "reference": "_internal/projects/0824-delf/ground_envelope_seed.geojson",
+          "required": false,
+          "owner": "project_presentation_input",
+          "present": false,
+          "size_bytes": null,
+          "sha256": null,
+          "storage": "package"
+        }
+      ],
+      "set_sha256": "139d7a6d44301fae5cc169e204daa4e5caf28a5e24982a4017cec343171cbfc6"
+    },
+    "project_input_set_sha256": "139d7a6d44301fae5cc169e204daa4e5caf28a5e24982a4017cec343171cbfc6"
+  },
+  "assets": {
+    "parcel_geometry": "runtime/parcel_geometry.geojson",
+    "parcel_metadata": "runtime/parcel_metadata.json",
+    "reference_ground_clipped": "runtime/reference_ground_clipped.geojson",
+    "depth_collar": "runtime/depth_collar.geojson",
+    "ground_clip_audit": "runtime/ground_clip_audit.json",
+    "surface_reference_floor": "runtime/surface_reference_floor.geojson",
+    "surface_depth_collar": "runtime/surface_depth_collar.geojson",
+    "surface_rim_envelope": "runtime/surface_rim_envelope.geojson",
+    "moving_parcel_ids": "runtime/moving_parcel_ids.json",
+    "blank_parcel_ids": "runtime/blank_parcel_ids.json",
+    "epoch_axis": "runtime/epoch_axis.json",
+    "reversible_displacement": "runtime/reversible.f32",
+    "irreversible_displacement": "runtime/irreversible.f32",
+    "irreversible_velocity": "runtime/irreversible_velocity.f32",
+    "knmi_weather": "runtime/knmi_weather.json",
+    "runtime_row_by_geometry": "runtime/runtime_row_by_geometry.i32",
+    "geometry_index_by_runtime_row": "runtime/geometry_index_by_runtime_row.u32"
+  },
+  "capabilities": {
+    "parcel_source_adapter": true,
+    "parcel_runtime_pack": true,
+    "parcel_renderer": true,
+    "total_uncertainty": false,
+    "exact_reference_ground": true,
+    "outer_depth_collar": true,
+    "irreversible_reference_toggle": true,
+    "selected_epoch_irreversible_reference": true,
+    "reversible_reference_unchanged": true,
+    "pyspams_knmi_source": true,
+    "knmi_weather_overlay": true,
+    "csv_runtime_source": false
+  },
+  "next_batch": "P2D8"
+}

@@ -1,0 +1,234 @@
+{
+  "schema": "proto2_parcel_canonical_inventory_v1",
+  "created_utc": "2026-08-24T13:15:56.082Z",
+  "project": {
+    "key": "0824-delf",
+    "name": "260824_delfland_github",
+    "label": "260824_delfland_github",
+    "product_type": "parcel"
+  },
+  "canonical_channels": [
+    "reversible",
+    "irreversible"
+  ],
+  "total_definition": "reversible_plus_irreversible",
+  "unit": "mm",
+  "geometry": {
+    "feature_count": 2300,
+    "polygon_count": 2081,
+    "multipolygon_count": 219,
+    "hole_count": 9,
+    "ring_count": 2528,
+    "point_count": 67365,
+    "invalid_record_count": 0,
+    "bbox": {
+      "min_x": 4.237546851,
+      "min_y": 51.91904988162314,
+      "max_x": 4.466073254,
+      "max_y": 52.018917976
+    },
+    "dbf_field_count": 18,
+    "cpg": "UTF-8",
+    "crs": {
+      "declared_authority": "EPSG:4326",
+      "prj_text": "GEOGCS[\"GCS_WGS_1984\",DATUM[\"D_WGS_1984\",SPHEROID[\"WGS_1984\",6378137.0,298.257223563]],PRIMEM[\"Greenwich\",0.0],UNIT[\"Degree\",0.0174532925199433]]",
+      "recognized_wgs84": true,
+      "matches_declared": true
+    }
+  },
+  "displacement": {
+    "row_count": 4116931,
+    "moving_parcel_count": 1127,
+    "epoch_count": 3653,
+    "epoch_min": "2016-01-01",
+    "epoch_max": "2025-12-31",
+    "ranges": {
+      "reversible_mm": {
+        "min": -78.82854461669922,
+        "max": 50.346229553222656
+      },
+      "irreversible_mm": {
+        "min": -80.74402618408203,
+        "max": 0
+      },
+      "total_mm": {
+        "min": -148.1631851196289,
+        "max": 35.95012664794922
+      },
+      "irreversible_velocity_mm_yr": {
+        "min": -8.073297500610352,
+        "max": -2.7079665660858154
+      }
+    },
+    "duplicate_parcel_epoch_count": 0,
+    "missing_parcel_epoch_count": 0,
+    "total_mismatch_count": 0,
+    "max_total_absolute_error_mm": 0
+  },
+  "join": {
+    "geometry_parcel_count": 2300,
+    "moving_parcel_count": 1127,
+    "blank_parcel_count": 1173,
+    "moving_without_geometry_count": 0
+  },
+  "source_fingerprints": {
+    "project_config_sha256": "54e34671b697675e49b4a48b204f9b9ae324a8aae995e20a0f3c1e223beeebb8",
+    "geometry_shp_sha256": "e8b41fb6c6e8af11c1a7e86f582a1d205cfc8fa1d0333168b56c6321f11494fd",
+    "deformation_source_sha256": "c705670e10921ecd65c0f9b517716d1895a4459b552bd12deb44a14d7b137e08",
+    "displacement_csv_sha256": null,
+    "spams_generation_sources": {
+      "model_parameters": {
+        "file": "D:/Kuliah/Q7/Thesis/260627_Gameplan2/4.Web/4.2.DeckGLProto2/Delfland/model_params/nl_delfland_spams10.parquet",
+        "sha256": "c705670e10921ecd65c0f9b517716d1895a4459b552bd12deb44a14d7b137e08"
+      },
+      "model_metadata": {
+        "file": "D:/Kuliah/Q7/Thesis/260627_Gameplan2/4.Web/4.2.DeckGLProto2/Delfland/model_params/nl_delfland_spams10.json",
+        "sha256": "d2e5cf30b6b64b557e4a6bf70218474a70ac55adc61f9a001127901f9b910079"
+      },
+      "pyspams_utils": {
+        "file": "D:/Kuliah/Q7/Thesis/260627_Gameplan2/4.Web/4.2.DeckGLProto2/Delfland/pyspams/utils.py",
+        "sha256": "4c3620c93a0f56f60a89e70d8dc8aa8895b1ef5064ba320aaf67f5ed648216e1"
+      },
+      "knmi": {
+        "330": {
+          "file": "D:/Kuliah/Q7/Thesis/260627_Gameplan2/4.Web/4.2.DeckGLProto2/Delfland/KNMI/etmgeg_330.txt",
+          "sha256": "04fdcaf363f71749b0c0a1a3ff4589ba6ea745c087998dfb01d63cf17617a3ea"
+        },
+        "344": {
+          "file": "D:/Kuliah/Q7/Thesis/260627_Gameplan2/4.Web/4.2.DeckGLProto2/Delfland/KNMI/etmgeg_344.txt",
+          "sha256": "5d34377175c0dde212190e0047b2b6d9a8a8110571ef9bb24f2ce93e1d73bbb5"
+        }
+      }
+    },
+    "project_inputs": {
+      "schema": "proto2_project_input_fingerprint_r8c_v1",
+      "file_count": 10,
+      "required_file_count": 10,
+      "missing_required": [],
+      "package_file_count": 0,
+      "external_file_count": 10,
+      "files": [
+        {
+          "role": "geometry.shp",
+          "reference": "D:/Kuliah/Q7/Thesis/260627_Gameplan2/4.Web/4.2.DeckGLProto2/Delfland/geometry/delfland_attributes_wgs84.shp",
+          "required": true,
+          "owner": "scientific_input",
+          "present": true,
+          "size_bytes": 1207652,
+          "sha256": "e8b41fb6c6e8af11c1a7e86f582a1d205cfc8fa1d0333168b56c6321f11494fd",
+          "storage": "external"
+        },
+        {
+          "role": "geometry.shx",
+          "reference": "D:/Kuliah/Q7/Thesis/260627_Gameplan2/4.Web/4.2.DeckGLProto2/Delfland/geometry/delfland_attributes_wgs84.shx",
+          "required": true,
+          "owner": "scientific_input",
+          "present": true,
+          "size_bytes": 18500,
+          "sha256": "359d03031ee86dde762cf9a52964f6c0e53de041d97e8668eba66a46e0f33970",
+          "storage": "external"
+        },
+        {
+          "role": "geometry.dbf",
+          "reference": "D:/Kuliah/Q7/Thesis/260627_Gameplan2/4.Web/4.2.DeckGLProto2/Delfland/geometry/delfland_attributes_wgs84.dbf",
+          "required": true,
+          "owner": "scientific_input",
+          "present": true,
+          "size_bytes": 4731710,
+          "sha256": "60275322bae9622744fd1901142dfe9048b799c55e60cbe417b29a434c13fa84",
+          "storage": "external"
+        },
+        {
+          "role": "geometry.prj",
+          "reference": "D:/Kuliah/Q7/Thesis/260627_Gameplan2/4.Web/4.2.DeckGLProto2/Delfland/geometry/delfland_attributes_wgs84.prj",
+          "required": true,
+          "owner": "scientific_input",
+          "present": true,
+          "size_bytes": 145,
+          "sha256": "a02a27b1d1982c8516d83398e85a3c8b1aef1713c13ef4d84d7bde17430c07c4",
+          "storage": "external"
+        },
+        {
+          "role": "geometry.cpg",
+          "reference": "D:/Kuliah/Q7/Thesis/260627_Gameplan2/4.Web/4.2.DeckGLProto2/Delfland/geometry/delfland_attributes_wgs84.cpg",
+          "required": true,
+          "owner": "scientific_input",
+          "present": true,
+          "size_bytes": 5,
+          "sha256": "3ad3031f5503a4404af825262ee8232cc04d4ea6683d42c5dd0a2f2a27ac9824",
+          "storage": "external"
+        },
+        {
+          "role": "spams.model_parameters",
+          "reference": "D:/Kuliah/Q7/Thesis/260627_Gameplan2/4.Web/4.2.DeckGLProto2/Delfland/model_params/nl_delfland_spams10.parquet",
+          "required": true,
+          "owner": "scientific_input",
+          "present": true,
+          "size_bytes": 149953,
+          "sha256": "c705670e10921ecd65c0f9b517716d1895a4459b552bd12deb44a14d7b137e08",
+          "storage": "external"
+        },
+        {
+          "role": "spams.model_metadata",
+          "reference": "D:/Kuliah/Q7/Thesis/260627_Gameplan2/4.Web/4.2.DeckGLProto2/Delfland/model_params/nl_delfland_spams10.json",
+          "required": true,
+          "owner": "scientific_input",
+          "present": true,
+          "size_bytes": 264,
+          "sha256": "d2e5cf30b6b64b557e4a6bf70218474a70ac55adc61f9a001127901f9b910079",
+          "storage": "external"
+        },
+        {
+          "role": "spams.utils",
+          "reference": "D:/Kuliah/Q7/Thesis/260627_Gameplan2/4.Web/4.2.DeckGLProto2/Delfland/pyspams/utils.py",
+          "required": true,
+          "owner": "scientific_input",
+          "present": true,
+          "size_bytes": 5455,
+          "sha256": "4c3620c93a0f56f60a89e70d8dc8aa8895b1ef5064ba320aaf67f5ed648216e1",
+          "storage": "external"
+        },
+        {
+          "role": "knmi.330",
+          "reference": "D:/Kuliah/Q7/Thesis/260627_Gameplan2/4.Web/4.2.DeckGLProto2/Delfland/KNMI/etmgeg_330.txt",
+          "required": true,
+          "owner": "scientific_input",
+          "present": true,
+          "size_bytes": 5083522,
+          "sha256": "04fdcaf363f71749b0c0a1a3ff4589ba6ea745c087998dfb01d63cf17617a3ea",
+          "storage": "external"
+        },
+        {
+          "role": "knmi.344",
+          "reference": "D:/Kuliah/Q7/Thesis/260627_Gameplan2/4.Web/4.2.DeckGLProto2/Delfland/KNMI/etmgeg_344.txt",
+          "required": true,
+          "owner": "scientific_input",
+          "present": true,
+          "size_bytes": 6384772,
+          "sha256": "5d34377175c0dde212190e0047b2b6d9a8a8110571ef9bb24f2ce93e1d73bbb5",
+          "storage": "external"
+        },
+        {
+          "role": "presentation.ground_envelope_seed",
+          "reference": "_internal/projects/0824-delf/ground_envelope_seed.geojson",
+          "required": false,
+          "owner": "project_presentation_input",
+          "present": false,
+          "size_bytes": null,
+          "sha256": null,
+          "storage": "package"
+        }
+      ],
+      "set_sha256": "139d7a6d44301fae5cc169e204daa4e5caf28a5e24982a4017cec343171cbfc6"
+    },
+    "project_input_set_sha256": "139d7a6d44301fae5cc169e204daa4e5caf28a5e24982a4017cec343171cbfc6"
+  },
+  "canonical_files": {
+    "parcel_index": "parcel_index.json",
+    "epoch_axis": "epoch_axis.json",
+    "moving_parcel_ids": "moving_parcel_ids.json",
+    "preflight_report": "preflight_report.json"
+  },
+  "renderer_connected": false,
+  "next_batch": "P2D6"
+}

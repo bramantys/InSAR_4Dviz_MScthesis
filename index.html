@@ -1,120 +1,168 @@
 <!doctype html>
-<html>
+<html lang="en">
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>MSc Thesis Project: InSAR 4D Viewer Prototypes</title>
   <style>
+    :root {
+      --text: #202124;
+      --muted: #5f6368;
+      --line: #d9dde3;
+      --blue: #1a73e8;
+      --p1: #edf6ee;
+      --p2: #edf4fb;
+      --legacy: #eeeeee;
+    }
+
+    * { box-sizing: border-box; }
+
     body {
-      font-family: Arial, sans-serif;
+      font-family: Arial, Helvetica, sans-serif;
       margin: 40px;
-      line-height: 1.5;
       max-width: 980px;
-      color: #202124;
+      line-height: 1.5;
+      color: var(--text);
+      background: #fff;
     }
-    a {
-      display: block;
-      margin: 12px 0;
-      font-size: 14px;
+
+    h1 {
+      font-size: 28px;
+      margin: 0 0 6px;
     }
-    code {
-      background: #eee;
-      padding: 2px 5px;
-      border-radius: 4px;
-    }
-    .page-title {
-      font-size: 27px;
+
+    h2 {
+      margin-top: 34px;
       margin-bottom: 6px;
+      font-size: 21px;
     }
+
     .thesis-title {
       margin: 0 0 14px;
       color: #444;
-      font-size: 14px;
+      font-size: 15px;
       font-weight: 600;
     }
-    .intro {
-      font-size: 14px;
-      color: #444;
-    }
-    .meta {
-      color: #555;
-      margin-top: -4px;
-      font-size: 13px;
-    }
-    .meta a {
-      display: inline;
-      margin: 0;
-      font-size: inherit;
-    }
+
+    .meta,
+    .intro,
     .section-note {
-      color: #555;
-      margin-top: -6px;
-      font-size: 13px;
+      color: var(--muted);
+      font-size: 14px;
     }
+
+    .meta {
+      margin-top: -4px;
+    }
+
+    .meta a {
+      color: var(--blue);
+    }
+
+    .intro {
+      max-width: 900px;
+    }
+
+    .section-note {
+      margin-top: -2px;
+      max-width: 920px;
+    }
+
     .viewer-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 12px 16px;
-      margin: 16px 0 24px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px 16px;
+      margin: 16px 0 26px;
     }
+
     .viewer-card {
+      position: relative;
       display: block;
-      margin: 0;
-      padding: 14px 16px;
-      border: 1px solid #ddd;
-      border-radius: 10px;
+      padding: 16px 18px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      color: var(--blue);
       text-decoration: none;
-      color: #1a73e8;
-      background: #dae4dd;
-      font-size: 17px;
+      transition: 0.15s ease;
+      min-height: 92px;
     }
+
     .viewer-card:hover {
-      background: #f1f6ff;
-      border-color: #b7d0ff;
+      transform: translateY(-1px);
+      border-color: #a9c7f5;
+      box-shadow: 0 4px 14px rgba(26, 115, 232, 0.12);
     }
+
     .viewer-card strong {
       display: block;
-      color: #202124;
-      font-size: 15px;
-      margin-bottom: 3px;
+      color: var(--text);
+      font-size: 16px;
+      margin-bottom: 5px;
+      padding-right: 58px;
     }
-    .viewer-card.progress-card {
-      background: #fff4d6;
+
+    .viewer-card span {
+      display: block;
+      color: var(--muted);
+      font-size: 13px;
     }
-    .viewer-card.experiment-card {
-      background: #ebe4f6;
+
+    .p1-card { background: var(--p1); }
+    .p2-card { background: var(--p2); }
+
+    .legacy-card {
+      background: var(--legacy);
+      min-height: 68px;
+      padding-top: 13px;
+      padding-bottom: 13px;
+      opacity: 0.82;
     }
-    .viewer-card.prototype2-card {
-      background: #e2eef8;
+
+    .legacy-card:hover {
+      opacity: 1;
+      background: #f4f4f4;
     }
-    .viewer-card.new-release {
-      position: relative;
-      border: 2px solid #1a73e8;
-      box-shadow: 0 4px 12px rgba(26, 115, 232, 0.18);
-      background: #eef5ff;
-    }
-    .viewer-card.new-release::after {
-      content: "NEW";
+
+    .current::after {
+      content: "CURRENT";
       position: absolute;
-      top: 9px;
-      right: 10px;
+      top: 11px;
+      right: 11px;
       padding: 2px 7px;
       border-radius: 999px;
-      background: #1a73e8;
+      background: var(--blue);
       color: #fff;
-      font-size: 10px;
+      font-size: 9px;
       font-weight: 700;
       letter-spacing: 0.5px;
     }
-    .viewer-card.progress-card:hover,
-    .viewer-card.experiment-card:hover,
-    .viewer-card.prototype2-card:hover,
-    .viewer-card.new-release:hover {
-      background: #f1f6ff;
-      border-color: #b7d0ff;
+
+    .note-box {
+      margin-top: 28px;
+      padding: 14px 16px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: #fafafa;
+      font-size: 13px;
+      color: var(--muted);
     }
-    .single-card {
-      margin: 12px 0 28px;
+
+    .note-box ul {
+      margin: 0;
+      padding-left: 20px;
     }
+
+    .note-box li + li {
+      margin-top: 5px;
+    }
+
+    .repo-link {
+      display: inline-block;
+      margin-top: 8px;
+      color: var(--blue);
+      font-size: 14px;
+    }
+
     @media (max-width: 700px) {
       body { margin: 24px; }
       .viewer-grid { grid-template-columns: 1fr; }
@@ -122,7 +170,7 @@
   </style>
 </head>
 <body>
-  <h1 class="page-title">MSc Thesis Project: InSAR 4D Viewer Prototypes</h1>
+  <h1>MSc Thesis Project: InSAR 4D Viewer Prototypes</h1>
   <p class="thesis-title">Spatiotemporal Visualization of InSAR Ground Deformation</p>
 
   <p class="meta">
@@ -131,96 +179,65 @@
   </p>
 
   <p class="intro">
-    Interactive DeckGL and CesiumJS webportal prototypes for InSAR data visualization.
     Recommended use: desktop or laptop browser with WebGL enabled.
   </p>
 
-  <h2>Prototype1 - RUM based</h2>
-  <p class="section-note">
-    Current highlighted release: Jakarta DeckGL RUM viewer with 2D/3D deformation, horizontal particles and glyphs, uncertainty encodings, trendline inspection, mini viewer, and Studio Mode tools.
-  </p>
+  <h2>Current releases (Deck.gl)</h2>
 
   <div class="viewer-grid">
-    <a class="viewer-card new-release" href="P1_4.2.5_JKT/">
-      <strong>Jakarta — DeckGL RUM Viewer</strong>
-      4D deformation, horizontal motion, uncertainty, trendline, mini viewer, and Studio Mode
+    <a class="viewer-card p1-card current" href="Proto1_RUM_1.0.1_JKTA/">
+      <strong>Prototype 1: Jakarta</strong>
+      <span>RUM based</span>
     </a>
-    <a class="viewer-card" href="P1_4.1.5.V4_4D_MC_jakarta/viz1_dev_v4_dualmode.html">
-      <strong>Jakarta — CesiumJS</strong>
-      Dual-mode viewer
+
+    <a class="viewer-card p2-card current" href="Proto2_Parcel_1.0.0_KRIM/">
+      <strong>Prototype 2: Krimpenerwaard</strong>
+      <span>Parcel based</span>
     </a>
-    <a class="viewer-card progress-card" href="P1_4.1.5.V6_4D_JKT/viz1_dev_v4_dualmode.html">
-      <strong>Jakarta — CesiumJS</strong>
-      Vertical Uncertainty V2
+
+    <a class="viewer-card p1-card current" href="Proto1_RUM_1.0.1_GRON/">
+      <strong>Prototype 1: Groningen</strong>
+      <span>RUM based</span>
     </a>
-    <a class="viewer-card" href="P1_4.1.5.V4_4D_MC_gron/viz1_dev_v4_dualmode.html">
-      <strong>Groningen</strong>
-      Dual-mode viewer
-    </a>
-    <a class="viewer-card" href="P1_4.1.5.V4_4D_MC_synthbowl/viz1_dev_v4_dualmode.html">
-      <strong>Synthbowl</strong>
-      Dual-mode viewer
+
+    <a class="viewer-card p2-card current" href="Proto2_Parcel_1.0.0_DELF/">
+      <strong>Prototype 2: Delfland</strong>
+      <span>Parcel based</span>
     </a>
   </div>
 
-  <h2>Prototype2 - Parcel Based</h2>
+  <h2>Earlier versions (CesiumJS)</h2>
   <p class="section-note">
-    Parcel-based 4D visualization of seasonal soft-soil deformation in Krimpenerwaard. The viewer separates reversible seasonal movement from irreversible long-term subsidence, showing parcels as animated vertical surfaces through time.
+    Earlier versions retained for comparison with the current releases.
   </p>
 
   <div class="viewer-grid">
-    <a class="viewer-card prototype2-card" href="P2_4.2.1.V3.1_Krimpen/viz2_dev_v11.html">
-      <strong>Krimpenerwaard</strong>
-      Parcel viewer
+    <a class="viewer-card legacy-card" href="P1_4.1.5.V6_4D_JKT/viz1_dev_v4_dualmode.html">
+      <strong>Prototype 1: Jakarta</strong>
+      <span>RUM based</span>
     </a>
-    <a class="viewer-card prototype2-card new-release" href="P2_4.2.1.V5.3_Krimpen_MC_Github/viz2_parcel_viewer.html">
-      <strong>Krimpenerwaard - MC</strong>
-      Parcel viewer
+
+    <a class="viewer-card legacy-card" href="P2_4.2.1.V5.3_Krimpen_MC_Github/viz2_parcel_viewer.html">
+      <strong>Prototype 2: Krimpenerwaard</strong>
+      <span>Parcel based</span>
+    </a>
+
+    <a class="viewer-card legacy-card" href="P1_4.1.5.V4_4D_MC_gron/viz1_dev_v4_dualmode.html">
+      <strong>Prototype 1: Groningen</strong>
+      <span>RUM based</span>
     </a>
   </div>
 
-  <h2>Prototype1 progress & experiments</h2>
-  <p class="section-note">
-    Current development checkpoints and standalone sandboxes for testing visual encodings before they are merged into the main viewer.
-  </p>
-
-  <div class="viewer-grid">
-    <a class="viewer-card progress-card" href="P1_4.1.5.V3_4D_jkt_UI_PRIMIT%20CHECKPOINT/viz1_dev_v3_batch9.3.6.1.html">
-      <strong>Jakarta</strong>
-      Fix occlusion problem, current progress
-    </a>
-    <a class="viewer-card experiment-card" href="P1_4.1.5.V4_4D_MC_jakarta/dimple_sandbox_proto1_clean_v8.html">
-      <strong>Vertical uncertainty encoding sandbox</strong>
-      Dimple / radial / half-step relief test
-    </a>
+  <div class="note-box">
+    <ul>
+      <li>The current releases still contain several items that are being refined.</li>
+      <li>Video Mode is not available in this GitHub deployment; it is available in the local package.</li>
+    </ul>
   </div>
 
   <h2>Repository</h2>
-  <a href="https://github.com/bramantys/InSAR_4Dviz_MScthesis" target="_blank">
+  <a class="repo-link" href="https://github.com/bramantys/InSAR_4Dviz_MScthesis" target="_blank" rel="noopener">
     Open GitHub repository
   </a>
-
-  <h2>Template package</h2>
-  <p>
-    The <code>Proto1_RUM_TEMPLATE/</code> folder contains the original reusable package structure and pipeline notes.
-    It is not meant to be opened as a finished viewer.
-  </p>
-  <p>
-    The <code>4DViz_thesis/P1_4.1.5.V4_4D_MC_template/</code> folder contains the new version for Prototype1.
-  </p>
-  <p>
-    <a href="https://github.com/bramantys/InSAR_4Dviz_MScthesis/tree/main/P2_4.2.1.V5.3_Krimpen_MC_Template" target="_blank">Open the Prototype2 Krimpenerwaard MC template package</a>
-  </p>
-
-  <h2>Local use</h2>
-  <p>
-    Online use requires no installation. For local use, download the repository and run a simple local server:
-  </p>
-
-  <pre><code>python -m http.server 8000</code></pre>
-
-  <p>
-    Then open <code>http://localhost:8000/</code>.
-  </p>
 </body>
 </html>

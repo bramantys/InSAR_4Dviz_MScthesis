@@ -1,0 +1,31 @@
+{
+  "schema": "proto2_parcel_runtime_index_d7_3_v1",
+  "active_project_key": "0824-delf",
+  "projects": [
+    {
+      "key": "0824-delf",
+      "label": "260824_delfland_github",
+      "preflight_summary": "0824-delf/preflight_summary.json",
+      "canonical_inventory": "0824-delf/canonical_inventory.json",
+      "runtime_contract": "0824-delf/runtime/runtime_contract.json",
+      "runtime_asset_registry": "0824-delf/runtime/runtime_asset_registry.json",
+      "adapter_ready": true,
+      "runtime_packed": true,
+      "renderer_connected": true,
+      "capabilities": {
+        "parcel_source_adapter": true,
+        "parcel_runtime_pack": true,
+        "parcel_renderer": true,
+        "total_uncertainty": false,
+        "exact_reference_ground": true,
+        "outer_depth_collar": true,
+        "irreversible_reference_toggle": true,
+        "selected_epoch_irreversible_reference": true,
+        "reversible_reference_unchanged": true,
+        "pyspams_knmi_source": true,
+        "knmi_weather_overlay": true,
+        "csv_runtime_source": false
+      }
+    }
+  ]
+}

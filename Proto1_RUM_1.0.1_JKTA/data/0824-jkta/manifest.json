@@ -1,0 +1,3004 @@
+{
+  "schema": "deckgl_proto1_runtime_manifest_v6",
+  "runtimeContract": {
+    "schema": "proto1_rum_runtime_contract_v1",
+    "compatibility": {
+      "legacy_manifest_schema": "deckgl_proto1_runtime_manifest_v6",
+      "legacy_fields_retained": true,
+      "note": "T3E retains the V6 compatibility fields while making the canonical contract authoritative for scene tuning, context-cap recommendations, asset discovery, and package integrity."
+    },
+    "project": {
+      "name": "260824_Jkta_git",
+      "label": "260824_Jkta_git",
+      "key": "0824-jkta",
+      "description": "upload in github_jkta",
+      "prototype": "proto1-rum",
+      "product_type": "rum",
+      "instance_id": "fa6e359c-da4f-4391-af9d-502fa3df9fc5"
+    },
+    "dataset": {
+      "source": {
+        "file": "D:/Kuliah/Q7/Thesis/260627_Gameplan2/4.Web/4.3 Real use/Proto1_RUM_1.0.1/data/jakarta_enu_estimates.csv",
+        "format": "auto",
+        "crs": {
+          "authority": "EPSG:23830",
+          "proj4": "+proj=tmerc +lat_0=0 +lon_0=94.5 +k=0.9999 +x_0=200000 +y_0=1500000 +ellps=WGS84 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs +type=crs"
+        },
+        "field_mapping": {
+          "id": null,
+          "x": "x_rum",
+          "y": "y_rum",
+          "east": "east",
+          "north": "north",
+          "up": "up",
+          "var_east": "var_east",
+          "var_north": "var_north",
+          "var_up": "var_up",
+          "covar_en": "covar_en",
+          "covar_eu": "covar_eu",
+          "covar_nu": "covar_nu"
+        }
+      },
+      "rum_size_m": 450,
+      "counts": {
+        "observed_rum_count": 4779,
+        "interpolated_blankie_count": 456,
+        "runtime_row_count": 5235,
+        "structural_cell_count": 5235,
+        "open_no_data_cell_count": 1415,
+        "grid_cell_count": 6650,
+        "epoch_count": 288
+      },
+      "grid": {
+        "min_x": 1556242.181238117,
+        "min_y": 781489.252100735,
+        "max_i": 94,
+        "max_j": 69,
+        "rum_size_m": 450,
+        "source_proj4": "+proj=tmerc +lat_0=0 +lon_0=94.5 +k=0.9999 +x_0=200000 +y_0=1500000 +ellps=WGS84 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs +type=crs"
+      },
+      "array_order": "runtime-row-major, epoch-minor",
+      "index_formula": "valueIndex = runtimeRowIndex * epochCount + epochIndex"
+    },
+    "spatial": {
+      "bounds_wgs84": {
+        "west": 106.66252852804094,
+        "south": -6.350420275820541,
+        "east": 107.0404913094419,
+        "north": -6.0749189990270525,
+        "center_lon": 106.85150991874141,
+        "center_lat": -6.212669637423797,
+        "width_deg": 0.3779627814009672,
+        "height_deg": 0.2755012767934888
+      },
+      "bounds_source_crs": {
+        "min_x": 1556017.181238117,
+        "min_y": 781264.252100735,
+        "max_x": 1598767.181238117,
+        "max_y": 812764.252100735,
+        "center_x": 1577392.181238117,
+        "center_y": 797014.252100735,
+        "width_m": 42750,
+        "height_m": 31500,
+        "diagonal_m": 53101.90674542676
+      },
+      "observed_bounds": {
+        "wgs84": {
+          "west": 106.66252852804094,
+          "south": -6.350420275820541,
+          "east": 107.0404913094419,
+          "north": -6.0749189990270525,
+          "center_lon": 106.85150991874141,
+          "center_lat": -6.212669637423797,
+          "width_deg": 0.3779627814009672,
+          "height_deg": 0.2755012767934888
+        },
+        "source_crs": {
+          "min_x": 1556017.181238117,
+          "min_y": 781264.252100735,
+          "max_x": 1598767.181238117,
+          "max_y": 812764.252100735,
+          "center_x": 1577392.181238117,
+          "center_y": 797014.252100735,
+          "width_m": 42750,
+          "height_m": 31500,
+          "diagonal_m": 53101.90674542676
+        }
+      },
+      "support_bounds_grid": {
+        "iMin": 0,
+        "iMax": 94,
+        "jMin": 0,
+        "jMax": 69
+      },
+      "framing_basis": "completed_support_envelope_observed_plus_interpolated_blankies",
+      "camera_recommendation": {
+        "mode": "auto_from_dataset_bounds",
+        "fit_mode": "fit_bounds",
+        "fit_bounds_wgs84": [
+          [
+            106.66252852804094,
+            -6.350420275820541
+          ],
+          [
+            107.0404913094419,
+            -6.0749189990270525
+          ]
+        ],
+        "target_lon_lat": [
+          106.85150991874141,
+          -6.212669637423797
+        ],
+        "zoom": 11.157004112448483,
+        "bearing_deg": -25,
+        "pitch_deg": 62,
+        "max_zoom": 11.8,
+        "fit_padding_px": {
+          "left": 380,
+          "right": 90,
+          "top": 90,
+          "bottom": 90
+        },
+        "reference_viewport_px": [
+          1920,
+          1080
+        ],
+        "auto_fit_zoom_reference": 11.157004112448483,
+        "two_d": {
+          "target_lon_lat": [
+            106.85150991874141,
+            -6.212669637423797
+          ],
+          "zoom": 11.157004112448483,
+          "bearing_deg": 0,
+          "pitch_deg": 0
+        },
+        "three_d": {
+          "target_lon_lat": [
+            106.85150991874141,
+            -6.212669637423797
+          ],
+          "zoom": 11.157004112448483,
+          "bearing_deg": -25,
+          "pitch_deg": 62
+        },
+        "provenance": "completed_support_bounds_plus_internal_defaults",
+        "note": "The pipeline records a deterministic reference fit. The viewer performs the final viewport-aware fit using these bounds and padding."
+      }
+    },
+    "scene": {
+      "schema": "proto1_rum_scene_runtime_v1",
+      "camera": {
+        "mode": "auto_from_dataset_bounds",
+        "fit_mode": "fit_bounds",
+        "fit_bounds_wgs84": [
+          [
+            106.66252852804094,
+            -6.350420275820541
+          ],
+          [
+            107.0404913094419,
+            -6.0749189990270525
+          ]
+        ],
+        "target_lon_lat": [
+          106.85150991874141,
+          -6.212669637423797
+        ],
+        "zoom": 11.157004112448483,
+        "bearing_deg": -25,
+        "pitch_deg": 62,
+        "max_zoom": 11.8,
+        "fit_padding_px": {
+          "left": 380,
+          "right": 90,
+          "top": 90,
+          "bottom": 90
+        },
+        "reference_viewport_px": [
+          1920,
+          1080
+        ],
+        "auto_fit_zoom_reference": 11.157004112448483,
+        "two_d": {
+          "target_lon_lat": [
+            106.85150991874141,
+            -6.212669637423797
+          ],
+          "zoom": 11.157004112448483,
+          "bearing_deg": 0,
+          "pitch_deg": 0
+        },
+        "three_d": {
+          "target_lon_lat": [
+            106.85150991874141,
+            -6.212669637423797
+          ],
+          "zoom": 11.157004112448483,
+          "bearing_deg": -25,
+          "pitch_deg": 62
+        },
+        "provenance": "completed_support_bounds_plus_internal_defaults",
+        "note": "The pipeline records a deterministic reference fit. The viewer performs the final viewport-aware fit using these bounds and padding."
+      },
+      "context_caps": {
+        "mode": "auto_from_completed_support_extent_and_rum_size",
+        "bounds_wgs84": {
+          "min_lon": 106.65307945850591,
+          "min_lat": -6.357307807740378,
+          "max_lon": 107.04994037897693,
+          "max_lat": -6.0680314671072155,
+          "center_lon": 106.85150991874141,
+          "center_lat": -6.212669637423797,
+          "padding_lon_deg": 0.00944906953502418,
+          "padding_lat_deg": 0.00688753191983722,
+          "padding_fraction": 0.025,
+          "minimum_padding_deg": 0.002
+        },
+        "uv_projection": "web_mercator_four_fixed_cap_corners_one_atlas_level_v_flip",
+        "overview_atlas": {
+          "source_zoom": 13,
+          "maximum_dimension_px": 4096,
+          "requested_width_px": 2311.8824252437335,
+          "requested_height_px": 1695.1139611294493,
+          "output_width_px": 2312,
+          "output_height_px": 1695,
+          "downscale_factor": 1,
+          "tile_count": 70,
+          "maximum_tile_count": null,
+          "within_tile_limit": true,
+          "metres_per_source_pixel_at_center": 18.99702951486764
+        },
+        "focus_atlas": {
+          "source_zoom": 14,
+          "maximum_dimension_px": 6144,
+          "requested_width_px": 4623.764850487467,
+          "requested_height_px": 3390.2279222588986,
+          "output_width_px": 4624,
+          "output_height_px": 3390,
+          "downscale_factor": 1,
+          "tile_count": 266,
+          "maximum_tile_count": 384,
+          "within_tile_limit": true,
+          "metres_per_source_pixel_at_center": 9.49851475743382
+        },
+        "lod": {
+          "enabled": true,
+          "focus_enter_map_zoom": 13,
+          "overview_return_map_zoom": 12.6,
+          "hysteresis_zoom": 0.40000000000000036
+        },
+        "source_detail_basis": {
+          "nominal_rum_size_m": 450,
+          "target_pixels_per_rum_overview": 24,
+          "target_pixels_per_rum_focus": 48
+        },
+        "renderer_defaults_retained": {
+          "mipmaps": true,
+          "max_anisotropy": 4,
+          "live_tint_alpha": 116,
+          "blankie_tint_rgba": [
+            119,
+            123,
+            119,
+            154
+          ]
+        },
+        "provenance": "completed_support_bounds_plus_nominal_rum_size_plus_internal_gpu_limits"
+      }
+    },
+    "time": {
+      "start_date": "2014-01-01",
+      "end_date": "2024-12-31",
+      "interval_days": 14,
+      "epoch_count": 288,
+      "epoch_axis_asset": "epoch_axis.json",
+      "first_epoch": "2014-01-01",
+      "last_epoch": "2024-12-31",
+      "years_since_start_range": {
+        "min": 0,
+        "max": 10.99794661190965
+      },
+      "initial_epoch": "last",
+      "playback_epochs_per_second": 8
+    },
+    "vertical": {
+      "model": {
+        "unit": "mm",
+        "range_mm": {
+          "min": -895.7599487304688,
+          "max": 89.47603607177734
+        },
+        "generator": "linear"
+      },
+      "measurement": {
+        "unit": "mm",
+        "range_mm": {
+          "min": -895.0265502929688,
+          "max": 91.487548828125
+        },
+        "behavior": "linear",
+        "noise": "low"
+      },
+      "uncertainty": {
+        "unit": "mm",
+        "sigma_range_mm": {
+          "min": 0.15019814670085907,
+          "max": 20.96527099609375
+        },
+        "quality_preset": "high",
+        "display_sigma_multiplier": 1,
+        "visibility_threshold": {
+          "mode": "absolute",
+          "minStandardDeviationMm": 0.5,
+          "displayedSampleCount": 1332716,
+          "belowThresholdSampleCount": 43636,
+          "displayedFraction": 0.968295901048569,
+          "meaning": "The threshold controls relief visibility only. Numeric sigma values remain available for inspection and the P75 legend anchor still uses all valid live-RUM samples."
+        },
+        "legend": {
+          "statistic": "P75",
+          "unit": "mm",
+          "anchorScope": "all_live_rums_all_epochs",
+          "liveCellCount": 4779,
+          "sampleCount": 1376352,
+          "globalP75Mm": 3.8467898964881897,
+          "sigma_provenance": "synthetic_demo",
+          "visibilityThreshold": {
+            "mode": "absolute",
+            "minStandardDeviationMm": 0.5,
+            "displayedSampleCount": 1332716,
+            "belowThresholdSampleCount": 43636,
+            "displayedFraction": 0.968295901048569,
+            "meaning": "The threshold controls relief visibility only. Numeric sigma values remain available for inspection and the P75 legend anchor still uses all valid live-RUM samples."
+          },
+          "note": "Static P75 reference across measured RUMs and all epochs. Blank support cells are excluded. Samples below the configured millimetre threshold retain their numeric value but do not render relief geometry."
+        }
+      },
+      "velocity_color_scale": {
+        "schema": "adaptive_diverging_vertical_velocity_scale_v1",
+        "mode": "adaptive_uncertainty_p75_sign_specific_p98",
+        "field": "up",
+        "varianceField": "var_up",
+        "unit": "mm/yr",
+        "zeroReferenceMmYr": 0,
+        "uncertaintyPercentile": 75,
+        "colourPercentile": 98,
+        "nearZeroSigmaMultiplier": 2,
+        "nearZeroThresholdRawMmYr": 0.6851945703520419,
+        "nearZeroThresholdMmYr": 1,
+        "nearZeroRoundUpStepMmYr": 0.5,
+        "minActiveFraction": 0.01,
+        "subsidenceLimitRawMmYr": 31.607409593755676,
+        "upliftLimitRawMmYr": 7.555869631532638,
+        "subsidenceLimitMmYr": 35,
+        "upliftLimitMmYr": 8,
+        "subsidenceActive": true,
+        "upliftActive": true,
+        "observationCount": 4779,
+        "meaningfulSubsidenceCount": 4622,
+        "meaningfulUpliftCount": 49,
+        "clipped": true,
+        "p98Rounding": {
+          "under_10_step_mm_yr": 1,
+          "from_10_to_20_step_mm_yr": 2,
+          "from_20_to_100_step_mm_yr": 5,
+          "over_100_step_mm_yr": 10
+        },
+        "stops": [
+          {
+            "valueMmYr": -35,
+            "color": "#67001f",
+            "role": "clipped_subsidence_limit"
+          },
+          {
+            "valueMmYr": -26.5,
+            "color": "#b2182b",
+            "role": "subsidence_gradient"
+          },
+          {
+            "valueMmYr": -18,
+            "color": "#d6604d",
+            "role": "subsidence_gradient"
+          },
+          {
+            "valueMmYr": -9.5,
+            "color": "#f4a582",
+            "role": "subsidence_gradient"
+          },
+          {
+            "valueMmYr": -1,
+            "color": "#fddbc7",
+            "role": "near_zero_subsidence_edge"
+          },
+          {
+            "valueMmYr": 0,
+            "color": "#f7f7f7",
+            "role": "zero_reference"
+          },
+          {
+            "valueMmYr": 1,
+            "color": "#d1e5f0",
+            "role": "near_zero_uplift_edge"
+          },
+          {
+            "valueMmYr": 2.75,
+            "color": "#92c5de",
+            "role": "uplift_gradient"
+          },
+          {
+            "valueMmYr": 4.5,
+            "color": "#4393c3",
+            "role": "uplift_gradient"
+          },
+          {
+            "valueMmYr": 6.25,
+            "color": "#2166ac",
+            "role": "uplift_gradient"
+          },
+          {
+            "valueMmYr": 8,
+            "color": "#053061",
+            "role": "clipped_uplift_limit"
+          }
+        ],
+        "legend": {
+          "title": "Vertical velocity · mm/yr",
+          "labels": [
+            {
+              "valueMmYr": -35,
+              "positionPct": 0,
+              "label": "≤ −35"
+            },
+            {
+              "valueMmYr": -1,
+              "positionPct": 42,
+              "label": "−1"
+            },
+            {
+              "valueMmYr": 0,
+              "positionPct": 50,
+              "label": "0"
+            },
+            {
+              "valueMmYr": 1,
+              "positionPct": 58,
+              "label": "+1"
+            },
+            {
+              "valueMmYr": 8,
+              "positionPct": 100,
+              "label": "≥ +8"
+            }
+          ],
+          "note": "Adaptive display limits · near-zero ±1 mm/yr from P75 of 2σ · sign-specific P98 clipping"
+        },
+        "meaning": "Adaptive continuous diverging display scale for observed vertical velocity. Zero is the physical divider: negative/subsidence is red and positive/uplift is blue. The symmetric near-zero band is derived from P75 of 2 sigma_up; negative and positive P98 limits are determined independently and clipped only for display. Display limits are contrast controls, not hazard thresholds."
+      },
+      "velocity_statistics_mm_yr": {
+        "min": -81.44792637981615,
+        "max": 8.13570354236172,
+        "p02": -31.232229684181462,
+        "p50": -10.110236767958995,
+        "p98": -0.1233893702313564,
+        "p98_abs": 31.23222968418145,
+        "max_abs": 81.44792637981615
+      },
+      "uncertainty_statistics_mm": {
+        "p50": 2.6078964471817017,
+        "p75": 3.8467898964881897,
+        "p95": 8.197819519042966,
+        "max": 18.68355369567871
+      },
+      "exaggeration": {
+        "mode": "auto",
+        "rule": "robust_velocity_with_displacement_safety_cap_v1",
+        "default_m_per_mm": 10,
+        "min_m_per_mm": 0,
+        "max_m_per_mm": 20,
+        "step_m_per_mm": 0.25,
+        "source_model_range_mm": {
+          "min": -895.7599487304688,
+          "max": 89.47603607177734
+        },
+        "diagnostics": {
+          "p98_abs_vertical_velocity_mm_yr": 31.23222968418145,
+          "observed_model_range_mm": {
+            "min": -895.7599487304688,
+            "max": 89.47603607177734
+          },
+          "max_abs_observed_model_displacement_mm": 895.7599487304688,
+          "velocity_recommendation": {
+            "default_m_per_mm": 30,
+            "max_m_per_mm": 60,
+            "rule_label": "P98 |vz| ≤ 50 mm/yr"
+          },
+          "displacement_safety_cap": {
+            "default_m_per_mm": 10,
+            "max_m_per_mm": 20,
+            "rule_label": "|model| > 500 mm"
+          },
+          "automatic_result": {
+            "default_m_per_mm": 10,
+            "max_m_per_mm": 20
+          }
+        },
+        "provenance": "pipeline_auto"
+      },
+      "trendline_y_axis": {
+        "mode": "auto_from_project_measurements",
+        "min_mm": -1500,
+        "max_mm": 500,
+        "tick_step_mm": 500,
+        "provenance": "project_measurement_range_plus_internal_padding"
+      }
+    },
+    "horizontal": {
+      "input_validation": {
+        "schema": "proto1_rum_horizontal_input_audit_v1",
+        "observedRumCount": 4779,
+        "activeFeatureContract": {
+          "requiredFields": [
+            "east",
+            "north",
+            "var_east",
+            "var_north",
+            "covar_en"
+          ],
+          "requiredCovarianceSubmatrix": "east_north_2x2",
+          "consumers": [
+            "horizontal_arrow_significance",
+            "horizontal_1sigma_ellipse",
+            "raw_gpu_particles",
+            "optional_lsc_field"
+          ],
+          "blankiesExcluded": true
+        },
+        "validation": {
+          "covarianceToleranceRelative": 0.000001,
+          "invalidFiniteCount": 0,
+          "negativeHorizontalVarianceCount": 0,
+          "covarEnBoundViolationCount": 0,
+          "unusedCrossCovarianceWarnings": {
+            "covarEuBoundViolationCount": 0,
+            "covarNuBoundViolationCount": 0,
+            "total": 0,
+            "policy": "warning_until_a_feature_consumes_eu_or_nu"
+          },
+          "zeroSpeedCount": 0,
+          "status": "passed"
+        },
+        "observedStatistics": {
+          "speedMmYr": {
+            "count": 4779,
+            "min": 0.00013578808826989985,
+            "max": 16.8629524179521,
+            "p50": 0.5301939306476109,
+            "p75": 0.9337063610372077,
+            "p95": 1.9980088899941029,
+            "p98": 2.9573332438768207
+          },
+          "stdMajor1SigmaMmYr": {
+            "count": 4779,
+            "min": 0.017306535817729878,
+            "max": 2.2991698401982807,
+            "p50": 0.6894197827460503,
+            "p75": 0.9119905496938523,
+            "p95": 1.0150879455948756,
+            "p98": 1.0411023410961124
+          },
+          "stdMinor1SigmaMmYr": {
+            "count": 4779,
+            "min": 0.0061032184145264285,
+            "max": 0.8108113521162533,
+            "p50": 0.24312661746459374,
+            "p75": 0.32161708012434054,
+            "p95": 0.3579747852006059,
+            "p98": 0.36714886482798387
+          },
+          "directionalSigmaTheta1SigmaDeg": {
+            "count": 4779,
+            "min": 0.21446955288894418,
+            "max": 90,
+            "p50": 25.217891960747416,
+            "p75": 50.40270294072262,
+            "p95": 90,
+            "p98": 90
+          }
+        },
+        "warnings": []
+      },
+      "glyphs": {
+        "schema": "deckgl_proto1_horizontal_static_glyphs_v1",
+        "visibility": {
+          "minimumSpeedMmYr": 0.5,
+          "significanceSigmaMultiplier": 1,
+          "rule": "speed >= minimumSpeed AND speed >= significanceSigmaMultiplier * stdMajor1Sigma"
+        },
+        "ellipse": {
+          "confidenceProbability": 0.3934693402873666,
+          "confidenceScale": 1,
+          "sigmaMultiplier": 1,
+          "label": "1σ East-North uncertainty ellipse",
+          "centerPlacement": "arrow_tip"
+        },
+        "scaling": {
+          "rumSizeM": 450,
+          "mode": "auto_percentile_by_rum_size_same_as_arrow",
+          "arrowReferencePercentile": 99.5,
+          "arrowSpeedReferenceMmYr": 4.459920078807498,
+          "arrowMaxLengthM": 360,
+          "arrowScaleMPerMmYr": 80.71893523622457,
+          "ellipseReferencePercentile": 99.5,
+          "ellipseMajorReferenceMmYr": 1.1018752441847102,
+          "ellipseScaleMPerMmYr": 80.71893523622457,
+          "ellipseMaxDiameterM": 337.5,
+          "ellipseClipMode": "none",
+          "clearanceAboveCapM": 6
+        },
+        "legend": {
+          "statistic": "P75",
+          "percentile": 75,
+          "speedP75MmYr": 1.5737831770852024,
+          "ellipseMajorP75MmYr": 0.8134411087350761,
+          "ellipseMinorP75MmYr": 0.28686322937480424,
+          "arrowReferenceMmYr": 4.459920078807498,
+          "ellipseMajorReferenceMmYr": 1.1018752441847102,
+          "confidenceProbability": 0.3934693402873666,
+          "sigmaMultiplier": 1,
+          "label": "1σ major",
+          "visibleGlyphPairCount": 1782,
+          "directionalUncertainty": {
+            "sigmaThetaP75Deg": 15.21430855898904,
+            "percentile": 75,
+            "sigmaMultiplier": 1,
+            "capDeg": 90,
+            "visibleCellCount": 1782,
+            "rule": "sigma_theta = sigma_perp / |v|; values capped at 90 degrees; computed only for glyph-visible observed RUMs."
+          }
+        },
+        "summary": {
+          "liveRumCount": 4779,
+          "visibleGlyphPairCount": 1782,
+          "skippedLowSpeed": 2268,
+          "skippedInsignificantVsUncertainty": 729,
+          "skippedMissingUncertainty": 0
+        }
+      },
+      "particles_raw": {
+        "schema": "deckgl_proto1_horizontal_gpu_particle_field_v6_long_history_safety",
+        "sampling": {
+          "mode": "conservative_v1",
+          "rule": "conservative_v1: bilinear only when all four adjacent observed RUMs are available; otherwise nearest observed grid cell. Motion never interpolates blankies. Lifecycle stall checks use the nearest observed RUM speed, not a bilinear blend."
+        },
+        "grid": {
+          "width": 95,
+          "height": 70,
+          "coordinate_origin_lon_lat": [
+            106.84714577023418,
+            -6.219253204348299
+          ],
+          "axis_i_m": [
+            439.55139116062855,
+            10.499376828211155
+          ],
+          "axis_j_m": [
+            -10.428826116580536,
+            442.4767937937895
+          ],
+          "subdivision": 1
+        },
+        "spawn_domain": {
+          "rule": "live RUM + speed above stall threshold + all eight direct neighbours observed",
+          "support_neighbour_count": 8,
+          "fallback_used": false,
+          "spawn_cell_count": 3716
+        },
+        "render_defaults": {
+          "enabled": true,
+          "show_by_default": true,
+          "default_mode": "mean",
+          "default_particle_count": 5000,
+          "particle_capacity": 12000,
+          "speed_multiplier": 1.5,
+          "stall_speed_mm_yr": 0.05,
+          "field_mode": null
+        },
+        "legend": {
+          "statistic": "P75",
+          "percentile": 75,
+          "speedP75MmYr": 0.9337063610372077,
+          "directionalUncertainty": {
+            "sigmaThetaP75Deg": 15.21430855898904,
+            "percentile": 75,
+            "sigmaMultiplier": 1,
+            "capDeg": 90,
+            "visibleCellCount": 1782,
+            "visibilityFilter": {
+              "minimumSpeedMmYr": 0.5,
+              "significanceSigmaMultiplier": 1,
+              "rule": "speed >= minimumSpeed AND speed >= significanceSigmaMultiplier * stdMajor1Sigma"
+            },
+            "rule": "Reference sigma_theta across observed cells passing the horizontal glyph visibility filter; sigma_theta = sigma_perp / |v|; values capped at 90 degrees."
+          }
+        },
+        "summary": {
+          "liveRumCount": 4779,
+          "spawnCellCount": 3716,
+          "speedP95MmYr": 1.9980088899941029,
+          "excludedStalledRums": 201,
+          "excludedForMissingEightNeighbourSupport": 862,
+          "spawnFallbackUsed": false
+        },
+        "lsc_model_summary": null
+      },
+      "particles_lsc": {
+        "schema": "deckgl_proto1_horizontal_lsc_signal_field_v1",
+        "sampling": {
+          "mode": "lsc_signal_field",
+          "rule": "Fine LSC texture sampled through the existing conservative-v1 shader rule. Fine texels are valid only where their nearest coarse RUM is observed; no blank/no-data prediction is emitted.",
+          "rawComparisonMode": "raw estimates · conservative bilinear v1"
+        },
+        "grid": {
+          "width": 380,
+          "height": 280,
+          "coordinate_origin_lon_lat": [
+            106.84714577023418,
+            -6.219253204348299
+          ],
+          "axis_i_m": [
+            109.88784779015714,
+            2.6248442070527886
+          ],
+          "axis_j_m": [
+            -2.607206529145134,
+            110.61919844844738
+          ],
+          "subdivision": 4
+        },
+        "spawn_domain": {
+          "rule": "same raw eight-neighbour-supported coarse emitter set, re-expressed in fine-grid coordinates",
+          "support_neighbour_count": 8,
+          "fallback_used": false,
+          "spawn_cell_count": 3716
+        },
+        "render_defaults": {
+          "enabled": true,
+          "show_by_default": true,
+          "default_mode": "mean",
+          "default_particle_count": 5000,
+          "particle_capacity": 12000,
+          "speed_multiplier": 1.5,
+          "stall_speed_mm_yr": 0.05,
+          "field_mode": "lsc"
+        },
+        "legend": {
+          "statistic": "P75",
+          "percentile": 75,
+          "speedP75MmYr": 0.6262942830860122,
+          "directionalUncertainty": {
+            "sigmaThetaP75Deg": 35.91549146520509,
+            "percentile": 75,
+            "sigmaMultiplier": 1,
+            "capDeg": 90,
+            "visibleCellCount": 28512,
+            "validFineTexelCount": 76464,
+            "parentVisibilityFilter": {
+              "minimumSpeedMmYr": 0.5,
+              "significanceSigmaMultiplier": 1,
+              "rule": "speed >= minimumSpeed AND speed >= significanceSigmaMultiplier * stdMajor1Sigma"
+            },
+            "rule": "Reference sigma_theta across valid fine LSC texels whose parent observed RUM passes the horizontal glyph visibility filter; E/N covariance is zero because the LSC runtime models component prediction variances only."
+          }
+        },
+        "summary": {
+          "validFineTexelCount": 76464,
+          "sourceLiveRumCount": 4779,
+          "spawnCellCount": 3716,
+          "speedP95MmYr": 1.288079929351807,
+          "meanAbsPredMinusRawAtCoarseCentersMmYr": {
+            "east": 0.1846133054256119,
+            "north": 0.2578050700079917
+          },
+          "meanPredSigmaAtCoarseCentersMmYr": {
+            "east": 0.267149316847755,
+            "north": 0.2491867970429626
+          },
+          "meanPredSigmaMmYrBySupport": {
+            "interior": 0.2532059651024668,
+            "boundary": 0.27949624993304456
+          },
+          "fallbackCount": 0,
+          "factorizationFallbackCount": 0,
+          "fixedParentSystemCount": 4779
+        },
+        "lsc_model_summary": {
+          "algorithm": "ordinary_kriging_with_heteroscedastic_formal_noise",
+          "algorithm_version": "ok_local_fixed_parent_k32_moore8_v1",
+          "subdivision": 4,
+          "neighbor_count": 32,
+          "variogram_fit_weighting": "equal_binned_variogram_reference_locked",
+          "prediction_rule": "nearest 32 live RUMs within min(3a, 4000 m), with fallback to nearest raw RUM when fewer than 4 neighbours are available."
+        }
+      },
+      "audit_asset": "horizontal_audit.json"
+    },
+    "support": {
+      "blankie_selection": {
+        "mode": "completed_support_envelope_v2_bounded_spans_component_bridging_v1",
+        "selectionBasis": "live_measurements_only",
+        "rule": "live_union_diamond_closing_then_bounded_orthogonal_span_fill_then_bounded_component_bridging_then_4_neighbour_hole_fill",
+        "closingKernel": "manhattan_diamond_4_neighbour",
+        "closingRadiusCells": 3,
+        "fillEnclosedHoles": true,
+        "selectedCellCount": 456,
+        "closingSelectedCellCount": 336,
+        "initialHoleFillSelectedCellCount": 33,
+        "boundedSpanFill": {
+          "enabled": true,
+          "maximumGapCells": 12,
+          "passesExecuted": 1,
+          "perPassAddedCellCounts": [
+            87
+          ],
+          "addedCellCount": 87,
+          "rowAddedCellCount": 62,
+          "columnAddedCellCount": 28
+        },
+        "componentBridging": {
+          "enabled": true,
+          "maximumComponentsToAbsorb": 12,
+          "bridgeCount": 0,
+          "totalBridgeCellCount": 0,
+          "bridges": []
+        },
+        "postBridgeHoleFillSelectedCellCount": 0,
+        "rejectedNoObservationSupportCellCount": 0,
+        "diagonalRule": "corner_touch_does_not_connect",
+        "liveComponents": {
+          "componentCount": 21,
+          "largestComponentCellCount": 4714
+        },
+        "supportComponents": {
+          "componentCount": 1,
+          "largestComponentCellCount": 5235
+        },
+        "studyAreaBoundary": {
+          "connectivityPolicy": "prefer_single_component",
+          "allObservedCellsRetained": true,
+          "uncontainedObservedCellCount": 0,
+          "observedComponentCountBeforeCompletion": 21,
+          "detachedObservedComponentCountBeforeCompletion": 20,
+          "completedSupportComponentCount": 1,
+          "singleConnectedSupport": true,
+          "semantic": "Every observed RUM is part of the support opening. Bounded completion attempts to form one study-area ground boundary without extrapolating beyond the configured live-neighbour support rule.",
+          "warnings": []
+        },
+        "outsideFill": false
+      },
+      "blankie_interpolation": {
+        "blankieCount": 456,
+        "runtimeRowStartIndex": 4779,
+        "runtimeRowEndIndex": 5234,
+        "interpolationMethod": "idw_grid_neighbours",
+        "selectedRadiusHistogram": {
+          "1": 340,
+          "2": 103,
+          "3": 13
+        },
+        "neighbourCountHistogram": {
+          "2": 86,
+          "3": 89,
+          "4": 83,
+          "5": 55,
+          "6": 50,
+          "7": 42,
+          "8": 27,
+          "9": 7,
+          "10": 6,
+          "11": 5,
+          "12": 6
+        },
+        "interpolatedVerticalVelocityMmYr": {
+          "min": -70.13199084084799,
+          "max": 6.640633027775429
+        },
+        "sourceRows": "observed live RUMs only",
+        "weightsComputedOnce": true
+      },
+      "pit_domain": {
+        "scope": "completed_support_envelope_v2_with_bounded_spans_and_component_bridges",
+        "iMin": 0,
+        "iMax": 94,
+        "jMin": 0,
+        "jMax": 69,
+        "supportBounds": {
+          "iMin": 0,
+          "iMax": 94,
+          "jMin": 0,
+          "jMax": 69
+        },
+        "northwestMaxSubsidenceAnchor": {
+          "rumId": "RUM_04639",
+          "gridI": 36,
+          "gridJ": 61,
+          "upMmYr": -81.44792637981615
+        }
+      }
+    },
+    "viewer_preferences": {
+      "initial_scene_mode": "3d",
+      "initial_basemap": "map",
+      "playback_default_multiplier": 1
+    },
+    "assets": {
+      "staticRums": "rum_static.json",
+      "interpolatedBlankies": "interpolated_blankies.json",
+      "supportEnvelopeAudit": "support_envelope_audit.json",
+      "epochAxis": "epoch_axis.json",
+      "verticalModelF32": "vertical_model_mm_f32.bin",
+      "verticalMeasurementF32": "vertical_measurement_mm_f32.bin",
+      "verticalSigmaF32": "vertical_sigma_mm_f32.bin",
+      "horizontalGlyphs": "horizontal_glyphs.json",
+      "horizontalParticleField": "horizontal_particle_field.json",
+      "horizontalAudit": "horizontal_audit.json",
+      "horizontalParticleFieldLsc": "horizontal_particle_field_lsc.json",
+      "resolvedConfig": "resolved_project_config.json",
+      "runtimeAssetRegistry": "runtime_asset_registry.json",
+      "runtimePackageAudit": "runtime_package_audit.json"
+    },
+    "asset_registry": {
+      "schema": "proto1_rum_runtime_asset_registry_v1",
+      "asset": "runtime_asset_registry.json",
+      "asset_count": 18,
+      "total_bytes": 32346521,
+      "entries": [
+        {
+          "key": "static_rums",
+          "path": "rum_static.json",
+          "bytes": 6519773,
+          "sha256": "58552594fd17840d23e603a9b7aca06d28c50f42b9fd0b4d6f10e0a844cf1b5e",
+          "kind": "metadata",
+          "media_type": "application/json",
+          "format": "json_utf8",
+          "schema": "deckgl_proto1_rum_static_v5",
+          "rows": 4779,
+          "role": "Observed RUM geometry and static ENU attributes.",
+          "optional": false
+        },
+        {
+          "key": "interpolated_blankies",
+          "path": "interpolated_blankies.json",
+          "bytes": 1142605,
+          "sha256": "357e1fa15bcc4c700a48a1467f78f1d63e298c98b8b923c6a28384583835d26e",
+          "kind": "metadata",
+          "media_type": "application/json",
+          "format": "json_utf8",
+          "schema": "deckgl_proto1_support_envelope_interpolated_blankies_v2",
+          "rows": 456,
+          "role": "Support-envelope cells without direct observations.",
+          "optional": false
+        },
+        {
+          "key": "support_envelope_audit",
+          "path": "support_envelope_audit.json",
+          "bytes": 3648,
+          "sha256": "e16c9710fcb06b6e5b02b721f4b7280fc755274ba328258afcf74369bd023100",
+          "kind": "metadata",
+          "media_type": "application/json",
+          "format": "json_utf8",
+          "schema": "proto1_rum_support_envelope_audit_v1",
+          "rows": null,
+          "role": "Support completion and interpolation audit.",
+          "optional": false
+        },
+        {
+          "key": "epoch_axis",
+          "path": "epoch_axis.json",
+          "bytes": 12085,
+          "sha256": "5f55b8a5ee8d7f93886e0cb43d3216a89f5e7c1d745e86def024cce9c89df9f7",
+          "kind": "metadata",
+          "media_type": "application/json",
+          "format": "json_utf8",
+          "schema": "deckgl_proto1_epoch_axis_v1",
+          "rows": 288,
+          "role": "Shared temporal axis.",
+          "optional": false
+        },
+        {
+          "key": "vertical_model",
+          "path": "vertical_model_mm_f32.bin",
+          "bytes": 6030720,
+          "sha256": "6fb1247d2fd092edda291d69823e6597d1d62d0c0e9594f40a54019dd8d17bcf",
+          "kind": "binary_array",
+          "media_type": "application/octet-stream",
+          "format": "float32_little_endian",
+          "shape": [
+            5235,
+            288
+          ],
+          "components": null,
+          "unit": "mm",
+          "role": "Model displacement used for animated geometry.",
+          "optional": false,
+          "array_order": "runtime_row_major_epoch_minor",
+          "expected_value_count": 1507680,
+          "expected_bytes": 6030720
+        },
+        {
+          "key": "vertical_measurement",
+          "path": "vertical_measurement_mm_f32.bin",
+          "bytes": 6030720,
+          "sha256": "3fc33c6c9714bc523f4bd5af08083a3cced542fbcd70dc28f01689a3e94d76a1",
+          "kind": "binary_array",
+          "media_type": "application/octet-stream",
+          "format": "float32_little_endian",
+          "shape": [
+            5235,
+            288
+          ],
+          "components": null,
+          "unit": "mm",
+          "role": "Synthetic measurement series used for inspection charts.",
+          "optional": false,
+          "array_order": "runtime_row_major_epoch_minor",
+          "expected_value_count": 1507680,
+          "expected_bytes": 6030720
+        },
+        {
+          "key": "vertical_sigma",
+          "path": "vertical_sigma_mm_f32.bin",
+          "bytes": 6030720,
+          "sha256": "5639c8b9a78196edeecf32a8aa9aa89946e802698be087e1fec38a8925a4e87a",
+          "kind": "binary_array",
+          "media_type": "application/octet-stream",
+          "format": "float32_little_endian",
+          "shape": [
+            5235,
+            288
+          ],
+          "components": null,
+          "unit": "mm_1sigma",
+          "role": "Per-row per-epoch vertical uncertainty.",
+          "optional": false,
+          "array_order": "runtime_row_major_epoch_minor",
+          "expected_value_count": 1507680,
+          "expected_bytes": 6030720
+        },
+        {
+          "key": "horizontal_glyphs",
+          "path": "horizontal_glyphs.json",
+          "bytes": 2837369,
+          "sha256": "50efa83bb6cb611c135479bec78cc090411e570ae8f925ae2026faf0df7d5ee0",
+          "kind": "metadata",
+          "media_type": "application/json",
+          "format": "json_utf8",
+          "schema": "deckgl_proto1_horizontal_static_glyphs_v1",
+          "rows": 1782,
+          "role": "Observed-RUM arrows and 1-sigma uncertainty ellipses.",
+          "optional": false
+        },
+        {
+          "key": "horizontal_particle_field_metadata",
+          "path": "horizontal_particle_field.json",
+          "bytes": 5407,
+          "sha256": "98d72a2cff60048f4691fa44262239e4cac0b5fae709e0518f2751fbd46dec83",
+          "kind": "metadata",
+          "media_type": "application/json",
+          "format": "json_utf8",
+          "schema": "deckgl_proto1_horizontal_gpu_particle_field_v6_long_history_safety",
+          "rows": null,
+          "role": "Raw horizontal GPU field metadata.",
+          "optional": false
+        },
+        {
+          "key": "horizontal_particle_velocity_raw",
+          "path": "horizontal_particle_field_rgba_f32.bin",
+          "bytes": 106400,
+          "sha256": "2c6f613abd077f9ede03f20a5747c1b7b1544ab9268a2b4d81fb412f07e2f27c",
+          "kind": "binary_array",
+          "media_type": "application/octet-stream",
+          "format": "float32_little_endian",
+          "shape": [
+            70,
+            95,
+            4
+          ],
+          "components": [
+            "east_mm_yr",
+            "north_mm_yr",
+            "runtime_row_index",
+            "valid_mask"
+          ],
+          "unit": "mixed",
+          "role": "Raw observed-RUM horizontal velocity field.",
+          "optional": false,
+          "array_order": null,
+          "expected_value_count": 26600,
+          "expected_bytes": 106400
+        },
+        {
+          "key": "horizontal_particle_covariance_raw",
+          "path": "horizontal_particle_covariance_rgba_f32.bin",
+          "bytes": 106400,
+          "sha256": "f22e45e1dc819a535ea8f14babfd7e178b004a2d3c10a3ec51b52ea451a54dc5",
+          "kind": "binary_array",
+          "media_type": "application/octet-stream",
+          "format": "float32_little_endian",
+          "shape": [
+            70,
+            95,
+            4
+          ],
+          "components": [
+            "var_east_mm2_yr2",
+            "var_north_mm2_yr2",
+            "covar_en_mm2_yr2",
+            "valid_mask"
+          ],
+          "unit": "mixed",
+          "role": "Raw horizontal covariance field.",
+          "optional": false,
+          "array_order": null,
+          "expected_value_count": 26600,
+          "expected_bytes": 106400
+        },
+        {
+          "key": "horizontal_particle_spawns_raw",
+          "path": "horizontal_particle_spawns_rg_f32.bin",
+          "bytes": 29728,
+          "sha256": "7119a63a08d767d1a8baa3881b27a9bfaf76a862bc6f9eab7db4a377edb79b56",
+          "kind": "binary_array",
+          "media_type": "application/octet-stream",
+          "format": "float32_little_endian",
+          "shape": [
+            3716,
+            2
+          ],
+          "components": [
+            "grid_i",
+            "grid_j"
+          ],
+          "unit": "grid_coordinate",
+          "role": "Raw particle spawn coordinates.",
+          "optional": false,
+          "array_order": null,
+          "expected_value_count": 7432,
+          "expected_bytes": 29728
+        },
+        {
+          "key": "horizontal_audit",
+          "path": "horizontal_audit.json",
+          "bytes": 23984,
+          "sha256": "5c180e4b1b38c15b74500036dc1e0acb70e27f44a0bde6fdea65d804876a1aa9",
+          "kind": "metadata",
+          "media_type": "application/json",
+          "format": "json_utf8",
+          "schema": "proto1_rum_horizontal_audit_v1",
+          "rows": null,
+          "role": "Horizontal validation, tuning and LSC audit.",
+          "optional": false
+        },
+        {
+          "key": "horizontal_particle_field_lsc_metadata",
+          "path": "horizontal_particle_field_lsc.json",
+          "bytes": 21447,
+          "sha256": "46dfaddba4b5005b230b0f5e992aae453a6fdd2cc4e9d9dd858ffb041ade1f2e",
+          "kind": "metadata",
+          "media_type": "application/json",
+          "format": "json_utf8",
+          "schema": "deckgl_proto1_horizontal_lsc_signal_field_v1",
+          "rows": null,
+          "role": "Optional LSC horizontal field metadata.",
+          "optional": true
+        },
+        {
+          "key": "horizontal_particle_velocity_lsc",
+          "path": "horizontal_particle_lsc_field_rgba_f32.bin",
+          "bytes": 1702400,
+          "sha256": "86395c17cba305325d54598a446690958b3c168bca4e2c0bdc592fc3d5659b1a",
+          "kind": "binary_array",
+          "media_type": "application/octet-stream",
+          "format": "float32_little_endian",
+          "shape": [
+            280,
+            380,
+            4
+          ],
+          "components": [
+            "east_mm_yr",
+            "north_mm_yr",
+            "parent_runtime_row_index",
+            "valid_mask"
+          ],
+          "unit": "mixed",
+          "role": "Optional fine LSC velocity field.",
+          "optional": true,
+          "array_order": null,
+          "expected_value_count": 425600,
+          "expected_bytes": 1702400
+        },
+        {
+          "key": "horizontal_particle_covariance_lsc",
+          "path": "horizontal_particle_lsc_covariance_rgba_f32.bin",
+          "bytes": 1702400,
+          "sha256": "b5b02e57dfb51e7d7db835ddcfc5a4300687e23465ea12cb2120a4b482807a8d",
+          "kind": "binary_array",
+          "media_type": "application/octet-stream",
+          "format": "float32_little_endian",
+          "shape": [
+            280,
+            380,
+            4
+          ],
+          "components": [
+            "var_east_mm2_yr2",
+            "var_north_mm2_yr2",
+            "covar_en_mm2_yr2",
+            "valid_mask"
+          ],
+          "unit": "mixed",
+          "role": "Optional fine LSC prediction covariance.",
+          "optional": true,
+          "array_order": null,
+          "expected_value_count": 425600,
+          "expected_bytes": 1702400
+        },
+        {
+          "key": "horizontal_particle_spawns_lsc",
+          "path": "horizontal_particle_lsc_spawns_rg_f32.bin",
+          "bytes": 29728,
+          "sha256": "026daa7884360f94167807af06ad9108b5d01ef922b7b286a7031a84fea18e64",
+          "kind": "binary_array",
+          "media_type": "application/octet-stream",
+          "format": "float32_little_endian",
+          "shape": [
+            3716,
+            2
+          ],
+          "components": [
+            "grid_i",
+            "grid_j"
+          ],
+          "unit": "fine_grid_coordinate",
+          "role": "Optional LSC particle spawn coordinates.",
+          "optional": true,
+          "array_order": null,
+          "expected_value_count": 7432,
+          "expected_bytes": 29728
+        },
+        {
+          "key": "resolved_project_config",
+          "path": "resolved_project_config.json",
+          "bytes": 10987,
+          "sha256": "b781d070a98b808d0189c6dae91c6d4ffcaadbee470ff41310891cb22116d601",
+          "kind": "metadata",
+          "media_type": "application/json",
+          "format": "json_utf8",
+          "schema": "proto1_rum_resolved_config_v1",
+          "rows": null,
+          "role": "Resolved project and internal defaults used by this build.",
+          "optional": false
+        }
+      ]
+    },
+    "provenance": {
+      "project_config_schema": "proto1_rum_project_config_v1",
+      "internal_defaults_schema": "proto1_rum_internal_defaults_v1",
+      "config_fingerprint_sha256": "480ea21034e4656dcc7e319fcad53b600f804f881e589663b0c41b463b64e911",
+      "compatibility_mode": "canonical",
+      "warnings": [],
+      "source_sha256": "36e1d393a8663bda11f1ecc7df932c565b2b516003a2137646e9734777dbb1a5",
+      "build_fingerprint_sha256": "be28099fd4457d50756da8d3a83fbfa5f657596a4ba57db3b0556115cb8ec7fa",
+      "source_format_resolved": "csv",
+      "generated_output": "public/data/0824-jkta",
+      "runtime_contract_stage": "T3E",
+      "runtime_package_audit_asset": "runtime_package_audit.json",
+      "contract_payload_sha256": "7622271bd9c32eb1a3ee8e913735980e2eae9ba946cc7dc46064e35cf4ec7487"
+    }
+  },
+  "projectName": "260824_Jkta_git",
+  "rumCount": 4779,
+  "blankCount": 456,
+  "runtimeRowCount": 5235,
+  "structuralCellCount": 5235,
+  "unfilledNoDataCellCount": 1415,
+  "gridCellCount": 6650,
+  "epochCount": 288,
+  "rumSizeM": 450,
+  "arrayOrder": "runtime-row-major, epoch-minor",
+  "indexFormula": "valueIndex = runtimeRowIndex * epochCount + epochIndex",
+  "verticalModel": {
+    "name": "linear_from_up_velocity_with_support_envelope_v2_idw_blankies",
+    "unit": "mm",
+    "liveSourceField": "up",
+    "blankieSource": "IDW of live model series"
+  },
+  "verticalMeasurement": {
+    "behavior": "linear",
+    "noiseLevel": "low",
+    "noiseSigmaMm": 2,
+    "meaning": "Synthetic measurement series for charts/inspection. It is not used to animate the cap surface."
+  },
+  "verticalSigma": {
+    "qualityPreset": "high",
+    "qualityPresetMeaning": "Synthetic generator profile only; it is not a measured uncertainty-quality class.",
+    "sigmaFloorMm": 0.05,
+    "qualityParameters": {
+      "baseSigmaMm": 0.1,
+      "temporalGrowthMmPerYear": 0.2,
+      "seasonalSigmaMm": 0.5,
+      "spikeProbability": 0.005,
+      "spikeSigmaMm": 5
+    },
+    "sigma_provenance": "synthetic_demo",
+    "sourceRateUncertainty": {
+      "field": "var_up",
+      "derivedAs": "sqrt(var_up)",
+      "unit": "mm/yr",
+      "role": "Input rate-uncertainty term used by the synthetic sigma_z display generator."
+    },
+    "blankiePolicy": {
+      "source": "IDW live sigma with maximum-neighbour inflation and radius penalty",
+      "minimumMultiplierOverMaxNeighbour": 1.15,
+      "radiusPenaltyMmPerCell": 0.15
+    },
+    "meaning": "Per-row, per-epoch synthetic 1-sigma uncertainty in mm."
+  },
+  "verticalUncertaintyLegend": {
+    "statistic": "P75",
+    "unit": "mm",
+    "anchorScope": "all_live_rums_all_epochs",
+    "liveCellCount": 4779,
+    "sampleCount": 1376352,
+    "globalP75Mm": 3.8467898964881897,
+    "sigma_provenance": "synthetic_demo",
+    "visibilityThreshold": {
+      "mode": "absolute",
+      "minStandardDeviationMm": 0.5,
+      "displayedSampleCount": 1332716,
+      "belowThresholdSampleCount": 43636,
+      "displayedFraction": 0.968295901048569,
+      "meaning": "The threshold controls relief visibility only. Numeric sigma values remain available for inspection and the P75 legend anchor still uses all valid live-RUM samples."
+    },
+    "note": "Static P75 reference across measured RUMs and all epochs. Blank support cells are excluded. Samples below the configured millimetre threshold retain their numeric value but do not render relief geometry."
+  },
+  "uncertaintyRelief": {
+    "displayRange": {
+      "unit": "sigma",
+      "value": 1
+    },
+    "visibilityThreshold": {
+      "mode": "absolute",
+      "minStandardDeviationMm": 0.5
+    },
+    "visualFade": {
+      "startEffectiveReliefM": 0.5,
+      "fullEffectiveReliefM": 10,
+      "minimumRenderWeight": 0.01,
+      "bucketCount": 8
+    },
+    "geometry": {
+      "enabled": true,
+      "renderer": "deckgl_simple_mesh_instancing",
+      "grid_n_per_rum": 4,
+      "flat_border_fraction": 0.1,
+      "up_relief_gain": 0.75,
+      "down_relief_gain": 0.85,
+      "up_relief_footprint_fraction": 0.36,
+      "down_relief_footprint_fraction": 0.36,
+      "meaning": "One shared low-poly checkerboard mesh is instanced per measured RUM only. Position/scale update each epoch; mesh geometry is not rebuilt. Blankies remain flat translucent support without uncertainty relief. Amplitude-aware tint fading keeps low/zero relief visually clean.",
+      "facet_tint": {
+        "mode": "unlit_fixed_local_facet_tint",
+        "flat": 1,
+        "up_min": 0.94,
+        "up_max": 0.985,
+        "down_min": 0.972,
+        "down_max": 0.997,
+        "light_direction_local": [
+          -0.42,
+          -0.36,
+          0.83
+        ],
+        "meaning": "Unlit, hue-safe luminance multipliers for full-strength relief. Upward facets retain a subtle cue; downward facets are intentionally fainter. Low-amplitude RUMs blend both back toward 1.0, so the scientific mean colour stays dominant and zero relief is visually clean."
+      },
+      "lod": {
+        "enabled": true,
+        "far_grid_n_per_rum": 2,
+        "near_grid_n_per_rum": 4,
+        "near_min_cell_pixels": 48,
+        "far_max_cell_pixels": 36,
+        "meaning": "Automatic semantic LOD for measured-RUM uncertainty relief. At overview scale the renderer instances a sparse 2x2 checkerboard; at close inspection it switches to 4x4. Each 2x2 pyramid keeps the same physical base size as a 4x4 pyramid, so overview mode is sparser rather than larger. The RUM footprint must be at least near_min_cell_pixels wide before moving to 4x4, and it must shrink below far_max_cell_pixels before returning to 2x2. The two thresholds create hysteresis so small zoom changes do not repeatedly rebuild layers. High-pitch views force 2x2 as a performance safeguard.",
+        "preserve_pyramid_footprint_across_lods": true,
+        "footprint_reference_grid_n_per_rum": 4,
+        "grazing_pitch_force_far_deg": 66,
+        "grazing_pitch_force_far_meaning": "At or above this pitch, force the sparse 2x2 relief mesh even when zoom alone would choose 4x4. This prevents horizon-angle relief overdraw."
+      }
+    },
+    "status": "deckgl_instanced_checkerboard_relief_ready",
+    "note": "unit=sigma means a multiple of each cell's current sigma; unit=mm means a fixed absolute future relief range. The renderer instances one static checkerboard mesh per cell; no per-epoch cap geometry is rebuilt."
+  },
+  "horizontalStaticGlyphs": {
+    "schema": "deckgl_proto1_horizontal_static_glyphs_v1",
+    "purpose": "Proto1 RUM horizontal arrow / covariance-ellipse math prepared for native DeckGL instancing. Arrow tail is the RUM coordinate and the confidence ellipse is centred at the vector tip. Observed RUMs only; no blankie horizontal interpolation.",
+    "units": {
+      "vector": "mm/year",
+      "covariance": "(mm/year)^2",
+      "displayedGeometry": "visual metres"
+    },
+    "visibility": {
+      "minimumSpeedMmYr": 0.5,
+      "significanceSigmaMultiplier": 1,
+      "rule": "speed >= minimumSpeed AND speed >= significanceSigmaMultiplier * stdMajor1Sigma"
+    },
+    "ellipse": {
+      "confidenceProbability": 0.3934693402873666,
+      "confidenceScale": 1,
+      "sigmaMultiplier": 1,
+      "label": "1σ East-North uncertainty ellipse",
+      "centerPlacement": "arrow_tip"
+    },
+    "scaling": {
+      "rumSizeM": 450,
+      "mode": "auto_percentile_by_rum_size_same_as_arrow",
+      "arrowReferencePercentile": 99.5,
+      "arrowSpeedReferenceMmYr": 4.459920078807498,
+      "arrowMaxLengthM": 360,
+      "arrowScaleMPerMmYr": 80.71893523622457,
+      "ellipseReferencePercentile": 99.5,
+      "ellipseMajorReferenceMmYr": 1.1018752441847102,
+      "ellipseScaleMPerMmYr": 80.71893523622457,
+      "ellipseMaxDiameterM": 337.5,
+      "ellipseClipMode": "none",
+      "clearanceAboveCapM": 6
+    },
+    "render": {
+      "enabled": true,
+      "showArrowsByDefault": true,
+      "showEllipsesByDefault": true,
+      "defaultOpacity": 0.92,
+      "arrowColorRgba": [
+        34,
+        34,
+        34,
+        240
+      ],
+      "ellipseColorRgba": [
+        0,
+        240,
+        216,
+        210
+      ],
+      "ellipseSegments": 64,
+      "ellipseRingInnerRadius": 0.94
+    },
+    "legend": {
+      "statistic": "P75",
+      "percentile": 75,
+      "speedP75MmYr": 1.5737831770852024,
+      "ellipseMajorP75MmYr": 0.8134411087350761,
+      "ellipseMinorP75MmYr": 0.28686322937480424,
+      "arrowReferenceMmYr": 4.459920078807498,
+      "ellipseMajorReferenceMmYr": 1.1018752441847102,
+      "confidenceProbability": 0.3934693402873666,
+      "sigmaMultiplier": 1,
+      "label": "1σ major",
+      "visibleGlyphPairCount": 1782,
+      "directionalUncertainty": {
+        "sigmaThetaP75Deg": 15.21430855898904,
+        "percentile": 75,
+        "sigmaMultiplier": 1,
+        "capDeg": 90,
+        "visibleCellCount": 1782,
+        "rule": "sigma_theta = sigma_perp / |v|; values capped at 90 degrees; computed only for glyph-visible observed RUMs."
+      }
+    },
+    "summary": {
+      "liveRumCount": 4779,
+      "visibleGlyphPairCount": 1782,
+      "skippedLowSpeed": 2268,
+      "skippedInsignificantVsUncertainty": 729,
+      "skippedMissingUncertainty": 0
+    }
+  },
+  "horizontalParticles": {
+    "schema": "deckgl_proto1_horizontal_gpu_particle_field_v6_long_history_safety",
+    "purpose": "GPU transform-feedback particle field for directly observed Proto1 RUM horizontal velocity and E/N covariance. Blankies are excluded from the field and spawn domain; emitter cells require observed 8-neighbour support.",
+    "units": {
+      "horizontalVelocity": "mm/year",
+      "covariance": "(mm/year)^2",
+      "localParticleCoordinates": "metres east/north relative to coordinateOriginLonLat"
+    },
+    "sampling": {
+      "mode": "conservative_v1",
+      "rule": "conservative_v1: bilinear only when all four adjacent observed RUMs are available; otherwise nearest observed grid cell. Motion never interpolates blankies. Lifecycle stall checks use the nearest observed RUM speed, not a bilinear blend."
+    },
+    "grid": {
+      "width": 95,
+      "height": 70,
+      "maxI": 94,
+      "maxJ": 69,
+      "rumSizeM": 450,
+      "coordinateOriginLonLat": [
+        106.84714577023418,
+        -6.219253204348299
+      ],
+      "gridOriginLocalM": [
+        -19763.295213891517,
+        -14835.332249483545
+      ],
+      "gridAxisIM": [
+        439.55139116062855,
+        10.499376828211155
+      ],
+      "gridAxisJM": [
+        -10.428826116580536,
+        442.4767937937895
+      ]
+    },
+    "spawnDomain": {
+      "rule": "live RUM + speed above stall threshold + all eight direct neighbours observed",
+      "supportNeighbourCount": 8,
+      "fallback": "all above-stall live RUMs only when no supported emitter cells exist",
+      "fallbackUsed": false
+    },
+    "render": {
+      "enabled": true,
+      "showByDefault": true,
+      "defaultMode": "mean",
+      "particleCapacity": 12000,
+      "defaultParticleCount": 5000,
+      "baseMps": 1800,
+      "speedMultiplier": 1.5,
+      "surfaceOffsetM": 20,
+      "stallSpeedMmYr": 0.05,
+      "samplerMode": "conservative_v1",
+      "particleSizePixels": 2.2,
+      "particleSizeMultiplier": 1,
+      "particleSizeMultiplierMin": 0.5,
+      "particleSizeMultiplierMax": 3,
+      "particleSizeMultiplierStep": 0.1,
+      "particleOpacity": 1,
+      "trailWidthPixels": 1.15,
+      "trailOpacity": 1,
+      "historySampleIntervalS": 0.05,
+      "historySamplesMin": 9,
+      "historySamplesMax": 65,
+      "historySamples": 32,
+      "trailDurationStepS": 0.05,
+      "trailPersistence": 0.98,
+      "trailPersistenceMin": 0.8,
+      "trailPersistenceMax": 0.999,
+      "trailPersistenceStep": 0.001,
+      "maxTrailScreenJumpPx": 120,
+      "integrationMaxCellFraction": 0.25,
+      "integrationMaxSubsteps": 24,
+      "tailFadeMode": "canvas_persistence",
+      "birthFadeSeconds": 0.3,
+      "spawnSupportRule": "eight_live_neighbours",
+      "uncertaintyStrength": 0.5,
+      "shimmerStrength": 0.5,
+      "monteCarloStrength": 0.5,
+      "mcModel": "directional",
+      "mcMaxSigma": 1.5,
+      "mcOffsetCapMmYr": 1,
+      "mcOffsetCapRatioToSpeed": 1,
+      "shimmerPixelAmplitude": 5,
+      "spawnJitterCells": 0.9,
+      "colorRgba": [
+        100,
+        100,
+        100,
+        255
+      ],
+      "rumSizeM": 450
+    },
+    "legend": {
+      "statistic": "P75",
+      "percentile": 75,
+      "speedP75MmYr": 0.9337063610372077,
+      "directionalUncertainty": {
+        "sigmaThetaP75Deg": 15.21430855898904,
+        "percentile": 75,
+        "sigmaMultiplier": 1,
+        "capDeg": 90,
+        "visibleCellCount": 1782,
+        "visibilityFilter": {
+          "minimumSpeedMmYr": 0.5,
+          "significanceSigmaMultiplier": 1,
+          "rule": "speed >= minimumSpeed AND speed >= significanceSigmaMultiplier * stdMajor1Sigma"
+        },
+        "rule": "Reference sigma_theta across observed cells passing the horizontal glyph visibility filter; sigma_theta = sigma_perp / |v|; values capped at 90 degrees."
+      }
+    },
+    "history": {
+      "storage": "RGBA32F texture: local_x_m, local_y_m, particle_age_s, speed_ratio_to_p95 (uncapped; visual alpha/width outputs clamp)",
+      "samples": 32,
+      "samplesMin": 9,
+      "samplesMax": 65,
+      "sampleIntervalS": 0.05,
+      "trailDurationMinS": 0.4,
+      "trailDurationMaxS": 3.2,
+      "trailDurationStepS": 0.05,
+      "tailFadeMode": "canvas_persistence",
+      "trailPersistence": 0.98,
+      "durationS": 1.55,
+      "maxTrailScreenJumpPx": 120,
+      "integrationMaxCellFraction": 0.25,
+      "integrationMaxSubsteps": 24,
+      "rationale": "Fixed simulation-time cadence makes visible trail duration independent of display frame rate. Trail alpha uses V7-style exponential canvas persistence; age resets mark respawn discontinuities; Z is recomputed from current vertical model at draw time. Requested duration reallocates only the sentinel-filled history target and never reseeds particle simulation state. At high visual speed, metric substeps validate support across the path and the screen-jump guard suppresses any remaining misleading cross-map connector.",
+      "atlas": {
+        "layout": "runtime_tiled_particle_row_atlas",
+        "preferredWidth": 4096,
+        "rationale": "Runtime tiles particle columns into multiple rows before multiplying by history samples, avoiding an excessively wide RGBA32F target while keeping texelFetch history reads exact."
+      }
+    },
+    "summary": {
+      "liveRumCount": 4779,
+      "spawnCellCount": 3716,
+      "speedP95MmYr": 1.9980088899941029,
+      "excludedStalledRums": 201,
+      "excludedForMissingEightNeighbourSupport": 862,
+      "spawnFallbackUsed": false
+    },
+    "assets": {
+      "fieldF32": "horizontal_particle_field_rgba_f32.bin",
+      "covarianceF32": "horizontal_particle_covariance_rgba_f32.bin",
+      "spawnGridF32": "horizontal_particle_spawns_rg_f32.bin"
+    }
+  },
+  "horizontalParticleLsc": {
+    "schema": "deckgl_proto1_horizontal_lsc_signal_field_v1",
+    "purpose": "Optional least-squares-collocation horizontal deformation signal field. Raw estimates remain available unchanged as a separate particle flow-field mode.",
+    "units": {
+      "horizontalVelocity": "mm/year",
+      "covariance": "(mm/year)^2",
+      "localParticleCoordinates": "metres east/north relative to coordinateOriginLonLat"
+    },
+    "sampling": {
+      "mode": "lsc_signal_field",
+      "rule": "Fine LSC texture sampled through the existing conservative-v1 shader rule. Fine texels are valid only where their nearest coarse RUM is observed; no blank/no-data prediction is emitted.",
+      "rawComparisonMode": "raw estimates · conservative bilinear v1"
+    },
+    "grid": {
+      "width": 380,
+      "height": 280,
+      "maxI": 379,
+      "maxJ": 279,
+      "rumSizeM": 112.5,
+      "coarseRumSizeM": 450,
+      "coordinateOriginLonLat": [
+        106.84714577023418,
+        -6.219253204348299
+      ],
+      "gridOriginLocalM": [
+        -19924.216175783036,
+        -15005.198313466795
+      ],
+      "gridAxisIM": [
+        109.88784779015714,
+        2.6248442070527886
+      ],
+      "gridAxisJM": [
+        -2.607206529145134,
+        110.61919844844738
+      ],
+      "subdivision": 4
+    },
+    "spawnDomain": {
+      "rule": "same raw eight-neighbour-supported coarse emitter set, re-expressed in fine-grid coordinates",
+      "supportNeighbourCount": 8,
+      "fallback": "all above-stall live RUMs only when no supported emitter cells exist",
+      "fallbackUsed": false,
+      "coarseSpawnCellCount": 3716
+    },
+    "render": {
+      "enabled": true,
+      "showByDefault": true,
+      "defaultMode": "mean",
+      "particleCapacity": 12000,
+      "defaultParticleCount": 5000,
+      "baseMps": 1800,
+      "speedMultiplier": 1.5,
+      "surfaceOffsetM": 20,
+      "stallSpeedMmYr": 0.05,
+      "samplerMode": "lsc_signal_field",
+      "particleSizePixels": 2.2,
+      "particleSizeMultiplier": 1,
+      "particleSizeMultiplierMin": 0.5,
+      "particleSizeMultiplierMax": 3,
+      "particleSizeMultiplierStep": 0.1,
+      "particleOpacity": 1,
+      "trailWidthPixels": 1.15,
+      "trailOpacity": 1,
+      "historySampleIntervalS": 0.05,
+      "historySamplesMin": 9,
+      "historySamplesMax": 65,
+      "historySamples": 32,
+      "trailDurationStepS": 0.05,
+      "trailPersistence": 0.98,
+      "trailPersistenceMin": 0.8,
+      "trailPersistenceMax": 0.999,
+      "trailPersistenceStep": 0.001,
+      "maxTrailScreenJumpPx": 120,
+      "integrationMaxCellFraction": 0.25,
+      "integrationMaxSubsteps": 24,
+      "tailFadeMode": "canvas_persistence",
+      "birthFadeSeconds": 0.3,
+      "spawnSupportRule": "eight_live_neighbours",
+      "uncertaintyStrength": 0.5,
+      "shimmerStrength": 0.5,
+      "monteCarloStrength": 0.5,
+      "mcModel": "directional",
+      "mcMaxSigma": 1.5,
+      "mcOffsetCapMmYr": 1,
+      "mcOffsetCapRatioToSpeed": 1,
+      "shimmerPixelAmplitude": 5,
+      "spawnJitterCells": 3.6,
+      "colorRgba": [
+        100,
+        100,
+        100,
+        255
+      ],
+      "rumSizeM": 450,
+      "fieldMode": "lsc"
+    },
+    "history": {
+      "storage": "RGBA32F texture: local_x_m, local_y_m, particle_age_s, speed_ratio_to_p95 (uncapped; visual alpha/width outputs clamp)",
+      "samples": 32,
+      "samplesMin": 9,
+      "samplesMax": 65,
+      "sampleIntervalS": 0.05,
+      "trailDurationMinS": 0.4,
+      "trailDurationMaxS": 3.2,
+      "trailDurationStepS": 0.05,
+      "tailFadeMode": "canvas_persistence",
+      "trailPersistence": 0.98,
+      "durationS": 1.55,
+      "maxTrailScreenJumpPx": 120,
+      "integrationMaxCellFraction": 0.25,
+      "integrationMaxSubsteps": 24,
+      "rationale": "Fixed simulation-time cadence makes visible trail duration independent of display frame rate. Trail alpha uses V7-style exponential canvas persistence; age resets mark respawn discontinuities; Z is recomputed from current vertical model at draw time. Requested duration reallocates only the sentinel-filled history target and never reseeds particle simulation state. At high visual speed, metric substeps validate support across the path and the screen-jump guard suppresses any remaining misleading cross-map connector.",
+      "atlas": {
+        "layout": "runtime_tiled_particle_row_atlas",
+        "preferredWidth": 4096,
+        "rationale": "Runtime tiles particle columns into multiple rows before multiplying by history samples, avoiding an excessively wide RGBA32F target while keeping texelFetch history reads exact."
+      }
+    },
+    "summary": {
+      "validFineTexelCount": 76464,
+      "sourceLiveRumCount": 4779,
+      "spawnCellCount": 3716,
+      "speedP95MmYr": 1.288079929351807,
+      "meanAbsPredMinusRawAtCoarseCentersMmYr": {
+        "east": 0.1846133054256119,
+        "north": 0.2578050700079917
+      },
+      "meanPredSigmaAtCoarseCentersMmYr": {
+        "east": 0.267149316847755,
+        "north": 0.2491867970429626
+      },
+      "meanPredSigmaMmYrBySupport": {
+        "interior": 0.2532059651024668,
+        "boundary": 0.27949624993304456
+      },
+      "fallbackCount": 0,
+      "factorizationFallbackCount": 0,
+      "fixedParentSystemCount": 4779
+    },
+    "lscModel": {
+      "algorithm": "ordinary_kriging_with_heteroscedastic_formal_noise",
+      "algorithmVersion": "ok_local_fixed_parent_k32_moore8_v1",
+      "subdivision": 4,
+      "variogramFitWeighting": "equal_binned_variogram_reference_locked",
+      "variogramFitWeightingMeaning": "Equal weight per populated empirical semivariogram bin. This is reference-locked because it reproduces the Jakarta validation parameters provided with the LSC handoff; pair counts remain recorded for audit.",
+      "neighborhood": "fixed_per_parent_cell_k32",
+      "neighborCount": 32,
+      "forcedImmediateNeighbourPolicy": "parent plus all available live Moore-8 neighbours are retained before distance ranking.",
+      "fixedNeighbourTradeoff": "Fixed parent-cell neighbour membership reuses two component LU factorizations across 16 fine texels. Weights remain exact for that fixed set; microscopic coarse-boundary membership seams are an explicit approximation.",
+      "domainRule": "fine texel valid iff the nearest coarse grid cell is a live observed RUM; no LSC value is generated into blankies or unfilled no-data.",
+      "sourceCoordinateGrid": {
+        "originX": 1556242.18123817,
+        "originY": 781489.2521008096,
+        "axisIM": [
+          450,
+          0
+        ],
+        "axisJM": [
+          0,
+          450
+        ]
+      },
+      "predictionRule": "nearest 32 live RUMs within min(3a, 4000 m), with fallback to nearest raw RUM when fewer than 4 neighbours are available.",
+      "predictionVarianceFloorMm2Yr2": 0.0001,
+      "east": {
+        "component": "east",
+        "c0": 0.10560949125112756,
+        "c1": 0.3512370548735827,
+        "a": 1276.6620572359595,
+        "effectiveRangeM": 3829.9861717078784,
+        "objective": 0.0024755183989636663,
+        "meanFormalVariance": 0.21137991267556844,
+        "signalToFormalNoise": 1.6616387547319633,
+        "fitWeighting": "equal_binned_variogram_reference_locked",
+        "variogram": {
+          "bins": [
+            {
+              "bin": 1,
+              "lagMinM": 450,
+              "lagMaxM": 900,
+              "lagCenterM": 675,
+              "pairCount": 18047,
+              "semivariance": 0.23197423481499796
+            },
+            {
+              "bin": 2,
+              "lagMinM": 900,
+              "lagMaxM": 1350,
+              "lagCenterM": 1125,
+              "pairCount": 35059,
+              "semivariance": 0.33018103424704087
+            },
+            {
+              "bin": 3,
+              "lagMinM": 1350,
+              "lagMaxM": 1800,
+              "lagCenterM": 1575,
+              "pairCount": 43023,
+              "semivariance": 0.3739109048559656
+            },
+            {
+              "bin": 4,
+              "lagMinM": 1800,
+              "lagMaxM": 2250,
+              "lagCenterM": 2025,
+              "pairCount": 50739,
+              "semivariance": 0.38563926291902456
+            },
+            {
+              "bin": 5,
+              "lagMinM": 2250,
+              "lagMaxM": 2700,
+              "lagCenterM": 2475,
+              "pairCount": 82785,
+              "semivariance": 0.40261354645807307
+            },
+            {
+              "bin": 6,
+              "lagMinM": 2700,
+              "lagMaxM": 3150,
+              "lagCenterM": 2925,
+              "pairCount": 73235,
+              "semivariance": 0.4169568099600067
+            },
+            {
+              "bin": 7,
+              "lagMinM": 3150,
+              "lagMaxM": 3600,
+              "lagCenterM": 3375,
+              "pairCount": 95695,
+              "semivariance": 0.42317275679447924
+            },
+            {
+              "bin": 8,
+              "lagMinM": 3600,
+              "lagMaxM": 4050,
+              "lagCenterM": 3825,
+              "pairCount": 109523,
+              "semivariance": 0.4261926830822434
+            },
+            {
+              "bin": 9,
+              "lagMinM": 4050,
+              "lagMaxM": 4500,
+              "lagCenterM": 4275,
+              "pairCount": 107468,
+              "semivariance": 0.43429570188010497
+            },
+            {
+              "bin": 10,
+              "lagMinM": 4500,
+              "lagMaxM": 4950,
+              "lagCenterM": 4725,
+              "pairCount": 127840,
+              "semivariance": 0.43859547522594255
+            },
+            {
+              "bin": 11,
+              "lagMinM": 4950,
+              "lagMaxM": 5400,
+              "lagCenterM": 5175,
+              "pairCount": 118271,
+              "semivariance": 0.4420008551266872
+            },
+            {
+              "bin": 12,
+              "lagMinM": 5400,
+              "lagMaxM": 5850,
+              "lagCenterM": 5625,
+              "pairCount": 144754,
+              "semivariance": 0.44550168898010345
+            },
+            {
+              "bin": 13,
+              "lagMinM": 5850,
+              "lagMaxM": 6300,
+              "lagCenterM": 6075,
+              "pairCount": 163170,
+              "semivariance": 0.44763115439805923
+            },
+            {
+              "bin": 14,
+              "lagMinM": 6300,
+              "lagMaxM": 6750,
+              "lagCenterM": 6525,
+              "pairCount": 152771,
+              "semivariance": 0.4524093532519424
+            },
+            {
+              "bin": 15,
+              "lagMinM": 6750,
+              "lagMaxM": 7200,
+              "lagCenterM": 6975,
+              "pairCount": 163289,
+              "semivariance": 0.45850738198032
+            },
+            {
+              "bin": 16,
+              "lagMinM": 7200,
+              "lagMaxM": 7650,
+              "lagCenterM": 7425,
+              "pairCount": 160115,
+              "semivariance": 0.46220545640805893
+            },
+            {
+              "bin": 17,
+              "lagMinM": 7650,
+              "lagMaxM": 8100,
+              "lagCenterM": 7875,
+              "pairCount": 189056,
+              "semivariance": 0.4642173702513979
+            },
+            {
+              "bin": 18,
+              "lagMinM": 8100,
+              "lagMaxM": 8550,
+              "lagCenterM": 8325,
+              "pairCount": 191463,
+              "semivariance": 0.46943749688932707
+            },
+            {
+              "bin": 19,
+              "lagMinM": 8550,
+              "lagMaxM": 9000,
+              "lagCenterM": 8775,
+              "pairCount": 186942,
+              "semivariance": 0.47865514716319124
+            }
+          ],
+          "maxOffset": 22
+        },
+        "detrend": {
+          "order": 2,
+          "basis": "[1, x, y, xy, x², y²]",
+          "normalizedCoordinates": true,
+          "coordinateCenterM": [
+            1576821.6539312021,
+            796088.4988051426
+          ],
+          "coordinateScaleM": [
+            11142.169034590777,
+            7427.112202334668
+          ],
+          "coefficients": [
+            -0.024129078119020153,
+            0.08006102825100828,
+            -0.03213444554591639,
+            -0.00035076755205589935,
+            0.06696253424581647,
+            -0.064133340024261
+          ],
+          "meaning": "Used only to estimate the semivariogram; not added back during prediction."
+        }
+      },
+      "north": {
+        "component": "north",
+        "c0": 0.2149735177066727,
+        "c1": 0.2771403633202128,
+        "a": 1333.5214321633246,
+        "effectiveRangeM": 4000.5642964899735,
+        "objective": 0.0039502211807085135,
+        "meanFormalVariance": 0.39216858641559327,
+        "signalToFormalNoise": 0.7066867998104227,
+        "fitWeighting": "equal_binned_variogram_reference_locked",
+        "variogram": {
+          "bins": [
+            {
+              "bin": 1,
+              "lagMinM": 450,
+              "lagMaxM": 900,
+              "lagCenterM": 675,
+              "pairCount": 18047,
+              "semivariance": 0.3003165152594434
+            },
+            {
+              "bin": 2,
+              "lagMinM": 900,
+              "lagMaxM": 1350,
+              "lagCenterM": 1125,
+              "pairCount": 35059,
+              "semivariance": 0.3966567759098897
+            },
+            {
+              "bin": 3,
+              "lagMinM": 1350,
+              "lagMaxM": 1800,
+              "lagCenterM": 1575,
+              "pairCount": 43023,
+              "semivariance": 0.43087513732798605
+            },
+            {
+              "bin": 4,
+              "lagMinM": 1800,
+              "lagMaxM": 2250,
+              "lagCenterM": 2025,
+              "pairCount": 50739,
+              "semivariance": 0.44512057181458614
+            },
+            {
+              "bin": 5,
+              "lagMinM": 2250,
+              "lagMaxM": 2700,
+              "lagCenterM": 2475,
+              "pairCount": 82785,
+              "semivariance": 0.4479286366169127
+            },
+            {
+              "bin": 6,
+              "lagMinM": 2700,
+              "lagMaxM": 3150,
+              "lagCenterM": 2925,
+              "pairCount": 73235,
+              "semivariance": 0.44435349210249014
+            },
+            {
+              "bin": 7,
+              "lagMinM": 3150,
+              "lagMaxM": 3600,
+              "lagCenterM": 3375,
+              "pairCount": 95695,
+              "semivariance": 0.44717164946498705
+            },
+            {
+              "bin": 8,
+              "lagMinM": 3600,
+              "lagMaxM": 4050,
+              "lagCenterM": 3825,
+              "pairCount": 109523,
+              "semivariance": 0.45834459199859184
+            },
+            {
+              "bin": 9,
+              "lagMinM": 4050,
+              "lagMaxM": 4500,
+              "lagCenterM": 4275,
+              "pairCount": 107468,
+              "semivariance": 0.46622185581529046
+            },
+            {
+              "bin": 10,
+              "lagMinM": 4500,
+              "lagMaxM": 4950,
+              "lagCenterM": 4725,
+              "pairCount": 127840,
+              "semivariance": 0.48058694639797417
+            },
+            {
+              "bin": 11,
+              "lagMinM": 4950,
+              "lagMaxM": 5400,
+              "lagCenterM": 5175,
+              "pairCount": 118271,
+              "semivariance": 0.48142630786819823
+            },
+            {
+              "bin": 12,
+              "lagMinM": 5400,
+              "lagMaxM": 5850,
+              "lagCenterM": 5625,
+              "pairCount": 144754,
+              "semivariance": 0.4815405684386139
+            },
+            {
+              "bin": 13,
+              "lagMinM": 5850,
+              "lagMaxM": 6300,
+              "lagCenterM": 6075,
+              "pairCount": 163170,
+              "semivariance": 0.48763380964726094
+            },
+            {
+              "bin": 14,
+              "lagMinM": 6300,
+              "lagMaxM": 6750,
+              "lagCenterM": 6525,
+              "pairCount": 152771,
+              "semivariance": 0.49217152562020144
+            },
+            {
+              "bin": 15,
+              "lagMinM": 6750,
+              "lagMaxM": 7200,
+              "lagCenterM": 6975,
+              "pairCount": 163289,
+              "semivariance": 0.4950721834594273
+            },
+            {
+              "bin": 16,
+              "lagMinM": 7200,
+              "lagMaxM": 7650,
+              "lagCenterM": 7425,
+              "pairCount": 160115,
+              "semivariance": 0.5010518531732335
+            },
+            {
+              "bin": 17,
+              "lagMinM": 7650,
+              "lagMaxM": 8100,
+              "lagCenterM": 7875,
+              "pairCount": 189056,
+              "semivariance": 0.5015189375967213
+            },
+            {
+              "bin": 18,
+              "lagMinM": 8100,
+              "lagMaxM": 8550,
+              "lagCenterM": 8325,
+              "pairCount": 191463,
+              "semivariance": 0.5028075919397998
+            },
+            {
+              "bin": 19,
+              "lagMinM": 8550,
+              "lagMaxM": 9000,
+              "lagCenterM": 8775,
+              "pairCount": 186942,
+              "semivariance": 0.5070457174182839
+            }
+          ],
+          "maxOffset": 22
+        },
+        "detrend": {
+          "order": 2,
+          "basis": "[1, x, y, xy, x², y²]",
+          "normalizedCoordinates": true,
+          "coordinateCenterM": [
+            1576821.6539312021,
+            796088.4988051426
+          ],
+          "coordinateScaleM": [
+            11142.169034590777,
+            7427.112202334668
+          ],
+          "coefficients": [
+            -0.12461569809180792,
+            -0.03113972292355485,
+            0.01076487181377763,
+            -0.04014886622607468,
+            0.03514641330413831,
+            0.1202784033378393
+          ],
+          "meaning": "Used only to estimate the semivariogram; not added back during prediction."
+        }
+      },
+      "meaning": {
+        "variogramTrendPolicy": "Variogram estimated on second-order residuals to avoid trend contamination of the covariance model; prediction uses ordinary kriging in local moving neighborhoods, whose locally-constant-mean assumption absorbs the regional trend. In pure interpolation with moving neighborhoods this is practically equivalent to trend-model kriging, while avoiding imprinting a global polynomial misfit into the predictions.",
+        "noiseModel": "Formal per-cell E/N variance is placed on the kriging diagonal. Fitted nugget is recorded only as a cross-check and is not substituted for the formal variances.",
+        "crossComponentCovariance": "Not modeled for the LSC prediction. Covariance texture stores 0.0 in the E/N cross-term; Monte Carlo axes are E/N aligned in LSC mode.",
+        "estimatedModels": {
+          "east": {
+            "component": "east",
+            "c0": 0.10560949125112756,
+            "c1": 0.3512370548735827,
+            "a": 1276.6620572359595,
+            "effectiveRangeM": 3829.9861717078784,
+            "objective": 0.0024755183989636663,
+            "meanFormalVariance": 0.21137991267556844,
+            "signalToFormalNoise": 1.6616387547319633,
+            "fitWeighting": "equal_binned_variogram_reference_locked"
+          },
+          "north": {
+            "component": "north",
+            "c0": 0.2149735177066727,
+            "c1": 0.2771403633202128,
+            "a": 1333.5214321633246,
+            "effectiveRangeM": 4000.5642964899735,
+            "objective": 0.0039502211807085135,
+            "meanFormalVariance": 0.39216858641559327,
+            "signalToFormalNoise": 0.7066867998104227,
+            "fitWeighting": "equal_binned_variogram_reference_locked"
+          }
+        }
+      },
+      "validation": {
+        "validFineTexelCount": 76464,
+        "sourceLiveRumCount": 4779,
+        "spawnCellCount": 3716,
+        "speedP95MmYr": 1.288079929351807,
+        "meanAbsPredMinusRawAtCoarseCentersMmYr": {
+          "east": 0.1846133054256119,
+          "north": 0.2578050700079917
+        },
+        "meanPredSigmaAtCoarseCentersMmYr": {
+          "east": 0.267149316847755,
+          "north": 0.2491867970429626
+        },
+        "meanPredSigmaMmYrBySupport": {
+          "interior": 0.2532059651024668,
+          "boundary": 0.27949624993304456
+        },
+        "fallbackCount": 0,
+        "factorizationFallbackCount": 0,
+        "fixedParentSystemCount": 4779
+      }
+    },
+    "cache": {
+      "fingerprint": "03923fbe597bc28ae594b99a00452faefde7d4f7d79fa1aa90ad0273f65fef66",
+      "algorithmVersion": "ok_local_fixed_parent_k32_moore8_v1",
+      "sourceCsvSha256": "36e1d393a8663bda11f1ecc7df932c565b2b516003a2137646e9734777dbb1a5",
+      "rawFieldSha256": "2c6f613abd077f9ede03f20a5747c1b7b1544ab9268a2b4d81fb412f07e2f27c",
+      "rawCovarianceSha256": "f22e45e1dc819a535ea8f14babfd7e178b004a2d3c10a3ec51b52ea451a54dc5",
+      "rawSpawnsSha256": "7119a63a08d767d1a8baa3881b27a9bfaf76a862bc6f9eab7db4a377edb79b56",
+      "config": {
+        "enabled": true,
+        "subdivision": 4,
+        "neighborCount": 32,
+        "minNeighbours": 4,
+        "maxLagM": 9000,
+        "binWidthM": 450,
+        "minPairsPerBin": 50,
+        "fitWeighting": "equal_binned_variogram_reference_locked",
+        "rangeMinM": 100,
+        "rangeMaxM": 10000,
+        "minEffectiveRangeM": 1000,
+        "minSignalSill": 0.02,
+        "weakSignalNoiseRatio": 0.25,
+        "maxNeighbourRadiusM": 4000,
+        "maxNeighbourRangeMultiplier": 3,
+        "predictionVarianceFloor": 0.0001
+      }
+    },
+    "warnings": [],
+    "assets": {
+      "fieldF32": "horizontal_particle_lsc_field_rgba_f32.bin",
+      "covarianceF32": "horizontal_particle_lsc_covariance_rgba_f32.bin",
+      "spawnGridF32": "horizontal_particle_lsc_spawns_rg_f32.bin"
+    },
+    "legend": {
+      "statistic": "P75",
+      "percentile": 75,
+      "speedP75MmYr": 0.6262942830860122,
+      "directionalUncertainty": {
+        "sigmaThetaP75Deg": 35.91549146520509,
+        "percentile": 75,
+        "sigmaMultiplier": 1,
+        "capDeg": 90,
+        "visibleCellCount": 28512,
+        "validFineTexelCount": 76464,
+        "parentVisibilityFilter": {
+          "minimumSpeedMmYr": 0.5,
+          "significanceSigmaMultiplier": 1,
+          "rule": "speed >= minimumSpeed AND speed >= significanceSigmaMultiplier * stdMajor1Sigma"
+        },
+        "rule": "Reference sigma_theta across valid fine LSC texels whose parent observed RUM passes the horizontal glyph visibility filter; E/N covariance is zero because the LSC runtime models component prediction variances only."
+      }
+    }
+  },
+  "horizontalAudit": {
+    "asset": "horizontal_audit.json",
+    "input": {
+      "schema": "proto1_rum_horizontal_input_audit_v1",
+      "observedRumCount": 4779,
+      "activeFeatureContract": {
+        "requiredFields": [
+          "east",
+          "north",
+          "var_east",
+          "var_north",
+          "covar_en"
+        ],
+        "requiredCovarianceSubmatrix": "east_north_2x2",
+        "consumers": [
+          "horizontal_arrow_significance",
+          "horizontal_1sigma_ellipse",
+          "raw_gpu_particles",
+          "optional_lsc_field"
+        ],
+        "blankiesExcluded": true
+      },
+      "validation": {
+        "covarianceToleranceRelative": 0.000001,
+        "invalidFiniteCount": 0,
+        "negativeHorizontalVarianceCount": 0,
+        "covarEnBoundViolationCount": 0,
+        "unusedCrossCovarianceWarnings": {
+          "covarEuBoundViolationCount": 0,
+          "covarNuBoundViolationCount": 0,
+          "total": 0,
+          "policy": "warning_until_a_feature_consumes_eu_or_nu"
+        },
+        "zeroSpeedCount": 0,
+        "status": "passed"
+      },
+      "observedStatistics": {
+        "speedMmYr": {
+          "count": 4779,
+          "min": 0.00013578808826989985,
+          "max": 16.8629524179521,
+          "p50": 0.5301939306476109,
+          "p75": 0.9337063610372077,
+          "p95": 1.9980088899941029,
+          "p98": 2.9573332438768207
+        },
+        "stdMajor1SigmaMmYr": {
+          "count": 4779,
+          "min": 0.017306535817729878,
+          "max": 2.2991698401982807,
+          "p50": 0.6894197827460503,
+          "p75": 0.9119905496938523,
+          "p95": 1.0150879455948756,
+          "p98": 1.0411023410961124
+        },
+        "stdMinor1SigmaMmYr": {
+          "count": 4779,
+          "min": 0.0061032184145264285,
+          "max": 0.8108113521162533,
+          "p50": 0.24312661746459374,
+          "p75": 0.32161708012434054,
+          "p95": 0.3579747852006059,
+          "p98": 0.36714886482798387
+        },
+        "directionalSigmaTheta1SigmaDeg": {
+          "count": 4779,
+          "min": 0.21446955288894418,
+          "max": 90,
+          "p50": 25.217891960747416,
+          "p75": 50.40270294072262,
+          "p95": 90,
+          "p98": 90
+        }
+      },
+      "warnings": []
+    },
+    "provenance": {
+      "statistics_basis": "observed_live_rums_only",
+      "blankies_included": false,
+      "horizontal_covariance_basis": "east_north_2x2",
+      "note": "Maximum values are retained for diagnostics. P75 is the visible legend reference; high-percentile values are used only for geometry scaling where configured."
+    }
+  },
+  "verticalVelocityColorScale": {
+    "schema": "adaptive_diverging_vertical_velocity_scale_v1",
+    "mode": "adaptive_uncertainty_p75_sign_specific_p98",
+    "field": "up",
+    "varianceField": "var_up",
+    "unit": "mm/yr",
+    "zeroReferenceMmYr": 0,
+    "uncertaintyPercentile": 75,
+    "colourPercentile": 98,
+    "nearZeroSigmaMultiplier": 2,
+    "nearZeroThresholdRawMmYr": 0.6851945703520419,
+    "nearZeroThresholdMmYr": 1,
+    "nearZeroRoundUpStepMmYr": 0.5,
+    "minActiveFraction": 0.01,
+    "subsidenceLimitRawMmYr": 31.607409593755676,
+    "upliftLimitRawMmYr": 7.555869631532638,
+    "subsidenceLimitMmYr": 35,
+    "upliftLimitMmYr": 8,
+    "subsidenceActive": true,
+    "upliftActive": true,
+    "observationCount": 4779,
+    "meaningfulSubsidenceCount": 4622,
+    "meaningfulUpliftCount": 49,
+    "clipped": true,
+    "p98Rounding": {
+      "under_10_step_mm_yr": 1,
+      "from_10_to_20_step_mm_yr": 2,
+      "from_20_to_100_step_mm_yr": 5,
+      "over_100_step_mm_yr": 10
+    },
+    "stops": [
+      {
+        "valueMmYr": -35,
+        "color": "#67001f",
+        "role": "clipped_subsidence_limit"
+      },
+      {
+        "valueMmYr": -26.5,
+        "color": "#b2182b",
+        "role": "subsidence_gradient"
+      },
+      {
+        "valueMmYr": -18,
+        "color": "#d6604d",
+        "role": "subsidence_gradient"
+      },
+      {
+        "valueMmYr": -9.5,
+        "color": "#f4a582",
+        "role": "subsidence_gradient"
+      },
+      {
+        "valueMmYr": -1,
+        "color": "#fddbc7",
+        "role": "near_zero_subsidence_edge"
+      },
+      {
+        "valueMmYr": 0,
+        "color": "#f7f7f7",
+        "role": "zero_reference"
+      },
+      {
+        "valueMmYr": 1,
+        "color": "#d1e5f0",
+        "role": "near_zero_uplift_edge"
+      },
+      {
+        "valueMmYr": 2.75,
+        "color": "#92c5de",
+        "role": "uplift_gradient"
+      },
+      {
+        "valueMmYr": 4.5,
+        "color": "#4393c3",
+        "role": "uplift_gradient"
+      },
+      {
+        "valueMmYr": 6.25,
+        "color": "#2166ac",
+        "role": "uplift_gradient"
+      },
+      {
+        "valueMmYr": 8,
+        "color": "#053061",
+        "role": "clipped_uplift_limit"
+      }
+    ],
+    "legend": {
+      "title": "Vertical velocity · mm/yr",
+      "labels": [
+        {
+          "valueMmYr": -35,
+          "positionPct": 0,
+          "label": "≤ −35"
+        },
+        {
+          "valueMmYr": -1,
+          "positionPct": 42,
+          "label": "−1"
+        },
+        {
+          "valueMmYr": 0,
+          "positionPct": 50,
+          "label": "0"
+        },
+        {
+          "valueMmYr": 1,
+          "positionPct": 58,
+          "label": "+1"
+        },
+        {
+          "valueMmYr": 8,
+          "positionPct": 100,
+          "label": "≥ +8"
+        }
+      ],
+      "note": "Adaptive display limits · near-zero ±1 mm/yr from P75 of 2σ · sign-specific P98 clipping"
+    },
+    "meaning": "Adaptive continuous diverging display scale for observed vertical velocity. Zero is the physical divider: negative/subsidence is red and positive/uplift is blue. The symmetric near-zero band is derived from P75 of 2 sigma_up; negative and positive P98 limits are determined independently and clipped only for display. Display limits are contrast controls, not hazard thresholds."
+  },
+  "verticalTuning": {
+    "schema": "proto1_rum_vertical_tuning_v1",
+    "ranges": {
+      "model_mm": {
+        "min": -895.7599487304688,
+        "max": 89.47603607177734
+      },
+      "measurement_mm": {
+        "min": -895.0265502929688,
+        "max": 91.487548828125
+      },
+      "sigma_mm": {
+        "min": 0.15019814670085907,
+        "max": 18.68355369567871
+      }
+    },
+    "velocityStatisticsMmYr": {
+      "min": -81.44792637981615,
+      "max": 8.13570354236172,
+      "p02": -31.232229684181462,
+      "p50": -10.110236767958995,
+      "p98": -0.1233893702313564,
+      "p98_abs": 31.23222968418145,
+      "max_abs": 81.44792637981615
+    },
+    "uncertaintyStatisticsMm": {
+      "p50": 2.6078964471817017,
+      "p75": 3.8467898964881897,
+      "p95": 8.197819519042966,
+      "max": 18.68355369567871
+    },
+    "verticalExaggeration": {
+      "mode": "auto",
+      "default_m_per_mm": 10,
+      "min_m_per_mm": 0,
+      "max_m_per_mm": 20,
+      "step_m_per_mm": 0.25,
+      "provenance": "pipeline_auto",
+      "rule": "robust_velocity_with_displacement_safety_cap_v1",
+      "diagnostics": {
+        "p98_abs_vertical_velocity_mm_yr": 31.23222968418145,
+        "observed_model_range_mm": {
+          "min": -895.7599487304688,
+          "max": 89.47603607177734
+        },
+        "max_abs_observed_model_displacement_mm": 895.7599487304688,
+        "velocity_recommendation": {
+          "default_m_per_mm": 30,
+          "max_m_per_mm": 60,
+          "rule_label": "P98 |vz| ≤ 50 mm/yr"
+        },
+        "displacement_safety_cap": {
+          "default_m_per_mm": 10,
+          "max_m_per_mm": 20,
+          "rule_label": "|model| > 500 mm"
+        },
+        "automatic_result": {
+          "default_m_per_mm": 10,
+          "max_m_per_mm": 20
+        }
+      }
+    },
+    "trendlineYAxis": {
+      "mode": "auto_from_project_measurements",
+      "min_mm": -1500,
+      "max_mm": 500,
+      "tick_step_mm": 500,
+      "provenance": "project_measurement_range_plus_internal_padding"
+    }
+  },
+  "rateColorSeed": {
+    "field": "up",
+    "unit": "mm/yr",
+    "legacy": "superseded_by_verticalVelocityColorScale",
+    "symmetricAbsMax": 35
+  },
+  "viewer": {
+    "playback_epochs_per_second": 8,
+    "vertical_exaggeration": {
+      "default_m_per_mm": 10,
+      "min_m_per_mm": 0,
+      "max_m_per_mm": 20,
+      "step_m_per_mm": 0.25
+    },
+    "pit_mode": {
+      "enabled": true,
+      "scope": "completed_support_envelope_v2_with_bounded_spans_and_component_bridges",
+      "apron_margin_cells": 50,
+      "default_apron_mode": "see-through",
+      "show_datum_outline": false,
+      "max_camera_pitch": 70,
+      "max_camera_pitch_meaning": "Operational ceiling for a below-datum pit. Above this, the datum ground naturally occludes the bowl and grazing-angle overdraw becomes disproportionate. This is a readability guard, not a scientific clipping of data."
+    },
+    "camera_depth_test": {
+      "far_z_multiplier": 8,
+      "depth_occluders_enabled": true,
+      "near_z_multiplier": 0.1,
+      "grazing_pitch_start_deg": 60,
+      "grazing_far_z_multiplier": 16,
+      "meaning": "The normal 8x far-plane keeps depth precision stable. From 60 degrees pitch to the configured maximum pitch, the far-plane rises smoothly to 16x to retain distant below-datum geometry without permanently degrading depth precision."
+    },
+    "blankies": {
+      "selection": {
+        "mode": "completed_support_envelope_v2_bounded_spans_component_bridging_v1",
+        "basis": "live_measurements_only",
+        "closing_radius_cells": 3,
+        "fill_enclosed_holes": true,
+        "outside_fill": false,
+        "diagonal_rule": "corner_touch_does_not_connect",
+        "bounded_span_fill": {
+          "enabled": true,
+          "max_gap_cells": 12,
+          "passes": 1,
+          "axes": [
+            "row",
+            "column"
+          ]
+        },
+        "component_bridge": {
+          "enabled": true,
+          "min_bridge_gap_cells": 2,
+          "max_bridge_gap_cells": 12,
+          "max_components_to_absorb": 12,
+          "note": "Shortest 4-neighbour corridors only. Candidate corridor cells must satisfy the live-neighbour IDW eligibility rule."
+        }
+      },
+      "interpolation": {
+        "min_neighbours": 2,
+        "max_radius_cells": 6,
+        "max_neighbours_used": 12,
+        "idw_power": 2
+      },
+      "visual": {
+        "semantic": "muted_grey_translucent_clickable_interpolated_support_flat_no_uncertainty_relief"
+      }
+    },
+    "playback_speed": {
+      "default_multiplier": 1,
+      "min_multiplier": 0.25,
+      "max_multiplier": 4,
+      "step_multiplier": 0.25,
+      "meaning": "Multiplier applied to playback_epochs_per_second. The epoch axis and deformation data remain unchanged."
+    },
+    "basemap": {
+      "default_mode": "map",
+      "modes": [
+        "map",
+        "satellite",
+        "bw"
+      ],
+      "bw_meaning": "Soft low-contrast B/W reference map used by context-cap mode. It is intentionally not a Toner-style high-ink basemap."
+    },
+    "context_cap": {
+      "enabled": true,
+      "live_context_mode_forces_basemap": "bw",
+      "live_context_mode_disables_uncertainty_relief": true,
+      "blankie_context_texture_always_on": true,
+      "texture_source": "soft_bw_study_area_atlas_from_cartographic_xyz_tiles",
+      "atlas_zoom": 13,
+      "atlas_max_dimension": 4096,
+      "atlas_padding_fraction": 0.025,
+      "live_tint_alpha": 116,
+      "blankie_tint_rgba": [
+        119,
+        123,
+        119,
+        154
+      ],
+      "meaning": "The B/W atlas is mapped from the true geographic UV of each fixed cap corner and moves vertically with the RUM. It is not a transparent window onto the screen-space basemap. Live context mode adds a transparent deformation-colour veil. Blankies always retain the B/W texture with a grey support veil; walls remain ordinary deformation/support colour. Context texture detail is automatically selected from a fixed overview/focus atlas pair.",
+      "uv_mapping": "four fixed cap-corner lon/lat positions projected to Web Mercator study-atlas UVs; one atlas-level V flip; no per-RUM affine UV transform",
+      "atlas_mipmaps": true,
+      "atlas_max_anisotropy": 4,
+      "atlas_sampling_meaning": "Each fixed atlas uses DeckGL/luma linear mipmaps for clean minification and anisotropic sampling at oblique views. Atlas B adds close-inspection source detail only after the configured focus threshold. This remains a fixed study-area texture system, not live cap tile management.",
+      "atlas_lod": {
+        "enabled": true,
+        "focus_atlas_zoom": 14,
+        "focus_atlas_max_dimension": 6144,
+        "focus_atlas_max_tiles": 384,
+        "focus_enter_map_zoom": 13,
+        "overview_return_map_zoom": 12.6,
+        "meaning": "Automatic two-atlas cap-texture LOD. Atlas A is the existing full-study overview atlas. After the map zoom reaches focus_enter_map_zoom, Atlas B lazily builds once over the same fixed study extent at higher source zoom, then replaces Atlas A only after it is ready. Returning below overview_return_map_zoom restores Atlas A. The gap is hysteresis; no per-zoom swaps or live cap tile lifecycle are used."
+      }
+    },
+    "two_d_analysis": {
+      "enabled": true,
+      "rum_fill_opacity": 0.66,
+      "flat_particle_z_m": 0,
+      "vertical_encoding": "static_observed_rum_up_mm_yr_with_semi_transparent_fill",
+      "support_policy": "observed_live_rums_only_blankie_and_no_data_cells_are_not_coloured",
+      "meaning": "A flat north-up analysis plane for reading long-term vertical velocity together with horizontal particles and glyphs. Observed RUM fills are semi-transparent and retain a subtle boundary so the selected basemap remains readable; Soft B/W is the recommended default 2D analytical background, while Map and Satellite remain user-selectable. Epoch-dependent vertical displacement, vertical uncertainty relief, walls, datum apron, and interpolated support geometry are intentionally absent.",
+      "rum_fill_opacity_min": 0.3,
+      "rum_fill_opacity_max": 0.9,
+      "rum_fill_opacity_step": 0.02,
+      "preferred_basemap_mode": "bw",
+      "rum_outline_rgba": [
+        20,
+        29,
+        38,
+        72
+      ],
+      "rum_outline_width_px": 0.65
+    }
+  },
+  "blankieSelection": {
+    "mode": "completed_support_envelope_v2_bounded_spans_component_bridging_v1",
+    "selectionBasis": "live_measurements_only",
+    "rule": "live_union_diamond_closing_then_bounded_orthogonal_span_fill_then_bounded_component_bridging_then_4_neighbour_hole_fill",
+    "closingKernel": "manhattan_diamond_4_neighbour",
+    "closingRadiusCells": 3,
+    "fillEnclosedHoles": true,
+    "selectedCellCount": 456,
+    "closingSelectedCellCount": 336,
+    "initialHoleFillSelectedCellCount": 33,
+    "boundedSpanFill": {
+      "enabled": true,
+      "maximumGapCells": 12,
+      "passesExecuted": 1,
+      "perPassAddedCellCounts": [
+        87
+      ],
+      "addedCellCount": 87,
+      "rowAddedCellCount": 62,
+      "columnAddedCellCount": 28
+    },
+    "componentBridging": {
+      "enabled": true,
+      "maximumComponentsToAbsorb": 12,
+      "bridgeCount": 0,
+      "totalBridgeCellCount": 0,
+      "bridges": []
+    },
+    "postBridgeHoleFillSelectedCellCount": 0,
+    "rejectedNoObservationSupportCellCount": 0,
+    "diagonalRule": "corner_touch_does_not_connect",
+    "liveComponents": {
+      "componentCount": 21,
+      "largestComponentCellCount": 4714
+    },
+    "supportComponents": {
+      "componentCount": 1,
+      "largestComponentCellCount": 5235
+    },
+    "studyAreaBoundary": {
+      "connectivityPolicy": "prefer_single_component",
+      "allObservedCellsRetained": true,
+      "uncontainedObservedCellCount": 0,
+      "observedComponentCountBeforeCompletion": 21,
+      "detachedObservedComponentCountBeforeCompletion": 20,
+      "completedSupportComponentCount": 1,
+      "singleConnectedSupport": true,
+      "semantic": "Every observed RUM is part of the support opening. Bounded completion attempts to form one study-area ground boundary without extrapolating beyond the configured live-neighbour support rule.",
+      "warnings": []
+    },
+    "outsideFill": false
+  },
+  "blankieInterpolation": {
+    "blankieCount": 456,
+    "runtimeRowStartIndex": 4779,
+    "runtimeRowEndIndex": 5234,
+    "interpolationMethod": "idw_grid_neighbours",
+    "selectedRadiusHistogram": {
+      "1": 340,
+      "2": 103,
+      "3": 13
+    },
+    "neighbourCountHistogram": {
+      "2": 86,
+      "3": 89,
+      "4": 83,
+      "5": 55,
+      "6": 50,
+      "7": 42,
+      "8": 27,
+      "9": 7,
+      "10": 6,
+      "11": 5,
+      "12": 6
+    },
+    "interpolatedVerticalVelocityMmYr": {
+      "min": -70.13199084084799,
+      "max": 6.640633027775429
+    },
+    "sourceRows": "observed live RUMs only",
+    "weightsComputedOnce": true
+  },
+  "pitDomain": {
+    "scope": "completed_support_envelope_v2_with_bounded_spans_and_component_bridges",
+    "iMin": 0,
+    "iMax": 94,
+    "jMin": 0,
+    "jMax": 69,
+    "supportBounds": {
+      "iMin": 0,
+      "iMax": 94,
+      "jMin": 0,
+      "jMax": 69
+    },
+    "northwestMaxSubsidenceAnchor": {
+      "rumId": "RUM_04639",
+      "gridI": 36,
+      "gridJ": 61,
+      "upMmYr": -81.44792637981615
+    }
+  },
+  "sceneTuning": {
+    "schema": "proto1_rum_scene_runtime_v1",
+    "spatial": {
+      "observed_bounds": {
+        "wgs84": {
+          "west": 106.66252852804094,
+          "south": -6.350420275820541,
+          "east": 107.0404913094419,
+          "north": -6.0749189990270525,
+          "center_lon": 106.85150991874141,
+          "center_lat": -6.212669637423797,
+          "width_deg": 0.3779627814009672,
+          "height_deg": 0.2755012767934888
+        },
+        "source_crs": {
+          "min_x": 1556017.181238117,
+          "min_y": 781264.252100735,
+          "max_x": 1598767.181238117,
+          "max_y": 812764.252100735,
+          "center_x": 1577392.181238117,
+          "center_y": 797014.252100735,
+          "width_m": 42750,
+          "height_m": 31500,
+          "diagonal_m": 53101.90674542676
+        }
+      },
+      "completed_support_bounds": {
+        "wgs84": {
+          "west": 106.66252852804094,
+          "south": -6.350420275820541,
+          "east": 107.0404913094419,
+          "north": -6.0749189990270525,
+          "center_lon": 106.85150991874141,
+          "center_lat": -6.212669637423797,
+          "width_deg": 0.3779627814009672,
+          "height_deg": 0.2755012767934888
+        },
+        "source_crs": {
+          "min_x": 1556017.181238117,
+          "min_y": 781264.252100735,
+          "max_x": 1598767.181238117,
+          "max_y": 812764.252100735,
+          "center_x": 1577392.181238117,
+          "center_y": 797014.252100735,
+          "width_m": 42750,
+          "height_m": 31500,
+          "diagonal_m": 53101.90674542676
+        }
+      },
+      "framing_basis": "completed_support_envelope_observed_plus_interpolated_blankies",
+      "excluded_from_framing": "open no-data cells outside the completed support envelope"
+    },
+    "camera": {
+      "mode": "auto_from_dataset_bounds",
+      "fit_mode": "fit_bounds",
+      "fit_bounds_wgs84": [
+        [
+          106.66252852804094,
+          -6.350420275820541
+        ],
+        [
+          107.0404913094419,
+          -6.0749189990270525
+        ]
+      ],
+      "target_lon_lat": [
+        106.85150991874141,
+        -6.212669637423797
+      ],
+      "zoom": 11.157004112448483,
+      "bearing_deg": -25,
+      "pitch_deg": 62,
+      "max_zoom": 11.8,
+      "fit_padding_px": {
+        "left": 380,
+        "right": 90,
+        "top": 90,
+        "bottom": 90
+      },
+      "reference_viewport_px": [
+        1920,
+        1080
+      ],
+      "auto_fit_zoom_reference": 11.157004112448483,
+      "two_d": {
+        "target_lon_lat": [
+          106.85150991874141,
+          -6.212669637423797
+        ],
+        "zoom": 11.157004112448483,
+        "bearing_deg": 0,
+        "pitch_deg": 0
+      },
+      "three_d": {
+        "target_lon_lat": [
+          106.85150991874141,
+          -6.212669637423797
+        ],
+        "zoom": 11.157004112448483,
+        "bearing_deg": -25,
+        "pitch_deg": 62
+      },
+      "provenance": "completed_support_bounds_plus_internal_defaults",
+      "note": "The pipeline records a deterministic reference fit. The viewer performs the final viewport-aware fit using these bounds and padding."
+    },
+    "context_caps": {
+      "mode": "auto_from_completed_support_extent_and_rum_size",
+      "bounds_wgs84": {
+        "min_lon": 106.65307945850591,
+        "min_lat": -6.357307807740378,
+        "max_lon": 107.04994037897693,
+        "max_lat": -6.0680314671072155,
+        "center_lon": 106.85150991874141,
+        "center_lat": -6.212669637423797,
+        "padding_lon_deg": 0.00944906953502418,
+        "padding_lat_deg": 0.00688753191983722,
+        "padding_fraction": 0.025,
+        "minimum_padding_deg": 0.002
+      },
+      "uv_projection": "web_mercator_four_fixed_cap_corners_one_atlas_level_v_flip",
+      "overview_atlas": {
+        "source_zoom": 13,
+        "maximum_dimension_px": 4096,
+        "requested_width_px": 2311.8824252437335,
+        "requested_height_px": 1695.1139611294493,
+        "output_width_px": 2312,
+        "output_height_px": 1695,
+        "downscale_factor": 1,
+        "tile_count": 70,
+        "maximum_tile_count": null,
+        "within_tile_limit": true,
+        "metres_per_source_pixel_at_center": 18.99702951486764
+      },
+      "focus_atlas": {
+        "source_zoom": 14,
+        "maximum_dimension_px": 6144,
+        "requested_width_px": 4623.764850487467,
+        "requested_height_px": 3390.2279222588986,
+        "output_width_px": 4624,
+        "output_height_px": 3390,
+        "downscale_factor": 1,
+        "tile_count": 266,
+        "maximum_tile_count": 384,
+        "within_tile_limit": true,
+        "metres_per_source_pixel_at_center": 9.49851475743382
+      },
+      "lod": {
+        "enabled": true,
+        "focus_enter_map_zoom": 13,
+        "overview_return_map_zoom": 12.6,
+        "hysteresis_zoom": 0.40000000000000036
+      },
+      "source_detail_basis": {
+        "nominal_rum_size_m": 450,
+        "target_pixels_per_rum_overview": 24,
+        "target_pixels_per_rum_focus": 48
+      },
+      "renderer_defaults_retained": {
+        "mipmaps": true,
+        "max_anisotropy": 4,
+        "live_tint_alpha": 116,
+        "blankie_tint_rgba": [
+          119,
+          123,
+          119,
+          154
+        ]
+      },
+      "provenance": "completed_support_bounds_plus_nominal_rum_size_plus_internal_gpu_limits"
+    }
+  },
+  "runtimeAssetRegistry": {
+    "asset": "runtime_asset_registry.json",
+    "schema": "proto1_rum_runtime_asset_registry_v1",
+    "assetCount": 18,
+    "totalBytes": 32346521
+  },
+  "runtimePackageAudit": {
+    "asset": "runtime_package_audit.json",
+    "schema": "proto1_rum_runtime_package_audit_v1",
+    "status": "passed",
+    "warnings": []
+  },
+  "assets": {
+    "staticRums": "rum_static.json",
+    "interpolatedBlankies": "interpolated_blankies.json",
+    "supportEnvelopeAudit": "support_envelope_audit.json",
+    "epochAxis": "epoch_axis.json",
+    "verticalModelF32": "vertical_model_mm_f32.bin",
+    "verticalMeasurementF32": "vertical_measurement_mm_f32.bin",
+    "verticalSigmaF32": "vertical_sigma_mm_f32.bin",
+    "horizontalGlyphs": "horizontal_glyphs.json",
+    "horizontalParticleField": "horizontal_particle_field.json",
+    "horizontalAudit": "horizontal_audit.json",
+    "horizontalParticleFieldLsc": "horizontal_particle_field_lsc.json",
+    "resolvedConfig": "resolved_project_config.json",
+    "runtimeAssetRegistry": "runtime_asset_registry.json",
+    "runtimePackageAudit": "runtime_package_audit.json"
+  }
+}

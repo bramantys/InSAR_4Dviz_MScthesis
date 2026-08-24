@@ -1,0 +1,301 @@
+{
+  "schema": "proto1_rum_resolved_config_v1",
+  "created_utc": "2026-08-24T13:48:55.387Z",
+  "fingerprint_sha256": "480ea21034e4656dcc7e319fcad53b600f804f881e589663b0c41b463b64e911",
+  "compatibility_mode": "canonical",
+  "warnings": [],
+  "inputs": {
+    "project_config": "_internal/projects/0824-jkta/project.json",
+    "project_config_schema": "proto1_rum_project_config_v1",
+    "internal_defaults": "_internal/config/defaults.json",
+    "internal_defaults_schema": "proto1_rum_internal_defaults_v1"
+  },
+  "project": {
+    "name": "260824_Jkta_git",
+    "label": "260824_Jkta_git",
+    "key": "0824-jkta",
+    "description": "upload in github_jkta",
+    "prototype": "proto1-rum",
+    "product_type": "rum",
+    "instance_id": "fa6e359c-da4f-4391-af9d-502fa3df9fc5"
+  },
+  "source": {
+    "file": "D:/Kuliah/Q7/Thesis/260627_Gameplan2/4.Web/4.3 Real use/Proto1_RUM_1.0.1/data/jakarta_enu_estimates.csv",
+    "format": "auto",
+    "crs": {
+      "authority": "EPSG:23830",
+      "proj4": "+proj=tmerc +lat_0=0 +lon_0=94.5 +k=0.9999 +x_0=200000 +y_0=1500000 +ellps=WGS84 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs +type=crs"
+    },
+    "rum_size_m": 450,
+    "expected_rum_count": null,
+    "fields": {
+      "id": null,
+      "x": "x_rum",
+      "y": "y_rum",
+      "east": "east",
+      "north": "north",
+      "up": "up",
+      "var_east": "var_east",
+      "var_north": "var_north",
+      "var_up": "var_up",
+      "covar_en": "covar_en",
+      "covar_eu": "covar_eu",
+      "covar_nu": "covar_nu"
+    },
+    "metadata_file": "D:/Kuliah/Q7/Thesis/260627_Gameplan2/4.Web/4.3 Real use/Proto1_RUM_1.0.1/data/jakarta_enu_estimates.json"
+  },
+  "time": {
+    "start_date": "2014-01-01",
+    "end_date": "2024-12-31",
+    "interval_days": 14,
+    "initial_epoch": "last",
+    "playback_epochs_per_second": 8
+  },
+  "data_generation": {
+    "vertical_measurement_behavior": "linear",
+    "vertical_measurement_noise": "low",
+    "vertical_model": "linear",
+    "uncertainty_quality": "high",
+    "random_seed": 6188575,
+    "models": {
+      "linear": {
+        "velocity_component": "up",
+        "start_displacement_at_zero": true,
+        "output_unit": "mm"
+      },
+      "sinusoidal": {
+        "base_trend": "from_velocity",
+        "velocity_component": "up",
+        "amplitude_mm": 5,
+        "period_days": 365.25,
+        "phase_days": 45,
+        "apply_to": "all_rums",
+        "start_displacement_at_zero": true,
+        "output_unit": "mm"
+      }
+    },
+    "uncertainty_quality_presets": {
+      "high": {
+        "base_sigma_mm": 0.1,
+        "temporal_growth_mm_per_year": 0.2,
+        "seasonal_sigma_mm": 0.5,
+        "spike_probability": 0.005,
+        "spike_sigma_mm": 5,
+        "meaning": "High confidence: lowest synthetic sigma profile."
+      },
+      "medium": {
+        "base_sigma_mm": 0.3,
+        "temporal_growth_mm_per_year": 0.5,
+        "seasonal_sigma_mm": 1.5,
+        "spike_probability": 0.01,
+        "spike_sigma_mm": 10,
+        "meaning": "Medium confidence: intermediate synthetic sigma profile."
+      },
+      "low": {
+        "base_sigma_mm": 0.5,
+        "temporal_growth_mm_per_year": 1,
+        "seasonal_sigma_mm": 3,
+        "spike_probability": 0.03,
+        "spike_sigma_mm": 20,
+        "meaning": "Low confidence: largest synthetic sigma profile."
+      }
+    }
+  },
+  "processing": {
+    "blankies": {
+      "selection": {
+        "mode": "completed_support_envelope_v2_bounded_spans_component_bridging_v1",
+        "basis": "live_measurements_only",
+        "closing_radius_cells": 3,
+        "fill_enclosed_holes": true,
+        "outside_fill": false,
+        "diagonal_rule": "corner_touch_does_not_connect",
+        "bounded_span_fill": {
+          "enabled": true,
+          "max_gap_cells": 12,
+          "passes": 1,
+          "axes": [
+            "row",
+            "column"
+          ]
+        },
+        "component_bridge": {
+          "enabled": true,
+          "min_bridge_gap_cells": 2,
+          "max_bridge_gap_cells": 12,
+          "max_components_to_absorb": 12,
+          "note": "Shortest 4-neighbour corridors only. Candidate corridor cells must satisfy the live-neighbour IDW eligibility rule."
+        }
+      },
+      "interpolation": {
+        "min_neighbours": 2,
+        "max_radius_cells": 6,
+        "max_neighbours_used": 12,
+        "idw_power": 2
+      },
+      "visual": {
+        "semantic": "muted_grey_translucent_clickable_interpolated_support_flat_no_uncertainty_relief"
+      }
+    },
+    "vertical_uncertainty": {
+      "display_range": {
+        "unit": "sigma",
+        "value": 1,
+        "meaning": "Relief amplitude. unit=sigma means ±value times the cell's current 1σ. unit=mm means fixed ±value millimetres. This changes visual amplitude only; raw sigma remains unchanged."
+      },
+      "sigma_floor_mm": 0.05,
+      "blankie_sigma": {
+        "minimum_multiplier_over_max_neighbour": 1.15,
+        "radius_penalty_mm_per_cell": 0.15,
+        "meaning": "Interpolated support cells must never present lower uncertainty than their measured neighbours."
+      },
+      "visibility_threshold": {
+        "mode": "absolute",
+        "min_standard_deviation_mm": 0.5,
+        "meaning": "Measured RUM samples with 1σ position uncertainty below this millimetre threshold retain their numeric value but do not render vertical uncertainty relief."
+      }
+    },
+    "horizontal_glyphs": {
+      "enabled": true,
+      "show_arrows_by_default": true,
+      "show_ellipses_by_default": true,
+      "default_opacity": 0.92,
+      "minimum_speed_mm_yr": 0.5,
+      "visibility_sigma_multiplier": 1,
+      "visibility_label": "1σ",
+      "arrow_significance_filter": true,
+      "ellipse_match_arrow_filter": true,
+      "ellipse_sigma_multiplier": 1,
+      "ellipse_label": "1σ East-North uncertainty ellipse",
+      "legend_reference_percentile": 75,
+      "directional_uncertainty_reference_percentile": 75,
+      "auto_scale": true,
+      "arrow_reference_percentile": 99.5,
+      "ellipse_reference_percentile": 99.5,
+      "arrow_max_length_rum_fraction": 0.8,
+      "ellipse_max_diameter_rum_fraction": 0.75,
+      "ellipse_scale_mode": "same_as_arrow",
+      "ellipse_clip_mode": "none"
+    },
+    "horizontal_particles": {
+      "enabled": true,
+      "show_by_default": true,
+      "default_mode": "mean",
+      "default_particle_count": 5000,
+      "speed_multiplier": 1.5,
+      "stall_speed_mm_yr": 0.05,
+      "sampler_mode": "conservative_v1",
+      "particle_opacity": 1,
+      "uncertainty_strength": 0.5,
+      "mc_model": "directional",
+      "mc_max_sigma": 1.5,
+      "mc_offset_cap_mm_yr": 1,
+      "mc_offset_cap_ratio_to_speed": 1,
+      "spawn_support_rule": "eight_live_neighbours",
+      "trail_persistence": 0.98,
+      "particle_size_multiplier": 1,
+      "shimmer_strength": 0.5,
+      "monte_carlo_strength": 0.5,
+      "spawn_jitter_cells": 0.9,
+      "lsc": {
+        "enabled": true,
+        "subdivision": 4,
+        "neighbor_count": 32,
+        "minimum_neighbors": 4,
+        "max_lag_m": 9000,
+        "bin_width_m": 450,
+        "minimum_pairs_per_bin": 50,
+        "range_min_m": 100,
+        "range_max_m": 10000,
+        "min_effective_range_m": 1000,
+        "min_signal_sill_mm2_yr2": 0.02,
+        "weak_signal_noise_ratio": 0.25,
+        "max_neighbor_radius_m": 4000,
+        "max_neighbor_range_multiplier": 3,
+        "prediction_variance_floor_mm2_yr2": 0.0001,
+        "meaning": "Optional least-squares-collocation signal field. The raw conservative-v1 field remains the default delivered-estimate mode. LSC fits covariance on second-order residuals, then predicts raw components using local ordinary kriging with formal per-cell E/N variance on the diagonal. Fine-grid domain never extends into blank/no-data cells. Empirical-bin fit uses equal bin weights because this reproduces the locked Jakarta reference parameters; pair counts remain recorded for audit.",
+        "variogram_fit_weighting": "equal_binned_variogram_reference_locked"
+      }
+    }
+  },
+  "visualization": {
+    "vertical_velocity_color_scale": {
+      "mode": "adaptive",
+      "velocity_field": "up",
+      "variance_field": "var_up",
+      "unit": "mm/yr",
+      "zero_reference_mm_yr": 0,
+      "uncertainty_percentile": 75,
+      "near_zero_sigma_multiplier": 2,
+      "near_zero_round_up_step_mm_yr": 0.5,
+      "colour_percentile": 98,
+      "min_active_fraction": 0.01,
+      "p98_rounding": {
+        "under_10_step_mm_yr": 1,
+        "from_10_to_20_step_mm_yr": 2,
+        "from_20_to_100_step_mm_yr": 5,
+        "over_100_step_mm_yr": 10
+      },
+      "palette": {
+        "subsidence": [
+          "#67001f",
+          "#b2182b",
+          "#d6604d",
+          "#f4a582",
+          "#fddbc7"
+        ],
+        "neutral": "#f7f7f7",
+        "uplift": [
+          "#d1e5f0",
+          "#92c5de",
+          "#4393c3",
+          "#2166ac",
+          "#053061"
+        ]
+      },
+      "legend_near_zero_positions_pct": {
+        "negative_edge": 42,
+        "zero": 50,
+        "positive_edge": 58
+      },
+      "meaning": "Adaptive continuous diverging display scale for observed vertical velocity. Zero is the physical divider: negative/subsidence is red and positive/uplift is blue. The symmetric near-zero band is derived from P75 of 2 sigma_up; negative and positive P98 limits are determined independently and clipped only for display. Display limits are contrast controls, not hazard thresholds.",
+      "manual_override_contract": "For synthetic/manual tests set mode=manual and provide manual_stops. Map interpolation remains value-based; legend positions may be manually adjusted for readability."
+    },
+    "vertical_exaggeration": {
+      "mode": "auto",
+      "auto_rule": "robust_velocity_with_displacement_safety_cap_v1",
+      "default_m_per_mm": null,
+      "min_m_per_mm": 0,
+      "max_m_per_mm": null,
+      "step_m_per_mm": 0.25
+    },
+    "camera": {
+      "mode": "auto_from_dataset_bounds",
+      "target_lon_lat_override": null,
+      "zoom_override": null,
+      "bearing_deg_override": null,
+      "pitch_deg_override": null
+    },
+    "trendline_y_axis": {
+      "mode": "auto_from_project_measurements",
+      "manual_min_mm": null,
+      "manual_max_mm": null
+    }
+  },
+  "viewer_preferences": {
+    "initial_scene_mode": "3d",
+    "initial_basemap": "map",
+    "playback_default_multiplier": 1
+  },
+  "build_context": {
+    "schema": "proto1_rum_build_context_v1",
+    "source_format": "csv",
+    "source_sha256": "36e1d393a8663bda11f1ecc7df932c565b2b516003a2137646e9734777dbb1a5",
+    "build_fingerprint_sha256": "be28099fd4457d50756da8d3a83fbfa5f657596a4ba57db3b0556115cb8ec7fa",
+    "generated_output": "public/data/0824-jkta"
+  },
+  "compatibility": {
+    "legacy_config_schema": "deckgl_proto1_support_envelope_config_v10_context_caps_horizontal_glyphs",
+    "note": "The current T3B pipeline receives this resolved compatibility shape. The public project config no longer exposes renderer mechanics."
+  }
+}
