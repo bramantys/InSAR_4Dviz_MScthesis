@@ -1,0 +1,14 @@
+{
+  "schema": "proto1_rum_runtime_index_v1",
+  "active_project_key": "grn1",
+  "manifest": "grn1/manifest.json",
+  "project": {
+    "name": "groningen final interactive portal github",
+    "label": "groningen final interactive portal github",
+    "key": "grn1"
+  },
+  "contract_schema": "proto1_rum_runtime_contract_v1",
+  "config_fingerprint_sha256": "8e3f46ce271ec8ac9d524e3a0eba130df8dd258a94c0b79447567cd3f997d649",
+  "source_sha256": "06e9cc71deb7e6a79ff4ae80375fbd0b45ddb82c53635d624b810b8ff800b8fe",
+  "build_fingerprint_sha256": "2abe8087acfb3a0cb09dc037f61fd8d5ab4ff881a8e56935817f1b477f3d3728"
+}

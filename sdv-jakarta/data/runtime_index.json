@@ -1,0 +1,14 @@
+{
+  "schema": "proto1_rum_runtime_index_v1",
+  "active_project_key": "jkt1",
+  "manifest": "jkt1/manifest.json",
+  "project": {
+    "name": "jakarta_final_interactive_github",
+    "label": "jakarta_final_interactive_github",
+    "key": "jkt1"
+  },
+  "contract_schema": "proto1_rum_runtime_contract_v1",
+  "config_fingerprint_sha256": "e807f129603aa846a2502df53d2b88558d128aa581ee7be9d9b74a9c2ec73c84",
+  "source_sha256": "36e1d393a8663bda11f1ecc7df932c565b2b516003a2137646e9734777dbb1a5",
+  "build_fingerprint_sha256": "ef842829ca43d201776a4d64c85092ba7d4fe33012b92782513d3be8ff5d3cb7"
+}

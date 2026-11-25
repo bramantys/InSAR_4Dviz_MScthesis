@@ -1,0 +1,147 @@
+{
+  "schema": "proto1_rum_runtime_package_audit_v1",
+  "status": "passed",
+  "errors": [],
+  "warnings": [],
+  "invariants": {
+    "runtime_rows_equal_observed_plus_blankies": true,
+    "structural_cells_equal_runtime_rows": true,
+    "every_observed_rum_retained": true,
+    "camera_derived_from_completed_support": true,
+    "context_derived_from_completed_support": true,
+    "all_binary_asset_sizes_match_registry": true
+  },
+  "counts": {
+    "observed_rum_count": 4779,
+    "interpolated_blankie_count": 456,
+    "runtime_row_count": 5235,
+    "structural_cell_count": 5235,
+    "open_no_data_cell_count": 1415,
+    "grid_cell_count": 6650,
+    "epoch_count": 288
+  },
+  "scene": {
+    "camera": {
+      "mode": "auto_from_dataset_bounds",
+      "fit_mode": "fit_bounds",
+      "fit_bounds_wgs84": [
+        [
+          106.64744811166956,
+          -6.341381685801812
+        ],
+        [
+          107.05551780627277,
+          -6.084213722913894
+        ]
+      ],
+      "target_lon_lat": [
+        106.85148295897116,
+        -6.212797704357853
+      ],
+      "zoom": 11.256352021551107,
+      "bearing_deg": -25,
+      "pitch_deg": 62,
+      "max_zoom": 11.8,
+      "fit_padding_px": {
+        "left": 380,
+        "right": 90,
+        "top": 90,
+        "bottom": 90
+      },
+      "reference_viewport_px": [
+        1920,
+        1080
+      ],
+      "auto_fit_zoom_reference": 11.256352021551107,
+      "two_d": {
+        "target_lon_lat": [
+          106.85148295897116,
+          -6.212797704357853
+        ],
+        "zoom": 11.256352021551107,
+        "bearing_deg": 0,
+        "pitch_deg": 0
+      },
+      "three_d": {
+        "target_lon_lat": [
+          106.85148295897116,
+          -6.212797704357853
+        ],
+        "zoom": 11.256352021551107,
+        "bearing_deg": -25,
+        "pitch_deg": 62
+      },
+      "provenance": "completed_support_bounds_plus_internal_defaults",
+      "note": "The pipeline records a deterministic reference fit. The viewer performs the final viewport-aware fit using these bounds and padding."
+    },
+    "context_caps": {
+      "mode": "auto_from_completed_support_extent_and_rum_size",
+      "bounds_wgs84": {
+        "min_lon": 106.63724636930448,
+        "min_lat": -6.34781088487401,
+        "max_lon": 107.06571954863786,
+        "max_lat": -6.0777845238416965,
+        "center_lon": 106.85148295897116,
+        "center_lat": -6.212797704357853,
+        "padding_lon_deg": 0.010201742365080336,
+        "padding_lat_deg": 0.006429199072197945,
+        "padding_fraction": 0.025,
+        "minimum_padding_deg": 0.002
+      },
+      "uv_projection": "web_mercator_four_fixed_cap_corners_one_atlas_level_v_flip",
+      "overview_atlas": {
+        "source_zoom": 13,
+        "maximum_dimension_px": 4096,
+        "requested_width_px": 2496.0371805147734,
+        "requested_height_px": 1582.3122651497833,
+        "output_width_px": 2496,
+        "output_height_px": 1582,
+        "downscale_factor": 1,
+        "tile_count": 77,
+        "maximum_tile_count": null,
+        "within_tile_limit": true,
+        "metres_per_source_pixel_at_center": 18.997024892474215
+      },
+      "focus_atlas": {
+        "source_zoom": 14,
+        "maximum_dimension_px": 6144,
+        "requested_width_px": 4992.074361029547,
+        "requested_height_px": 3164.6245302995667,
+        "output_width_px": 4992,
+        "output_height_px": 3165,
+        "downscale_factor": 1,
+        "tile_count": 260,
+        "maximum_tile_count": 384,
+        "within_tile_limit": true,
+        "metres_per_source_pixel_at_center": 9.498512446237108
+      },
+      "lod": {
+        "enabled": true,
+        "focus_enter_map_zoom": 13,
+        "overview_return_map_zoom": 12.6,
+        "hysteresis_zoom": 0.40000000000000036
+      },
+      "source_detail_basis": {
+        "nominal_rum_size_m": 450,
+        "target_pixels_per_rum_overview": 24,
+        "target_pixels_per_rum_focus": 48
+      },
+      "renderer_defaults_retained": {
+        "mipmaps": true,
+        "max_anisotropy": 4,
+        "live_tint_alpha": 116,
+        "blankie_tint_rgba": [
+          119,
+          123,
+          119,
+          154
+        ]
+      },
+      "provenance": "completed_support_bounds_plus_nominal_rum_size_plus_internal_gpu_limits"
+    }
+  },
+  "assets": {
+    "count": 18,
+    "total_bytes": 34178283
+  }
+}

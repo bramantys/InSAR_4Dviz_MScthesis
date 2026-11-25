@@ -1,0 +1,14 @@
+{
+  "schema": "proto1_rum_runtime_index_v1",
+  "active_project_key": "jkthex1",
+  "manifest": "jkthex1/manifest.json",
+  "project": {
+    "name": "jakarta hex",
+    "label": "jakarta hex",
+    "key": "jkthex1"
+  },
+  "contract_schema": "proto1_rum_runtime_contract_v1",
+  "config_fingerprint_sha256": "22c3cdca507b514071c3a69c35ddc623de39a0271334034c37d1a50964a57fe9",
+  "source_sha256": "30e2996344b56a8c5ae1ac297b1d6fe89c507df5216751a3e76702e4a1f829bf",
+  "build_fingerprint_sha256": "e09e7881ff9b25a0600d976f7d886578d120fe9739c8a2ee9a836f5699ec68d2"
+}

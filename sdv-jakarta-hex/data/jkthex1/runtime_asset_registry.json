@@ -1,0 +1,336 @@
+{
+  "schema": "proto1_rum_runtime_asset_registry_v1",
+  "runtime_row_count": 5235,
+  "epoch_count": 288,
+  "asset_count": 18,
+  "total_bytes": 34178283,
+  "assets": [
+    {
+      "key": "static_rums",
+      "path": "rum_static.json",
+      "bytes": 8065054,
+      "sha256": "34498129191a1b15adda934bbf0eb081720c7e6ea704a904df0d1da90554b060",
+      "kind": "metadata",
+      "media_type": "application/json",
+      "format": "json_utf8",
+      "schema": "deckgl_proto1_rum_static_v5",
+      "rows": 4779,
+      "role": "Observed RUM geometry and static ENU attributes.",
+      "optional": false
+    },
+    {
+      "key": "interpolated_blankies",
+      "path": "interpolated_blankies.json",
+      "bytes": 1320502,
+      "sha256": "a8a51add1f011ef6bf73cb358c5b286ff50b36935289fed517e5b6e51b77d09f",
+      "kind": "metadata",
+      "media_type": "application/json",
+      "format": "json_utf8",
+      "schema": "deckgl_proto1_support_envelope_interpolated_blankies_v2",
+      "rows": 456,
+      "role": "Support-envelope cells without direct observations.",
+      "optional": false
+    },
+    {
+      "key": "support_envelope_audit",
+      "path": "support_envelope_audit.json",
+      "bytes": 3906,
+      "sha256": "e6ac9ddedb3ea0bacc48880fbec82ace24a534b8392f8a12033fa4ec803123a0",
+      "kind": "metadata",
+      "media_type": "application/json",
+      "format": "json_utf8",
+      "schema": "proto1_rum_support_envelope_audit_v1",
+      "rows": null,
+      "role": "Support completion and interpolation audit.",
+      "optional": false
+    },
+    {
+      "key": "epoch_axis",
+      "path": "epoch_axis.json",
+      "bytes": 12085,
+      "sha256": "5f55b8a5ee8d7f93886e0cb43d3216a89f5e7c1d745e86def024cce9c89df9f7",
+      "kind": "metadata",
+      "media_type": "application/json",
+      "format": "json_utf8",
+      "schema": "deckgl_proto1_epoch_axis_v1",
+      "rows": 288,
+      "role": "Shared temporal axis.",
+      "optional": false
+    },
+    {
+      "key": "vertical_model",
+      "path": "vertical_model_mm_f32.bin",
+      "bytes": 6030720,
+      "sha256": "dd390f69a055da0cf909d72bcd6a01d820678b9a23d01f51ebc0b5a3a93ee847",
+      "kind": "binary_array",
+      "media_type": "application/octet-stream",
+      "format": "float32_little_endian",
+      "shape": [
+        5235,
+        288
+      ],
+      "components": null,
+      "unit": "mm",
+      "role": "Model displacement used for animated geometry.",
+      "optional": false,
+      "array_order": "runtime_row_major_epoch_minor",
+      "expected_value_count": 1507680,
+      "expected_bytes": 6030720
+    },
+    {
+      "key": "vertical_measurement",
+      "path": "vertical_measurement_mm_f32.bin",
+      "bytes": 6030720,
+      "sha256": "ddd80767be24c4b42164ed08809156d6fe9075821c35e5f3fd4d0f30b1217af6",
+      "kind": "binary_array",
+      "media_type": "application/octet-stream",
+      "format": "float32_little_endian",
+      "shape": [
+        5235,
+        288
+      ],
+      "components": null,
+      "unit": "mm",
+      "role": "Synthetic measurement series used for inspection charts.",
+      "optional": false,
+      "array_order": "runtime_row_major_epoch_minor",
+      "expected_value_count": 1507680,
+      "expected_bytes": 6030720
+    },
+    {
+      "key": "vertical_sigma",
+      "path": "vertical_sigma_mm_f32.bin",
+      "bytes": 6030720,
+      "sha256": "5639c8b9a78196edeecf32a8aa9aa89946e802698be087e1fec38a8925a4e87a",
+      "kind": "binary_array",
+      "media_type": "application/octet-stream",
+      "format": "float32_little_endian",
+      "shape": [
+        5235,
+        288
+      ],
+      "components": null,
+      "unit": "mm_1sigma",
+      "role": "Per-row per-epoch vertical uncertainty.",
+      "optional": false,
+      "array_order": "runtime_row_major_epoch_minor",
+      "expected_value_count": 1507680,
+      "expected_bytes": 6030720
+    },
+    {
+      "key": "horizontal_glyphs",
+      "path": "horizontal_glyphs.json",
+      "bytes": 2837412,
+      "sha256": "be85611f9dfc4ad21a1d71f7a802149bf8080937909cc9a34192f007bd8b18f1",
+      "kind": "metadata",
+      "media_type": "application/json",
+      "format": "json_utf8",
+      "schema": "deckgl_proto1_horizontal_static_glyphs_v1",
+      "rows": 1782,
+      "role": "Observed-RUM arrows and 1-sigma uncertainty ellipses.",
+      "optional": false
+    },
+    {
+      "key": "horizontal_particle_field_metadata",
+      "path": "horizontal_particle_field.json",
+      "bytes": 5504,
+      "sha256": "c54b32888d100ee998bd8a25f34479cbdca197051c780d12be2c332eec214ab1",
+      "kind": "metadata",
+      "media_type": "application/json",
+      "format": "json_utf8",
+      "schema": "sdv_hex_particle_field_staged_v1",
+      "rows": null,
+      "role": "Raw horizontal GPU field metadata.",
+      "optional": false
+    },
+    {
+      "key": "horizontal_particle_velocity_raw",
+      "path": "horizontal_particle_field_rgba_f32.bin",
+      "bytes": 106400,
+      "sha256": "2c6f613abd077f9ede03f20a5747c1b7b1544ab9268a2b4d81fb412f07e2f27c",
+      "kind": "binary_array",
+      "media_type": "application/octet-stream",
+      "format": "float32_little_endian",
+      "shape": [
+        70,
+        95,
+        4
+      ],
+      "components": [
+        "east_mm_yr",
+        "north_mm_yr",
+        "runtime_row_index",
+        "valid_mask"
+      ],
+      "unit": "mixed",
+      "role": "Raw observed-RUM horizontal velocity field.",
+      "optional": false,
+      "array_order": null,
+      "expected_value_count": 26600,
+      "expected_bytes": 106400
+    },
+    {
+      "key": "horizontal_particle_covariance_raw",
+      "path": "horizontal_particle_covariance_rgba_f32.bin",
+      "bytes": 106400,
+      "sha256": "f22e45e1dc819a535ea8f14babfd7e178b004a2d3c10a3ec51b52ea451a54dc5",
+      "kind": "binary_array",
+      "media_type": "application/octet-stream",
+      "format": "float32_little_endian",
+      "shape": [
+        70,
+        95,
+        4
+      ],
+      "components": [
+        "var_east_mm2_yr2",
+        "var_north_mm2_yr2",
+        "covar_en_mm2_yr2",
+        "valid_mask"
+      ],
+      "unit": "mixed",
+      "role": "Raw horizontal covariance field.",
+      "optional": false,
+      "array_order": null,
+      "expected_value_count": 26600,
+      "expected_bytes": 106400
+    },
+    {
+      "key": "horizontal_particle_spawns_raw",
+      "path": "horizontal_particle_spawns_rg_f32.bin",
+      "bytes": 30672,
+      "sha256": "263495f6c732afe12e3d7cec562a23bd0c297467176a4a673e6c087ef7160288",
+      "kind": "binary_array",
+      "media_type": "application/octet-stream",
+      "format": "float32_little_endian",
+      "shape": [
+        3834,
+        2
+      ],
+      "components": [
+        "grid_i",
+        "grid_j"
+      ],
+      "unit": "grid_coordinate",
+      "role": "Raw particle spawn coordinates.",
+      "optional": false,
+      "array_order": null,
+      "expected_value_count": 7668,
+      "expected_bytes": 30672
+    },
+    {
+      "key": "horizontal_audit",
+      "path": "horizontal_audit.json",
+      "bytes": 23890,
+      "sha256": "49601ca77ea3d6d154461b7dbc70da27fcfe7960359ee8e54315ed7ad591a191",
+      "kind": "metadata",
+      "media_type": "application/json",
+      "format": "json_utf8",
+      "schema": "proto1_rum_horizontal_audit_v1",
+      "rows": null,
+      "role": "Horizontal validation, tuning and LSC audit.",
+      "optional": false
+    },
+    {
+      "key": "horizontal_particle_field_lsc_metadata",
+      "path": "horizontal_particle_field_lsc.json",
+      "bytes": 21509,
+      "sha256": "a43d59bbc3c144f18c18ca3b0ca3ad97038cbd4e37f43e16c352d3de42dc89b2",
+      "kind": "metadata",
+      "media_type": "application/json",
+      "format": "json_utf8",
+      "schema": "deckgl_proto1_horizontal_lsc_signal_field_v1",
+      "rows": null,
+      "role": "Optional LSC horizontal field metadata.",
+      "optional": true
+    },
+    {
+      "key": "horizontal_particle_velocity_lsc",
+      "path": "horizontal_particle_lsc_field_rgba_f32.bin",
+      "bytes": 1755600,
+      "sha256": "d7fb1b4193a182b889cae150c882e8f135d2c9c6773a76e3a6aedf23f7cacce0",
+      "kind": "binary_array",
+      "media_type": "application/octet-stream",
+      "format": "float32_little_endian",
+      "shape": [
+        285,
+        385,
+        4
+      ],
+      "components": [
+        "east_mm_yr",
+        "north_mm_yr",
+        "parent_runtime_row_index",
+        "valid_mask"
+      ],
+      "unit": "mixed",
+      "role": "Optional fine LSC velocity field.",
+      "optional": true,
+      "array_order": null,
+      "expected_value_count": 438900,
+      "expected_bytes": 1755600
+    },
+    {
+      "key": "horizontal_particle_covariance_lsc",
+      "path": "horizontal_particle_lsc_covariance_rgba_f32.bin",
+      "bytes": 1755600,
+      "sha256": "2eca1315ab49807345989f2e307eed445149f01dfbf8330164589844c267a8e5",
+      "kind": "binary_array",
+      "media_type": "application/octet-stream",
+      "format": "float32_little_endian",
+      "shape": [
+        285,
+        385,
+        4
+      ],
+      "components": [
+        "var_east_mm2_yr2",
+        "var_north_mm2_yr2",
+        "covar_en_mm2_yr2",
+        "valid_mask"
+      ],
+      "unit": "mixed",
+      "role": "Optional fine LSC prediction covariance.",
+      "optional": true,
+      "array_order": null,
+      "expected_value_count": 438900,
+      "expected_bytes": 1755600
+    },
+    {
+      "key": "horizontal_particle_spawns_lsc",
+      "path": "horizontal_particle_lsc_spawns_rg_f32.bin",
+      "bytes": 30672,
+      "sha256": "261b8cc70d9f65b3133a1241e074e3bfb5ef5f38750975d1985b4db123989046",
+      "kind": "binary_array",
+      "media_type": "application/octet-stream",
+      "format": "float32_little_endian",
+      "shape": [
+        3834,
+        2
+      ],
+      "components": [
+        "grid_i",
+        "grid_j"
+      ],
+      "unit": "fine_grid_coordinate",
+      "role": "Optional LSC particle spawn coordinates.",
+      "optional": true,
+      "array_order": null,
+      "expected_value_count": 7668,
+      "expected_bytes": 30672
+    },
+    {
+      "key": "resolved_project_config",
+      "path": "resolved_project_config.json",
+      "bytes": 10917,
+      "sha256": "e065b0c31d4276b826ce3bcdb0ea53ebef75dfe37538c331ebda11584132f7db",
+      "kind": "metadata",
+      "media_type": "application/json",
+      "format": "json_utf8",
+      "schema": "proto1_rum_resolved_config_v1",
+      "rows": null,
+      "role": "Resolved project and internal defaults used by this build.",
+      "optional": false
+    }
+  ]
+}
