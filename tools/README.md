@@ -2,7 +2,7 @@
 
 This folder contains helper scripts for preparing data and media
 used with the Strapdown Visualizer (SDV) and
-Piston Deformation Visualizer (PDV).
+Parcel Deformation Visualizer (PDV).
 
 ## Linked Video Preparation
 
